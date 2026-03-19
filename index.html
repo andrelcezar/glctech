@@ -777,39 +777,176 @@
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
-    <div class="section-header">
-      <span class="label">Últimas Novidades</span>
-      <h2>Insights sobre TI e Segurança</h2>
-      <p>Artigos, tutoriais e tendências sobre monitoramento, segurança e infraestrutura.</p>
+    <div class="section-header" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <span class="label">Últimas Novidades</span>
+        <h2>Insights sobre TI e Segurança</h2>
+        <p>Notícias em tempo real sobre segurança cibernética, infraestrutura e tecnologia.</p>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--gray-dim);">
+          <span id="rss-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--dark-border);display:inline-block;"></span>
+          <span id="rss-status-text">Carregando...</span>
+        </div>
+        <a href="https://www.techtudo.com.br/" target="_blank"
+          style="font-size:12px;font-weight:600;color:var(--gray-dim);text-decoration:none;border:1px solid var(--dark-border);padding:6px 12px;border-radius:var(--radius);font-family:var(--font-display);transition:color 0.2s,border-color 0.2s;"
+          onmouseover="this.style.color='var(--red)';this.style.borderColor='var(--red)'"
+          onmouseout="this.style.color='var(--gray-dim)';this.style.borderColor='var(--dark-border)'">
+          Ver TechTudo &rarr;
+        </a>
+      </div>
     </div>
-    <div class="blog-grid">
-      <a href="#" class="blog-card">
-        <div class="blog-card-cat">Monitoramento</div>
+ 
+    <!-- Loading skeleton -->
+    <div class="blog-grid" id="blog-skeleton">
+      <div class="blog-card" style="pointer-events:none;">
+        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:60%;animation:shimmer 1.5s infinite;"></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">15 de Dezembro, 2024</div>
-          <h3>Como Implementar Monitoramento Zabbix Eficiente</h3>
-          <p>Descubra os passos essenciais e as melhores práticas para uma implementação de sucesso, garantindo visibilidade total da sua infraestrutura.</p>
+          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:80%;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:70%;animation:shimmer 1.5s infinite;"></div>
         </div>
-      </a>
-      <a href="#" class="blog-card">
-        <div class="blog-card-cat">Segurança</div>
+      </div>
+      <div class="blog-card" style="pointer-events:none;">
+        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:50%;animation:shimmer 1.5s infinite 0.2s;"></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">28 de Novembro, 2024</div>
-          <h3>As Novidades em Segurança Cibernética para 2025</h3>
-          <p>Principais tendências e desafios que as empresas enfrentarão e como se proteger com as melhores ferramentas do mercado.</p>
+          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite 0.2s;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite 0.2s;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:75%;margin-bottom:8px;animation:shimmer 1.5s infinite 0.2s;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite 0.2s;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:60%;animation:shimmer 1.5s infinite 0.2s;"></div>
         </div>
-      </a>
-      <a href="#" class="blog-card">
-        <div class="blog-card-cat">Infraestrutura</div>
+      </div>
+      <div class="blog-card" style="pointer-events:none;">
+        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:55%;animation:shimmer 1.5s infinite 0.4s;"></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">01 de Janeiro, 2025</div>
-          <h3>Backup Inteligente: por que sua empresa não pode esperar</h3>
-          <p>Entenda os riscos de operar sem uma estratégia sólida de backup e como o Veeam pode transformar a resiliência do seu ambiente.</p>
+          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite 0.4s;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite 0.4s;"></div>
+          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:85%;margin-bottom:8px;animation:shimmer 1.5s infinite 0.4s;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite 0.4s;"></div>
+          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:65%;animation:shimmer 1.5s infinite 0.4s;"></div>
         </div>
-      </a>
+      </div>
     </div>
+ 
+    <!-- Real RSS content -->
+    <div class="blog-grid" id="blog-feed" style="display:none;"></div>
+ 
+    <!-- Error state -->
+    <div id="blog-error" style="display:none; text-align:center; padding:3rem; background:var(--dark-light); border:1px solid var(--dark-border); border-radius:var(--radius-lg);">
+      <div style="font-size:2rem; margin-bottom:1rem;">📡</div>
+      <div style="color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.5rem;">Feed temporariamente indisponível</div>
+      <div style="color:var(--gray-dim); font-size:14px;">
+        Acesse diretamente em
+        <a href="https://www.techtudo.com.br/" target="_blank" style="color:var(--red); text-decoration:none;">TechTudo</a>
+      </div>
+    </div>
+ 
   </div>
 </section>
+ 
+<style>
+  @keyframes shimmer {
+    0%,100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+  .blog-card-thumb {
+    width: 100%; aspect-ratio: 16/9;
+    object-fit: cover; display: block;
+    filter: brightness(0.8);
+    transition: filter var(--transition);
+  }
+  .blog-card:hover .blog-card-thumb { filter: brightness(1); }
+  .blog-card-no-thumb {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--dark-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+  }
+</style>
+ 
+<script>
+(function() {
+  const RSS_URL = 'https://pox.globo.com/rss/techtudo/';
+  const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=3&api_key=&order_by=pubDate';
+ 
+  const skeleton = document.getElementById('blog-skeleton');
+  const feed = document.getElementById('blog-feed');
+  const error = document.getElementById('blog-error');
+  const statusDot = document.getElementById('rss-status-dot');
+  const statusText = document.getElementById('rss-status-text');
+ 
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+ 
+  function stripHtml(html) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  }
+ 
+  function truncate(str, max) {
+    const s = str.trim();
+    return s.length > max ? s.substring(0, max) + '...' : s;
+  }
+ 
+  function extractImage(item) {
+    if (item.thumbnail && item.thumbnail.length > 5) return item.thumbnail;
+    if (item.enclosure && item.enclosure.link) return item.enclosure.link;
+    const m = item.content ? item.content.match(/<img[^>]+src=["']([^"']+)["']/i) : null;
+    return m ? m[1] : null;
+  }
+ 
+  function getCategory(item) {
+    if (item.categories && item.categories.length > 0) return item.categories[0];
+    return 'Segurança';
+  }
+ 
+  fetch(API)
+    .then(r => r.json())
+    .then(data => {
+      if (data.status !== 'ok' || !data.items || data.items.length === 0) throw new Error('empty');
+ 
+      const html = data.items.map(item => {
+        const img = extractImage(item);
+        const desc = truncate(stripHtml(item.description || ''), 120);
+        const cat = getCategory(item);
+        const date = formatDate(item.pubDate);
+        const imgBlock = img
+          ? `<img src="${img}" alt="${item.title}" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-card-no-thumb\\'>📰</div>'">`
+          : `<div class="blog-card-no-thumb">📰</div>`;
+ 
+        return `
+          <a href="${item.link}" target="_blank" rel="noopener" class="blog-card">
+            ${imgBlock}
+            <div class="blog-card-cat">${cat}</div>
+            <div class="blog-card-body">
+              <div class="blog-card-date">${date}</div>
+              <h3>${truncate(item.title, 80)}</h3>
+              <p>${desc}</p>
+            </div>
+          </a>`;
+      }).join('');
+ 
+      skeleton.style.display = 'none';
+      feed.innerHTML = html;
+      feed.style.display = 'grid';
+ 
+      statusDot.style.background = '#4ade80';
+      statusText.textContent = 'Atualizado agora';
+    })
+    .catch(() => {
+      skeleton.style.display = 'none';
+      error.style.display = 'block';
+      statusDot.style.background = 'var(--red)';
+      statusText.textContent = 'Feed indisponível';
+    });
+})();
+</script>
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
