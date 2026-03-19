@@ -478,24 +478,27 @@
 
   /* ── MOBILE DRAWER ── */
   .mobile-menu {
-    display: none;
     position: fixed;
     top: 70px; left: 0; right: 0;
     background: rgba(26,26,26,0.99);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--dark-border);
     z-index: 999;
-    padding: 1.5rem 2rem 2rem;
+    padding: 0 2rem;
+    display: flex;
     flex-direction: column;
     gap: 0;
-    transform: translateY(-10px);
+    max-height: 0;
+    overflow: hidden;
     opacity: 0;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease;
   }
   .mobile-menu.open {
-    display: flex;
-    transform: translateY(0);
+    max-height: 600px;
     opacity: 1;
+    pointer-events: all;
+    padding: 1.5rem 2rem 2rem;
   }
   .mobile-menu a {
     text-decoration: none;
@@ -1216,3 +1219,130 @@
         <ul class="footer-links">
           <li><a href="politica.html">Política de Privacidade</a></li>
           <li><a
+          <li><a href="termos.html">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 GLCTech Tecnologia. Todos os direitos reservados.</span>
+      <span>São Paulo, SP — Brasil</span>
+    </div>
+  </div>
+</footer>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  .field-error { display:block; font-size:12px; color:var(--red); margin-top:4px; min-height:16px; font-family:var(--font-display); }
+  input.error, textarea.error { border-color:var(--red) !important; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
+</style>
+<script>
+  emailjs.init('0vEmqGDJ4dJz45f0M');
+
+  function clearErrors() {
+    ['nome','email','mensagem'].forEach(function(f) {
+      var el = document.getElementById(f);
+      var err = document.getElementById('err-' + f);
+      if (el) el.classList.remove('error');
+      if (err) err.textContent = '';
+    });
+    var msg = document.getElementById('form-error-msg');
+    if (msg) msg.style.display = 'none';
+  }
+
+  function validateForm() {
+    var valid = true;
+    var nome = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var mensagem = document.getElementById('mensagem').value.trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!nome) { document.getElementById('err-nome').textContent = 'Por favor, informe seu nome.'; document.getElementById('nome').classList.add('error'); valid = false; }
+    if (!email || !emailRegex.test(email)) { document.getElementById('err-email').textContent = 'Informe um e-mail válido.'; document.getElementById('email').classList.add('error'); valid = false; }
+    if (!mensagem) { document.getElementById('err-mensagem').textContent = 'Por favor, escreva uma mensagem.'; document.getElementById('mensagem').classList.add('error'); valid = false; }
+    return valid;
+  }
+
+  function sendEmail() {
+    clearErrors();
+    if (!validateForm()) return;
+    var btn = document.getElementById('btn-submit');
+    var btnText = document.getElementById('btn-text');
+    var btnLoading = document.getElementById('btn-loading');
+    btn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+    var params = {
+      nome: document.getElementById('nome').value.trim(),
+      empresa: document.getElementById('empresa').value.trim() || 'Não informado',
+      email: document.getElementById('email').value.trim(),
+      telefone: document.getElementById('telefone').value.trim() || 'Não informado',
+      mensagem: document.getElementById('mensagem').value.trim()
+    };
+    emailjs.send('801710627', 'template_mquna1f', params)
+      .then(function() {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      })
+      .catch(function(err) {
+        var errMsg = document.getElementById('form-error-msg');
+        errMsg.textContent = 'Erro ao enviar. Tente novamente ou ligue: +55 11 95762-4146';
+        errMsg.style.display = 'block';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
+      });
+  }
+
+  function resetForm() {
+    clearErrors();
+    ['nome','empresa','email','telefone'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+    var ta = document.getElementById('mensagem'); if (ta) ta.value = '';
+    document.getElementById('form-success').style.display = 'none';
+    document.getElementById('contact-form').style.display = 'block';
+  }
+</script>
+
+<!-- Hamburger JS -->
+<script>
+  var menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('mobile-menu');
+    if (menuOpen) {
+      btn.classList.add('open');
+      menu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    } else {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function closeMenu() {
+    menuOpen = false;
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('mobile-menu');
+    if (btn) btn.classList.remove('open');
+    if (menu) menu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!menuOpen) return;
+    var menu = document.getElementById('mobile-menu');
+    var btn = document.getElementById('hamburger');
+    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+
+</body>
+</html>
