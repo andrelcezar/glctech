@@ -6,6 +6,7 @@
 <title>GLCTech — Monitoramento e Segurança em TI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -436,6 +437,23 @@
   .footer-bottom { border-top: 1px solid var(--dark-border); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--gray-dim); }
 
   /* ── RESPONSIVE ── */
+  
+  /* ── Font Awesome global icon color ── */
+  .fa-solid, .fa-regular, .fa-brands { color: var(--red); }
+
+  /* Exceções: ícones que devem ter cor própria */
+  .nav-links .fa-solid,
+  .nav-links .fa-regular       { color: inherit; }
+  .btn-primary .fa-solid       { color: #fff; }
+  .btn-outline .fa-solid       { color: inherit; }
+  .btn-white .fa-solid         { color: var(--red); }
+  .nav-cta .fa-regular         { color: #fff; }
+  .form-submit .fa-solid       { color: #fff; }
+  .result-cta .fa-solid        { color: #fff; }
+  .service-link .fa-solid      { color: var(--red); }
+  #form-success .fa-solid      { color: #4ade80; }
+  .blog-card-no-thumb .fa-regular { color: var(--gray-dim); }
+
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-visual { display: none; }
@@ -463,7 +481,7 @@
       <li><a href="#team">Time</a></li>
       <li><a href="#testimonials">Clientes</a></li>
       <li><a href="https://ty0ci.share.hsforms.com/2dDZ5-CdFTKektziqcbgsTQ" target="_blank">Trabalhe Conosco</a></li>
-      <li><a href="#contact" class="nav-cta">Fale Conosco</a></li>
+      <li><a href="#contact" class="nav-cta"><i class="fa-regular fa-comment-dots" style="margin-right:6px;"></i>Fale Conosco</a></li>
     </ul>
   </div>
 </nav>
@@ -482,7 +500,7 @@
       <h1>Visibilidade Total<br>da Sua <span>Infraestrutura</span><br>de TI</h1>
       <p>Detectamos falhas antes que impactem seu negócio. Monitoramento inteligente, segurança avançada e suporte especializado — tudo em um único parceiro.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Solicitar Diagnóstico &rarr;</a>
+        <a href="#contact" class="btn-primary">Solicitar Diagnóstico <i class="fa-solid fa-arrow-right"></i></a>
         <a href="#services" class="btn-outline">Ver Soluções</a>
       </div>
     </div>
@@ -504,18 +522,22 @@
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item">
+      <i class="fa-solid fa-server" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">144<span>+</span></div>
       <div class="stat-desc">Devices monitorados via SNMP</div>
     </div>
     <div class="stat-item">
+      <i class="fa-solid fa-rocket" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">3k<span>+</span></div>
       <div class="stat-desc">Capacidade total de monitoramento</div>
     </div>
     <div class="stat-item">
+      <i class="fa-solid fa-circle-check" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">99<span>.9%</span></div>
       <div class="stat-desc">SLA garantido aos clientes</div>
     </div>
     <div class="stat-item">
+      <i class="fa-solid fa-headset" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">24<span>/7</span></div>
       <div class="stat-desc">Suporte técnico contínuo</div>
     </div>
@@ -541,21 +563,21 @@
         <p>A GLCTech nasceu com um propósito claro: transformar o monitoramento de TI em vantagem competitiva. Nossa abordagem combina tecnologia de ponta com profundo conhecimento técnico para garantir que sua infraestrutura opere no máximo desempenho — sempre.</p>
         <div class="about-pillars">
           <div class="pillar">
-            <div class="pillar-icon">⚡</div>
+            <div class="pillar-icon"><i class="fa-solid fa-bolt"></i></div>
             <div>
               <h4>Expertise em Zabbix</h4>
               <p>Equipe altamente qualificada em uma das plataformas líderes de monitoramento, com soluções personalizadas para cada cliente.</p>
             </div>
           </div>
           <div class="pillar">
-            <div class="pillar-icon">🛡️</div>
+            <div class="pillar-icon"><i class="fa-solid fa-shield-halved"></i></div>
             <div>
               <h4>Suporte Abrangente</h4>
               <p>Da concepção à manutenção contínua, estamos ao seu lado em todas as etapas do projeto.</p>
             </div>
           </div>
           <div class="pillar">
-            <div class="pillar-icon">📊</div>
+            <div class="pillar-icon"><i class="fa-solid fa-chart-line"></i></div>
             <div>
               <h4>Inovação Tecnológica</h4>
               <p>Utilizamos Zabbix, Grafana e as melhores ferramentas do mercado para dashboards precisos e insights acionáveis.</p>
@@ -578,24 +600,24 @@
     <div class="services-grid">
       <a href="zabbix.html" class="service-card">
         <div class="service-num">01 — Monitoramento</div>
-        <div class="service-icon">📡</div>
+        <div class="service-icon"><i class="fa-solid fa-satellite-dish"></i></div>
         <h3>Monitoramento Inteligente com Zabbix</h3>
         <p>Acompanhe em tempo real servidores, redes e aplicações com métricas precisas, dashboards personalizados e análise proativa de incidentes.</p>
-        <span class="service-link">Saiba mais &rarr;</span>
+        <span class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></span>
       </a>
       <a href="kaspersky.html" class="service-card">
         <div class="service-num">02 — Segurança</div>
-        <div class="service-icon">🔒</div>
+        <div class="service-icon"><i class="fa-solid fa-lock"></i></div>
         <h3>Segurança Kaspersky em Tempo Real</h3>
         <p>Monitore continuamente seus sistemas e detecte ameaças em tempo real, garantindo segurança, desempenho e conformidade em todo o ambiente.</p>
-        <span class="service-link">Saiba mais &rarr;</span>
+        <span class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></span>
       </a>
       <a href="veeam.html" class="service-card">
         <div class="service-num">03 — Backup</div>
-        <div class="service-icon">💾</div>
+        <div class="service-icon"><i class="fa-solid fa-database"></i></div>
         <h3>Backup Inteligente com Veeam</h3>
         <p>Garanta a continuidade dos seus negócios com backups automáticos, recuperação rápida e relatórios completos sobre o status das suas cópias de segurança.</p>
-        <span class="service-link">Saiba mais &rarr;</span>
+        <span class="service-link">Saiba mais <i class="fa-solid fa-arrow-right"></i></span>
       </a>
     </div>
   </div>
@@ -644,7 +666,7 @@
 
       <div>
         <div class="why-quote-card">
-          <div class="why-quote-icon">💬</div>
+          <div class="why-quote-icon"><i class="fa-solid fa-quote-left" style="color:var(--red);font-size:2rem;"></i></div>
           <blockquote>"A qualidade dos serviços prestados pela GLCTech é excepcional. Sempre atenciosos e ágeis, demonstram profundo conhecimento em sua área, oferecendo soluções eficazes para qualquer desafio."</blockquote>
           <div class="why-quote-author">
             <div class="why-quote-avatar">MP</div>
@@ -712,7 +734,7 @@
     </div>
     <div class="testimonials-grid">
       <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"Sempre que precisamos de algo, eles estão dispostos a ajudar. Possuem excelente conhecimento de sua área e entregam soluções de acordo com as nossas necessidades. Recomendo fortemente."</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">WN</div>
@@ -723,7 +745,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"A qualidade dos serviços prestados pela GLCTech é excepcional. Sempre atenciosos e ágeis, demonstram profundo conhecimento e oferecem soluções eficazes para qualquer desafio."</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">MP</div>
@@ -734,7 +756,7 @@
         </div>
       </div>
       <div class="testi-card"hidden>
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"Excelente consultoria. Além do monitoramento, nos ajudaram a otimizar custos e melhorar a segurança de rede com Kaspersky. Parceiros de verdade."</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">JP</div>
@@ -745,7 +767,7 @@
         </div>
       </div>
       <div class="testi-card"hidden>
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"A GLCTech transformou nossa visibilidade de infraestrutura. Os dashboards em Grafana nos permitem tomar decisões muito mais rápidas e embasadas."</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">RL</div>
@@ -792,7 +814,7 @@
           style="font-size:12px;font-weight:600;color:var(--gray-dim);text-decoration:none;border:1px solid var(--dark-border);padding:6px 12px;border-radius:var(--radius);font-family:var(--font-display);transition:color 0.2s,border-color 0.2s;"
           onmouseover="this.style.color='var(--red)';this.style.borderColor='var(--red)'"
           onmouseout="this.style.color='var(--gray-dim)';this.style.borderColor='var(--dark-border)'">
-          Ver TechTudo &rarr;
+          Ver TechTudo <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
     </div>
@@ -836,7 +858,7 @@
  
     <!-- Error state -->
     <div id="blog-error" style="display:none; text-align:center; padding:3rem; background:var(--dark-light); border:1px solid var(--dark-border); border-radius:var(--radius-lg);">
-      <div style="font-size:2rem; margin-bottom:1rem;">📡</div>
+      <div style="font-size:2rem; margin-bottom:1rem; color:var(--red);"><i class="fa-solid fa-satellite-dish"></i></div>
       <div style="color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.5rem;">Feed temporariamente indisponível</div>
       <div style="color:var(--gray-dim); font-size:14px;">
         Acesse diretamente em
@@ -917,8 +939,8 @@
         const cat = getCategory(item);
         const date = formatDate(item.pubDate);
         const imgBlock = img
-          ? `<img src="${img}" alt="${item.title}" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-card-no-thumb\\'>📰</div>'">`
-          : `<div class="blog-card-no-thumb">📰</div>`;
+          ? `<img src="${img}" alt="${item.title}" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-card-no-thumb\\' style=\\'font-size:1.8rem;color:var(--gray-dim)\\'><i class=\\'fa-regular fa-newspaper\\'></i></div>'">`
+          : `<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>`;
  
         return `
           <a href="${item.link}" target="_blank" rel="noopener" class="blog-card">
@@ -953,7 +975,7 @@
   <div class="container cta-banner-inner">
     <h2>Pronto para proteger sua infraestrutura?</h2>
     <p>Fale com nossos especialistas e descubra como a GLCTech pode transformar o monitoramento da sua empresa.</p>
-    <a href="#contact" class="btn-white">Iniciar Diagnóstico Gratuito &rarr;</a>
+    <a href="#contact" class="btn-white">Iniciar Diagnóstico Gratuito <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </div>
 
@@ -967,22 +989,22 @@
         <div class="rule"></div>
         <p>Entre em contato com nossa equipe e descubra como a GLCTech pode otimizar sua infraestrutura de TI. Resposta em até 24h úteis.</p>
         <div class="contact-items">
-          <a href="mailto:contato@glctech.com.br" class="contact-item">
-            <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
+          <a href="/cdn-cgi/l/email-protection#ccafa3a2b8adb8a38caba0afb8a9afa4e2afa3a1e2aebe" class="contact-item">
+            <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
             <div>
               <div class="contact-item-label">E-mail</div>
-              <div class="contact-item-val">contato@glctech.com.br</div>
+              <div class="contact-item-val"><span class="__cf_email__" data-cfemail="f89b97968c998c97b89f949b8c9d9b90d69b9795d69a8a">[email&#160;protected]</span></div>
             </div>
           </a>
           <a href="tel:+5511957624146" class="contact-item">
-            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
             <div>
               <div class="contact-item-label">Telefone / WhatsApp</div>
               <div class="contact-item-val">+55 11 95762-4146</div>
             </div>
           </a>
           <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div>
               <div class="contact-item-label">Localização</div>
               <div class="contact-item-val">São Paulo, SP — Brasil</div>
@@ -994,7 +1016,7 @@
       <div class="contact-form-wrap">
         <!-- SUCCESS STATE -->
         <div id="form-success" style="display:none; text-align:center; padding:3rem 1rem;">
-          <div style="width:64px;height:64px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.5rem;">&#10003;</div>
+          <div style="width:64px;height:64px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#4ade80;margin:0 auto 1.5rem;"><i class="fa-solid fa-circle-check"></i></div>
           <h3 style="color:var(--white);font-size:1.3rem;margin-bottom:0.75rem;">Mensagem enviada!</h3>
           <p style="color:var(--gray-dim);font-size:14px;line-height:1.7;">Recebemos seu contato e responderemos em at&#233; <strong style="color:var(--white)">24h &#250;teis</strong>.</p>
           <button onclick="resetForm()" style="margin-top:1.5rem;background:transparent;border:1px solid var(--dark-border);color:var(--gray-dim);padding:10px 24px;border-radius:var(--radius);cursor:pointer;font-family:var(--font-display);font-size:13px;">Enviar nova mensagem</button>
@@ -1028,7 +1050,7 @@
             <span class="field-error" id="err-mensagem"></span>
           </div>
           <button class="form-submit" id="btn-submit" onclick="sendEmail()">
-            <span id="btn-text">Enviar Mensagem</span>
+            <span id="btn-text"><i class="fa-solid fa-paper-plane" style="margin-right:8px;"></i>Enviar Mensagem</span>
             <span id="btn-loading" style="display:none;">Enviando...</span>
           </button>
           <p id="form-error-msg" style="display:none;color:var(--red);font-size:13px;margin-top:0.8rem;text-align:center;"></p>
@@ -1069,9 +1091,4 @@
         <h4>Legal</h4>
         <ul class="footer-links">
           <li><a href="politica.html">Política de Privacidade</a></li>
-          <li><a href="termos.html">Termos de Uso</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 GLCTech 
+          <li><a
