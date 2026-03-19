@@ -968,10 +968,10 @@
         <p>Entre em contato com nossa equipe e descubra como a GLCTech pode otimizar sua infraestrutura de TI. Resposta em até 24h úteis.</p>
         <div class="contact-items">
           <a href="mailto:contato@glctech.com.br" class="contact-item">
-            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-icon">&#x2709;&#xFE0F;</div>
             <div>
               <div class="contact-item-label">E-mail</div>
-              <div class="contact-item-val"><span class="__cf_email__" data-cfemail="563539382237223916313a352233353e7835393b783424">[email&#160;protected]</span></div>
+              <div class="contact-item-val">contato@glctech.com.br</div>
             </div>
           </a>
           <a href="tel:+5511957624146" class="contact-item">
@@ -990,31 +990,49 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="contact-form-wrap">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" placeholder="Seu nome">
+        <!-- SUCCESS STATE -->
+        <div id="form-success" style="display:none; text-align:center; padding:3rem 1rem;">
+          <div style="width:64px;height:64px;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.5rem;">&#10003;</div>
+          <h3 style="color:var(--white);font-size:1.3rem;margin-bottom:0.75rem;">Mensagem enviada!</h3>
+          <p style="color:var(--gray-dim);font-size:14px;line-height:1.7;">Recebemos seu contato e responderemos em at&#233; <strong style="color:var(--white)">24h &#250;teis</strong>.</p>
+          <button onclick="resetForm()" style="margin-top:1.5rem;background:transparent;border:1px solid var(--dark-border);color:var(--gray-dim);padding:10px 24px;border-radius:var(--radius);cursor:pointer;font-family:var(--font-display);font-size:13px;">Enviar nova mensagem</button>
+        </div>
+ 
+        <!-- FORM -->
+        <div id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome *</label>
+              <input type="text" id="nome" placeholder="Seu nome">
+              <span class="field-error" id="err-nome"></span>
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" placeholder="Nome da empresa">
+            </div>
           </div>
           <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" placeholder="Nome da empresa">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" placeholder="seu@email.com.br">
+            <span class="field-error" id="err-email"></span>
           </div>
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(11) 99999-9999">
+          </div>
+          <div class="form-group">
+            <label for="mensagem">Mensagem *</label>
+            <textarea id="mensagem" placeholder="Descreva sua necessidade ou infraestrutura..."></textarea>
+            <span class="field-error" id="err-mensagem"></span>
+          </div>
+          <button class="form-submit" id="btn-submit" onclick="sendEmail()">
+            <span id="btn-text">Enviar Mensagem</span>
+            <span id="btn-loading" style="display:none;">Enviando...</span>
+          </button>
+          <p id="form-error-msg" style="display:none;color:var(--red);font-size:13px;margin-top:0.8rem;text-align:center;"></p>
         </div>
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" placeholder="seu@email.com.br">
-        </div>
-        <div class="form-group">
-          <label for="telefone">Telefone</label>
-          <input type="tel" id="telefone" placeholder="(11) 99999-9999">
-        </div>
-        <div class="form-group">
-          <label for="mensagem">Mensagem</label>
-          <textarea id="mensagem" placeholder="Descreva sua necessidade ou infraestrutura..."></textarea>
-        </div>
-        <button class="form-submit">Enviar Mensagem</button>
       </div>
     </div>
   </div>
