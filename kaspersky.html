@@ -50,8 +50,9 @@
   .btn-outline:hover { border-color: var(--red); color: var(--red); }
 
   /* Hero visual */
-  .hero-visual { display: flex; flex-direction: column; gap: 1rem; }
-  .hero-threat-card { background: var(--dark-light); border: 1px solid var(--dark-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .hero-visual { display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center; }
+  .hero-img-wrap { width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--dark-border); }
+  .hero-product-img { width: 100%; display: block; border-radius: var(--radius-lg); object-fit: cover; }
   .threat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--dark-border); }
   .threat-title { font-family: var(--font-display); font-size: 12px; font-weight: 600; color: var(--gray-dim); text-transform: uppercase; letter-spacing: 0.1em; }
   .threat-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4ade80; font-weight: 500; }
@@ -186,39 +187,8 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-threat-card">
-        <div class="threat-header">
-          <span class="threat-title">Centro de Ameaças · Ao Vivo</span>
-          <div class="threat-status"><div class="threat-dot"></div>Proteção ativa</div>
-        </div>
-        <div class="threat-items">
-          <div class="threat-item">
-            <div class="threat-item-left"><div class="threat-icon ok">🛡️</div>Ransomware detectado</div>
-            <span class="threat-badge blocked">Bloqueado</span>
-          </div>
-          <div class="threat-item">
-            <div class="threat-item-left"><div class="threat-icon ok">🔍</div>Phishing — 3 tentativas</div>
-            <span class="threat-badge blocked">Bloqueado</span>
-          </div>
-          <div class="threat-item">
-            <div class="threat-item-left"><div class="threat-icon ok">💻</div>Endpoint — 48 dispositivos</div>
-            <span class="threat-badge ok">Protegido</span>
-          </div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-mini">
-          <div class="stat-mini-num">99.9<span style="font-size:13px;color:var(--gray-dim)">%</span></div>
-          <div class="stat-mini-label">Taxa de detecção</div>
-        </div>
-        <div class="stat-mini">
-          <div class="stat-mini-num">0</div>
-          <div class="stat-mini-label">Incidentes ativos</div>
-        </div>
-        <div class="stat-mini">
-          <div class="stat-mini-num">24/7</div>
-          <div class="stat-mini-label">Proteção contínua</div>
-        </div>
+      <div class="hero-img-wrap">
+        <img src="./assets/services/kaspersky.png" alt="Kaspersky Security" class="hero-product-img">
       </div>
     </div>
   </div>
@@ -365,7 +335,7 @@
           <div class="result-item"><span class="result-item-key">Gestão GLCTech</span><span class="result-item-val" id="k-gestao">—</span></div>
           <div class="result-item"><span class="result-item-key">Custo por dispositivo</span><span class="result-item-val" id="k-unit">—</span></div>
         </div>
-        <a href="https://wa.me/5511911517501" target="_blank" class="result-cta" id="k-cta">Solicitar Cotação Oficial &rarr;</a>
+        <a href="https://wa.me/5511957624146" target="_blank" class="result-cta" id="k-cta">Solicitar Cotação Oficial &rarr;</a>
       </div>
     </div>
   </div>

@@ -50,8 +50,9 @@
   .btn-outline:hover { border-color: var(--red); color: var(--red); }
 
   /* Hero visual — backup status card */
-  .hero-visual { display: flex; flex-direction: column; gap: 1rem; }
-  .backup-status-card { background: var(--dark-light); border: 1px solid var(--dark-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .hero-visual { display: flex; align-items: center; justify-content: center; }
+  .hero-img-wrap { width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--dark-border); }
+  .hero-product-img { width: 100%; display: block; border-radius: var(--radius-lg); object-fit: cover; }
   .bk-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--dark-border); }
   .bk-title { font-family: var(--font-display); font-size: 12px; font-weight: 600; color: var(--gray-dim); text-transform: uppercase; letter-spacing: 0.1em; }
   .bk-ok { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4ade80; font-weight: 500; }
@@ -187,39 +188,8 @@
     </div>
 
     <div class="hero-visual">
-      <div class="backup-status-card">
-        <div class="bk-header">
-          <span class="bk-title">Jobs de Backup · Status</span>
-          <div class="bk-ok"><div class="bk-dot"></div>3 de 3 bem-sucedidos</div>
-        </div>
-        <div class="bk-jobs">
-          <div class="bk-job">
-            <div class="bk-job-left"><div class="bk-job-icon">🗄️</div>VM Production — 4 VMs</div>
-            <span class="bk-badge ok">Concluído</span>
-          </div>
-          <div class="bk-job">
-            <div class="bk-job-left"><div class="bk-job-icon">📧</div>Exchange Server</div>
-            <span class="bk-badge ok">Concluído</span>
-          </div>
-          <div class="bk-job">
-            <div class="bk-job-left"><div class="bk-job-icon">🗂️</div>File Servers — 2.4 TB</div>
-            <span class="bk-badge ok">Concluído</span>
-          </div>
-        </div>
-      </div>
-      <div class="bk-stats">
-        <div class="bk-stat">
-          <div class="bk-stat-num">2.4<span style="font-size:12px;color:var(--gray-dim)">TB</span></div>
-          <div class="bk-stat-label">Protegidos</div>
-        </div>
-        <div class="bk-stat">
-          <div class="bk-stat-num">15<span style="font-size:12px;color:var(--gray-dim)">min</span></div>
-          <div class="bk-stat-label">RTO médio</div>
-        </div>
-        <div class="bk-stat">
-          <div class="bk-stat-num">100<span style="font-size:12px;color:var(--gray-dim)">%</span></div>
-          <div class="bk-stat-label">Sucesso 30d</div>
-        </div>
+      <div class="hero-img-wrap">
+        <img src="./assets/services/veeam.png" alt="Veeam Backup" class="hero-product-img">
       </div>
     </div>
   </div>
