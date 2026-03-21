@@ -914,7 +914,7 @@
     <p class="partners-label">Tecnologias &amp; Parceiros de Confiança</p>
     <div class="partners-row">
       <div class="partner-badge"hidden>Zabbix</div>
-      <div class="partner-badge"hidden>Grafana</div>
+      <div class="partner-badge">DSR9</div>
       <div class="partner-badge">Kaspersky</div>
       <div class="partner-badge">Veeam</div>
       <div class="partner-badge">Nordenet</div>
@@ -926,176 +926,147 @@
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
-    <div class="section-header" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+ 
+    <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
       <div>
         <span class="label">Últimas Novidades</span>
         <h2>Insights sobre TI e Segurança</h2>
         <p>Notícias em tempo real sobre segurança cibernética, infraestrutura e tecnologia.</p>
       </div>
-      <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-        <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--gray-dim);">
-          <span id="rss-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--dark-border);display:inline-block;"></span>
-          <span id="rss-status-text">Carregando...</span>
-        </div>
-        <a href="https://www.techtudo.com.br/" target="_blank"
-          style="font-size:12px;font-weight:600;color:var(--gray-dim);text-decoration:none;border:1px solid var(--dark-border);padding:6px 12px;border-radius:var(--radius);font-family:var(--font-display);transition:color 0.2s,border-color 0.2s;"
-          onmouseover="this.style.color='var(--red)';this.style.borderColor='var(--red)'"
-          onmouseout="this.style.color='var(--gray-dim)';this.style.borderColor='var(--dark-border)'">
-          Ver TechTudo <i class="fa-solid fa-arrow-right"></i>
-        </a>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span id="rss-status-dot" style="width:8px;height:8px;border-radius:50%;background:var(--dark-border);display:inline-block;transition:background .3s;"></span>
+        <span id="rss-status-text" style="font-size:12px;color:var(--gray-dim);">Carregando...</span>
       </div>
     </div>
  
-    <!-- Loading skeleton -->
-    <div class="blog-grid" id="blog-skeleton">
-      <div class="blog-card" style="pointer-events:none;">
-        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:60%;animation:shimmer 1.5s infinite;"></div>
-        <div class="blog-card-body">
-          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:80%;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:70%;animation:shimmer 1.5s infinite;"></div>
-        </div>
-      </div>
-      <div class="blog-card" style="pointer-events:none;">
-        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:50%;animation:shimmer 1.5s infinite 0.2s;"></div>
-        <div class="blog-card-body">
-          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite 0.2s;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite 0.2s;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:75%;margin-bottom:8px;animation:shimmer 1.5s infinite 0.2s;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite 0.2s;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:60%;animation:shimmer 1.5s infinite 0.2s;"></div>
-        </div>
-      </div>
-      <div class="blog-card" style="pointer-events:none;">
-        <div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:55%;animation:shimmer 1.5s infinite 0.4s;"></div>
-        <div class="blog-card-body">
-          <div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite 0.4s;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite 0.4s;"></div>
-          <div style="height:14px;background:var(--dark-border);border-radius:2px;width:85%;margin-bottom:8px;animation:shimmer 1.5s infinite 0.4s;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;margin-bottom:6px;animation:shimmer 1.5s infinite 0.4s;"></div>
-          <div style="height:12px;background:var(--dark-border);border-radius:2px;width:65%;animation:shimmer 1.5s infinite 0.4s;"></div>
-        </div>
-      </div>
+    <!-- Abas de filtro -->
+    <div style="display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap;">
+      <button id="tab-all"      onclick="filterFeed('all')"      class="feed-tab feed-tab-active">Todos</button>
+      <button id="tab-techtudo" onclick="filterFeed('techtudo')" class="feed-tab">TechTudo</button>
+      <button id="tab-tecmundo" onclick="filterFeed('tecmundo')" class="feed-tab">TecMundo Segurança</button>
     </div>
  
-    <!-- Real RSS content -->
-    <div class="blog-grid" id="blog-feed" style="display:none;"></div>
+    <!-- Skeleton 6 cards -->
+    <div class="blog-grid" id="blog-skeleton" style="grid-template-columns:repeat(3,1fr);">
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:60%;animation:shimmer 1.5s infinite;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:70%;animation:shimmer 1.5s infinite;"></div></div></div>
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:50%;animation:shimmer 1.5s infinite .15s;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite .15s;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite .15s;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:60%;animation:shimmer 1.5s infinite .15s;"></div></div></div>
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:55%;animation:shimmer 1.5s infinite .3s;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite .3s;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite .3s;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:65%;animation:shimmer 1.5s infinite .3s;"></div></div></div>
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:58%;animation:shimmer 1.5s infinite .45s;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite .45s;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite .45s;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:75%;animation:shimmer 1.5s infinite .45s;"></div></div></div>
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:52%;animation:shimmer 1.5s infinite .6s;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite .6s;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite .6s;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:55%;animation:shimmer 1.5s infinite .6s;"></div></div></div>
+      <div class="blog-card" style="pointer-events:none;"><div style="height:8px;background:var(--dark-border);border-radius:2px;margin:1.5rem 1.5rem 0;width:62%;animation:shimmer 1.5s infinite .75s;"></div><div class="blog-card-body"><div style="height:8px;background:var(--dark-border);border-radius:2px;width:40%;margin-bottom:12px;animation:shimmer 1.5s infinite .75s;"></div><div style="height:14px;background:var(--dark-border);border-radius:2px;margin-bottom:8px;animation:shimmer 1.5s infinite .75s;"></div><div style="height:12px;background:var(--dark-border);border-radius:2px;width:80%;animation:shimmer 1.5s infinite .75s;"></div></div></div>
+    </div>
  
-    <!-- Error state -->
-    <div id="blog-error" style="display:none; text-align:center; padding:3rem; background:var(--dark-light); border:1px solid var(--dark-border); border-radius:var(--radius-lg);">
-      <div style="font-size:2rem; margin-bottom:1rem; color:var(--red);"><i class="fa-solid fa-satellite-dish"></i></div>
-      <div style="color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.5rem;">Feed temporariamente indisponível</div>
-      <div style="color:var(--gray-dim); font-size:14px;">
-        Acesse diretamente em
-        <a href="https://www.techtudo.com.br/" target="_blank" style="color:var(--red); text-decoration:none;">TechTudo</a>
-      </div>
+    <!-- Feed real -->
+    <div class="blog-grid" id="blog-feed" style="display:none;grid-template-columns:repeat(3,1fr);"></div>
+ 
+    <!-- Erro -->
+    <div id="blog-error" style="display:none;text-align:center;padding:3rem;background:var(--dark-light);border:1px solid var(--dark-border);border-radius:var(--radius-lg);">
+      <div style="font-size:2rem;margin-bottom:1rem;color:var(--red);"><i class="fa-solid fa-satellite-dish"></i></div>
+      <div style="color:var(--white);font-family:var(--font-display);font-size:1rem;margin-bottom:.5rem;">Feeds temporariamente indisponíveis</div>
+      <div style="color:var(--gray-dim);font-size:14px;">Acesse: <a href="https://www.techtudo.com.br/" target="_blank" style="color:var(--red);text-decoration:none;">TechTudo</a> &nbsp;|&nbsp; <a href="https://www.tecmundo.com.br/seguranca" target="_blank" style="color:var(--red);text-decoration:none;">TecMundo Segurança</a></div>
     </div>
  
   </div>
 </section>
  
 <style>
-  @keyframes shimmer {
-    0%,100% { opacity: 0.4; }
-    50% { opacity: 0.9; }
-  }
-  .blog-card-thumb {
-    width: 100%; aspect-ratio: 16/9;
-    object-fit: cover; display: block;
-    filter: brightness(0.8);
-    transition: filter var(--transition);
-  }
-  .blog-card:hover .blog-card-thumb { filter: brightness(1); }
-  .blog-card-no-thumb {
-    width: 100%; aspect-ratio: 16/9;
-    background: var(--dark-mid);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem;
-  }
+  @keyframes shimmer { 0%,100%{opacity:.4} 50%{opacity:.9} }
+  .blog-card-thumb { width:100%;aspect-ratio:16/9;object-fit:cover;display:block;filter:brightness(.8);transition:filter var(--transition); }
+  .blog-card:hover .blog-card-thumb { filter:brightness(1); }
+  .blog-card-no-thumb { width:100%;aspect-ratio:16/9;background:var(--dark-mid);display:flex;align-items:center;justify-content:center;font-size:2rem; }
+  .blog-source-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark-border);color:var(--gray-dim);padding:3px 8px;border-radius:100px;margin:1rem 1.5rem 0;font-family:var(--font-display); }
+  .blog-source-badge.tecmundo { background:rgba(230,38,44,.15);color:var(--red); }
+  .blog-source-badge.techtudo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
+  .feed-tab { background:var(--dark-light);border:1px solid var(--dark-border);color:var(--gray-dim);padding:7px 16px;border-radius:100px;font-family:var(--font-display);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.05em; }
+  .feed-tab:hover { border-color:var(--red);color:var(--white); }
+  .feed-tab-active { background:var(--red) !important;border-color:var(--red) !important;color:#fff !important; }
+  @media(max-width:900px) { #blog-feed, #blog-skeleton { grid-template-columns:1fr !important; } }
 </style>
  
 <script>
 (function() {
-  const RSS_URL = 'https://pox.globo.com/rss/techtudo/';
-  const API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=3&api_key=&order_by=pubDate';
+  const API_BASE = 'https://api.rss2json.com/v1/api.json?api_key=&order_by=pubDate&count=3&rss_url=';
+  const FEEDS = [
+    { url:'https://pox.globo.com/rss/techtudo/',             source:'techtudo', label:'TechTudo'  },
+    { url:'https://www.tecmundo.com.br/seguranca/rss',        source:'tecmundo', label:'TecMundo'  }
+  ];
  
-  const skeleton = document.getElementById('blog-skeleton');
-  const feed = document.getElementById('blog-feed');
-  const error = document.getElementById('blog-error');
-  const statusDot = document.getElementById('rss-status-dot');
+  const skeleton   = document.getElementById('blog-skeleton');
+  const feedEl     = document.getElementById('blog-feed');
+  const errorEl    = document.getElementById('blog-error');
+  const statusDot  = document.getElementById('rss-status-dot');
   const statusText = document.getElementById('rss-status-text');
  
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  let allItems = [], loaded = 0, failed = 0;
+  let currentFilter = 'all';
+ 
+  function formatDate(s) { const d=new Date(s); return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}); }
+  function stripHtml(h) { const t=document.createElement('div'); t.innerHTML=h; return t.textContent||t.innerText||''; }
+  function trunc(s,n) { s=(s||'').trim(); return s.length>n?s.substring(0,n)+'...':s; }
+  function extractImg(item) {
+    if (item.thumbnail&&item.thumbnail.length>5) return item.thumbnail;
+    if (item.enclosure&&item.enclosure.link) return item.enclosure.link;
+    const m=item.content?item.content.match(/<img[^>]+src=["']([^"']+)["']/i):null; return m?m[1]:null;
+  }
+  function getCat(item) { return (item.categories&&item.categories.length>0)?item.categories[0]:'Segurança'; }
+ 
+  function buildCard(item) {
+    const img=extractImg(item);
+    const imgBlock=img
+      ? '<img src="'+img+'" alt="'+item.title.replace(/"/g,'&quot;')+'" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\'blog-card-no-thumb\'><i class=\'fa-regular fa-newspaper\'></i></div>'">'
+      : '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
+    return '<a href="'+item.link+'" target="_blank" rel="noopener" class="blog-card" data-source="'+item._source+'">'+
+      imgBlock+
+      '<span class="blog-source-badge '+item._source+'">'+item._label+'</span>'+
+      '<div class="blog-card-cat">'+getCat(item)+'</div>'+
+      '<div class="blog-card-body">'+
+        '<div class="blog-card-date">'+formatDate(item.pubDate)+'</div>'+
+        '<h3>'+trunc(item.title,75)+'</h3>'+
+        '<p>'+trunc(stripHtml(item.description||''),110)+'</p>'+
+      '</div></a>';
   }
  
-  function stripHtml(html) {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
-  }
- 
-  function truncate(str, max) {
-    const s = str.trim();
-    return s.length > max ? s.substring(0, max) + '...' : s;
-  }
- 
-  function extractImage(item) {
-    if (item.thumbnail && item.thumbnail.length > 5) return item.thumbnail;
-    if (item.enclosure && item.enclosure.link) return item.enclosure.link;
-    const m = item.content ? item.content.match(/<img[^>]+src=["']([^"']+)["']/i) : null;
-    return m ? m[1] : null;
-  }
- 
-  function getCategory(item) {
-    if (item.categories && item.categories.length > 0) return item.categories[0];
-    return 'Segurança';
-  }
- 
-  fetch(API)
-    .then(r => r.json())
-    .then(data => {
-      if (data.status !== 'ok' || !data.items || data.items.length === 0) throw new Error('empty');
- 
-      const html = data.items.map(item => {
-        const img = extractImage(item);
-        const desc = truncate(stripHtml(item.description || ''), 120);
-        const cat = getCategory(item);
-        const date = formatDate(item.pubDate);
-        const imgBlock = img
-          ? `<img src="${img}" alt="${item.title}" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-card-no-thumb\\' style=\\'font-size:1.8rem;color:var(--gray-dim)\\'><i class=\\'fa-regular fa-newspaper\\'></i></div>'">`
-          : `<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>`;
- 
-        return `
-          <a href="${item.link}" target="_blank" rel="noopener" class="blog-card">
-            ${imgBlock}
-            <div class="blog-card-cat">${cat}</div>
-            <div class="blog-card-body">
-              <div class="blog-card-date">${date}</div>
-              <h3>${truncate(item.title, 80)}</h3>
-              <p>${desc}</p>
-            </div>
-          </a>`;
-      }).join('');
- 
-      skeleton.style.display = 'none';
-      feed.innerHTML = html;
-      feed.style.display = 'grid';
- 
-      statusDot.style.background = '#4ade80';
-      statusText.textContent = 'Atualizado agora';
-    })
-    .catch(() => {
-      skeleton.style.display = 'none';
-      error.style.display = 'block';
-      statusDot.style.background = 'var(--red)';
-      statusText.textContent = 'Feed indisponível';
+  window.filterFeed = function(f) {
+    currentFilter = f;
+    ['all','techtudo','tecmundo'].forEach(t => {
+      const b=document.getElementById('tab-'+t);
+      if(b) b.className='feed-tab'+(t===f?' feed-tab-active':'');
     });
-})();
-</script>
+    const filtered = f==='all' ? allItems : allItems.filter(i=>i._source===f);
+    feedEl.innerHTML = filtered.map(buildCard).join('');
+  };
+ 
+  function onDone() {
+    loaded++;
+    if (loaded+failed < FEEDS.length) return;
+    skeleton.style.display='none';
+    if (allItems.length===0) {
+      errorEl.style.display='block';
+      statusDot.style.background='var(--red)';
+      statusText.textContent='Feeds indisponíveis';
+    } else {
+      allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+      window.filterFeed('all');
+      feedEl.style.display='grid';
+      const ok = FEEDS.length - failed;
+      statusDot.style.background='#4ade80';
+      statusText.textContent = ok===FEEDS.length ? '2 fontes ativas' : '1 fonte ativa';
+    }
+  }
+ 
+  FEEDS.forEach(feed => {
+    fetch(API_BASE + encodeURIComponent(feed.url))
+      .then(r=>r.json())
+      .then(data => {
+        if (data.status==='ok'&&data.items&&data.items.length>0) {
+          data.items.forEach(i=>{ i._source=feed.source; i._label=feed.label; });
+          allItems = allItems.concat(data.items);
+          onDone();
+        } else { failed++; onDone(); }
+      })
+      .catch(()=>{ failed++; onDone(); });
+  });
+})();</script>
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
