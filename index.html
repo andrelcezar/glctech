@@ -650,19 +650,22 @@
   <div class="stats-inner">
     <div class="stat-item">
       <i class="fa-solid fa-server" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
-      <div class="stat-number">144<span>+</span></div>
-      <div class="stat-desc">Devices monitorados via SNMP</div>
+      <div class="stat-number" id="snmp-available-count">--</div>
+      <div class="stat-desc">Devices SNMP disponíveis</div>
     </div>
+
     <div class="stat-item">
       <i class="fa-solid fa-rocket" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">3k<span>+</span></div>
       <div class="stat-desc">Capacidade total de monitoramento</div>
     </div>
+
     <div class="stat-item">
       <i class="fa-solid fa-circle-check" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">99<span>.9%</span></div>
       <div class="stat-desc">SLA garantido aos clientes</div>
     </div>
+
     <div class="stat-item">
       <i class="fa-solid fa-headset" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">24<span>/7</span></div>
@@ -670,6 +673,23 @@
     </div>
   </div>
 </div>
+
+<script>
+async function carregarTotalSnmpDisponivel() {
+  try {
+    const resp = await fetch('/api/zabbix-snmp-disponiveis.php');
+    const data = await resp.json();
+    document.getElementById('snmp-available-count').innerHTML =
+      `${data.snmp_available_hosts}<span>+</span>`;
+  } catch (e) {
+    console.error(e);
+    document.getElementById('snmp-available-count').textContent = 'N/D';
+  }
+}
+
+carregarTotalSnmpDisponivel();
+setInterval(carregarTotalSnmpDisponivel, 60000);
+</script>
 
 <!-- ABOUT -->
 <section id="about">
