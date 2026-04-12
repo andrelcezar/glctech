@@ -73,8 +73,8 @@
     width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 2rem;
   }
 
-  .nav-logo { display: block; text-decoration: none; }
-  .nav-logo img { height: 42px; display: block; }
+  .nav-logo4 { display: block; text-decoration: none; }
+  .nav-logo4 img { height: 42px; display: block; }
 
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 
@@ -586,8 +586,8 @@
 <!-- NAVIGATION -->
 <nav>
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">
-      <img src="https://glctech.com.br/assets/logo/logo.png" alt="GLCTech — Monitoramento e Segurança em TI">
+    <a href="#hero" class="nav-logo4">
+      <img src="https://glctech.com.br/assets/logo/logo4.webp" alt="GLCTech — Monitoramento e Segurança em TI">
     </a>
     <ul class="nav-links">
       <li><a href="#about">Sobre</a></li>
@@ -639,7 +639,7 @@
           <span class="hero-img-label">GLCTech · Dashboard Zabbix</span>
           <div class="hero-img-live"><div class="hero-status-dot"></div>Ao vivo</div>
         </div>
-        <img src="./assets/hero/zabbix_fk.png" alt="Dashboard Zabbix GLCTech" class="hero-zabbix-img">
+        <img src="./assets/hero/zabbix_fk.webp" alt="Dashboard Zabbix GLCTech" class="hero-zabbix-img">
       </div>
     </div>
   </div>
@@ -650,22 +650,19 @@
   <div class="stats-inner">
     <div class="stat-item">
       <i class="fa-solid fa-server" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
-      <div class="stat-number" id="snmp-available-count">--</div>
-      <div class="stat-desc">Devices SNMP disponíveis</div>
+      <div class="stat-number" data-stat="devices">144+</div>
+      <div class="stat-desc">Devices monitorados via SNMP</div>
     </div>
-
     <div class="stat-item">
       <i class="fa-solid fa-rocket" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">3k<span>+</span></div>
       <div class="stat-desc">Capacidade total de monitoramento</div>
     </div>
-
     <div class="stat-item">
       <i class="fa-solid fa-circle-check" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">99<span>.9%</span></div>
       <div class="stat-desc">SLA garantido aos clientes</div>
     </div>
-
     <div class="stat-item">
       <i class="fa-solid fa-headset" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
       <div class="stat-number">24<span>/7</span></div>
@@ -674,29 +671,12 @@
   </div>
 </div>
 
-<script>
-async function carregarTotalSnmpDisponivel() {
-  try {
-    const resp = await fetch('/api/zabbix-snmp-disponiveis.php');
-    const data = await resp.json();
-    document.getElementById('snmp-available-count').innerHTML =
-      `${data.snmp_available_hosts}<span>+</span>`;
-  } catch (e) {
-    console.error(e);
-    document.getElementById('snmp-available-count').textContent = 'N/D';
-  }
-}
-
-carregarTotalSnmpDisponivel();
-setInterval(carregarTotalSnmpDisponivel, 60000);
-</script>
-
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <img src="https://glctech.com.br/assets/hero/escritorio.png" alt="Equipe GLCTech">
+        <img src="https://glctech.com.br/assets/hero/escritorio.webp" alt="Equipe GLCTech">
         <div class="about-img-badge"hidden>
           <div class="about-img-badge-num">+50</div>
           <div class="about-img-badge-text">Projetos Entregues</div>
@@ -844,7 +824,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
     </div>
     <div class="team-grid">
       <div class="team-card">
-        <img src="https://glctech.com.br/assets/team/eu3.png" alt="André Luiz Cézar" class="team-card-img face-fix">
+        <img src="https://glctech.com.br/assets/team/eu3.webp" alt="André Luiz Cézar" class="team-card-img face-fix">
         <div class="team-card-body">
           <div class="team-card-role">CEO &amp; Fundador</div>
           <h3>André Luiz Cézar</h3>
@@ -852,7 +832,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
         </div>
       </div>
       <div class="team-card">
-        <img src="https://glctech.com.br/assets/team/tchize.png" alt="Tchize Matias" class="team-card-img">
+        <img src="https://glctech.com.br/assets/team/tchize.webp" alt="Tchize Matias" class="team-card-img">
         <div class="team-card-body">
           <div class="team-card-role">Co-Founder & Dev Operations</div>
           <h3>Tchize Matias</h3>
@@ -861,7 +841,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
       </div>
       <!-- Kawan Pablo — temporariamente oculto -->
       <div class="team-card" style="display:none;" aria-hidden="true">
-        <img src="https://glctech.com.br/assets/team/kawan.png" alt="Kawan Pablo" class="team-card-img">
+        <img src="https://glctech.com.br/assets/team/kawan.webp" alt="Kawan Pablo" class="team-card-img">
         <div class="team-card-body">
           <div class="team-card-role">Arquiteto Clou</div>
           <h3>Kawan Pablo</h3>
@@ -961,9 +941,10 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
  
     <!-- Abas de filtro -->
     <div style="display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap;">
-      <button id="tab-all"      onclick="filterFeed('all')"      class="feed-tab feed-tab-active">Todos</button>
-      <button id="tab-techtudo" onclick="filterFeed('techtudo')" class="feed-tab">TechTudo</button>
-      <button id="tab-tecmundo" onclick="filterFeed('tecmundo')" class="feed-tab">TecMundo Segurança</button>
+      <button id="tab-all"       onclick="filterFeed('all')"       class="feed-tab feed-tab-active">Todos</button>
+      <button id="tab-techtudo"  onclick="filterFeed('techtudo')"  class="feed-tab">TechTudo</button>
+      <button id="tab-kaspersky" onclick="filterFeed('kaspersky')" class="feed-tab">Kaspersky</button>
+      <button id="tab-veeam"     onclick="filterFeed('veeam')"     class="feed-tab">Veeam</button>
     </div>
  
     <!-- Skeleton 6 cards -->
@@ -983,7 +964,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
     <div id="blog-error" style="display:none;text-align:center;padding:3rem;background:var(--dark-light);border:1px solid var(--dark-border);border-radius:var(--radius-lg);">
       <div style="font-size:2rem;margin-bottom:1rem;color:var(--red);"><i class="fa-solid fa-satellite-dish"></i></div>
       <div style="color:var(--white);font-family:var(--font-display);font-size:1rem;margin-bottom:.5rem;">Feeds temporariamente indisponíveis</div>
-      <div style="color:var(--gray-dim);font-size:14px;">Acesse: <a href="https://www.techtudo.com.br/" target="_blank" style="color:var(--red);text-decoration:none;">TechTudo</a> &nbsp;|&nbsp; <a href="https://www.tecmundo.com.br/seguranca" target="_blank" style="color:var(--red);text-decoration:none;">TecMundo Segurança</a></div>
+      <div style="color:var(--gray-dim);font-size:14px;">Acesse: <a href="https://www.techtudo.com.br/" target="_blank" style="color:var(--red);text-decoration:none;">TechTudo</a> &nbsp;|&nbsp; <a href="https://www.kaspersky.com/blog/" target="_blank" style="color:var(--red);text-decoration:none;">Kaspersky Blog</a> &nbsp;|&nbsp; <a href="https://www.veeam.com/blog/" target="_blank" style="color:var(--red);text-decoration:none;">Veeam Blog</a></div>
     </div>
  
   </div>
@@ -995,7 +976,8 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   .blog-card:hover .blog-card-thumb { filter:brightness(1); }
   .blog-card-no-thumb { width:100%;aspect-ratio:16/9;background:var(--dark-mid);display:flex;align-items:center;justify-content:center;font-size:2rem; }
   .blog-source-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark-border);color:var(--gray-dim);padding:3px 8px;border-radius:100px;margin:1rem 1.5rem 0;font-family:var(--font-display); }
-  .blog-source-badge.tecmundo { background:rgba(230,38,44,.15);color:var(--red); }
+  .blog-source-badge.kaspersky { background:rgba(0,120,200,.15);color:#4da8ff; }
+  .blog-source-badge.veeam     { background:rgba(0,180,90,.15);color:#4ade80; }
   .blog-source-badge.techtudo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
   .feed-tab { background:var(--dark-light);border:1px solid var(--dark-border);color:var(--gray-dim);padding:7px 16px;border-radius:100px;font-family:var(--font-display);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.05em; }
   .feed-tab:hover { border-color:var(--red);color:var(--white); }
@@ -1004,89 +986,266 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
 </style>
  
 <script>
-(function() {
-  const API_BASE = 'https://api.rss2json.com/v1/api.json?api_key=&order_by=pubDate&count=3&rss_url=';
-  const FEEDS = [
-    { url:'https://pox.globo.com/rss/techtudo/',             source:'techtudo', label:'TechTudo'  },
-    { url:'https://www.tecmundo.com.br/seguranca/rss',        source:'tecmundo', label:'TecMundo'  }
+(function () {
+
+  // ─────────────────────────────────────────────────────────
+  // CONFIGURAÇÃO
+  // Para funcionar melhor: crie conta GRATUITA em rss2json.com
+  // e cole sua API key abaixo (deixe '' para usar sem key)
+  var RSS2JSON_KEY = '62efwtaerreoxsqnlf3dzmt1painunkn2k6kttuu';
+  // ─────────────────────────────────────────────────────────
+
+  var FEEDS = [
+    { url: 'https://pox.globo.com/rss/techtudo/',    source: 'techtudo',  label: 'TechTudo'  },
+    { url: 'https://www.kaspersky.com/blog/feed/',   source: 'kaspersky', label: 'Kaspersky' },
+    { url: 'https://www.veeam.com/blog/feed/',       source: 'veeam',     label: 'Veeam'     }
   ];
- 
-  const skeleton   = document.getElementById('blog-skeleton');
-  const feedEl     = document.getElementById('blog-feed');
-  const errorEl    = document.getElementById('blog-error');
-  const statusDot  = document.getElementById('rss-status-dot');
-  const statusText = document.getElementById('rss-status-text');
- 
-  let allItems = [], loaded = 0, failed = 0;
-  let currentFilter = 'all';
- 
-  function formatDate(s) { const d=new Date(s); return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}); }
-  function stripHtml(h) { const t=document.createElement('div'); t.innerHTML=h; return t.textContent||t.innerText||''; }
-  function trunc(s,n) { s=(s||'').trim(); return s.length>n?s.substring(0,n)+'...':s; }
+
+  var CACHE_KEY = 'glc_rss_v6';
+  var CACHE_TTL = 25 * 60 * 1000; // 25 min
+  var TIMEOUT   = 8000;
+
+  var skeleton  = document.getElementById('blog-skeleton');
+  var feedEl    = document.getElementById('blog-feed');
+  var errorEl   = document.getElementById('blog-error');
+  var statusDot = document.getElementById('rss-status-dot');
+  var statusTxt = document.getElementById('rss-status-text');
+  var allItems  = [];
+  var curFilter = 'all';
+
+  // ── UTILS ──────────────────────────────────────────────────
+  function formatDate(s) {
+    var d = new Date(s);
+    return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+  }
+  function stripHtml(h) {
+    var t = document.createElement('div');
+    t.innerHTML = h || '';
+    return (t.textContent || t.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+  function trunc(s, n) {
+    s = (s || '').trim();
+    return s.length > n ? s.slice(0, n) + '…' : s;
+  }
   function extractImg(item) {
-    if (item.thumbnail&&item.thumbnail.length>5) return item.thumbnail;
-    if (item.enclosure&&item.enclosure.link) return item.enclosure.link;
-    const m=item.content?item.content.match(/<img[^>]+src=["']([^"']+)["']/i):null; return m?m[1]:null;
+    if (item.thumbnail && item.thumbnail.length > 10) return item.thumbnail;
+    if (item.enclosure && item.enclosure.link)        return item.enclosure.link;
+    var m = (item.content || '').match(/<img[^>]+src=["']([^"']+)["']/i);
+    return m ? m[1] : null;
   }
-  function getCat(item) { return (item.categories&&item.categories.length>0)?item.categories[0]:'Segurança'; }
- 
-  function buildCard(item) {
-    const img=extractImg(item);
-    const imgBlock=img
-      ? '<img src="'+img+'" alt="'+item.title.replace(/"/g,'&quot;')+'" class="blog-card-thumb" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\'blog-card-no-thumb\'><i class=\'fa-regular fa-newspaper\'></i></div>'">'
-      : '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
-    return '<a href="'+item.link+'" target="_blank" rel="noopener" class="blog-card" data-source="'+item._source+'">'+
-      imgBlock+
-      '<span class="blog-source-badge '+item._source+'">'+item._label+'</span>'+
-      '<div class="blog-card-cat">'+getCat(item)+'</div>'+
-      '<div class="blog-card-body">'+
-        '<div class="blog-card-date">'+formatDate(item.pubDate)+'</div>'+
-        '<h3>'+trunc(item.title,75)+'</h3>'+
-        '<p>'+trunc(stripHtml(item.description||''),110)+'</p>'+
-      '</div></a>';
+  function getCat(item) {
+    return (item.categories && item.categories.length) ? item.categories[0] : 'Segurança';
   }
- 
-  window.filterFeed = function(f) {
-    currentFilter = f;
-    ['all','techtudo','tecmundo'].forEach(t => {
-      const b=document.getElementById('tab-'+t);
-      if(b) b.className='feed-tab'+(t===f?' feed-tab-active':'');
+
+  // ── CACHE ──────────────────────────────────────────────────
+  function readCache() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      return (Date.now() - obj.ts < CACHE_TTL) ? obj.items : null;
+    } catch (e) { return null; }
+  }
+  function writeCache(items) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), items: items })); } catch (e) {}
+  }
+
+  // ── FETCH COM TIMEOUT ──────────────────────────────────────
+  function tFetch(url) {
+    return new Promise(function (resolve, reject) {
+      var done  = false;
+      var timer = setTimeout(function () {
+        if (!done) { done = true; reject(new Error('timeout')); }
+      }, TIMEOUT);
+      fetch(url)
+        .then(function (r) { if (!done) { done = true; clearTimeout(timer); resolve(r); } })
+        .catch(function (e) { if (!done) { done = true; clearTimeout(timer); reject(e); } });
     });
-    const filtered = f==='all' ? allItems : allItems.filter(i=>i._source===f);
-    feedEl.innerHTML = filtered.map(buildCard).join('');
-  };
- 
-  function onDone() {
-    loaded++;
-    if (loaded+failed < FEEDS.length) return;
-    skeleton.style.display='none';
-    if (allItems.length===0) {
-      errorEl.style.display='block';
-      statusDot.style.background='var(--red)';
-      statusText.textContent='Feeds indisponíveis';
-    } else {
-      allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
-      window.filterFeed('all');
-      feedEl.style.display='grid';
-      const ok = FEEDS.length - failed;
-      statusDot.style.background='#4ade80';
-      statusText.textContent = ok===FEEDS.length ? '2 fontes ativas' : '1 fonte ativa';
-    }
   }
- 
-  FEEDS.forEach(feed => {
-    fetch(API_BASE + encodeURIComponent(feed.url))
-      .then(r=>r.json())
-      .then(data => {
-        if (data.status==='ok'&&data.items&&data.items.length>0) {
-          data.items.forEach(i=>{ i._source=feed.source; i._label=feed.label; });
-          allItems = allItems.concat(data.items);
-          onDone();
-        } else { failed++; onDone(); }
+
+  // ── PARSER XML (fallback quando a API retorna XML bruto) ───
+  function parseXml(text, source, label) {
+    var items = [];
+    try {
+      var doc   = new DOMParser().parseFromString(text, 'text/xml');
+      var nodes = doc.getElementsByTagName('item');
+      for (var i = 0; i < Math.min(nodes.length, 3); i++) {
+        var node = nodes[i];
+        function g(tag) {
+          var el = node.getElementsByTagName(tag)[0];
+          return el ? el.textContent.trim() : '';
+        }
+        var enc = node.getElementsByTagName('content:encoded')[0];
+        var encUrl = '';
+        var encEl  = node.getElementsByTagName('enclosure')[0];
+        if (encEl) encUrl = encEl.getAttribute('url') || '';
+        var cats = [];
+        var catEls = node.getElementsByTagName('category');
+        for (var k = 0; k < catEls.length; k++) cats.push(catEls[k].textContent.trim());
+        items.push({
+          title:       g('title'),
+          link:        g('link'),
+          pubDate:     g('pubDate'),
+          description: g('description'),
+          thumbnail:   '',
+          enclosure:   { link: encUrl },
+          content:     enc ? enc.textContent : g('description'),
+          categories:  cats,
+          _source:     source,
+          _label:      label
+        });
+      }
+    } catch (e) {}
+    return items;
+  }
+
+  // ── FETCH UM FEED (cascata de proxies) ─────────────────────
+  function fetchFeed(feed) {
+    var keyParam = RSS2JSON_KEY ? ('&api_key=' + RSS2JSON_KEY) : '';
+    var r2j = 'https://api.rss2json.com/v1/api.json?order_by=pubDate&count=3'
+            + keyParam + '&rss_url=' + encodeURIComponent(feed.url);
+
+    // 1️⃣ rss2json (JSON pronto)
+    return tFetch(r2j).then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.status === 'ok' && data.items && data.items.length) {
+          data.items.forEach(function (i) { i._source = feed.source; i._label = feed.label; });
+          return data.items.slice(0, 3);
+        }
+        throw new Error('r2j-empty');
       })
-      .catch(()=>{ failed++; onDone(); });
-  });
-})();</script>
+
+      // 2️⃣ allorigins (CORS proxy → XML)
+      .catch(function () {
+        var u = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feed.url);
+        return tFetch(u).then(function (r) { return r.json(); })
+          .then(function (d) {
+            var items = parseXml(d.contents || '', feed.source, feed.label);
+            if (items.length) return items;
+            throw new Error('allorigins-empty');
+          });
+      })
+
+      // 3️⃣ corsproxy.io (CORS proxy → XML)
+      .catch(function () {
+        var u = 'https://corsproxy.io/?' + encodeURIComponent(feed.url);
+        return tFetch(u).then(function (r) { return r.text(); })
+          .then(function (text) {
+            var items = parseXml(text, feed.source, feed.label);
+            return items; // pode ser [] — tratado em render()
+          });
+      })
+
+      // falha total → array vazio
+      .catch(function () { return []; });
+  }
+
+  // ── CARD ───────────────────────────────────────────────────
+  function buildCard(item) {
+    var img = extractImg(item);
+    var imgBlock = img
+      ? '<img src="' + img + '" alt="' + trunc(item.title, 60).replace(/"/g, '&quot;')
+        + '" class="blog-card-thumb" loading="lazy" width="400" height="225" decoding="async"'
+        + ' onerror="this.parentNode.innerHTML=\'<div class=\\\"blog-card-no-thumb\\\"><i class=\\\"fa-regular fa-newspaper\\\"></i></div>\'">'
+      : '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
+
+    return '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-card" data-source="' + item._source + '">'
+      + imgBlock
+      + '<span class="blog-source-badge ' + item._source + '">' + item._label + '</span>'
+      + '<div class="blog-card-cat">' + getCat(item) + '</div>'
+      + '<div class="blog-card-body">'
+        + '<div class="blog-card-date">' + formatDate(item.pubDate) + '</div>'
+        + '<h3>' + trunc(item.title, 75) + '</h3>'
+        + '<p>'  + trunc(stripHtml(item.description), 110) + '</p>'
+      + '</div></a>';
+  }
+
+  // ── FILTRO ─────────────────────────────────────────────────
+  window.filterFeed = function (f) {
+    curFilter = f;
+    ['all','techtudo','kaspersky','veeam'].forEach(function (t) {
+      var b = document.getElementById('tab-' + t);
+      if (b) b.className = 'feed-tab' + (t === f ? ' feed-tab-active' : '');
+    });
+    var list = f === 'all' ? allItems : allItems.filter(function (i) { return i._source === f; });
+    feedEl.innerHTML = list.map(buildCard).join('');
+  };
+
+  // ── RENDER ─────────────────────────────────────────────────
+  function render(items, fromCache) {
+    skeleton.style.display = 'none';
+    if (!items || !items.length) {
+      errorEl.style.display  = 'block';
+      statusDot.style.background = 'var(--red)';
+      statusTxt.textContent  = 'Feeds indisponíveis';
+      return;
+    }
+    allItems = items;
+    window.filterFeed(curFilter);
+    feedEl.style.display = 'grid';
+    var srcs = {};
+    items.forEach(function (i) { srcs[i._source] = 1; });
+    var n = Object.keys(srcs).length;
+    statusDot.style.background = '#4ade80';
+    statusTxt.textContent = (fromCache ? '⚡ ' : '') + n + (n > 1 ? ' fontes ativas' : ' fonte ativa');
+  }
+
+  // ── LOAD ───────────────────────────────────────────────────
+  function load() {
+    var cached = readCache();
+    if (cached && cached.length) { render(cached, true); return; }
+
+    Promise.all(FEEDS.map(fetchFeed)).then(function (results) {
+      var merged = [];
+      results.forEach(function (r) { if (r) merged = merged.concat(r); });
+      merged.sort(function (a, b) { return new Date(b.pubDate) - new Date(a.pubDate); });
+      writeCache(merged);
+      render(merged, false);
+    }).catch(function () { render([], false); });
+  }
+
+  // ── TRIGGER ──────────────────────────────────────────────
+  // Limpar cache corrompido antes de carregar
+  (function() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (raw) { JSON.parse(raw); } // testa se é JSON válido
+    } catch(e) {
+      localStorage.removeItem(CACHE_KEY); // remove se corrompido
+    }
+  })();
+
+  var section = document.getElementById('blog');
+  var loaded  = false;
+
+  function triggerLoad() {
+    if (loaded) return;
+    loaded = true;
+    load();
+  }
+
+  // Dispara imediatamente após o DOM estar pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(triggerLoad, 100);
+    });
+  } else {
+    setTimeout(triggerLoad, 100);
+  }
+
+  // IntersectionObserver como reforço caso ainda não tenha carregado
+  if (typeof IntersectionObserver !== 'undefined' && section) {
+    var obs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { obs.disconnect(); triggerLoad(); }
+    }, { rootMargin: '400px', threshold: 0 });
+    obs.observe(section);
+  }
+
+  // Fallback final: se depois de 3s ainda não carregou, força
+  setTimeout(triggerLoad, 3000);
+
+})();
+</script>
 
 <!-- CTA BANNER -->
 <div class="cta-banner">
@@ -1107,7 +1266,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
         <div class="rule"></div>
         <p>Entre em contato com nossa equipe e descubra como a GLCTech pode otimizar sua infraestrutura de TI. Resposta em até 24h úteis.</p>
         <div class="contact-items">
-          <a href="mailto:contato@glctech.com.br" class="contact-item">
+          <a href="/cdn-cgi/l/email-protection#50333f3e2431243f10373c33243533387e333f3d7e3222" class="contact-item">
             <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
             <div>
               <div class="contact-item-label">E-mail</div>
@@ -1183,7 +1342,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://glctech.com.br/assets/logo/logo.png" alt="GLCTech">
+        <img src="https://glctech.com.br/assets/logo/logo4.webp" alt="GLCTech">
         <p>Monitoramento inteligente e segurança de TI para empresas que exigem alta performance e continuidade operacional.</p>
       </div>
       <div class="footer-col">
@@ -1209,7 +1368,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
         <h4>Legal</h4>
         <ul class="footer-links">
           <li><a href="politica.html">Política de Privacidade</a></li>
-          <li><a
+          <li><a></a>
           <li><a href="termos.html">Termos de Uso</a></li>
         </ul>
       </div>
@@ -1221,8 +1380,7 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   </div>
 </footer>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- Web3Forms -->
 <style>
   .field-error { display:block; font-size:12px; color:var(--red); margin-top:4px; min-height:16px; font-family:var(--font-display); }
   input.error, textarea.error { border-color:var(--red) !important; }
@@ -1230,7 +1388,14 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   #btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
 </style>
 <script>
-  emailjs.init('0vEmqGDJ4dJz45f0M');
+  /* ── Web3Forms ─────────────────────────────────────────────────────────────
+     COMO ATIVAR:
+     1. Acesse https://web3forms.com
+     2. Digite contato@glctech.com.br e clique em "Create Access Key"
+     3. Confirme o e-mail que chegar na caixa de entrada
+     4. Copie a chave gerada e cole abaixo em W3F_ACCESS_KEY
+  ─────────────────────────────────────────────────────────────────────────── */
+  var W3F_ACCESS_KEY = '524f9ef9-fb3d-467b-8eee-7b4930e40520';
 
   function clearErrors() {
     ['nome','email','mensagem'].forEach(function(f) {
@@ -1258,34 +1423,56 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   function sendEmail() {
     clearErrors();
     if (!validateForm()) return;
+
     var btn = document.getElementById('btn-submit');
     var btnText = document.getElementById('btn-text');
     var btnLoading = document.getElementById('btn-loading');
     btn.disabled = true;
     btnText.style.display = 'none';
     btnLoading.style.display = 'inline';
-    var params = {
-      nome: document.getElementById('nome').value.trim(),
-      empresa: document.getElementById('empresa').value.trim() || 'Não informado',
-      email: document.getElementById('email').value.trim(),
-      telefone: document.getElementById('telefone').value.trim() || 'Não informado',
-      mensagem: document.getElementById('mensagem').value.trim()
+
+    var nome     = document.getElementById('nome').value.trim();
+    var empresa  = document.getElementById('empresa').value.trim() || 'Não informado';
+    var email    = document.getElementById('email').value.trim();
+    var telefone = document.getElementById('telefone').value.trim() || 'Não informado';
+    var mensagem = document.getElementById('mensagem').value.trim();
+
+    var payload = {
+      access_key: W3F_ACCESS_KEY,
+      subject: 'Novo contato pelo site — ' + nome,
+      from_name: 'GLCTech Site',
+      replyto: email,
+      nome: nome,
+      empresa: empresa,
+      email: email,
+      telefone: telefone,
+      message: 'Nome: ' + nome + '\nEmpresa: ' + empresa + '\nE-mail: ' + email + '\nTelefone: ' + telefone + '\n\nMensagem:\n' + mensagem
     };
-    emailjs.send('801710627', 'template_mquna1f', params)
-      .then(function() {
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success) {
         document.getElementById('contact-form').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
-      })
-      .catch(function(err) {
-        var errMsg = document.getElementById('form-error-msg');
-        errMsg.textContent = 'Erro ao enviar. Tente novamente ou ligue: +55 11 95762-4146';
-        errMsg.style.display = 'block';
-      })
-      .finally(function() {
-        btn.disabled = false;
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
-      });
+      } else {
+        throw new Error(data.message || 'Erro desconhecido');
+      }
+    })
+    .catch(function() {
+      var errMsg = document.getElementById('form-error-msg');
+      errMsg.textContent = 'Erro ao enviar. Tente novamente ou ligue: +55 11 95762-4146';
+      errMsg.style.display = 'block';
+    })
+    .finally(function() {
+      btn.disabled = false;
+      btnText.style.display = 'inline';
+      btnLoading.style.display = 'none';
+    });
   }
 
   function resetForm() {
@@ -1328,12 +1515,64 @@ setInterval(carregarTotalSnmpDisponivel, 60000);
   document.addEventListener('click', function(e) {
     if (!menuOpen) return;
     var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementById('hamburger');
-    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-</script>
+    var btn = document.getElementB
 
-</body>
-</html>
+    <!-- ═══════════════════════════════════════════════════════
+     STATS ZABBIX — cole este bloco antes do </body> no index.html
+     Lê /assets/data/stats.json gerado pelo GitHub Actions
+     e atualiza o contador de devices na seção de stats.
+     ════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  // IDs dos elementos que exibem os stats
+  // Ajuste os seletores conforme o HTML do seu site
+  var SELECTORS = {
+    devices: '[data-stat="devices"]',   // elemento com o número de devices
+  };
+
+  // Formata número: 144 → "144+" | 1200 → "1.2k+"
+  function fmt(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace('.', ',') + 'k+';
+    return n + '+';
+  }
+
+  // Animação de contagem (0 → valor final)
+  function animateCount(el, target, duration) {
+    var start     = 0;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      // easeOutExpo
+      var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      var current = Math.floor(ease * target);
+      el.textContent = fmt(current);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+
+  fetch('/assets/data/stats.json?v=' + Date.now())
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var devices = parseInt(data.devices, 10);
+      if (isNaN(devices) || devices < 1) return;
+
+      // Atualizar todos os elementos que exibem o número de devices
+      var els = document.querySelectorAll(SELECTORS.devices);
+      els.forEach(function (el) {
+        animateCount(el, devices, 1200);
+      });
+
+      console.log('[stats] Devices Zabbix:', devices, '| Atualizado:', data.updated_at);
+    })
+    .catch(function (e) {
+      // Falha silenciosa — mantém o valor estático do HTML
+      console.warn('[stats] Não foi possível carregar stats.json:', e.message);
+    });
+})();
+</script>
