@@ -5,11 +5,14 @@ on:
     - cron: '0 * * * *'   # toda hora
   workflow_dispatch:        # permite rodar manualmente
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # usa Node.js 24
+
 jobs:
   fetch-stats:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # necessário para commitar o JSON
+      contents: write
 
     steps:
       - name: Checkout repositório
