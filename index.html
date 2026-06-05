@@ -685,7 +685,7 @@
     <div class="about-grid">
       <div class="about-img-wrap">
         <img src="https://glctech.com.br/assets/hero/escritorio.webp" alt="Equipe GLCTech">
-        <div class="about-img-badge"hidden>
+        <div class="about-img-badge" hidden>
           <div class="about-img-badge-num">+50</div>
           <div class="about-img-badge-text">Projetos Entregues</div>
         </div>
@@ -890,7 +890,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card"hidden>
+      <div class="testi-card" hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"Excelente consultoria. Além do monitoramento, nos ajudaram a otimizar custos e melhorar a segurança de rede com Kaspersky. Parceiros de verdade."</blockquote>
         <div class="testi-author">
@@ -901,7 +901,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card"hidden>
+      <div class="testi-card" hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"A GLCTech transformou nossa visibilidade de infraestrutura. Os dashboards em Grafana nos permitem tomar decisões muito mais rápidas e embasadas."</blockquote>
         <div class="testi-author">
@@ -921,7 +921,7 @@
   <div class="container">
     <p class="partners-label">Tecnologias &amp; Parceiros de Confiança</p>
     <div class="partners-row">
-      <div class="partner-badge"hidden>Zabbix</div>
+      <div class="partner-badge" hidden>Zabbix</div>
       <div class="partner-badge">DSR9</div>
       <div class="partner-badge">Kaspersky</div>
       <div class="partner-badge">Veeam</div>
@@ -949,11 +949,11 @@
  
     <!-- Abas de filtro -->
     <div style="display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap;">
-      <button id="tab-all"       onclick="filterFeed('all')"       class="feed-tab feed-tab-active">Todos</button>
-      <button id="tab-techtudo"  onclick="filterFeed('techtudo')"  class="feed-tab">TechTudo</button>
-      <button id="tab-techtudo"  onclick="filterFeed('techMundo')"  class="feed-tab">TechMundo</button>
-      <button id="tab-kaspersky" onclick="filterFeed('kaspersky')" class="feed-tab">Kaspersky</button>
-      <button id="tab-veeam"     onclick="filterFeed('veeam')"     class="feed-tab">Veeam</button>
+      <button id="tab-all"       onclick="filterFeed('all')"        class="feed-tab feed-tab-active">Todos</button>
+      <button id="tab-techtudo"  onclick="filterFeed('techtudo')"   class="feed-tab">TechTudo</button>
+      <button id="tab-techmundo" onclick="filterFeed('techmundo')"  class="feed-tab">TechMundo</button>
+      <button id="tab-kaspersky" onclick="filterFeed('kaspersky')"  class="feed-tab">Kaspersky</button>
+      <button id="tab-veeam"     onclick="filterFeed('veeam')"      class="feed-tab">Veeam</button>
     </div>
  
     <!-- Skeleton 6 cards -->
@@ -987,7 +987,8 @@
   .blog-source-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark-border);color:var(--gray-dim);padding:3px 8px;border-radius:100px;margin:1rem 1.5rem 0;font-family:var(--font-display); }
   .blog-source-badge.kaspersky { background:rgba(0,120,200,.15);color:#4da8ff; }
   .blog-source-badge.veeam     { background:rgba(0,180,90,.15);color:#4ade80; }
-  .blog-source-badge.techtudo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
+  .blog-source-badge.techtudo  { background:rgba(255,255,255,.06);color:var(--gray-dim); }
+  .blog-source-badge.techmundo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
   .feed-tab { background:var(--dark-light);border:1px solid var(--dark-border);color:var(--gray-dim);padding:7px 16px;border-radius:100px;font-family:var(--font-display);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.05em; }
   .feed-tab:hover { border-color:var(--red);color:var(--white); }
   .feed-tab-active { background:var(--red) !important;border-color:var(--red) !important;color:#fff !important; }
@@ -1006,7 +1007,7 @@
 
   var FEEDS = [
     { url: 'https://pox.globo.com/rss/techtudo/informatica/',    source: 'techtudo',  label: 'TechTudo'  },
-    { url: 'https://www.tecmundo.com.br/tags/rss',    source: 'techtudo',  label: 'TechMundo'  },
+    { url: 'https://www.tecmundo.com.br/tags/rss',    source: 'techmundo',  label: 'TechMundo'  },
     { url: 'https://www.kaspersky.com/blog/feed/',   source: 'kaspersky', label: 'Kaspersky' },
     { url: 'https://www.veeam.com/blog/feed/',       source: 'veeam',     label: 'Veeam'     }
   ];
@@ -1173,7 +1174,7 @@
   // ── FILTRO ─────────────────────────────────────────────────
   window.filterFeed = function (f) {
     curFilter = f;
-    ['all','techtudo','kaspersky','veeam'].forEach(function (t) {
+    ['all','techtudo','techmundo','kaspersky','veeam'].forEach(function (t) {
       var b = document.getElementById('tab-' + t);
       if (b) b.className = 'feed-tab' + (t === f ? ' feed-tab-active' : '');
     });
@@ -1378,7 +1379,6 @@
         <h4>Legal</h4>
         <ul class="footer-links">
           <li><a href="politica.html">Política de Privacidade</a></li>
-          <li><a
           <li><a href="termos.html">Termos de Uso</a></li>
         </ul>
       </div>
@@ -1525,4 +1525,12 @@
   document.addEventListener('click', function(e) {
     if (!menuOpen) return;
     var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementB
+    var btn = document.getElementById('hamburger');
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+
+</body>
+</html>
