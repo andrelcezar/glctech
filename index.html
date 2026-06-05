@@ -951,6 +951,7 @@
     <div style="display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap;">
       <button id="tab-all"       onclick="filterFeed('all')"       class="feed-tab feed-tab-active">Todos</button>
       <button id="tab-techtudo"  onclick="filterFeed('techtudo')"  class="feed-tab">TechTudo</button>
+      <button id="tab-techtudo"  onclick="filterFeed('techMundo')"  class="feed-tab">TechMundo</button>
       <button id="tab-kaspersky" onclick="filterFeed('kaspersky')" class="feed-tab">Kaspersky</button>
       <button id="tab-veeam"     onclick="filterFeed('veeam')"     class="feed-tab">Veeam</button>
     </div>
@@ -1004,7 +1005,8 @@
   // ─────────────────────────────────────────────────────────
 
   var FEEDS = [
-    { url: 'https://pox.globo.com/rss/techtudo/',    source: 'techtudo',  label: 'TechTudo'  },
+    { url: 'https://pox.globo.com/rss/techtudo/informatica/',    source: 'techtudo',  label: 'TechTudo'  },
+    { url: 'https://www.tecmundo.com.br/tags/rss',    source: 'techtudo',  label: 'TechMundo'  },
     { url: 'https://www.kaspersky.com/blog/feed/',   source: 'kaspersky', label: 'Kaspersky' },
     { url: 'https://www.veeam.com/blog/feed/',       source: 'veeam',     label: 'Veeam'     }
   ];
