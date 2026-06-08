@@ -585,17 +585,9 @@
 
 <!-- NAVIGATION -->
 <nav>
-
-  <!-- Language Switcher -->
-<div class="lang-switcher">
-  <button class="lang-btn" data-lang="pt">PT</button>
-  <button class="lang-btn" data-lang="en">EN</button>
-  <button class="lang-btn" data-lang="es">ES</button>
-</div>
-
   <div class="nav-inner">
     <a href="#hero" class="nav-logo4">
-      <img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech — Monitoramento e Segurança em TI">
+      <img src="https://glctech.com.br/assets/logo/logo4.webp" alt="GLCTech — Monitoramento e Segurança em TI">
     </a>
     <ul class="nav-links">
       <li><a href="#about">Sobre</a></li>
@@ -647,7 +639,7 @@
           <span class="hero-img-label">GLCTech · Dashboard Zabbix</span>
           <div class="hero-img-live"><div class="hero-status-dot"></div>Ao vivo</div>
         </div>
-        <img src="./assets/hero/zabbix_fk.png" alt="Dashboard Zabbix GLCTech" class="hero-zabbix-img">
+        <img src="./assets/hero/zabbix_fk.webp" alt="Dashboard Zabbix GLCTech" class="hero-zabbix-img">
       </div>
     </div>
   </div>
@@ -658,7 +650,7 @@
   <div class="stats-inner">
     <div class="stat-item">
       <i class="fa-solid fa-server" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
-      <div class="stat-number">144<span>+</span></div>
+      <div class="stat-number" data-stat="devices">144+</div>
       <div class="stat-desc">Devices monitorados via SNMP</div>
     </div>
     <div class="stat-item">
@@ -685,7 +677,7 @@
     <div class="about-grid">
       <div class="about-img-wrap">
         <img src="https://glctech.com.br/assets/hero/escritorio.webp" alt="Equipe GLCTech">
-        <div class="about-img-badge" hidden>
+        <div class="about-img-badge"hidden>
           <div class="about-img-badge-num">+50</div>
           <div class="about-img-badge-text">Projetos Entregues</div>
         </div>
@@ -890,7 +882,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card" hidden>
+      <div class="testi-card"hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"Excelente consultoria. Além do monitoramento, nos ajudaram a otimizar custos e melhorar a segurança de rede com Kaspersky. Parceiros de verdade."</blockquote>
         <div class="testi-author">
@@ -901,7 +893,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card" hidden>
+      <div class="testi-card"hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"A GLCTech transformou nossa visibilidade de infraestrutura. Os dashboards em Grafana nos permitem tomar decisões muito mais rápidas e embasadas."</blockquote>
         <div class="testi-author">
@@ -921,7 +913,7 @@
   <div class="container">
     <p class="partners-label">Tecnologias &amp; Parceiros de Confiança</p>
     <div class="partners-row">
-      <div class="partner-badge" hidden>Zabbix</div>
+      <div class="partner-badge"hidden>Zabbix</div>
       <div class="partner-badge">DSR9</div>
       <div class="partner-badge">Kaspersky</div>
       <div class="partner-badge">Veeam</div>
@@ -949,11 +941,10 @@
  
     <!-- Abas de filtro -->
     <div style="display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap;">
-      <button id="tab-all"       onclick="filterFeed('all')"        class="feed-tab feed-tab-active">Todos</button>
-      <button id="tab-techtudo"  onclick="filterFeed('techtudo')"   class="feed-tab">TechTudo</button>
-      <button id="tab-techmundo" onclick="filterFeed('techmundo')"  class="feed-tab">TechMundo</button>
-      <button id="tab-kaspersky" onclick="filterFeed('kaspersky')"  class="feed-tab">Kaspersky</button>
-      <button id="tab-veeam"     onclick="filterFeed('veeam')"      class="feed-tab">Veeam</button>
+      <button id="tab-all"       onclick="filterFeed('all')"       class="feed-tab feed-tab-active">Todos</button>
+      <button id="tab-techtudo"  onclick="filterFeed('techtudo')"  class="feed-tab">TechTudo</button>
+      <button id="tab-kaspersky" onclick="filterFeed('kaspersky')" class="feed-tab">Kaspersky</button>
+      <button id="tab-veeam"     onclick="filterFeed('veeam')"     class="feed-tab">Veeam</button>
     </div>
  
     <!-- Skeleton 6 cards -->
@@ -987,8 +978,7 @@
   .blog-source-badge { display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--dark-border);color:var(--gray-dim);padding:3px 8px;border-radius:100px;margin:1rem 1.5rem 0;font-family:var(--font-display); }
   .blog-source-badge.kaspersky { background:rgba(0,120,200,.15);color:#4da8ff; }
   .blog-source-badge.veeam     { background:rgba(0,180,90,.15);color:#4ade80; }
-  .blog-source-badge.techtudo  { background:rgba(255,255,255,.06);color:var(--gray-dim); }
-  .blog-source-badge.techmundo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
+  .blog-source-badge.techtudo { background:rgba(255,255,255,.06);color:var(--gray-dim); }
   .feed-tab { background:var(--dark-light);border:1px solid var(--dark-border);color:var(--gray-dim);padding:7px 16px;border-radius:100px;font-family:var(--font-display);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:.05em; }
   .feed-tab:hover { border-color:var(--red);color:var(--white); }
   .feed-tab-active { background:var(--red) !important;border-color:var(--red) !important;color:#fff !important; }
@@ -1006,8 +996,7 @@
   // ─────────────────────────────────────────────────────────
 
   var FEEDS = [
-    { url: 'https://pox.globo.com/rss/techtudo/informatica/',    source: 'techtudo',  label: 'TechTudo'  },
-    { url: 'https://www.tecmundo.com.br/tags/rss',    source: 'techmundo',  label: 'TechMundo'  },
+    { url: 'https://pox.globo.com/rss/techtudo/',    source: 'techtudo',  label: 'TechTudo'  },
     { url: 'https://www.kaspersky.com/blog/feed/',   source: 'kaspersky', label: 'Kaspersky' },
     { url: 'https://www.veeam.com/blog/feed/',       source: 'veeam',     label: 'Veeam'     }
   ];
@@ -1174,7 +1163,7 @@
   // ── FILTRO ─────────────────────────────────────────────────
   window.filterFeed = function (f) {
     curFilter = f;
-    ['all','techtudo','techmundo','kaspersky','veeam'].forEach(function (t) {
+    ['all','techtudo','kaspersky','veeam'].forEach(function (t) {
       var b = document.getElementById('tab-' + t);
       if (b) b.className = 'feed-tab' + (t === f ? ' feed-tab-active' : '');
     });
@@ -1353,7 +1342,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech">
+        <img src="https://glctech.com.br/assets/logo/logo4.webp" alt="GLCTech">
         <p>Monitoramento inteligente e segurança de TI para empresas que exigem alta performance e continuidade operacional.</p>
       </div>
       <div class="footer-col">
@@ -1379,6 +1368,7 @@
         <h4>Legal</h4>
         <ul class="footer-links">
           <li><a href="politica.html">Política de Privacidade</a></li>
+          <li><a></a>
           <li><a href="termos.html">Termos de Uso</a></li>
         </ul>
       </div>
@@ -1525,12 +1515,64 @@
   document.addEventListener('click', function(e) {
     if (!menuOpen) return;
     var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementById('hamburger');
-    if (!menu.contains(e.target) && !btn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-</script>
+    var btn = document.getElementB
 
-</body>
-</html>
+    <!-- ═══════════════════════════════════════════════════════
+     STATS ZABBIX — cole este bloco antes do </body> no index.html
+     Lê /assets/data/stats.json gerado pelo GitHub Actions
+     e atualiza o contador de devices na seção de stats.
+     ════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  // IDs dos elementos que exibem os stats
+  // Ajuste os seletores conforme o HTML do seu site
+  var SELECTORS = {
+    devices: '[data-stat="devices"]',   // elemento com o número de devices
+  };
+
+  // Formata número: 144 → "144+" | 1200 → "1.2k+"
+  function fmt(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace('.', ',') + 'k+';
+    return n + '+';
+  }
+
+  // Animação de contagem (0 → valor final)
+  function animateCount(el, target, duration) {
+    var start     = 0;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      // easeOutExpo
+      var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      var current = Math.floor(ease * target);
+      el.textContent = fmt(current);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+
+  fetch('/assets/data/stats.json?v=' + Date.now())
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      var devices = parseInt(data.devices, 10);
+      if (isNaN(devices) || devices < 1) return;
+
+      // Atualizar todos os elementos que exibem o número de devices
+      var els = document.querySelectorAll(SELECTORS.devices);
+      els.forEach(function (el) {
+        animateCount(el, devices, 1200);
+      });
+
+      console.log('[stats] Devices Zabbix:', devices, '| Atualizado:', data.updated_at);
+    })
+    .catch(function (e) {
+      // Falha silenciosa — mantém o valor estático do HTML
+      console.warn('[stats] Não foi possível carregar stats.json:', e.message);
+    });
+})();
+</script>
