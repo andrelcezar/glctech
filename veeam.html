@@ -170,7 +170,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="https://glctech.com.br/assets/logo/logo.png" alt="GLCTech"></a>
+    <a href="index.html" class="nav-logo"><img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech"></a>
     <ul class="nav-links">
       <li><a href="index.html" data-i18n="nav.home">Início</a></li>
       <li><a href="index.html#about" data-i18n="nav.about">Sobre</a></li>
@@ -318,24 +318,24 @@
         <h3 data-i18n="common.sim.config">Configurações do Ambiente</h3>
 
         <div class="sim-group">
-          <label class="sim-label">Edição Veeam (VUL)</label>
+          <label class="sim-label" data-i18n="veeam.sim.edicao.label">Edição Veeam (VUL)</label>
           <select class="sim-select" id="edicao">
-            <option value="1">Veeam Data Platform Foundation</option>
-            <option value="1.5">Veeam Data Platform Advanced</option>
-            <option value="2.2">Premium (Cyber Secure)</option>
+            <option value="1" data-i18n="veeam.opt.ed1">Veeam Data Platform Foundation</option>
+            <option value="1.5" data-i18n="veeam.opt.ed2">Veeam Data Platform Advanced</option>
+            <option value="2.2" data-i18n="veeam.opt.ed3">Premium (Cyber Secure)</option>
           </select>
         </div>
 
         <div class="sim-group">
-          <label class="sim-label">Nível de Serviço GLCTech (BaaS)</label>
+          <label class="sim-label" data-i18n="veeam.sim.baas.label">Nível de Serviço GLCTech (BaaS)</label>
           <select class="sim-select" id="baas">
-            <option value="1">Apenas Licença</option>
-            <option value="1.6">Gestão + Monitoramento de Jobs</option>
+            <option value="1" data-i18n="veeam.opt.baas1">Apenas Licença</option>
+            <option value="1.6" data-i18n="veeam.opt.baas2">Gestão + Monitoramento de Jobs</option>
           </select>
         </div>
 
         <div class="sim-group">
-          <label class="sim-label">VMs (VMware / Hyper-V)</label>
+          <label class="sim-label" data-i18n="veeam.sim.vms.label">VMs (VMware / Hyper-V)</label>
           <div class="sim-slider-row">
             <input type="range" class="sim-slider" id="vms" min="0" max="200" value="10" step="1">
             <span class="sim-val" id="vms-out">10</span>
@@ -343,7 +343,7 @@
         </div>
 
         <div class="sim-group">
-          <label class="sim-label">Servidores Físicos</label>
+          <label class="sim-label" data-i18n="veeam.sim.fisicos.label">Servidores Físicos</label>
           <div class="sim-slider-row">
             <input type="range" class="sim-slider" id="fisicos" min="0" max="50" value="2" step="1">
             <span class="sim-val" id="fisicos-out">2</span>
@@ -351,7 +351,7 @@
         </div>
 
         <div class="sim-group">
-          <label class="sim-label">Storage (TB protegido)</label>
+          <label class="sim-label" data-i18n="veeam.sim.storage.label">Storage (TB protegido)</label>
           <div class="sim-slider-row">
             <input type="range" class="sim-slider" id="storage" min="1" max="500" value="5" step="1">
             <span class="sim-val" id="storage-out">5</span>
@@ -368,10 +368,10 @@
           <div class="result-price" id="v-price"><span>Preencha os dados</span></div>
         </div>
         <div class="result-items">
-          <div class="result-item"><span class="result-item-key">Workloads protegidos</span><span class="result-item-val" id="v-workloads">—</span></div>
-          <div class="result-item"><span class="result-item-key">Edição Veeam</span><span class="result-item-val" id="v-edicao">—</span></div>
-          <div class="result-item"><span class="result-item-key">Serviço BaaS</span><span class="result-item-val" id="v-baas">—</span></div>
-          <div class="result-item"><span class="result-item-key">Storage protegido</span><span class="result-item-val" id="v-storage">—</span></div>
+          <div class="result-item"><span class="result-item-key" data-i18n="veeam.result.workloads">Workloads protegidos</span><span class="result-item-val" id="v-workloads">—</span></div>
+          <div class="result-item"><span class="result-item-key" data-i18n="veeam.result.edicao">Edição Veeam</span><span class="result-item-val" id="v-edicao">—</span></div>
+          <div class="result-item"><span class="result-item-key" data-i18n="veeam.result.baas">Serviço BaaS</span><span class="result-item-val" id="v-baas">—</span></div>
+          <div class="result-item"><span class="result-item-key" data-i18n="veeam.result.storage">Storage protegido</span><span class="result-item-val" id="v-storage">—</span></div>
         </div>
         <a href="https://wa.me/5511911517501" target="_blank" class="result-cta" id="v-cta" data-i18n="veeam.cta.wa">Solicitar Proposta Veeam</a>
       </div>
@@ -391,7 +391,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://glctech.com.br/assets/logo/logo.png" alt="GLCTech">
+        <img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech">
         <p data-i18n="footer.p">Monitoramento inteligente e segurança de TI para empresas que exigem alta performance e continuidade operacional.</p>
       </div>
       <div class="footer-col">
@@ -428,33 +428,52 @@
 </footer>
 
 <script>
+  const CURRENCY = {
+    pt: { symbol: 'R$', locale: 'pt-BR', rate: 1,    period: '/mês', year: '/ano' },
+    en: { symbol: '$',  locale: 'en-US', rate: 0.18,  period: '/mo',  year: '/yr'  },
+    de: { symbol: '€',  locale: 'de-DE', rate: 0.17,  period: '/Mon.',year: '/Jahr'},
+    es: { symbol: '$',  locale: 'en-US', rate: 0.18,  period: '/mes', year: '/año' },
+    fr: { symbol: '€',  locale: 'fr-FR', rate: 0.17,  period: '/mois',year: '/an'  },
+    it: { symbol: '€',  locale: 'it-IT', rate: 0.17,  period: '/mese',year: '/anno'},
+  };
+  function getCurr() {
+    const lang = window._currentLang || localStorage.getItem('glctech_lang') || 'pt';
+    return CURRENCY[lang] || CURRENCY.pt;
+  }
+  function fmtMoney(valueInBRL) {
+    const c = getCurr();
+    const val = Math.round(valueInBRL * c.rate / 10) * 10;
+    return c.symbol + ' ' + val.toLocaleString(c.locale) + '<span>' + c.period + '</span>';
+  }
+
   const edicaoLabels = { '1': 'Foundation', '1.5': 'Advanced', '2.2': 'Premium Cyber Secure' };
-  const baasLabels = { '1': 'Apenas Licença', '1.6': 'Gestão + Monitoramento' };
+  const baasLabels   = { '1': 'License Only', '1.6': 'Management + Monitoring' };
 
   document.getElementById('vms').addEventListener('input', e => { document.getElementById('vms-out').textContent = e.target.value; });
   document.getElementById('fisicos').addEventListener('input', e => { document.getElementById('fisicos-out').textContent = e.target.value; });
   document.getElementById('storage').addEventListener('input', e => { document.getElementById('storage-out').textContent = e.target.value; });
 
   function calcVeeam() {
-    const edicao = parseFloat(document.getElementById('edicao').value);
-    const baas = parseFloat(document.getElementById('baas').value);
-    const vms = parseInt(document.getElementById('vms').value);
-    const fisicos = parseInt(document.getElementById('fisicos').value);
-    const storage = parseInt(document.getElementById('storage').value);
+    const edicao   = parseFloat(document.getElementById('edicao').value);
+    const baas     = parseFloat(document.getElementById('baas').value);
+    const vms      = parseInt(document.getElementById('vms').value);
+    const fisicos  = parseInt(document.getElementById('fisicos').value);
+    const storage  = parseInt(document.getElementById('storage').value);
     const workloads = vms + fisicos;
-
     const baseWorkload = 120;
-    const baseStorage = 35;
-    const monthly = Math.round((workloads * baseWorkload + storage * baseStorage) * edicao * baas / 10) * 10;
+    const baseStorage  = 35;
+    const monthlyBRL = Math.round((workloads * baseWorkload + storage * baseStorage) * edicao * baas / 10) * 10;
 
-    document.getElementById('v-price').innerHTML = 'R$ ' + monthly.toLocaleString('pt-BR') + '<span>/mês</span>';
+    document.getElementById('v-price').innerHTML     = fmtMoney(monthlyBRL);
     document.getElementById('v-workloads').textContent = workloads + ' workloads';
-    document.getElementById('v-edicao').textContent = edicaoLabels[document.getElementById('edicao').value];
-    document.getElementById('v-baas').textContent = baasLabels[document.getElementById('baas').value];
+    document.getElementById('v-edicao').textContent  = edicaoLabels[document.getElementById('edicao').value];
+    document.getElementById('v-baas').textContent    = baasLabels[document.getElementById('baas').value];
     document.getElementById('v-storage').textContent = storage + ' TB';
 
-    const msg = encodeURIComponent(`Olá! Simulei meu ambiente Veeam: ${workloads} workloads, ${storage}TB, edição ${edicaoLabels[document.getElementById('edicao').value]}. Estimativa: R$ ${monthly.toLocaleString('pt-BR')}/mês. Gostaria de uma proposta.`);
-    document.getElementById('v-cta').href = `https://wa.me/5511911517501?text=${msg}`;
+    const c   = getCurr();
+    const val = Math.round(monthlyBRL * c.rate / 10) * 10;
+    const msg = encodeURIComponent('Hello! I simulated my Veeam environment: ' + workloads + ' workloads, ' + storage + 'TB, edition ' + edicaoLabels[document.getElementById('edicao').value] + '. Estimate: ' + c.symbol + ' ' + val.toLocaleString(c.locale) + c.period + '. I would like a proposal.');
+    document.getElementById('v-cta').href = 'https://wa.me/5511911517501?text=' + msg;
   }
 </script>
 <script src="scripts/i18n.js"></script>
