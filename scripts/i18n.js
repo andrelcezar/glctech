@@ -1995,6 +1995,8 @@
       btn.classList.remove('open');
       dropdown.classList.remove('open');
     }
+    // Atualiza APENAS o estado visual do seletor (sem reaplicar a tradução).
+    // Chamado por applyLang() para manter bandeira/nome/ativo em sincronia.
     function syncSwitcherUI(code) {
       btnFlag.textContent = flags[code];
       btnName.textContent = names[code];
@@ -2002,6 +2004,7 @@
         o.classList.toggle('active', o.getAttribute('data-lang') === code);
       });
     }
+    // Seleção pelo usuário: atualiza a UI e aplica a tradução.
     function selectLang(code) {
       syncSwitcherUI(code);
       applyLang(code);
@@ -2017,7 +2020,8 @@
     });
     document.addEventListener('click', closeDropdown);
 
-    /* ── Expose UI-sync function for applyLang to call (must NOT call applyLang back) ── */
+    /* ── Expose UI-sync (NÃO reaplica tradução) para applyLang chamar ──
+       Evita a recursão infinita applyLang() → selectLang() → applyLang(). ── */
     window._glcSelectLang = syncSwitcherUI;
 
     /* ── Set initial state ── */

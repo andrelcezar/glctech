@@ -660,7 +660,7 @@
   <div class="stats-inner">
     <div class="stat-item">
       <i class="fa-solid fa-server" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;"></i>
-      <div class="stat-number">144<span>+</span></div>
+      <div class="stat-number"><span data-stat="devices">144</span><span>+</span></div>
       <div class="stat-desc" data-i18n="stat.snmp">Devices monitorados via SNMP</div>
     </div>
     <div class="stat-item">
@@ -1148,16 +1148,12 @@
   }
 
   // ── CARD ───────────────────────────────────────────────────
-  window.glcImgFallback = function (el) {
-    el.parentNode.innerHTML = '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
-  };
-
   function buildCard(item) {
     var img = extractImg(item);
     var imgBlock = img
       ? '<img src="' + img + '" alt="' + trunc(item.title, 60).replace(/"/g, '&quot;')
         + '" class="blog-card-thumb" loading="lazy" width="400" height="225" decoding="async"'
-        + ' onerror="window.glcImgFallback(this)">'
+        + ' onerror="this.parentNode.innerHTML=\'<div class=&quot;blog-card-no-thumb&quot;><i class=&quot;fa-regular fa-newspaper&quot;></i></div>\'">'
       : '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
 
     return '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-card" data-source="' + item._source + '">'
@@ -1282,7 +1278,7 @@
             <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
             <div>
               <div class="contact-item-label" data-i18n="contact.email.label">E-mail</div>
-              <div class="contact-item-val"><span class="__cf_email__" data-cfemail="f89b97968c998c97b89f949b8c9d9b90d69b9795d69a8a">[email&#160;protected]</span></div>
+              <div class="contact-item-val">contato@glctech.com.br</div>
             </div>
           </a>
           <a href="tel:+5511957624146" class="contact-item">
@@ -1530,13 +1526,89 @@
     if (!menuOpen) return;
     var menu = document.getElementById('mobile-menu');
     var btn = document.getElementById('hamburger');
-    if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+    if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
       closeMenu();
     }
   });
 </script>
 
-<!-- Tidio Chat -->
+<!-- ─────────────────────────────────────────────────────────────
+     STATS AO VIVO (Zabbix)
+     Lê assets/data/stats.json (gerado pelo workflow do GitHub Actions
+     scripts/fetch_zabbix_stats.py) e anima o contador de "devices".
+     Falha em silêncio: se o JSON não carregar, mantém o número estático
+     do HTML (144). O "+" vermelho fica em um <span> separado, então só o
+     número dentro de [data-stat="devices"] é atualizado.
+────────────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  var el = document.querySelector('[data-stat="devices"]');
+  if (!el) return;
+
+  // 505 → "505" | 3000 → "3k" | 1200 → "1,2k" (sem "+", que é um span à parte)
+  function fmt(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '').replace('.', ',') + 'k';
+    return String(n);
+  }
+
+  function animate(target, duration) {
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var ease = p === 1 ? 1 : 1 - Math.pow(2, -10 * p); // easeOutExpo
+      el.textContent = fmt(Math.floor(ease * target));
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+
+  fetch('/assets/data/stats.json?v=' + Date.now())
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      var devices = parseInt(data.devices, 10);
+      if (!isNaN(devices) && devices > 0) animate(devices, 1200);
+    })
+    .catch(function (e) {
+      // mantém o valor estático do HTML
+      console.warn('[stats] stats.json indisponível:', e.message);
+    });
+})();
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────
+     AI CHATBOT (Tidio) — GLCTech
+     Integração nativa:
+       • Carregado de forma assíncrona (não bloqueia a renderização).
+       • Herda o idioma detectado pelo site (pt/en/de/es/fr/it), para
+         que o atendimento por IA fale a mesma língua da página.
+       • Expõe window.glcOpenChat() para abrir o chat a partir de
+         qualquer botão da marca.
+     Obs.: a identidade visual (cor #e6262c, avatar, saudação) deve ser
+     configurada no painel Tidio para combinar com a marca GLCTech.
+────────────────────────────────────────────────────────────────── -->
+<script>
+  (function () {
+    // Sincroniza o idioma do chat com o idioma do site (mesma chave do i18n)
+    try {
+      var supported = ['pt', 'en', 'de', 'es', 'fr', 'it'];
+      var lang = localStorage.getItem('glctech_lang');
+      if (!lang || supported.indexOf(lang) === -1) {
+        var nav = (navigator.language || 'pt').toLowerCase().split('-')[0];
+        lang = supported.indexOf(nav) > -1 ? nav : 'pt';
+      }
+      document.tidioChatLang = lang;
+    } catch (e) { /* localStorage indisponível — usa idioma padrão do Tidio */ }
+
+    // Atalho bespoke: abre o chat a partir dos CTAs do site quando pronto
+    document.addEventListener('tidioChat-ready', function () {
+      window.glcOpenChat = function () {
+        if (window.tidioChatApi) window.tidioChatApi.open();
+      };
+    });
+  })();
+</script>
 <script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>
 
 </body>
