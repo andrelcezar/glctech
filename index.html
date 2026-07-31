@@ -83,7 +83,7 @@
   }
 
   .nav-logo4 { display: block; text-decoration: none; }
-  .nav-logo4 img { height: 62px; display: block; }
+  .nav-logo4 img { height:  70px; display: block; }
 
   .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 
@@ -298,7 +298,7 @@
   .service-num { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.15em; color: var(--red); margin-bottom: 1.5rem; }
 
   .service-icon {
-    width: 52px; height: 52px; border: 1px solid var(--dark-border);
+    width:  70px; height:  70px; border: 1px solid var(--dark-border);
     border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
     margin-bottom: 1.5rem; font-size: 24px; transition: border-color var(--transition);
   }
@@ -604,7 +604,7 @@
       <li><a href="#services" data-i18n="nav.services">Serviços</a></li>
       <li><a href="#team" data-i18n="nav.team">Time</a></li>
       <li><a href="#testimonials" data-i18n="nav.clients">Clientes</a></li>
-      <li><a href="https://ty0ci.share.hsforms.com/2dDZ5-CdFTKektziqcbgsTQ" target="_blank" data-i18n="nav.careers">Trabalhe Conosco</a></li>
+      <li><a href="trabalhe-conosco.html" data-i18n="nav.careers">Trabalhe Conosco</a></li>
       <li><a href="#contact" class="nav-cta"><i class="fa-regular fa-comment-dots" style="margin-right:6px;"></i><span data-i18n="nav.contact">Fale Conosco</span></a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
@@ -619,7 +619,7 @@
   <a href="#services" onclick="closeMenu()"><i class="fa-solid fa-server" style="color:var(--red);width:16px;"></i><span data-i18n="nav.services">Serviços</span></a>
   <a href="#team" onclick="closeMenu()"><i class="fa-solid fa-users" style="color:var(--red);width:16px;"></i><span data-i18n="nav.team">Time</span></a>
   <a href="#testimonials" onclick="closeMenu()"><i class="fa-solid fa-star" style="color:var(--red);width:16px;"></i><span data-i18n="nav.clients">Clientes</span></a>
-  <a href="https://ty0ci.share.hsforms.com/2dDZ5-CdFTKektziqcbgsTQ" target="_blank" onclick="closeMenu()"><i class="fa-solid fa-briefcase" style="color:var(--red);width:16px;"></i><span data-i18n="nav.careers">Trabalhe Conosco</span></a>
+  <a href="trabalhe-conosco.html" onclick="closeMenu()"><i class="fa-solid fa-briefcase" style="color:var(--red);width:16px;"></i><span data-i18n="nav.careers">Trabalhe Conosco</span></a>
   <a href="#contact" class="mob-cta" onclick="closeMenu()"><i class="fa-regular fa-comment-dots" style="margin-right:6px;"></i><span data-i18n="nav.contact">Fale Conosco</span></a>
 </div>
 
@@ -687,7 +687,7 @@
     <div class="about-grid">
       <div class="about-img-wrap">
         <img src="https://glctech.com.br/assets/hero/escritorio.webp" alt="Equipe GLCTech">
-        <div class="about-img-badge"hidden>
+        <div class="about-img-badge" hidden>
           <div class="about-img-badge-num">+50</div>
           <div class="about-img-badge-text" data-i18n="about.badge.sub">Projetos Entregues</div>
         </div>
@@ -892,7 +892,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card"hidden>
+      <div class="testi-card" hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"Excelente consultoria. Além do monitoramento, nos ajudaram a otimizar custos e melhorar a segurança de rede com Kaspersky. Parceiros de verdade."</blockquote>
         <div class="testi-author">
@@ -903,7 +903,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card"hidden>
+      <div class="testi-card" hidden>
         <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <blockquote>"A GLCTech transformou nossa visibilidade de infraestrutura. Os dashboards em Grafana nos permitem tomar decisões muito mais rápidas e embasadas."</blockquote>
         <div class="testi-author">
@@ -923,7 +923,7 @@
   <div class="container">
     <p class="partners-label" data-i18n="partners.label">Tecnologias &amp; Parceiros de Confiança</p>
     <div class="partners-row">
-      <div class="partner-badge"hidden>Zabbix</div>
+      <div class="partner-badge" hidden>Zabbix</div>
       <div class="partner-badge">DSR9</div>
       <div class="partner-badge">Kaspersky</div>
       <div class="partner-badge">Veeam</div>
@@ -1148,12 +1148,16 @@
   }
 
   // ── CARD ───────────────────────────────────────────────────
+  window.glcImgFallback = function (el) {
+    el.parentNode.innerHTML = '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
+  };
+
   function buildCard(item) {
     var img = extractImg(item);
     var imgBlock = img
       ? '<img src="' + img + '" alt="' + trunc(item.title, 60).replace(/"/g, '&quot;')
         + '" class="blog-card-thumb" loading="lazy" width="400" height="225" decoding="async"'
-        + ' onerror="this.parentNode.innerHTML='<div class=\"blog-card-no-thumb\"><i class=\"fa-regular fa-newspaper\"></i></div>'">'
+        + ' onerror="window.glcImgFallback(this)">'
       : '<div class="blog-card-no-thumb"><i class="fa-regular fa-newspaper"></i></div>';
 
     return '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-card" data-source="' + item._source + '">'
@@ -1369,14 +1373,13 @@
           <li><a href="zabbix.html">Zabbix</a></li>
           <li><a href="kaspersky.html">Kaspersky</a></li>
           <li><a href="veeam.html">Veeam Backup</a></li>
-          <li><a href="https://ty0ci.share.hsforms.com/2dDZ5-CdFTKektziqcbgsTQ" target="_blank">Trabalhe Conosco</a></li>
+          <li><a href="trabalhe-conosco.html">Trabalhe Conosco</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.legal.title">Legal</h4>
         <ul class="footer-links">
           <li><a href="politica.html" data-i18n="footer.legal.privacy">Política de Privacidade</a></li>
-          <li><a
           <li><a href="termos.html" data-i18n="footer.legal.terms">Termos de Uso</a></li>
         </ul>
       </div>
@@ -1526,4 +1529,15 @@
   document.addEventListener('click', function(e) {
     if (!menuOpen) return;
     var menu = document.getElementById('mobile-menu');
-    var btn = document.getElementB
+    var btn = document.getElementById('hamburger');
+    if (menu && !menu.contains(e.target) && btn && !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+</script>
+
+<!-- Tidio Chat -->
+<script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>
+
+</body>
+</html>
