@@ -1,7 +1,9 @@
 /**
  * GLCTech — Sistema de Tradução Automática por Localidade
- * v4 — dicionário unificado, sem problema de timing
- * Idiomas: pt-BR · en · de · es · fr · it
+ * v5 — dicionário unificado, sem problema de timing
+ * Idioma padrão: en (inglês) · Idiomas do switcher: en · de · es · fr · it
+ * O bloco 'pt' permanece no dicionário apenas como dado histórico/fallback
+ * interno; não é mais selecionável na interface.
  */
 
 (function () {
@@ -123,7 +125,7 @@
       'form.email':     'E-mail *',
       'form.email.ph':  'seu@email.com.br',
       'form.tel':       'Telefone',
-      'form.tel.ph':    '(11) 99999-9999',
+      'form.tel.ph':    '(7778) 173575',
       'form.msg':       'Mensagem *',
       'form.msg.ph':    'Descreva sua necessidade ou infraestrutura...',
       'form.submit':    'Enviar Mensagem',
@@ -134,7 +136,7 @@
       'form.err.nome':  'Por favor, informe seu nome.',
       'form.err.email': 'Informe um e-mail válido.',
       'form.err.msg':   'Por favor, escreva uma mensagem.',
-      'form.err.send':  'Erro ao enviar. Tente novamente ou ligue: +55 11 95762-4146',
+      'form.err.send':  'Erro ao enviar. Tente novamente ou ligue: +44 7778 173575',
 
       /* Footer */
       'footer.p':           'Monitoramento inteligente e segurança de TI para empresas que exigem alta performance e continuidade operacional.',
@@ -382,6 +384,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'Apenas Licença',
       'veeam.opt.baas2': 'Gestão + Monitoramento de Jobs',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Projetos Entregues',
+      'pol.s1.h': 'Coleta de Dados',
+      'pol.s1.num': 'Seção 01',
+      'pol.s2.h': 'Uso das Informações',
+      'pol.s2.num': 'Seção 02',
+      'pol.s3.h': 'Compartilhamento de Dados',
+      'pol.s3.num': 'Seção 03',
+      'pol.s4.h': 'Segurança da Informação',
+      'pol.s4.num': 'Seção 04',
+      'pol.s5.h': 'Seus Direitos (LGPD)',
+      'pol.s5.num': 'Seção 05',
+      'pol.s6.h': 'Contato',
+      'pol.s6.num': 'Seção 06',
+      'pol.s7.h': 'Atualizações desta Política',
+      'pol.s7.num': 'Seção 07',
+      'ter.t1.h': 'Uso do Conteúdo',
+      'ter.t1.num': 'Seção 01',
+      'ter.t2.h': 'Responsabilidades do Usuário',
+      'ter.t2.num': 'Seção 02',
+      'ter.t3.h': 'Privacidade',
+      'ter.t3.num': 'Seção 03',
+      'ter.t4.h': 'Propriedade Intelectual',
+      'ter.t4.num': 'Seção 04',
+      'ter.t5.h': 'Limitação de Responsabilidade',
+      'ter.t5.num': 'Seção 05',
+      'ter.t6.h': 'Modificações dos Termos',
+      'ter.t6.num': 'Seção 06',
+      'ter.t7.h': 'Contato',
+      'ter.t7.num': 'Seção 07',
     },
 
     'en': {
@@ -496,7 +529,7 @@
       'form.err.nome':  'Please enter your name.',
       'form.err.email': 'Please enter a valid e-mail.',
       'form.err.msg':   'Please write a message.',
-      'form.err.send':  'Error sending. Please try again or call: +55 11 95762-4146',
+      'form.err.send':  'Error sending. Please try again or call: +44 7778 173575',
 
       'footer.p':           'Intelligent IT monitoring and security for companies that demand high performance and operational continuity.',
       'footer.nav.title':   'Navigation',
@@ -725,6 +758,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'License Only',
       'veeam.opt.baas2': 'Management + Job Monitoring',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Projects Delivered',
+      'pol.s1.h': 'Data Collection',
+      'pol.s1.num': 'Section 01',
+      'pol.s2.h': 'Use of Information',
+      'pol.s2.num': 'Section 02',
+      'pol.s3.h': 'Data Sharing',
+      'pol.s3.num': 'Section 03',
+      'pol.s4.h': 'Information Security',
+      'pol.s4.num': 'Section 04',
+      'pol.s5.h': 'Your Rights (GDPR/LGPD)',
+      'pol.s5.num': 'Section 05',
+      'pol.s6.h': 'Contact',
+      'pol.s6.num': 'Section 06',
+      'pol.s7.h': 'Updates to this Policy',
+      'pol.s7.num': 'Section 07',
+      'ter.t1.h': 'Use of Content',
+      'ter.t1.num': 'Section 01',
+      'ter.t2.h': 'User Responsibilities',
+      'ter.t2.num': 'Section 02',
+      'ter.t3.h': 'Privacy',
+      'ter.t3.num': 'Section 03',
+      'ter.t4.h': 'Intellectual Property',
+      'ter.t4.num': 'Section 04',
+      'ter.t5.h': 'Limitation of Liability',
+      'ter.t5.num': 'Section 05',
+      'ter.t6.h': 'Changes to these Terms',
+      'ter.t6.num': 'Section 06',
+      'ter.t7.h': 'Contact',
+      'ter.t7.num': 'Section 07',
     },
 
     'de': {
@@ -839,7 +903,7 @@
       'form.err.nome':  'Bitte geben Sie Ihren Namen ein.',
       'form.err.email': 'Bitte geben Sie eine gültige E-Mail ein.',
       'form.err.msg':   'Bitte schreiben Sie eine Nachricht.',
-      'form.err.send':  'Fehler beim Senden. Bitte erneut versuchen oder anrufen: +55 11 95762-4146',
+      'form.err.send':  'Fehler beim Senden. Bitte erneut versuchen oder anrufen: +44 7778 173575',
 
       'footer.p':           'Intelligentes IT-Monitoring und Sicherheit für Unternehmen, die Hochleistung und Betriebskontinuität fordern.',
       'footer.nav.title':   'Navigation',
@@ -1006,6 +1070,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'Nur Lizenz',
       'veeam.opt.baas2': 'Management + Job-Monitoring',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Abgeschlossene Projekte',
+      'pol.s1.h': 'Datenerhebung',
+      'pol.s1.num': 'Abschnitt 01',
+      'pol.s2.h': 'Nutzung der Informationen',
+      'pol.s2.num': 'Abschnitt 02',
+      'pol.s3.h': 'Datenweitergabe',
+      'pol.s3.num': 'Abschnitt 03',
+      'pol.s4.h': 'Informationssicherheit',
+      'pol.s4.num': 'Abschnitt 04',
+      'pol.s5.h': 'Ihre Rechte (DSGVO)',
+      'pol.s5.num': 'Abschnitt 05',
+      'pol.s6.h': 'Kontakt',
+      'pol.s6.num': 'Abschnitt 06',
+      'pol.s7.h': 'Aktualisierungen dieser Richtlinie',
+      'pol.s7.num': 'Abschnitt 07',
+      'ter.t1.h': 'Nutzung der Inhalte',
+      'ter.t1.num': 'Abschnitt 01',
+      'ter.t2.h': 'Pflichten des Nutzers',
+      'ter.t2.num': 'Abschnitt 02',
+      'ter.t3.h': 'Datenschutz',
+      'ter.t3.num': 'Abschnitt 03',
+      'ter.t4.h': 'Geistiges Eigentum',
+      'ter.t4.num': 'Abschnitt 04',
+      'ter.t5.h': 'Haftungsbeschränkung',
+      'ter.t5.num': 'Abschnitt 05',
+      'ter.t6.h': 'Änderungen dieser Bedingungen',
+      'ter.t6.num': 'Abschnitt 06',
+      'ter.t7.h': 'Kontakt',
+      'ter.t7.num': 'Abschnitt 07',
     },
 
     'es': {
@@ -1120,7 +1215,7 @@
       'form.err.nome':  'Por favor ingresa tu nombre.',
       'form.err.email': 'Ingresa un correo electrónico válido.',
       'form.err.msg':   'Por favor escribe un mensaje.',
-      'form.err.send':  'Error al enviar. Inténtalo de nuevo o llama: +55 11 95762-4146',
+      'form.err.send':  'Error al enviar. Inténtalo de nuevo o llama: +44 7778 173575',
 
       'footer.p':           'Monitoreo inteligente y seguridad de TI para empresas que exigen alto rendimiento y continuidad operacional.',
       'footer.nav.title':   'Navegación',
@@ -1271,6 +1366,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'Solo Licencia',
       'veeam.opt.baas2': 'Gestión + Monitoreo de Jobs',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Proyectos Entregados',
+      'pol.s1.h': 'Recopilación de Datos',
+      'pol.s1.num': 'Sección 01',
+      'pol.s2.h': 'Uso de la Información',
+      'pol.s2.num': 'Sección 02',
+      'pol.s3.h': 'Compartición de Datos',
+      'pol.s3.num': 'Sección 03',
+      'pol.s4.h': 'Seguridad de la Información',
+      'pol.s4.num': 'Sección 04',
+      'pol.s5.h': 'Sus Derechos (RGPD)',
+      'pol.s5.num': 'Sección 05',
+      'pol.s6.h': 'Contacto',
+      'pol.s6.num': 'Sección 06',
+      'pol.s7.h': 'Actualizaciones de esta Política',
+      'pol.s7.num': 'Sección 07',
+      'ter.t1.h': 'Uso del Contenido',
+      'ter.t1.num': 'Sección 01',
+      'ter.t2.h': 'Responsabilidades del Usuario',
+      'ter.t2.num': 'Sección 02',
+      'ter.t3.h': 'Privacidad',
+      'ter.t3.num': 'Sección 03',
+      'ter.t4.h': 'Propiedad Intelectual',
+      'ter.t4.num': 'Sección 04',
+      'ter.t5.h': 'Limitación de Responsabilidad',
+      'ter.t5.num': 'Sección 05',
+      'ter.t6.h': 'Modificaciones de los Términos',
+      'ter.t6.num': 'Sección 06',
+      'ter.t7.h': 'Contacto',
+      'ter.t7.num': 'Sección 07',
     },
 
     'fr': {
@@ -1385,7 +1511,7 @@
       'form.err.nome':  'Veuillez saisir votre nom.',
       'form.err.email': 'Veuillez saisir un e-mail valide.',
       'form.err.msg':   'Veuillez écrire un message.',
-      'form.err.send':  'Erreur d\'envoi. Veuillez réessayer ou appeler : +55 11 95762-4146',
+      'form.err.send':  'Erreur d\'envoi. Veuillez réessayer ou appeler : +44 7778 173575',
 
       'footer.p':           'Supervision IT intelligente et sécurité pour les entreprises exigeant haute performance et continuité opérationnelle.',
       'footer.nav.title':   'Navigation',
@@ -1536,6 +1662,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'Licence uniquement',
       'veeam.opt.baas2': 'Gestion + Supervision des jobs',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Projets Livrés',
+      'pol.s1.h': 'Collecte de Données',
+      'pol.s1.num': 'Section 01',
+      'pol.s2.h': 'Utilisation des Informations',
+      'pol.s2.num': 'Section 02',
+      'pol.s3.h': 'Partage des Données',
+      'pol.s3.num': 'Section 03',
+      'pol.s4.h': 'Sécurité de l\'Information',
+      'pol.s4.num': 'Section 04',
+      'pol.s5.h': 'Vos Droits (RGPD)',
+      'pol.s5.num': 'Section 05',
+      'pol.s6.h': 'Contact',
+      'pol.s6.num': 'Section 06',
+      'pol.s7.h': 'Mises à Jour de cette Politique',
+      'pol.s7.num': 'Section 07',
+      'ter.t1.h': 'Utilisation du Contenu',
+      'ter.t1.num': 'Section 01',
+      'ter.t2.h': 'Responsabilités de l\'Utilisateur',
+      'ter.t2.num': 'Section 02',
+      'ter.t3.h': 'Confidentialité',
+      'ter.t3.num': 'Section 03',
+      'ter.t4.h': 'Propriété Intellectuelle',
+      'ter.t4.num': 'Section 04',
+      'ter.t5.h': 'Limitation de Responsabilité',
+      'ter.t5.num': 'Section 05',
+      'ter.t6.h': 'Modifications des Conditions',
+      'ter.t6.num': 'Section 06',
+      'ter.t7.h': 'Contact',
+      'ter.t7.num': 'Section 07',
     },
 
     'it': {
@@ -1650,7 +1807,7 @@
       'form.err.nome':  'Per favore inserisci il tuo nome.',
       'form.err.email': 'Inserisci un\'e-mail valida.',
       'form.err.msg':   'Per favore scrivi un messaggio.',
-      'form.err.send':  'Errore di invio. Riprova o chiama: +55 11 95762-4146',
+      'form.err.send':  'Errore di invio. Riprova o chiama: +44 7778 173575',
 
       'footer.p':           'Monitoraggio IT intelligente e sicurezza per aziende che richiedono alte prestazioni e continuità operativa.',
       'footer.nav.title':   'Navigazione',
@@ -1801,6 +1958,37 @@
       'veeam.opt.ed3': 'Premium (Cyber Secure)',
       'veeam.opt.baas1': 'Solo Licenza',
       'veeam.opt.baas2': 'Gestione + Monitoraggio Job',
+
+      /* Legal doc headers (added) */
+      'about.badge.sub': 'Progetti Consegnati',
+      'pol.s1.h': 'Raccolta dei Dati',
+      'pol.s1.num': 'Sezione 01',
+      'pol.s2.h': 'Uso delle Informazioni',
+      'pol.s2.num': 'Sezione 02',
+      'pol.s3.h': 'Condivisione dei Dati',
+      'pol.s3.num': 'Sezione 03',
+      'pol.s4.h': 'Sicurezza delle Informazioni',
+      'pol.s4.num': 'Sezione 04',
+      'pol.s5.h': 'I Tuoi Diritti (GDPR)',
+      'pol.s5.num': 'Sezione 05',
+      'pol.s6.h': 'Contatto',
+      'pol.s6.num': 'Sezione 06',
+      'pol.s7.h': 'Aggiornamenti di questa Politica',
+      'pol.s7.num': 'Sezione 07',
+      'ter.t1.h': 'Uso dei Contenuti',
+      'ter.t1.num': 'Sezione 01',
+      'ter.t2.h': 'Responsabilità dell\'Utente',
+      'ter.t2.num': 'Sezione 02',
+      'ter.t3.h': 'Privacy',
+      'ter.t3.num': 'Sezione 03',
+      'ter.t4.h': 'Proprietà Intellettuale',
+      'ter.t4.num': 'Sezione 04',
+      'ter.t5.h': 'Limitazione di Responsabilità',
+      'ter.t5.num': 'Sezione 05',
+      'ter.t6.h': 'Modifiche ai Termini',
+      'ter.t6.num': 'Sezione 06',
+      'ter.t7.h': 'Contatto',
+      'ter.t7.num': 'Sezione 07',
     },
 
   };
@@ -1808,7 +1996,6 @@
   /* ── MAPEAMENTO DE LOCALE → IDIOMA ───────────────────────────────────────── */
 
   var localeMap = {
-    'pt': 'pt', 'pt-br': 'pt', 'pt-pt': 'pt',
     'en': 'en', 'en-us': 'en', 'en-gb': 'en', 'en-au': 'en', 'en-ca': 'en', 'en-nz': 'en',
     'de': 'de', 'de-de': 'de', 'de-at': 'de', 'de-ch': 'de',
     'es': 'es', 'es-es': 'es', 'es-mx': 'es', 'es-ar': 'es', 'es-co': 'es', 'es-cl': 'es', 'es-pe': 'es',
@@ -1831,18 +2018,18 @@
       var base = loc.split('-')[0];
       if (localeMap[base])       return localeMap[base];
     }
-    return 'pt'; // padrão
+    return 'en'; // padrão
   }
 
   /* ── APLICAR TRADUÇÃO ────────────────────────────────────────────────────── */
 
   function t(key, lang) {
-    var dict = translations[lang] || translations['pt'];
-    return dict[key] !== undefined ? dict[key] : (translations['pt'][key] || key);
+    var dict = translations[lang] || translations['en'];
+    return dict[key] !== undefined ? dict[key] : (translations['en'][key] || key);
   }
 
   function applyLang(lang) {
-    var dict = translations[lang] || translations['pt'];
+    var dict = translations[lang] || translations['en'];
 
     // Atualiza <html lang="...">
     document.documentElement.lang = dict['page.lang'] || lang;
@@ -1855,8 +2042,8 @@
       var titleKey = titleEl.getAttribute('data-i18n');
       if (dict[titleKey] !== undefined) {
         document.title = dict[titleKey];
-      } else if (translations['pt'][titleKey] !== undefined) {
-        document.title = translations['pt'][titleKey];
+      } else if (translations['en'][titleKey] !== undefined) {
+        document.title = translations['en'][titleKey];
       }
     }
 
@@ -1903,8 +2090,8 @@
   /* ── CRIAR SELETOR DE IDIOMA ─────────────────────────────────────────────── */
 
   function buildSwitcher() {
-    var flags = { pt: '🇧🇷', en: '🇺🇸', de: '🇩🇪', es: '🇪🇸', fr: '🇫🇷', it: '🇮🇹' };
-    var names  = { pt: 'PT', en: 'EN', de: 'DE', es: 'ES', fr: 'FR', it: 'IT' };
+    var flags = { en: '🇺🇸', de: '🇩🇪', es: '🇪🇸', fr: '🇫🇷', it: '🇮🇹' };
+    var names  = { en: 'EN', de: 'DE', es: 'ES', fr: 'FR', it: 'IT' };
 
     /* ── Inject CSS once ── */
     if (!document.getElementById('glc-lang-css')) {
@@ -2026,8 +2213,8 @@
 
     /* ── Set initial state ── */
     var initLang = detectLang();
-    btnFlag.textContent = flags[initLang] || flags.pt;
-    btnName.textContent = names[initLang] || names.pt;
+    btnFlag.textContent = flags[initLang] || flags.en;
+    btnName.textContent = names[initLang] || names.en;
     var initOpt = dropdown.querySelector('[data-lang="' + initLang + '"]');
     if (initOpt) initOpt.classList.add('active');
 
