@@ -13,11 +13,12 @@ deployment of the static GLCTech website.
 
 ## Test suite
 
-The tests live in `tests/` and run on Node.js 20+ with the built-in test
-runner — **no third-party dependencies**, so CI is fast and reliable.
+The tests live in `tests/` and run on Node.js with the built-in test
+runner — **no third-party dependencies**, so CI is fast and reliable. CI
+runs them on Node.js 22.
 
 ```bash
-npm test        # runs: node --test "tests/**/*.test.js"
+npm test        # runs: node --test tests/*.test.js
 ```
 
 What is covered:
