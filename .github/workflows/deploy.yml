@@ -1,0 +1,72 @@
+name: Deploy to GitHub Pages
+
+# Continuous deployment for the static site.
+#
+# The site is published to GitHub Pages on its custom domain (glctechsec.com,
+# via the repo-root CNAME file). This workflow runs the test suite first and
+# only publishes if it passes, so a bad commit never reaches production.
+#
+# ONE-TIME SETUP (required): in the repository settings go to
+#   Settings -> Pages -> Build and deployment -> Source -> "GitHub Actions".
+# The custom domain is preserved automatically because the CNAME file is part
+# of the uploaded artifact.
+
+on:
+  # Normal commits merged/pushed to main.
+  push:
+    branches: [main]
+  # Re-publish after the hourly Zabbix stats job commits fresh data (that
+  # commit uses [skip ci], so this workflow_run trigger republishes it).
+  workflow_run:
+    workflows: ['Atualizar Stats Zabbix']
+    types: [completed]
+  # Allow manual re-deploys from the Actions tab.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let an in-flight deploy finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Test suite
+    # Skip when triggered by a failed stats run; always run otherwise.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Publish the whole repository (the CNAME file keeps the custom domain).
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
