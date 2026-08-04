@@ -117,7 +117,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Telefone / WhatsApp',
       'contact.location.label': 'Localização',
-      'contact.location.val':   'São Paulo, SP — Brasil',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Nome *',
       'form.nome.ph':   'Seu nome',
       'form.empresa':   'Empresa',
@@ -151,7 +151,7 @@
       'footer.legal.privacy': 'Política de Privacidade',
       'footer.legal.terms':   'Termos de Uso',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Todos os direitos reservados.',
-      'footer.location':    'São Paulo, SP — Brasil',
+      'footer.location':    'Salford, Greater Manchester — UK',
 
       /* Lang switcher */
       'lang.label': 'Idioma',
@@ -510,7 +510,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Phone / WhatsApp',
       'contact.location.label': 'Location',
-      'contact.location.val':   'São Paulo, SP — Brazil',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Name *',
       'form.nome.ph':   'Your name',
       'form.empresa':   'Company',
@@ -543,7 +543,7 @@
       'footer.legal.privacy': 'Privacy Policy',
       'footer.legal.terms':   'Terms of Use',
       'footer.copy':        '© 2025 GLCTech Tecnologia. All rights reserved.',
-      'footer.location':    'São Paulo, SP — Brazil',
+      'footer.location':    'Salford, Greater Manchester — UK',
       'lang.label': 'Language',
     
 
@@ -884,7 +884,7 @@
       'contact.email.label': 'E-Mail',
       'contact.phone.label': 'Telefon / WhatsApp',
       'contact.location.label': 'Standort',
-      'contact.location.val':   'São Paulo, SP — Brasilien',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Name *',
       'form.nome.ph':   'Ihr Name',
       'form.empresa':   'Unternehmen',
@@ -917,7 +917,7 @@
       'footer.legal.privacy': 'Datenschutzrichtlinie',
       'footer.legal.terms':   'Nutzungsbedingungen',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Alle Rechte vorbehalten.',
-      'footer.location':    'São Paulo, SP — Brasilien',
+      'footer.location':    'Salford, Greater Manchester — UK',
       'lang.label': 'Sprache',
     
 
@@ -1196,7 +1196,7 @@
       'contact.email.label': 'Correo electrónico',
       'contact.phone.label': 'Teléfono / WhatsApp',
       'contact.location.label': 'Ubicación',
-      'contact.location.val':   'São Paulo, SP — Brasil',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Nombre *',
       'form.nome.ph':   'Tu nombre',
       'form.empresa':   'Empresa',
@@ -1229,7 +1229,7 @@
       'footer.legal.privacy': 'Política de Privacidad',
       'footer.legal.terms':   'Términos de Uso',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Todos los derechos reservados.',
-      'footer.location':    'São Paulo, SP — Brasil',
+      'footer.location':    'Salford, Greater Manchester — UK',
       'lang.label': 'Idioma',
     
 
@@ -1492,7 +1492,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Téléphone / WhatsApp',
       'contact.location.label': 'Localisation',
-      'contact.location.val':   'São Paulo, SP — Brésil',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Nom *',
       'form.nome.ph':   'Votre nom',
       'form.empresa':   'Entreprise',
@@ -1525,7 +1525,7 @@
       'footer.legal.privacy': 'Politique de confidentialité',
       'footer.legal.terms':   'Conditions d\'utilisation',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Tous droits réservés.',
-      'footer.location':    'São Paulo, SP — Brésil',
+      'footer.location':    'Salford, Greater Manchester — UK',
       'lang.label': 'Langue',
     
 
@@ -1788,7 +1788,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Telefono / WhatsApp',
       'contact.location.label': 'Posizione',
-      'contact.location.val':   'São Paulo, SP — Brasile',
+      'contact.location.val':   'Salford, Greater Manchester — UK',
       'form.nome':      'Nome *',
       'form.nome.ph':   'Il tuo nome',
       'form.empresa':   'Azienda',
@@ -1821,7 +1821,7 @@
       'footer.legal.privacy': 'Informativa sulla Privacy',
       'footer.legal.terms':   'Termini di Utilizzo',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Tutti i diritti riservati.',
-      'footer.location':    'São Paulo, SP — Brasile',
+      'footer.location':    'Salford, Greater Manchester — UK',
       'lang.label': 'Lingua',
     
 
