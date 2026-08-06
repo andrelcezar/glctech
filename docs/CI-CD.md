@@ -8,8 +8,8 @@ deployment of the static GLCTech website.
 | Workflow | File | Trigger | Purpose |
 |----------|------|---------|---------|
 | **CI** | `.github/workflows/ci.yml` | every pull request + push to `main` | Runs the test suite. Blocks broken changes from merging. |
-| **Deploy** | `.github/workflows/deploy.yml` | push to `main`, after the stats job, or manual | Runs the tests, then publishes the site to GitHub Pages. |
 | **Stats** | `.github/workflows/Atualizar Stats Zabbix.yml` | hourly + manual | Existing job that refreshes `assets/data/stats.json` from Zabbix. |
+| **Deploy** | GitHub Pages (built-in) | push to the published branch | GitHub's own `pages-build-deployment` publishes the site — no custom workflow needed. |
 
 ## Test suite
 
@@ -40,18 +40,16 @@ What is covered:
 
 ## Deployment
 
-Deployment uses the official GitHub Pages Actions flow. The whole repository
-is uploaded as the Pages artifact, so the repo-root `CNAME`
-(`glctechsec.com`) keeps the custom domain automatically.
+Deployment is handled by GitHub Pages' **built-in branch deployment**
+(`pages-build-deployment`), which already publishes the site on the custom
+domain `glctechsec.com` (via the repo-root `CNAME`). Every push to the
+published branch is deployed automatically — no custom workflow is required.
 
-### One-time setup (required once)
-
-In the repository: **Settings → Pages → Build and deployment → Source →
-select "GitHub Actions".**
-
-Until this is set, the site continues to serve from its previous source; after
-it is set, every push to `main` (that passes the tests) publishes
-automatically.
+> **Note:** a custom `deploy.yml` (the "GitHub Actions" Pages flow) was
+> intentionally *not* added, because it conflicts with the existing
+> branch-based Pages deployment — both would contend for the single Pages
+> deployment and deadlock. CI (tests) is the value this pipeline adds;
+> deployment stays with the mechanism that already works.
 
 ### Recommended: protect `main`
 
