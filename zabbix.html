@@ -13,14 +13,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="zabbix.title">GLCTech — Monitoring with Zabbix</title>
+<meta name="description" content="Round-the-clock infrastructure monitoring built on Zabbix and Grafana — servers, networks and applications watched continuously, with alerting and escalation handled for you.">
+<link rel="canonical" href="https://glctechsec.com/zabbix.html">
+<meta name="theme-color" content="#2d2d2d">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GLCTech Sec">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://glctechsec.com/zabbix.html">
+<meta property="og:title" content="GLCTech — Monitoring with Zabbix">
+<meta property="og:description" content="Round-the-clock infrastructure monitoring built on Zabbix and Grafana — servers, networks and applications watched continuously, with alerting and escalation handled for you.">
+<meta property="og:image" content="https://glctechsec.com/assets/og/og-monitoring.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GLCTech — Monitoring with Zabbix">
+<meta name="twitter:description" content="Round-the-clock infrastructure monitoring built on Zabbix and Grafana — servers, networks and applications watched continuously, with alerting and escalation handled for you.">
+<meta name="twitter:image" content="https://glctechsec.com/assets/og/og-monitoring.png">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --dark: #2d2d2d; --dark-mid: #242424; --dark-light: #383838; --dark-border: #484848;
     --red: #e6262c; --red-light: #ff4a50; --red-dim: rgba(230,38,44,0.12);
-    --white: #ffffff; --gray: #c9c9c9; --gray-dim: #909090; --gray-dark: #606060;
+    --white: #ffffff; --gray: #c9c9c9; --gray-dim: #909090; --gray-dark: #8d8d8d;
     --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
     --radius: 4px; --radius-lg: 8px; --transition: 0.22s ease;
   }
@@ -35,9 +58,12 @@
   /* NAV */
   nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(30,30,30,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--dark-border); height: 70px; display: flex; align-items: center; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-  .nav-logo img { height:  70px; display: block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--gray-dim); font-size: 14px; font-weight: 500; transition: color var(--transition); }
+  .nav-logo img, .nav-logo4 img {
+    height: 40px; width: auto; max-width: 210px;
+    object-fit: contain; display: block;
+  }
+  .nav-links { display: flex; gap: 1.4rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--gray-dim); font-size: 14px; font-weight: 500; transition: color var(--transition); white-space: nowrap; }
   .nav-links a:hover { color: var(--white); }
   .nav-cta { background: var(--red) !important; color: #fff !important; padding: 9px 22px; border-radius: var(--radius); font-weight: 600 !important; }
   .nav-cta:hover { background: var(--red-light) !important; }
@@ -61,7 +87,7 @@
 
   /* Hero image */
   .hero-img-wrap { position: relative; }
-  .hero-img-wrap img { width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--dark-border); display: block; filter: brightness(0.85); }
+  .hero-img-wrap img { width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid var(--dark-border); display: block; }
 
   /* FEATURES */
   #features { background: var(--dark-mid); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); }
@@ -91,8 +117,8 @@
   .plan-divider { height: 1px; background: var(--dark-border); margin: 1.5rem 0; }
   .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
   .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray); }
-  .plan-features li::before { content: '✓'; color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-  .plan-features li.no::before { content: '×'; color: var(--gray-dark); }
+  .plan-features li::before { content: '\f00c'; color: var(--red); flex-shrink: 0; margin-top: 2px; font-family: "Font Awesome 6 Free"; font-weight: 900; }
+  .plan-features li.no::before { content: '\f00d'; color: var(--gray-dark); font-family: "Font Awesome 6 Free"; font-weight: 900; }
   .plan-features li.no { color: var(--gray-dark); }
   .btn-plan { display: block; text-align: center; text-decoration: none; padding: 13px; border-radius: var(--radius); font-family: var(--font-display); font-weight: 600; font-size: 14px; transition: background var(--transition), color var(--transition), border-color var(--transition); border: 1px solid var(--dark-border); color: var(--gray); }
   .btn-plan:hover { border-color: var(--red); color: var(--red); }
@@ -141,7 +167,7 @@
   /* FOOTER */
   footer { background: var(--dark-mid); border-top: 1px solid var(--dark-border); padding: 4rem 0 2rem; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
-  .footer-brand img { height: 40px; margin-bottom: 1.2rem; display: block; }
+  .footer-brand img { height: 34px; width: auto; margin-bottom: 1.2rem; display: block; }
   .footer-brand p { font-size: 14px; color: var(--gray-dim); line-height: 1.8; max-width: 260px; }
   .footer-col h4 { font-family: var(--font-display); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray-dim); margin-bottom: 1.2rem; }
   .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
@@ -157,17 +183,47 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .nav-links { display: none; }
   }
+
+  /* ── a11y + motion baseline (added in revision 3) ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 2000;
+    background: var(--red); color: #fff; padding: 10px 18px;
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    border-radius: 0 0 var(--radius) 0; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+  :focus-visible {
+    outline: 2px solid var(--red-light, #ff4a50);
+    outline-offset: 2px; border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Font Awesome ── icons inherit the brand accent unless overridden ── */
+  .fa-solid, .fa-regular, .fa-brands { color: var(--red); }
+  .btn-plan .fa-solid, .sim-btn .fa-solid, .btn-primary .fa-solid,
+  .nav-cta .fa-solid, .footer-social .fa-brands { color: inherit; }
+  /* Glyph pseudo-elements (list ticks, arrows) come from the same font as the
+     inline icons, so ticks and arrows can never fall back to a system glyph. */
+  .fa-glyph::before { -webkit-font-smoothing: antialiased; display: inline-block; font-family: "Font Awesome 6 Free"; font-weight: 900; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#hero">Skip to content</a>
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech"></a>
+    <a href="index.html" class="nav-logo"><img src="./assets/logo/glctech-logo.png" alt="GLCTech" decoding="async" loading="lazy"></a>
     <ul class="nav-links">
       <li><a href="index.html" data-i18n="nav.home">Home</a></li>
       <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
       <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="trust-compliance.html">Trust &amp; Compliance</a></li>
       <li><a href="trabalhe-conosco.html" data-i18n="nav.careers">Careers</a></li>
       <li><a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact Us</a></li>
     </ul>
@@ -189,7 +245,7 @@
       </div>
     </div>
     <div class="hero-img-wrap">
-      <img src="https://glctech.com.br/assets/hero/zabbix_fk.png" alt="Painel Zabbix GLCTech">
+      <img src="./assets/hero/glc-noc-dashboard.svg" width="1200" height="620" alt="Zabbix-based operations dashboard: host health, problems by severity and network throughput" decoding="async" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -204,22 +260,22 @@
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">📊</div>
+        <div class="feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true" title="Dashboards"></i></div>
         <h3 data-i18n="zabbix.f1.h">Dynamic Dashboards</h3>
         <p data-i18n="zabbix.f1.p">Custom indicators and interactive panels showing the real state of your infrastructure in real time, integrated with Grafana.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔔</div>
+        <div class="feature-icon"><i class="fa-solid fa-bell" aria-hidden="true" title="Alerts"></i></div>
         <h3 data-i18n="zabbix.f2.h">Smart Alerts</h3>
         <p data-i18n="zabbix.f2.p">Immediate notifications via e-mail and WhatsApp when something goes off-pattern — before the issue affects end users.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚙️</div>
+        <div class="feature-icon"><i class="fa-solid fa-gears" aria-hidden="true" title="Automation"></i></div>
         <h3 data-i18n="zabbix.f3.h">Automation &amp; Integrations</h3>
         <p data-i18n="zabbix.f3.p">Automation of repetitive tasks and integrations with external systems via API, reducing manual work for the IT team.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">☁️</div>
+        <div class="feature-icon"><i class="fa-solid fa-cloud" aria-hidden="true" title="Cloud and on-premise"></i></div>
         <h3 data-i18n="zabbix.f4.h">Cloud &amp; On-Premise</h3>
         <p data-i18n="zabbix.f4.p">Flexible monitoring for local, cloud or hybrid environments — with security and scalability to grow alongside your business.</p>
       </div>
@@ -241,7 +297,7 @@
         <div class="plan-tier" data-i18n="zabbix.plan1.tier">Plan 01</div>
         <div class="plan-name" data-i18n="zabbix.plan1.name">Essential</div>
         <div class="plan-sub" data-i18n="zabbix.plan1.sub">For small operations</div>
-        <div class="plan-price" id="plan1-price">$ 90<span id="plan1-period" data-i18n="common.per.month">/mo</span></div>
+        <div class="plan-price" id="plan1-price">£ 80<span id="plan1-period" data-i18n="common.per.month">/mo</span></div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
           <li data-i18n="zabbix.p1.f1">Monitoring up to 30 hosts</li>
@@ -258,7 +314,7 @@
         <div class="plan-tier" data-i18n="zabbix.plan2.tier">Plan 02</div>
         <div class="plan-name" data-i18n="zabbix.plan2.name">Advanced</div>
         <div class="plan-sub" data-i18n="zabbix.plan2.sub">Balance for mid-size companies</div>
-        <div class="plan-price" id="plan2-price">$ 230<span id="plan2-period" data-i18n="common.per.month">/mo</span></div>
+        <div class="plan-price" id="plan2-price">£ 210<span id="plan2-period" data-i18n="common.per.month">/mo</span></div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
           <li data-i18n="zabbix.p2.f1">Monitoring up to 100 hosts</li>
@@ -386,7 +442,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech">
+        <img src="./assets/logo/glctech-logo.png" alt="GLCTech" decoding="async" loading="lazy">
         <p data-i18n="footer.p">Intelligent IT monitoring and security for companies that demand high performance and operational continuity.</p>
       </div>
       <div class="footer-col">
@@ -396,6 +452,8 @@
           <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
           <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
           <li><a href="index.html#team" data-i18n="nav.team">Team</a></li>
+          <li><a href="about-the-group.html">About the Group</a></li>
+          <li><a href="trust-compliance.html">Trust &amp; Compliance</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -416,8 +474,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-i18n="footer.copy">© 2025 GLCTech Tecnologia. All rights reserved.</span>
-      <span data-i18n="footer.location">Salford, Greater Manchester — UK</span>
+      <span data-i18n="footer.copy">© 2026 GLCTech Sec. All rights reserved.</span>
+      <span data-i18n="footer.location">São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)</span>
     </div>
   </div>
 </footer>
@@ -426,14 +484,16 @@
   // ── Currency config per language ──────────────────────────────────────────
   const CURRENCY = {
     pt: { symbol: 'R$', code: 'BRL', locale: 'pt-BR', rate: 1,      period: '/mês',  year: '/ano' },
-    en: { symbol: '$',  code: 'USD', locale: 'en-US', rate: 0.18,   period: '/mo',   year: '/yr'  },
+    en: { symbol: '£',  code: 'GBP', locale: 'en-GB', rate: 0.16,   period: '/mo',   year: '/yr'  },
     de: { symbol: '€',  code: 'EUR', locale: 'de-DE', rate: 0.17,   period: '/Mon.', year: '/Jahr'},
     es: { symbol: '$',  code: 'USD', locale: 'en-US', rate: 0.18,   period: '/mes',  year: '/año' },
     fr: { symbol: '€',  code: 'EUR', locale: 'fr-FR', rate: 0.17,   period: '/mois', year: '/an'  },
     it: { symbol: '€',  code: 'EUR', locale: 'it-IT', rate: 0.17,   period: '/mese', year: '/anno'},
   };
   function getCurr() {
-    const lang = window._currentLang || localStorage.getItem('glctech_lang') || 'en';
+    let saved = null;
+    try { saved = localStorage.getItem('glctech_lang'); } catch (e) { /* blocked storage */ }
+    const lang = window._currentLang || saved || 'en';
     return CURRENCY[lang] || CURRENCY.pt;
   }
   function fmtMoney(valueInBRL, period) {
@@ -487,12 +547,11 @@
     // Plan 3 is "on request" — no price to convert
   }
 
-  // Hook into language switcher
-  document.addEventListener('DOMContentLoaded', function() {
-    updatePlanPrices();
-    const sel = document.getElementById('lang-switcher');
-    if (sel) sel.addEventListener('change', function() { setTimeout(updatePlanPrices, 50); });
-  });
+  // Re-render prices whenever i18n.js switches language.
+  // (This previously listened to a #lang-switcher <select> that does not exist
+  //  on this page, so the currency never updated.)
+  document.addEventListener('DOMContentLoaded', updatePlanPrices);
+  document.addEventListener('glc:langchange', updatePlanPrices);
 </script>
 <script src="scripts/i18n.js"></script>
 <!-- Tidio Chat -->

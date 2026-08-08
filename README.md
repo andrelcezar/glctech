@@ -185,3 +185,50 @@ Questions? Check the documentation first — it's comprehensive.
 
 **Your international site is complete and tested.** 🎉  
 Ready to deploy whenever you are!
+
+---
+
+## 🔄 Revision 2 — Strategic Audit Fixes (Aug 2026)
+
+Following a strategic review of glctechsec.com vs. glctech.com.br (see internal audit doc), this revision fixes the core credibility issues the audit identified:
+
+- **Dual-office transparency.** Every page now discloses both São Paulo (GLCTech Group HQ, est. 2016) and Salford, Greater Manchester (GLCTech Sec UK operations) instead of presenting Salford as the only address. Applied to all 6 language blocks in `scripts/i18n.js`, all page footers, the contact section, and a new origin strip under the main nav.
+- **Two new pages:** `about-the-group.html` (explains the GLCTech / GLCTech Sec relationship transparently) and `trust-compliance.html` (DPA, 72-hour ICO breach process, Cyber Essentials status, insurance, vendor-agnostic security policy).
+- **Kaspersky repositioned as vendor-agnostic.** Service card copy, the homepage "why us" tag, and a new callout on `kaspersky.html` now frame Kaspersky as one option among Microsoft Defender for Business, Bitdefender GravityZone and Sophos, selected per client risk profile — not the default.
+- **Pricing converted to GBP** for the `en` locale on `zabbix.html`, `kaspersky.html` and `veeam.html` (was USD, serving neither the UK nor Brazil market).
+- **Testimonials disclosed as Brazil-based**, with an honest note that the UK client base is new.
+- **Removed further clutter:** the hidden/dead Portuguese blog + RSS-feed block on `index.html` (HTML, CSS and JS), and 7 orphaned pages (`andre.html`, `kawan.html`, `tchize.html`, `landing.html`, `mailmkt.html`, `ebook.html` + its PT PDF, `stats-snippet.html`) plus the legacy unused i18n systems (`css/styles.css`, `js/i18n.js`, `lang.js`, `lang/*.json`) that had already been documented as removed but were still present in this snapshot.
+- **Fixed a live cross-domain bug:** every page was loading its own logo/images from `https://glctech.com.br/...`, which itself just redirects back to this site. All asset references are now local (`./assets/...`).
+- **Privacy Policy** (`politica.html`) now includes a UK-specific note on DPA availability and 72-hour ICO breach notification within the existing "Information Security" section.
+
+**Still open / needs a human decision before publishing:**
+- Cyber Essentials certification is marked "in progress" — needs a real target date once you've started the process.
+- The DPA, insurance certificate of currency, and 72-hour breach process on `trust-compliance.html` describe a *commitment*, not a signed/audited status — confirm these are accurate before this page goes live to real UK prospects.
+- DE/ES/FR/IT language blocks were not updated for the new Kaspersky-agnostic wording or the two new pages (English-only for now) — flagged as a follow-up if those locales matter for the UK launch.
+
+---
+
+## 🔄 Revision 3 — Full audit, image replacement and rebuild
+
+See **`REVISION-3-CHANGELOG.md`** for the complete list. Headlines:
+
+- **All AI-generated imagery replaced.** The hero "dashboard" contained invented
+  Portuguese labels and an invalid timestamp (18:60); the Veeam graphic was
+  misspelt "VEEEAM"; both founder portraits carried a visible AI-generator
+  watermark. Four brand-native SVG figures now stand in, generated from
+  `tools/`.
+- **Bundle cut from 24 MB to 1.4 MB** — three pages were serving 1.3–1.8 MB PNGs
+  next to identical 32–56 KB WebPs, and 22 MB of assets were never referenced.
+- **SEO metadata actually added.** Six pages had no description, canonical, OG
+  tags or favicon, contrary to what earlier revisions of this README claimed.
+- **Accessibility baseline**: skip links, focus rings, reduced-motion, a real
+  `<form>`, a mobile-reachable language switcher, and a text colour that clears
+  the WCAG contrast floor.
+- **Iconography unified on Font Awesome** across all nine pages — 21 emoji and
+  every CSS text glyph replaced, so icons follow the brand palette and render
+  identically on every OS.
+- **126 tests passing** (was 63). The new `tests/quality.test.js` locks in every
+  fix above.
+
+⚠ Six items still need a human decision — they are listed at the end of
+`REVISION-3-CHANGELOG.md`. The first is real founder photography.

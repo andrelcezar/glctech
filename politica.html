@@ -13,14 +13,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="pol.title">GLCTech — Privacy Policy</title>
+<meta name="description" content="How GLCTech collects, uses, stores and protects personal data, including UK GDPR rights and our 72-hour ICO breach notification commitment.">
+<link rel="canonical" href="https://glctechsec.com/politica.html">
+<meta name="theme-color" content="#2d2d2d">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GLCTech Sec">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://glctechsec.com/politica.html">
+<meta property="og:title" content="GLCTech — Privacy Policy">
+<meta property="og:description" content="How GLCTech collects, uses, stores and protects personal data, including UK GDPR rights and our 72-hour ICO breach notification commitment.">
+<meta property="og:image" content="https://glctechsec.com/assets/og/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GLCTech — Privacy Policy">
+<meta name="twitter:description" content="How GLCTech collects, uses, stores and protects personal data, including UK GDPR rights and our 72-hour ICO breach notification commitment.">
+<meta name="twitter:image" content="https://glctechsec.com/assets/og/og-default.png">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --dark: #2d2d2d; --dark-mid: #242424; --dark-light: #383838; --dark-border: #484848;
     --red: #e6262c; --red-light: #ff4a50; --red-dim: rgba(230,38,44,0.12);
-    --white: #ffffff; --gray: #c9c9c9; --gray-dim: #909090; --gray-dark: #606060;
+    --white: #ffffff; --gray: #c9c9c9; --gray-dim: #909090; --gray-dark: #8d8d8d;
     --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
     --radius: 4px; --radius-lg: 8px; --transition: 0.22s ease;
   }
@@ -32,9 +55,13 @@
   /* NAV */
   nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(30,30,30,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--dark-border); height: 70px; display: flex; align-items: center; }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-  .nav-logo img { height:  70px; display: block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--gray-dim); font-size: 14px; font-weight: 500; transition: color var(--transition); }
+  .nav-logo img, .nav-logo4 img {
+    height: 40px; width: auto; max-width: 210px;
+    object-fit: contain; display: block;
+  }
+  .nav-links { display: flex; gap: 1.4rem; list-style: none; align-items: center; }
+  @media (max-width: 480px) { .nav-logo img, .nav-logo4 img { height: 32px; max-width: 168px; } }
+  .nav-links a { text-decoration: none; color: var(--gray-dim); font-size: 14px; font-weight: 500; transition: color var(--transition); white-space: nowrap; }
   .nav-links a:hover { color: var(--white); }
   .nav-cta { background: var(--red) !important; color: #fff !important; padding: 9px 22px; border-radius: var(--radius); font-weight: 600 !important; transition: background var(--transition) !important; }
   .nav-cta:hover { background: var(--red-light) !important; }
@@ -157,9 +184,9 @@
     font-size: 15px; color: var(--gray-dim); line-height: 1.7;
   }
   .doc-list li::before {
-    content: '→'; color: var(--red); font-weight: 700;
+    content: '\f105'; color: var(--red);
     flex-shrink: 0; margin-top: 2px;
-    font-family: var(--font-display);
+    font-family: "Font Awesome 6 Free"; font-weight: 900;
   }
 
   .doc-highlight {
@@ -183,7 +210,7 @@
   /* FOOTER */
   footer { background: var(--dark-mid); border-top: 1px solid var(--dark-border); padding: 4rem 0 2rem; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; max-width: 1160px; margin-left: auto; margin-right: auto; padding: 0 2rem; }
-  .footer-brand img { height: 40px; margin-bottom: 1.2rem; display: block; }
+  .footer-brand img { height: 34px; width: auto; margin-bottom: 1.2rem; display: block; }
   .footer-brand p { font-size: 14px; color: var(--gray-dim); line-height: 1.8; max-width: 260px; }
   .footer-col h4 { font-family: var(--font-display); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gray-dim); margin-bottom: 1.2rem; }
   .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
@@ -197,13 +224,46 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .nav-links { display: none; }
   }
+
+  /* ── a11y + motion baseline (added in revision 3) ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 2000;
+    background: var(--red); color: #fff; padding: 10px 18px;
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    border-radius: 0 0 var(--radius) 0; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+  :focus-visible {
+    outline: 2px solid var(--red-light, #ff4a50);
+    outline-offset: 2px; border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Font Awesome ── icons inherit the brand accent unless overridden ── */
+  .fa-solid, .fa-regular, .fa-brands { color: var(--red); }
+  .btn-plan .fa-solid, .sim-btn .fa-solid, .btn-primary .fa-solid,
+  .nav-cta .fa-solid, .footer-social .fa-brands { color: inherit; }
+  /* Glyph pseudo-elements (list ticks, arrows) come from the same font as the
+     inline icons, so ticks and arrows can never fall back to a system glyph. */
+  .fa-glyph::before { -webkit-font-smoothing: antialiased; display: inline-block; font-family: "Font Awesome 6 Free"; font-weight: 900; }
+
+  .doc-section h2 .fa-solid,
+  .sidebar-header .fa-solid { color: var(--red); margin-right: 0.6rem; font-size: 0.85em; }
+  .page-hero-meta span .fa-solid { color: var(--red); font-size: 11px; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html"><img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech" style="height: 70px;display:block;"></a>
+    <a href="index.html" class="nav-logo"><img src="./assets/logo/glctech-logo.png" alt="GLCTech Sec — IT monitoring and security" decoding="async"></a>
     <ul class="nav-links">
       <li><a href="index.html" data-i18n="nav.home">Home</a></li>
       <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
@@ -221,11 +281,11 @@
     <span class="page-hero-label" data-i18n="doc.label">Legal &amp; Compliance</span>
     <h1 data-i18n="pol.h1">Privacy Policy</h1>
     <div class="page-hero-meta">
-      <span data-i18n="doc.company">GLCTech Tecnologia</span>
+      <span><i class="fa-solid fa-building" aria-hidden="true"></i><span data-i18n="doc.company">GLCTech Tecnologia</span></span>
       <span class="meta-dot"></span>
-      <span data-i18n="doc.lastupdate">Last updated: July 8, 2025</span>
+      <span><i class="fa-solid fa-calendar-day" aria-hidden="true"></i><span data-i18n="doc.lastupdate">Last updated: July 8, 2025</span></span>
       <span class="meta-dot"></span>
-      <span data-i18n="pol.lgpd">LGPD Compliant</span>
+      <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span data-i18n="pol.lgpd">LGPD Compliant</span></span>
     </div>
   </div>
 </div>
@@ -236,7 +296,7 @@
   <!-- SIDEBAR -->
   <aside class="doc-sidebar">
     <div class="sidebar-card">
-      <div class="sidebar-header" data-i18n="doc.index">Table of Contents</div>
+      <div class="sidebar-header"><i class="fa-solid fa-list-ul" aria-hidden="true"></i><span data-i18n="doc.index">Table of Contents</span></div>
       <ul class="sidebar-nav">
         <li><a href="#s1"><span class="sn-num">01</span><span data-i18n="pol.s1.nav">Data Collection</span></a></li>
         <li><a href="#s2"><span class="sn-num">02</span><span data-i18n="pol.s2.nav">Use of Information</span></a></li>
@@ -251,11 +311,11 @@
     <div class="sidebar-contact">
       <h4 data-i18n="pol.sidebar.q">Questions about privacy?</h4>
       <div class="sidebar-contact-item">
-        <div class="sc-icon">✉️</div>
+        <div class="sc-icon"><i class="fa-solid fa-envelope" aria-hidden="true" title="Email"></i></div>
         <span>contact@glctechsec.com</span>
       </div>
       <div class="sidebar-contact-item">
-        <div class="sc-icon">📞</div>
+        <div class="sc-icon"><i class="fa-solid fa-phone" aria-hidden="true" title="Phone"></i></div>
         <span>+44 7778 173575</span>
       </div>
     </div>
@@ -276,7 +336,7 @@
 
     <div class="doc-section" id="s1">
       <span class="doc-section-num" data-i18n="pol.s1.num">Section 01</span>
-      <h2 data-i18n="pol.s1.h">Data Collection</h2>
+      <h2><i class="fa-solid fa-database" aria-hidden="true"></i><span data-i18n="pol.s1.h">Data Collection</span></h2>
       <p>We collect personal information you voluntarily provide through forms, business contacts and interactions with our content. The data collected may include:</p>
       <ul class="doc-list">
         <li>Full name and identification details</li>
@@ -290,7 +350,7 @@
 
     <div class="doc-section" id="s2">
       <span class="doc-section-num" data-i18n="pol.s2.num">Section 02</span>
-      <h2 data-i18n="pol.s2.h">Use of Information</h2>
+      <h2><i class="fa-solid fa-gears" aria-hidden="true"></i><span data-i18n="pol.s2.h">Use of Information</span></h2>
       <p>The information collected is used exclusively for the following purposes:</p>
       <ul class="doc-list">
         <li>Contacting you and providing the services requested</li>
@@ -306,7 +366,7 @@
 
     <div class="doc-section" id="s3">
       <span class="doc-section-num" data-i18n="pol.s3.num">Section 03</span>
-      <h2 data-i18n="pol.s3.h">Data Sharing</h2>
+      <h2><i class="fa-solid fa-share-nodes" aria-hidden="true"></i><span data-i18n="pol.s3.h">Data Sharing</span></h2>
       <p>GLCTech does not share, sell or rent your personal data to third parties, except in the following situations:</p>
       <ul class="doc-list">
         <li>When necessary to perform the contracted services (e.g. technology partners such as Kaspersky, Veeam)</li>
@@ -318,7 +378,7 @@
 
     <div class="doc-section" id="s4">
       <span class="doc-section-num" data-i18n="pol.s4.num">Section 04</span>
-      <h2 data-i18n="pol.s4.h">Information Security</h2>
+      <h2><i class="fa-solid fa-lock" aria-hidden="true"></i><span data-i18n="pol.s4.h">Information Security</span></h2>
       <p>We adopt technical and administrative measures consistent with market security standards to protect your data against:</p>
       <ul class="doc-list">
         <li>Unauthorized access</li>
@@ -327,11 +387,14 @@
         <li>Leaks and security incidents</li>
       </ul>
       <p>As a company specialized in IT security and monitoring, we apply internally the same best practices we recommend to our clients.</p>
+      <div class="doc-highlight">
+        <strong style="color:var(--white)">UK clients:</strong> a standard Data Processing Agreement (DPA) covering the scope of processing, sub-processors, security measures and data return/deletion on termination is available on request — ask your account manager before signing a service agreement. Our incident response process targets notification of affected clients and, where required, the Information Commissioner's Office (ICO), within 72 hours of a qualifying breach becoming known to us, in line with UK GDPR Article 33. See our <a href="trust-compliance.html" style="color:var(--red)">Trust &amp; Compliance Centre</a> for full detail.
+      </div>
     </div>
 
     <div class="doc-section" id="s5">
       <span class="doc-section-num" data-i18n="pol.s5.num">Section 05</span>
-      <h2 data-i18n="pol.s5.h">Your Rights (GDPR/LGPD)</h2>
+      <h2><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span data-i18n="pol.s5.h">Your Rights (GDPR/LGPD)</span></h2>
       <p>In accordance with applicable data protection law, you may, at any time, request:</p>
       <ul class="doc-list">
         <li>Confirmation of whether your data is being processed</li>
@@ -348,27 +411,27 @@
 
     <div class="doc-section" id="s6">
       <span class="doc-section-num" data-i18n="pol.s6.num">Section 06</span>
-      <h2 data-i18n="pol.s6.h">Contact</h2>
+      <h2><i class="fa-solid fa-envelope" aria-hidden="true"></i><span data-i18n="pol.s6.h">Contact</span></h2>
       <p>If you have any questions, requests, or wish to exercise your data protection rights, please contact our data protection team:</p>
       <div class="doc-contact-box">
         <div class="contact-row">
-          <div class="contact-icon">✉️</div>
+          <div class="contact-icon"><i class="fa-solid fa-envelope" aria-hidden="true" title="Email"></i></div>
           <a href="mailto:contact@glctechsec.com">contact@glctechsec.com</a>
         </div>
         <div class="contact-row">
-          <div class="contact-icon">📞</div>
+          <div class="contact-icon"><i class="fa-solid fa-phone" aria-hidden="true" title="Phone"></i></div>
           <a href="tel:+447778173575">+44 7778 173575</a>
         </div>
         <div class="contact-row">
-          <div class="contact-icon">📍</div>
-          <span style="font-size:14px;color:var(--gray-dim);">Salford, Greater Manchester — UK</span>
+          <div class="contact-icon"><i class="fa-solid fa-location-dot" aria-hidden="true" title="Address"></i></div>
+          <span style="font-size:14px;color:var(--gray-dim);">São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)</span>
         </div>
       </div>
     </div>
 
     <div class="doc-section" id="s7">
       <span class="doc-section-num" data-i18n="pol.s7.num">Section 07</span>
-      <h2 data-i18n="pol.s7.h">Updates to this Policy</h2>
+      <h2><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span data-i18n="pol.s7.h">Updates to this Policy</span></h2>
       <p>This Privacy Policy may be updated periodically to reflect legal, operational or service-related changes. We recommend reviewing it periodically.</p>
       <div class="doc-highlight">
         <strong style="color:var(--white)">Last updated:</strong> July 8, 2025. Should any material changes occur, we will notify registered data subjects by e-mail.
@@ -381,7 +444,7 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="https://glctech.com.br/assets/logo/new_logo.png" alt="GLCTech">
+      <img src="./assets/logo/glctech-logo.png" alt="GLCTech" decoding="async" loading="lazy">
       <p data-i18n="footer.p">Intelligent IT monitoring and security for companies that demand high performance and operational continuity.</p>
     </div>
     <div class="footer-col">
@@ -411,8 +474,8 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span data-i18n="footer.copy">© 2025 GLCTech Tecnologia. All rights reserved.</span>
-    <span data-i18n="footer.location">Salford, Greater Manchester — UK</span>
+    <span data-i18n="footer.copy">© 2026 GLCTech Sec. All rights reserved.</span>
+    <span data-i18n="footer.location">São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)</span>
   </div>
 </footer>
 

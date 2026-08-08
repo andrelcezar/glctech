@@ -28,6 +28,7 @@
       /* Hero */
       'hero.badge':   'Monitoramento em tempo real · Zabbix & Grafana',
       'hero.live':    'Ao vivo',
+      'hero.h1':      'Visibilidade total da sua<br><span>infraestrutura de TI</span>',
       'hero.h1.line1':'Visibilidade Total',
       'hero.h1.line2':'da Sua',
       'hero.h1.line3':'de TI',
@@ -56,7 +57,7 @@
 
       /* Services */
       'services.label': 'Nossas Soluções',
-      'services.h2':    'Tudo o que sua TI precisa,\nem um único parceiro',
+      'services.h2':    'Tudo o que sua TI precisa,<br>em um único parceiro',
       'services.p':     'Soluções integradas de monitoramento, segurança e backup para manter sua operação estável e protegida.',
       'services.s1.num':  '01 — Monitoramento',
       'services.s1.h':    'Monitoramento Inteligente com Zabbix',
@@ -117,7 +118,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Telefone / WhatsApp',
       'contact.location.label': 'Localização',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Nome *',
       'form.nome.ph':   'Seu nome',
       'form.empresa':   'Empresa',
@@ -151,7 +152,7 @@
       'footer.legal.privacy': 'Política de Privacidade',
       'footer.legal.terms':   'Termos de Uso',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Todos os direitos reservados.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
 
       /* Lang switcher */
       'lang.label': 'Idioma',
@@ -430,6 +431,7 @@
 
       'hero.badge':   'Real-time monitoring · Zabbix & Grafana',
       'hero.live':    'Live',
+      'hero.h1':      'Total visibility of your<br><span>IT infrastructure</span>',
       'hero.h1.line1':'Total Visibility',
       'hero.h1.line2':'of Your',
       'hero.h1.line3':'IT',
@@ -455,15 +457,15 @@
       'about.badge':     '+50 Projects Delivered',
 
       'services.label': 'Our Solutions',
-      'services.h2':    'Everything your IT needs,\nin a single partner',
+      'services.h2':    'Everything your IT needs,<br>in a single partner',
       'services.p':     'Integrated monitoring, security and backup solutions to keep your operation stable and protected.',
       'services.s1.num':  '01 — Monitoring',
       'services.s1.h':    'Intelligent Monitoring with Zabbix',
       'services.s1.p':    'Monitor servers, networks and applications in real time with precise metrics, custom dashboards and proactive incident analysis.',
       'services.s1.link': 'Learn more',
       'services.s2.num':  '02 — Security',
-      'services.s2.h':    'Real-Time Kaspersky Security',
-      'services.s2.p':    'Continuously monitor your systems and detect threats in real time, ensuring security, performance and compliance across the entire environment.',
+      'services.s2.h':    'Managed Endpoint Security',
+      'services.s2.p':    'Vendor-agnostic endpoint and network security — Kaspersky, Microsoft Defender for Business, Bitdefender or Sophos, matched to your risk profile and procurement requirements.',
       'services.s2.link': 'Learn more',
       'services.s3.num':  '03 — Backup',
       'services.s3.h':    'Intelligent Backup with Veeam',
@@ -510,7 +512,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Phone / WhatsApp',
       'contact.location.label': 'Location',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Name *',
       'form.nome.ph':   'Your name',
       'form.empresa':   'Company',
@@ -543,7 +545,7 @@
       'footer.legal.privacy': 'Privacy Policy',
       'footer.legal.terms':   'Terms of Use',
       'footer.copy':        '© 2025 GLCTech Tecnologia. All rights reserved.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'lang.label': 'Language',
     
 
@@ -804,6 +806,7 @@
 
       'hero.badge':   'Echtzeit-Monitoring · Zabbix & Grafana',
       'hero.live':    'Live',
+      'hero.h1':      'Vollständige Sicht auf Ihre<br><span>IT-Infrastruktur</span>',
       'hero.h1.line1':'Vollständige Sichtbarkeit',
       'hero.h1.line2':'Ihrer',
       'hero.h1.line3':'IT',
@@ -829,7 +832,7 @@
       'about.badge':     '+50 abgeschlossene Projekte',
 
       'services.label': 'Unsere Lösungen',
-      'services.h2':    'Alles, was Ihre IT braucht,\nbei einem Partner',
+      'services.h2':    'Alles, was Ihre IT braucht,<br>bei einem Partner',
       'services.p':     'Integrierte Monitoring-, Sicherheits- und Backup-Lösungen für eine stabile und geschützte Betriebsumgebung.',
       'services.s1.num':  '01 — Monitoring',
       'services.s1.h':    'Intelligentes Monitoring mit Zabbix',
@@ -884,7 +887,7 @@
       'contact.email.label': 'E-Mail',
       'contact.phone.label': 'Telefon / WhatsApp',
       'contact.location.label': 'Standort',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Name *',
       'form.nome.ph':   'Ihr Name',
       'form.empresa':   'Unternehmen',
@@ -917,7 +920,7 @@
       'footer.legal.privacy': 'Datenschutzrichtlinie',
       'footer.legal.terms':   'Nutzungsbedingungen',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Alle Rechte vorbehalten.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'lang.label': 'Sprache',
     
 
@@ -1116,6 +1119,7 @@
 
       'hero.badge':   'Monitoreo en tiempo real · Zabbix & Grafana',
       'hero.live':    'En vivo',
+      'hero.h1':      'Visibilidad total de tu<br><span>infraestructura de TI</span>',
       'hero.h1.line1':'Visibilidad Total',
       'hero.h1.line2':'de tu',
       'hero.h1.line3':'TI',
@@ -1141,7 +1145,7 @@
       'about.badge':     '+50 Proyectos Entregados',
 
       'services.label': 'Nuestras Soluciones',
-      'services.h2':    'Todo lo que tu TI necesita,\nen un único socio',
+      'services.h2':    'Todo lo que tu TI necesita,<br>en un único socio',
       'services.p':     'Soluciones integradas de monitoreo, seguridad y backup para mantener tu operación estable y protegida.',
       'services.s1.num':  '01 — Monitoreo',
       'services.s1.h':    'Monitoreo Inteligente con Zabbix',
@@ -1196,7 +1200,7 @@
       'contact.email.label': 'Correo electrónico',
       'contact.phone.label': 'Teléfono / WhatsApp',
       'contact.location.label': 'Ubicación',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Nombre *',
       'form.nome.ph':   'Tu nombre',
       'form.empresa':   'Empresa',
@@ -1229,7 +1233,7 @@
       'footer.legal.privacy': 'Política de Privacidad',
       'footer.legal.terms':   'Términos de Uso',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Todos los derechos reservados.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'lang.label': 'Idioma',
     
 
@@ -1412,6 +1416,7 @@
 
       'hero.badge':   'Supervision en temps réel · Zabbix & Grafana',
       'hero.live':    'En direct',
+      'hero.h1':      'Visibilité totale de votre<br><span>infrastructure IT</span>',
       'hero.h1.line1':'Visibilité Totale',
       'hero.h1.line2':'de Votre',
       'hero.h1.line3':'IT',
@@ -1437,7 +1442,7 @@
       'about.badge':     '+50 Projets livrés',
 
       'services.label': 'Nos Solutions',
-      'services.h2':    'Tout ce dont votre IT a besoin,\nchez un seul partenaire',
+      'services.h2':    'Tout ce dont votre IT a besoin,<br>chez un seul partenaire',
       'services.p':     'Solutions intégrées de supervision, sécurité et sauvegarde pour maintenir votre activité stable et protégée.',
       'services.s1.num':  '01 — Supervision',
       'services.s1.h':    'Supervision Intelligente avec Zabbix',
@@ -1492,7 +1497,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Téléphone / WhatsApp',
       'contact.location.label': 'Localisation',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Nom *',
       'form.nome.ph':   'Votre nom',
       'form.empresa':   'Entreprise',
@@ -1525,7 +1530,7 @@
       'footer.legal.privacy': 'Politique de confidentialité',
       'footer.legal.terms':   'Conditions d\'utilisation',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Tous droits réservés.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'lang.label': 'Langue',
     
 
@@ -1708,6 +1713,7 @@
 
       'hero.badge':   'Monitoraggio in tempo reale · Zabbix & Grafana',
       'hero.live':    'In diretta',
+      'hero.h1':      'Visibilità totale della tua<br><span>infrastruttura IT</span>',
       'hero.h1.line1':'Visibilità Totale',
       'hero.h1.line2':'della Tua',
       'hero.h1.line3':'IT',
@@ -1733,7 +1739,7 @@
       'about.badge':     '+50 Progetti Consegnati',
 
       'services.label': 'Le Nostre Soluzioni',
-      'services.h2':    'Tutto ciò di cui la tua IT ha bisogno,\nin un unico partner',
+      'services.h2':    'Tutto ciò di cui la tua IT ha bisogno,<br>in un unico partner',
       'services.p':     'Soluzioni integrate di monitoraggio, sicurezza e backup per mantenere la tua operazione stabile e protetta.',
       'services.s1.num':  '01 — Monitoraggio',
       'services.s1.h':    'Monitoraggio Intelligente con Zabbix',
@@ -1788,7 +1794,7 @@
       'contact.email.label': 'E-mail',
       'contact.phone.label': 'Telefono / WhatsApp',
       'contact.location.label': 'Posizione',
-      'contact.location.val':   'Salford, Greater Manchester — UK',
+      'contact.location.val':   'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'form.nome':      'Nome *',
       'form.nome.ph':   'Il tuo nome',
       'form.empresa':   'Azienda',
@@ -1821,7 +1827,7 @@
       'footer.legal.privacy': 'Informativa sulla Privacy',
       'footer.legal.terms':   'Termini di Utilizzo',
       'footer.copy':        '© 2025 GLCTech Tecnologia. Tutti i diritti riservati.',
-      'footer.location':    'Salford, Greater Manchester — UK',
+      'footer.location':    'São Paulo, Brazil (Group HQ) · Salford, UK (GLCTech Sec)',
       'lang.label': 'Lingua',
     
 
@@ -1993,6 +1999,12 @@
 
   };
 
+  /* ── STORAGE GUARDS ──────────────────────────────────────────────────────
+     localStorage throws (not returns null) in private mode and when cookies are
+     blocked. Unguarded, that took the whole translation layer down with it. ── */
+  function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* no-op */ } }
+
   /* ── MAPEAMENTO DE LOCALE → IDIOMA ───────────────────────────────────────── */
 
   var localeMap = {
@@ -2007,7 +2019,7 @@
 
   function detectLang() {
     // 1. Preferência salva pelo usuário
-    var saved = localStorage.getItem('glctech_lang');
+    var saved = safeGet('glctech_lang');
     if (saved && translations[saved]) return saved;
 
     // 2. navigator.languages (lista de preferências do navegador)
@@ -2050,10 +2062,16 @@
     // Traduz todos os elementos com data-i18n
     var els = document.querySelectorAll('[data-i18n],[data-i18n-html],[data-i18n-attr]');
     /* Use the correct attribute name as the key */
-    function getKey(el) { return el.getAttribute('data-i18n') || el.getAttribute('data-i18n-html') || el.getAttribute('data-i18n-attr'); }
+    function getKey(el) {
+      // data-i18n-attr holds the attribute NAME (e.g. "placeholder"), never the key.
+      // Pair it with data-i18n or data-i18n-key for the key itself.
+      return el.getAttribute('data-i18n') || el.getAttribute('data-i18n-html')
+          || el.getAttribute('data-i18n-key');
+    }
     for (var i = 0; i < els.length; i++) {
       var el  = els[i];
       var key = getKey(el);
+      if (!key) continue;
       var val = t(key, lang);
 
       if (el.hasAttribute('data-i18n-attr')) {
@@ -2083,8 +2101,10 @@
     }
 
     // Salva preferência
-    localStorage.setItem('glctech_lang', lang);
     window._currentLang = lang;
+    // Let page-level scripts (currency simulators) react to a language change.
+    try { document.dispatchEvent(new CustomEvent('glc:langchange', { detail: { lang: lang } })); }
+    catch (e) { /* older browsers — simulators keep their initial currency */ }
   }
 
   /* ── CRIAR SELETOR DE IDIOMA ─────────────────────────────────────────────── */
@@ -2098,7 +2118,7 @@
       var style = document.createElement('style');
       style.id = 'glc-lang-css';
       style.textContent = [
-        '#glc-lang-btn {',
+        '.glc-lang-btn {',
         '  display:flex; align-items:center; gap:6px; cursor:pointer;',
         '  padding:5px 10px 5px 8px; border-radius:6px;',
         '  border:1px solid rgba(255,255,255,0.15);',
@@ -2107,19 +2127,19 @@
         '  user-select:none; position:relative; white-space:nowrap;',
         '  transition:border-color .2s,color .2s,background .2s;',
         '}',
-        '#glc-lang-btn:hover { border-color:#CC0000; color:#fff; background:rgba(40,40,40,0.95); }',
-        '#glc-lang-btn .glc-arrow {',
+        '.glc-lang-btn:hover { border-color:#CC0000; color:#fff; background:rgba(40,40,40,0.95); }',
+        '.glc-lang-btn .glc-arrow {',
         '  display:inline-block; font-size:9px; margin-left:2px; transition:transform .2s;',
         '}',
-        '#glc-lang-btn.open .glc-arrow { transform:rotate(180deg); }',
-        '#glc-lang-dropdown {',
+        '.glc-lang-btn.open .glc-arrow { transform:rotate(180deg); }',
+        '.glc-lang-dropdown {',
         '  display:none; position:absolute; top:calc(100% + 6px); right:0;',
         '  background:#1a1a1a; border:1px solid rgba(255,255,255,0.15);',
         '  border-radius:8px; overflow:hidden; min-width:110px;',
         '  box-shadow:0 8px 32px rgba(0,0,0,0.6);',
         '  z-index:9999;',
         '}',
-        '#glc-lang-dropdown.open { display:block; }',
+        '.glc-lang-dropdown.open { display:block; }',
         '.glc-lang-opt {',
         '  display:flex; align-items:center; gap:8px; padding:9px 14px;',
         '  background:#1a1a1a; border:0px solid rgba(255,255,255,0.15);',
@@ -2129,24 +2149,22 @@
         '}',
         '.glc-lang-opt:hover { background:rgba(204,0,0,0.15); color:#fff; }',
         '.glc-lang-opt.active { color:#fff; background:rgba(204,0,0,0.25); }',
-        '#glc-lang-wrap { position:relative; }',
+        '.glc-lang-wrap { position:relative; }',
       ].join('\n');
       document.head.appendChild(style);
     }
 
     var wrap = document.createElement('div');
-    wrap.id = 'glc-lang-wrap';
+    wrap.className = 'glc-lang-wrap';
 
     var btn = document.createElement('div');
-    btn.id = 'glc-lang-btn';
+    btn.className = 'glc-lang-btn';
     btn.setAttribute('role','button');
     btn.setAttribute('aria-label','Select language');
     btn.setAttribute('tabindex','0');
 
     var btnFlag = document.createElement('span');
-    btnFlag.id = 'glc-lang-flag';
     var btnName = document.createElement('span');
-    btnName.id = 'glc-lang-name';
     var btnArrow = document.createElement('span');
     btnArrow.className = 'glc-arrow';
     btnArrow.textContent = '▾';
@@ -2156,7 +2174,7 @@
     btn.appendChild(btnArrow);
 
     var dropdown = document.createElement('div');
-    dropdown.id = 'glc-lang-dropdown';
+    dropdown.className = 'glc-lang-dropdown';
 
     Object.keys(names).forEach(function(code) {
       var opt = document.createElement('div');
@@ -2195,6 +2213,7 @@
     function selectLang(code) {
       syncSwitcherUI(code);
       applyLang(code);
+      safeSet('glctech_lang', code);   // explicit user choice — remember it
     }
 
     btn.addEventListener('click', function(e) {
@@ -2209,7 +2228,11 @@
 
     /* ── Expose UI-sync (NÃO reaplica tradução) para applyLang chamar ──
        Evita a recursão infinita applyLang() → selectLang() → applyLang(). ── */
-    window._glcSelectLang = syncSwitcherUI;
+    window._glcSyncSwitchers = window._glcSyncSwitchers || [];
+    window._glcSyncSwitchers.push(syncSwitcherUI);
+    window._glcSelectLang = function (code) {
+      window._glcSyncSwitchers.forEach(function (fn) { fn(code); });
+    };
 
     /* ── Set initial state ── */
     var initLang = detectLang();
@@ -2224,12 +2247,22 @@
   /* ── INIT ────────────────────────────────────────────────────────────────── */
 
   function init() {
+    // Only persist a language the user actually chose — see selectLang().
     // Injeta seletor na nav
     var navLinks = document.querySelector('.nav-links');
     if (navLinks) {
       var li = document.createElement('li');
       li.appendChild(buildSwitcher());
       navLinks.appendChild(li);
+    }
+    // .nav-links is display:none below 900px, so the desktop switcher is
+    // unreachable on mobile. Mount a second one inside the drawer.
+    var drawer = document.querySelector('.mobile-menu');
+    if (drawer) {
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'padding:1rem 0 0;border-top:1px solid var(--dark-border);margin-top:0.5rem;';
+      wrap.appendChild(buildSwitcher());
+      drawer.appendChild(wrap);
     }
 
     var lang = detectLang();
