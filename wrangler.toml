@@ -19,12 +19,18 @@ binding = "ASSETS"
 not_found_handling = "404-page"
 
 # Secrets are NOT set here. They are encrypted, and set with:
-#   npx wrangler secret put ZOHO_USER     # contact@glctechsec.com
-#   npx wrangler secret put ZOHO_PASS     # Zoho app-specific password
-#   npx wrangler secret put CONTACT_TO    # contact@glctechsec.com
+#   npx wrangler secret put ZOHO_USER            # Zoho mailbox that authenticates SMTP, e.g. contac@glctech.com.br
+#   npx wrangler secret put ZOHO_PASS            # Zoho APP-SPECIFIC password (not the account password)
+#   npx wrangler secret put CONTACT_TO_EMAIL     # contac@glctech.com.br — where the contact form is delivered
+#   npx wrangler secret put CAREERS_TO_EMAIL     # rh@glctech.com.br — where the careers form is delivered
+#   npx wrangler secret put TURNSTILE_SECRET_KEY # Cloudflare Turnstile secret key (optional — see AUDIT-REPORT.md)
+#
+# If CONTACT_TO_EMAIL / CAREERS_TO_EMAIL are not set, mail falls back to ZOHO_USER.
 
-# Optional flood guard for the contact endpoint. The Worker runs without it.
+# Flood guard for both form endpoints. The Worker runs without it (it just
+# loses the per-IP limit), but it is strongly recommended in production:
 #   npx wrangler kv namespace create RATE_LIMIT
+# then paste the id below and uncomment.
 # [[kv_namespaces]]
 # binding = "RATE_LIMIT"
 # id = "<paste the id wrangler prints>"

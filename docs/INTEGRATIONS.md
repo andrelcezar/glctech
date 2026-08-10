@@ -11,14 +11,13 @@ value is safe to be public, and how to change it.
 
 - [At a glance](#at-a-glance)
 - [Google Analytics 4](#google-analytics-4)
-- [Web3Forms (contact form)](#web3forms-contact-form)
-- [HubSpot (careers form)](#hubspot-careers-form)
+- [Cloudflare Worker + Zoho Mail (contact and careers forms)](#cloudflare-worker--zoho-mail-contact-and-careers-forms)
 - [JotForm (e-book capture)](#jotform-e-book-capture)
 - [RSS2JSON + CORS proxies (blog feed)](#rss2json--cors-proxies-blog-feed)
 - [Tidio AI chatbot](#tidio-ai-chatbot)
 - [Zabbix API (stats pipeline)](#zabbix-api-stats-pipeline)
 - [Google Fonts & Font Awesome](#google-fonts--font-awesome)
-- [`landing.html` form target](#landinghtml-form-target)
+- [`landing.html` form (legacy — not migrated)](#landinghtml-form-legacy--not-migrated)
 
 ---
 
@@ -27,8 +26,9 @@ value is safe to be public, and how to change it.
 | Service | Purpose | Identifier lives in | Public? |
 |---------|---------|---------------------|:---:|
 | Google Analytics 4 | Traffic analytics | `G-YDBB1PYYCM` in each page `<head>` | ✅ public by design |
-| Web3Forms | Contact form → e-mail | `W3F_ACCESS_KEY` in `index.html` | ✅ public submission key |
-| HubSpot | "Trabalhe Conosco" form | `hsforms.com` link in nav/footer | ✅ public link |
+| Cloudflare Worker + Zoho Mail | Contact form → e-mail (`/api/contact`) | `worker/index.js` + `worker/lib/`; credentials in Worker secrets | 🔒 credentials secret, endpoint path is public |
+| Cloudflare Worker + Zoho Mail | Careers form → e-mail (`/api/careers`) | same Worker, `CAREERS_TO_EMAIL` secret | 🔒 credentials secret, endpoint path is public |
+| Cloudflare Turnstile | Bot protection on both forms | site key in HTML (public), secret key in `TURNSTILE_SECRET_KEY` | ✅ site key public / 🔒 secret key secret |
 | JotForm | E-book lead capture | iframe `src` in `ebook.html` | ✅ public embed |
 | RSS2JSON | Blog feed JSON | `RSS2JSON_KEY` in `index.html` blog IIFE | ✅ public API key |
 | Tidio | AI chatbot | script URL id in `index.html` | ✅ public widget id |
@@ -48,36 +48,24 @@ value is safe to be public, and how to change it.
 
 ---
 
-## Web3Forms (contact form)
+## Cloudflare Worker + Zoho Mail (contact and careers forms)
 
-- **What:** turns the `#contact` form on `index.html` into e-mail without a
-  backend. See the flow in [`ARCHITECTURE.md`](ARCHITECTURE.md#4-contact-form--web3forms).
-- **Destination:** `var CONTACT_EMAIL = 'contact@glctechsec.com'` in the
-  contact `<script>` near the bottom of `index.html`. Change that one line to
-  change where enquiries go.
-- **Endpoint:** `POST https://formsubmit.co/ajax/<destination>` (FormData).
-- **Why not Web3Forms:** its access key decided the destination server-side, so
-  the recipient was invisible in the code — and the key in use delivered to
-  `contato@glctech.com.br`, not to this site's own address. FormSubmit puts the
-  destination in the request, where it is greppable and covered by a test.
-- **Activation (once):** the first real submission triggers a confirmation
-  e-mail to the destination with an "Activate Form" link. Until it is clicked,
-  the API accepts submissions but does not deliver them.
-- **Public?** The address is in client code, but it is already published in
-  plain text in the contact block, so this exposes nothing new.
-- **Gotcha:** the form's inline error strings are localized through
+- **What:** both forms POST same-origin to the Worker that also serves the
+  site (`/api/contact`, `/api/careers`), which relays the message over SMTP to
+  Zoho Mail. No third-party form service is involved. Full flow, secrets,
+  deployment and testing steps: **`AUDIT-REPORT.md`** at the repo root, and
+  [`ARCHITECTURE.md`](ARCHITECTURE.md#4-contact-and-careers-forms--cloudflare-worker--zoho-mail).
+- **Destination:** `CONTACT_TO_EMAIL` and `CAREERS_TO_EMAIL` Worker secrets —
+  never in the HTML/JS. They default to the authenticating mailbox
+  (`ZOHO_USER`) if unset.
+- **Public?** No credential is public. The site key for Cloudflare Turnstile
+  is the only client-visible identifier related to these forms, and it is
+  meant to be public.
+- **Gotcha:** the contact form's inline error strings are localized through
   `window._i18n_errors` (populated by i18n). New error messages need keys in
-  `scripts/i18n.js` (`form.err.*`).
-
----
-
-## HubSpot (careers form)
-
-- **What:** the "Trabalhe Conosco" link opens a hosted HubSpot form.
-- **Where:** `https://ty0ci.share.hsforms.com/…` in the nav, mobile drawer, and
-  footer of `index.html` (and possibly other pages).
-- **To change:** replace the share URL. It's an external hosted form — nothing
-  to configure in this repo beyond the link.
+  `scripts/i18n.js` (`form.err.*`). The Worker's own JSON error `message` is
+  intentionally not shown verbatim to the visitor (it is Portuguese, an
+  internal API contract) — the frontend shows its own localized fallback text.
 
 ---
 
@@ -158,14 +146,15 @@ value is safe to be public, and how to change it.
 
 ---
 
-## `landing.html` form (Web3Forms)
+## `landing.html` form (legacy — not migrated)
 
-The "Free Diagnostic" form on `landing.html` submits to **Web3Forms**, reusing
-FormSubmit, like the contact form, but delivering to `hr@glctechsec.com`.
-A small JS handler posts the form without a page reload and shows an inline
-success/error state; the `<form>`'s native `action="https://api.web3forms.com/submit"`
-is kept as a no-JS fallback. To change the destination, swap the access key (and
-`subject`) — see [Web3Forms](#web3forms-contact-form).
+The "Free Diagnostic" form on `landing.html` still submits directly to
+**FormSubmit.co**, delivering to `hr@glctechsec.com`. Unlike the contact and
+careers forms, it was **not** migrated to the Worker — `landing.html` is an
+orphaned page (nothing links to it) and was out of scope for the forms audit
+in `AUDIT-REPORT.md`. Treat it as legacy: either wire it to `/api/contact`
+(with `subject: 'Free Diagnostic'`) or remove the page, as a follow-up
+decision.
 
 > Previously this form POSTed to an unrelated `automationanywhere.com` URL
 > (a placeholder), so its leads went nowhere — that's now fixed.

@@ -302,41 +302,39 @@ test('no inline style overrides the responsive nav logo height', () => {
 
 /* ── form destinations ──────────────────────────────────────────────────── */
 
-test('the contact form posts to contact@glctechsec.com', () => {
+test('the contact form posts same-origin to /api/contact (no third-party form service)', () => {
   const s = read('index.html');
-  assert.match(s, /var CONTACT_EMAIL = 'contact@glctechsec\.com';/,
-    'contact destination is not contact@glctechsec.com');
-  assert.match(s, /formsubmit\.co\/ajax\/' \+ CONTACT_EMAIL/,
-    'the destination constant is not the one actually posted to');
+  assert.match(s, /var CONTACT_ENDPOINT = '\/api\/contact';/,
+    'contact form no longer posts to the Worker at /api/contact');
+  assert.ok(!/formsubmit\.co/.test(s), 'index.html still references FormSubmit');
+  assert.ok(!/api\.web3forms\.com/.test(s), 'index.html still references Web3Forms');
 });
 
-test('no form routes to an address outside glctechsec.com', () => {
-  // Web3Forms hid the recipient behind an access key, which is how mail ended
-  // up at contato@glctech.com.br. Every destination must now be visible here.
+test('the careers form posts same-origin to /api/careers (no third-party form service)', () => {
+  const s = read('trabalhe-conosco.html');
+  assert.match(s, /var CAREERS_ENDPOINT = '\/api\/careers';/,
+    'careers form no longer posts to the Worker at /api/careers');
+  assert.ok(!/formsubmit\.co/.test(s), 'trabalhe-conosco.html still references FormSubmit');
+});
+
+test('the real recipient addresses are not hard-coded in client code', () => {
+  // The destination is configurable server-side (CONTACT_TO_EMAIL /
+  // CAREERS_TO_EMAIL Worker secrets) precisely so it is never baked into a
+  // publicly-readable file. Publicly displayed support addresses (mailto:
+  // links, footers) are a separate, intentional thing and are not checked here.
   for (const page of PAGES) {
-    const code = read(page).replace(/\/\*[\s\S]*?\*\//g, '');   // ignore comments
-    assert.ok(!/api\.web3forms\.com/.test(code),
-      `${page} still posts to Web3Forms, whose destination is not in the code`);
-    // Only routing addresses — form destinations and mailto targets. Input
-    // placeholders like "you@email.com" are illustrative, not recipients.
-    const routing = [
-      ...code.matchAll(/var \w*EMAIL\w* = '([^']+)'/g),
-      ...code.matchAll(/formsubmit\.co\/ajax\/([\w.+-]+@[\w.-]+)/g),
-      ...code.matchAll(/mailto:([\w.+-]+@[\w.-]+)/g),
-    ].map((m) => m[1]);
-    for (const addr of routing) {
-      assert.match(addr, /@glctechsec\.com$/, `${page} routes mail to ${addr}`);
-    }
+    const code = read(page).replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '');
+    assert.ok(!/api\.web3forms\.com/.test(code), `${page} still posts to Web3Forms`);
   }
 });
 
-test('the old glctech.com.br address survives nowhere but the explanatory comment', () => {
+test('no page or i18n string references the legacy glctech.com.br domain', () => {
   for (const page of PAGES) {
-    const code = read(page).replace(/\/\*[\s\S]*?\*\//g, '');
-    assert.ok(!/glctech\.com\.br/.test(code), `${page} still uses glctech.com.br`);
+    const code = read(page).replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, '');
+    assert.ok(!/glctech\.com\.br/.test(code), `${page} references glctech.com.br`);
   }
   const i18nSrc = fs.readFileSync(path.join(ROOT, 'scripts', 'i18n.js'), 'utf8');
-  assert.ok(!/glctech\.com\.br/.test(i18nSrc), 'i18n.js still uses glctech.com.br');
+  assert.ok(!/glctech\.com\.br/.test(i18nSrc), 'i18n.js references glctech.com.br');
 });
 
 /* ── credential hygiene ─────────────────────────────────────────────────── */
@@ -350,12 +348,14 @@ test('no credential is committed anywhere in the published site', () => {
 
   const secretish = [
     /ZOHO_PASS\s*[:=]\s*['"][^'"<]/,          // an actual value, not a placeholder
+    /TURNSTILE_SECRET_KEY\s*[:=]\s*['"][^'"<]/,
     /smtp[^\n]{0,40}pass(word)?\s*[:=]\s*['"][^'"<$]/i,
     /Sec#\d{4}/,                               // the password shared in chat
   ];
   for (const f of walk(ROOT)) {
     if (!/\.(html|js|json|md|yml|yaml|txt)$/.test(f)) continue;
     if (f.endsWith('quality.test.js')) continue;
+    if (f.endsWith('.dev.vars.example')) continue; // placeholders only, not real secrets
     const s = fs.readFileSync(f, 'utf8');
     for (const re of secretish) {
       assert.ok(!re.test(s), `possible credential in ${path.relative(ROOT, f)}`);
@@ -363,33 +363,35 @@ test('no credential is committed anywhere in the published site', () => {
   }
 });
 
-test('the relay reads its credential from the environment, never a literal', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'serverless', 'api', 'contact.js'), 'utf8');
-  assert.match(src, /process\.env/, 'relay does not use environment variables');
-  assert.ok(!/pass:\s*['"][^'"]+['"]/.test(src), 'relay has a hard-coded password');
+test('the Worker reads its credentials from env, never a literal', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'worker', 'index.js'), 'utf8');
+  assert.match(src, /env\.ZOHO_USER/, 'worker does not read ZOHO_USER from env');
+  assert.match(src, /env\.ZOHO_PASS/, 'worker does not read ZOHO_PASS from env');
+  assert.ok(!/pass:\s*['"][^'"]+['"]/.test(src), 'worker has a hard-coded password');
 });
 
-test('the relay only accepts requests from our own origins', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'serverless', 'api', 'contact.js'), 'utf8');
-  const origins = [...src.matchAll(/'(https:\/\/[^']+)'/g)].map((m) => m[1]);
-  assert.ok(origins.length > 0, 'no allowed origins declared');
-  for (const o of origins) {
-    assert.match(o, /glctechsec\.com$/, `relay allows ${o}`);
+test('the Worker only accepts requests from its own origin', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'worker', 'lib', 'http.js'), 'utf8');
+  assert.match(src, /new URL\(origin\)\.origin === new URL\(request\.url\)\.origin/,
+    'originAllowed no longer enforces a same-origin match');
+});
+
+test('the form carries a honeypot the Worker can check', () => {
+  const contact = read('index.html');
+  assert.match(contact, /id="website"[^>]*tabindex="-1"/, 'contact form: no honeypot field');
+  assert.match(contact, /id="website"[^>]*aria-hidden="true"/, 'contact honeypot is exposed to screen readers');
+
+  const careers = read('trabalhe-conosco.html');
+  assert.match(careers, /name="website"[^>]*tabindex="-1"/, 'careers form: no honeypot field');
+  assert.match(careers, /name="website"[^>]*aria-hidden="true"/, 'careers honeypot is exposed to screen readers');
+});
+
+test('both forms embed a Cloudflare Turnstile widget', () => {
+  for (const page of ['index.html', 'trabalhe-conosco.html']) {
+    const s = read(page);
+    assert.match(s, /class="cf-turnstile"/, `${page}: no Turnstile widget`);
+    assert.match(s, /challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/, `${page}: Turnstile script not loaded`);
   }
-});
-
-test('the contact endpoint is blank, same-origin, or our own https relay', () => {
-  const m = read('index.html').match(/var CONTACT_ENDPOINT = '([^']*)'/);
-  assert.ok(m, 'CONTACT_ENDPOINT is missing');
-  if (!m[1]) return;                       // blank falls back to the previous path
-  if (m[1].startsWith('/')) return;        // same-origin, routed by worker/index.js
-  assert.match(m[1], /^https:\/\//, 'a remote endpoint must be https');
-});
-
-test('the form carries a honeypot the relay can check', () => {
-  const s = read('index.html');
-  assert.match(s, /id="website"[^>]*tabindex="-1"/, 'no honeypot field');
-  assert.match(s, /id="website"[^>]*aria-hidden="true"/, 'honeypot is exposed to screen readers');
 });
 
 /* ── Cloudflare deploy hygiene ──────────────────────────────────────────── */
@@ -422,13 +424,18 @@ test('build outputs and local secrets are gitignored', () => {
   }
 });
 
-test('the form posts to the same-origin endpoint the Worker serves', () => {
-  const endpoint = read('index.html').match(/var CONTACT_ENDPOINT = '([^']*)'/)[1];
+test('both forms post to endpoints the Worker actually routes', () => {
   const worker = fs.readFileSync(path.join(ROOT, 'worker', 'index.js'), 'utf8');
-  if (!endpoint) return;                       // blank is a valid fallback state
-  if (endpoint.startsWith('/')) {
-    assert.ok(worker.includes(`'${endpoint}'`), `the Worker does not route ${endpoint}`);
-  } else {
-    assert.match(endpoint, /^https:\/\//, 'a remote endpoint must be https');
-  }
+  const contactEndpoint = read('index.html').match(/var CONTACT_ENDPOINT = '([^']*)'/)[1];
+  const careersEndpoint = read('trabalhe-conosco.html').match(/var CAREERS_ENDPOINT = '([^']*)'/)[1];
+  assert.ok(worker.includes(`'${contactEndpoint}'`), `the Worker does not route ${contactEndpoint}`);
+  assert.ok(worker.includes(`'${careersEndpoint}'`), `the Worker does not route ${careersEndpoint}`);
+});
+
+test('the resume upload is validated for size, extension, MIME and magic bytes', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'worker', 'lib', 'validate.js'), 'utf8');
+  assert.match(src, /MAX_RESUME_BYTES/, 'no file size cap');
+  assert.match(src, /\\\.pdf\$/, 'no .pdf extension check');
+  assert.match(src, /application\/pdf/, 'no MIME type check');
+  assert.match(src, /0x25, 0x50, 0x44, 0x46, 0x2d/, 'no PDF magic-byte check ("%PDF-")');
 });

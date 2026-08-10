@@ -40,6 +40,7 @@ const FILES = [
   'andre.html',
   'kawan.html',
   'tchize.html',
+  '_headers',
   'robots.txt',
   'sitemap.xml',
   'favicon.ico',

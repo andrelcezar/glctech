@@ -614,6 +614,14 @@
           <span class="field-error" id="err-c-curriculo"></span>
         </div>
 
+        <input type="text" id="c-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+
+        <div class="form-group">
+          <!-- Cloudflare Turnstile. Replace data-sitekey with the real site key
+               (public, safe in HTML) before deploying — see AUDIT-REPORT.md. -->
+          <div class="cf-turnstile" data-sitekey="0x0000000000000000000AA" data-theme="dark"></div>
+        </div>
+
         <button type="submit" class="form-submit" id="c-btn-submit">
           <span id="c-btn-text">Submit Application</span>
           <span id="c-btn-loading" style="display:none;">Sending...</span>
@@ -677,16 +685,14 @@
 </footer>
 
 <script>
-  /* ── Application — FormSubmit.co ──────────────────────────────────────────
-     Web3Forms blocks file attachments on the free plan ("Pro feature").
-     Since this form requires a PDF resume, we use FormSubmit.co, which
-     attaches files at no cost — same no-backend, no-API-key scheme,
-     just the destination e-mail in the URL itself.
-     ACTIVATION (first time only): the first real submission triggers a
-     confirmation e-mail to hr@glctechsec.com with an "Activate Form" link —
-     it needs to be clicked once for subsequent submissions to be delivered.
-  ─────────────────────────────────────────────────────────────────────────── */
-  var FORMSUBMIT_EMAIL = 'hr@glctechsec.com';
+  /* ── Application — Cloudflare Worker → Zoho Mail ──────────────────────────
+     Same-origin multipart POST to /api/careers, served by the same Worker as
+     the site (worker/index.js). The Worker validates the PDF (extension,
+     MIME type and magic bytes), attaches it to the notification e-mail and
+     sends it via Zoho SMTP. The destination mailbox is configurable
+     server-side via CAREERS_TO_EMAIL — deliberately not in this file.
+     See AUDIT-REPORT.md. */
+  var CAREERS_ENDPOINT = '/api/careers';
   var MAX_FILE_MB = 5;
 
   function candidatar(vaga) {
@@ -773,19 +779,15 @@
     btnLoading.style.display = 'inline';
 
     var formData = new FormData(form);
-    formData.set('_subject', 'New application — ' + formData.get('vaga') + ' — ' + formData.get('nome'));
-    formData.set('_replyto', formData.get('email'));
-    formData.set('_template', 'table');
-    formData.set('_captcha', 'false');
 
-    fetch('https://formsubmit.co/ajax/' + FORMSUBMIT_EMAIL, {
+    fetch(CAREERS_ENDPOINT, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: formData
     })
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        if (String(data.success) === 'true') {
+        if (data.success === true) {
           form.style.display = 'none';
           document.getElementById('form-success').style.display = 'block';
         } else {
@@ -794,8 +796,9 @@
       })
       .catch(function () {
         var msg = document.getElementById('c-form-error-msg');
-        msg.textContent = 'Error submitting your application. Please try again or send it directly to hr@glctechsec.com.';
+        msg.textContent = 'Could not submit your application. Please try again in a moment.';
         msg.style.display = 'block';
+        if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
       })
       .finally(function () {
         btn.disabled = false;
@@ -805,6 +808,7 @@
   });
 </script>
 <script src="scripts/i18n.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <!-- Tidio Chat -->
 <script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>

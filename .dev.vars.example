@@ -1,0 +1,20 @@
+# Local development secrets for `npx wrangler dev`.
+#
+# Copy this file to `.dev.vars` (already in .gitignore — never commit the
+# real file) and fill in real values. In production these same names are set
+# with `npx wrangler secret put <NAME>`, encrypted, never in the repo.
+
+# Zoho mailbox that authenticates outgoing SMTP (smtppro.zoho.com:465).
+# Use an app-specific password (Zoho Mail → Settings → Security → App
+# Passwords), never the account password.
+ZOHO_USER=contac@glctech.com.br
+ZOHO_PASS=replace-with-a-zoho-app-specific-password
+
+# Where each form is delivered. Both fall back to ZOHO_USER if unset.
+CONTACT_TO_EMAIL=contac@glctech.com.br
+CAREERS_TO_EMAIL=rh@glctech.com.br
+
+# Cloudflare Turnstile secret key. Optional: while unset, Turnstile
+# verification is skipped and the forms rely on the honeypot field + rate
+# limiting only. See AUDIT-REPORT.md for how to create a Turnstile widget.
+TURNSTILE_SECRET_KEY=replace-with-a-turnstile-secret-key

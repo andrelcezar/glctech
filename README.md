@@ -245,3 +245,62 @@ See **`REVISION-3-CHANGELOG.md`** for the complete list. Headlines:
 
 ⚠ Six items still need a human decision — they are listed at the end of
 `REVISION-3-CHANGELOG.md`. The first is real founder photography.
+
+---
+
+## 🔄 Revision 4 — Full site audit and functional, secure forms (Aug 2026)
+
+Requested: a complete audit of `glctechsec.com` plus a real, production-ready
+implementation of the contact and careers forms — visitor → Cloudflare Worker
+→ Zoho Mail → GLCTech inbox — instead of the third-party form services the
+site had accumulated. Full findings, every configuration required outside
+this repo (Cloudflare secrets, Turnstile, DNS/SPF/DKIM/DMARC), and how to
+deploy/test/roll back live in **[`AUDIT-REPORT.md`](AUDIT-REPORT.md)** at the
+repo root. Headlines:
+
+- **The contact form was completely broken in production.** The live site is
+  still served by GitHub Pages behind Cloudflare's proxy — the Worker in this
+  repo (`worker/index.js`) had never actually been deployed. Every `POST
+  /api/contact` on the real domain returned GitHub Pages' `405 Not Allowed`,
+  so every visitor submission failed silently. Deploying the Worker (see
+  `AUDIT-REPORT.md`) is what fixes this, not a code change alone.
+- **Careers form moved off FormSubmit.co and onto the Worker**, at a new
+  `/api/careers` endpoint, alongside the existing contact form at
+  `/api/contact`. Both are same-origin, so there is no CORS preflight and
+  nothing to keep in sync across two URLs.
+- **Duplicate implementations consolidated.** The repo carried three separate
+  copies of "send the contact e-mail" (`worker/index.js`,
+  `serverless/cloudflare/`, `serverless/api/` for Vercel/Netlify) with
+  diverging CORS logic, only one of which was actually deployed. `serverless/`
+  is removed; `worker/lib/` is now the single implementation, covered by 51
+  tests (was split across two files, one of them testing code that was never
+  live).
+- **Résumé uploads are validated properly.** Extension, declared MIME type
+  *and* the file's own magic bytes (`%PDF-`) are all checked — a renamed
+  `.exe` with a spoofed `.pdf` name and `Content-Type` no longer passes. Valid
+  PDFs are attached to the notification e-mail as MIME `multipart/mixed`,
+  capped at 5MB.
+- **Cloudflare Turnstile added to both forms**, verified server-side
+  (`worker/lib/turnstile.js`) against Cloudflare's `siteverify` endpoint — the
+  browser-side widget alone is never trusted. It degrades gracefully (skipped,
+  not failed) until `TURNSTILE_SECRET_KEY` is configured, so the forms don't
+  break the moment this ships.
+- **Security headers added everywhere** — CSP, `X-Content-Type-Options`,
+  `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options` — via a `_headers`
+  file for static pages (the ones Cloudflare's asset server answers directly,
+  bypassing the Worker) and via `worker/lib/http.js` for the two API routes.
+  Neither existed before.
+- **Recipient addresses are now Worker secrets, not hard-coded.**
+  `CONTACT_TO_EMAIL` and `CAREERS_TO_EMAIL` default to
+  `contac@glctech.com.br` and `rh@glctech.com.br` respectively — see
+  `AUDIT-REPORT.md` for why those addresses, not the `glctechsec.com` ones the
+  site displays publicly, and for the DNS/SPF/DKIM/DMARC findings for both
+  domains.
+- **242 tests passing** (was 232, several of them exercising code that could
+  never have run in production). See `AUDIT-REPORT.md` for the full list of
+  what was tested and how to test the forms manually end-to-end.
+
+⚠ Several items need a human decision or an action outside this repository
+(deploying the Worker, rotating/creating the Zoho app password, creating the
+Turnstile widget, a DMARC record for `glctechsec.com`) — all listed at the end
+of `AUDIT-REPORT.md`.

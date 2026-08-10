@@ -184,8 +184,9 @@ File: `index.html`, `#contact` → `.contact-items`.
 - **Location:** translated (`contact.location.val`).
 
 Also update the footer and any service pages if the same details appear there.
-Changing where contact-form submissions are e-mailed is a Web3Forms change —
-see [`INTEGRATIONS.md`](INTEGRATIONS.md#web3forms-contact-form).
+Changing where contact-form submissions are e-mailed is a Worker secret change
+(`CONTACT_TO_EMAIL`), not an HTML edit — see [`INTEGRATIONS.md`](INTEGRATIONS.md#cloudflare-worker--zoho-mail-contact-and-careers-forms)
+and `AUDIT-REPORT.md`.
 
 ---
 
