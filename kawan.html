@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YDBB1PYYCM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YDBB1PYYCM');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kawan Pablo — especialista em tecnologia da informação da GLCTech, atuando com monitoramento, segurança e infraestrutura de TI.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://glctechsec.com/kawan.html">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://glctechsec.com/kawan.html">
+<meta property="og:image" content="https://glctechsec.com/assets/og/og-default.png">
 <title>Kawan Pablo — GLCTech</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -178,6 +196,9 @@
     overflow: hidden;
     background: var(--dlight);
     box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 6px var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .foto img {
@@ -388,11 +409,15 @@
     opacity: 1;
   }
   .toast i { color: var(--red); }
+  .skip-link{position:absolute;left:-999px;top:0;z-index:1000;background:#e6262c;color:#fff;padding:10px 16px;text-decoration:none;border-radius:0 0 6px 0;}
+  .skip-link:focus{left:0;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
-<div class="card">
+<div id="main-content" class="card">
 
   <!-- HERO -->
   <div class="hero">
@@ -401,7 +426,7 @@
     <div class="hero-corner hero-corner-tr"></div>
     <div class="hero-corner hero-corner-bl"></div>
     <div class="logo-wrap">
-      <img src="https://glctech.com.br/assets/logo/glc3.png" alt="GLCTech">
+      <img src="https://glctechsec.com/assets/logo/glc3.png" alt="GLCTech">
     </div>
     <div class="hero-tag">Cloud Architect · Infraestrutura</div>
   </div>
@@ -409,7 +434,7 @@
   <!-- FOTO -->
   <div class="foto-wrap">
     <div class="foto">
-      <img src="https://glctech.com.br/assets/team/kawan.png" alt="Kawan Pablo">
+      <i class="fa-solid fa-circle-user" aria-hidden="true" style="font-size:104px;color:var(--red);line-height:1;"></i>
     </div>
   </div>
 
@@ -431,31 +456,31 @@
     <div class="info-grid">
 
       <a class="info-item" href="tel:+5515997311046">
-        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="info-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">Telefone</div>
           <div class="info-value">+55 15 99731-1046</div>
         </div>
       </a>
 
-      <a class="info-item" href="mailto:kawan.pablo@glctech.com.br">
-        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+      <a class="info-item" href="mailto:kawan.pablo@glctechsec.com">
+        <div class="info-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">E-mail</div>
-          <div class="info-value">kawan.pablo@glctech.com.br</div>
+          <div class="info-value">kawan.pablo@glctechsec.com</div>
         </div>
       </a>
 
-      <a class="info-item" href="https://www.glctech.com.br" target="_blank" rel="noopener">
-        <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
+      <a class="info-item" href="https://www.glctechsec.com" target="_blank" rel="noopener">
+        <div class="info-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">Site</div>
-          <div class="info-value">www.glctech.com.br</div>
+          <div class="info-value">www.glctechsec.com</div>
         </div>
       </a>
 
       <a class="info-item" href="https://www.linkedin.com/in/kawan-pablo/" target="_blank" rel="noopener">
-        <div class="info-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+        <div class="info-icon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">LinkedIn</div>
           <div class="info-value">Kawan Pablo</div>
@@ -463,7 +488,7 @@
       </a>
 
       <a class="info-item" href="https://wa.me/5515997311046" target="_blank" rel="noopener">
-        <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="info-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">WhatsApp</div>
           <div class="info-value">+55 15 99731-1046</div>
@@ -471,7 +496,7 @@
       </a>
 
       <div class="info-item" style="cursor:default;">
-        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="info-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
         <div>
           <div class="info-label">Localização</div>
           <div class="info-value">Brasil</div>
@@ -483,15 +508,15 @@
     <!-- AÇÕES -->
     <div class="actions">
       <button class="btn btn-primary" onclick="baixarVCard()">
-        <i class="fa-solid fa-address-card"></i>
+        <i class="fa-solid fa-address-card" aria-hidden="true"></i>
         Salvar Contato (.vcf)
       </button>
       <a class="btn btn-whatsapp" href="https://wa.me/5515997311046?text=Olá%20Kawan!%20Vi%20seu%20cartão%20digital%20da%20GLCTech." target="_blank" rel="noopener">
-        <i class="fa-brands fa-whatsapp"></i>
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
         Chamar no WhatsApp
       </a>
-      <a class="btn btn-outline" href="https://www.glctech.com.br" target="_blank" rel="noopener">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      <a class="btn btn-outline" href="https://www.glctechsec.com" target="_blank" rel="noopener">
+        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         Visitar Site GLCTech
       </a>
     </div>
@@ -507,7 +532,7 @@
 
 <!-- TOAST -->
 <div class="toast" id="toast">
-  <i class="fa-solid fa-circle-check"></i>
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
   Contato salvo com sucesso!
 </div>
 
@@ -521,8 +546,8 @@
       'ORG:GLCTech Tecnologia',
       'TITLE:Cloud Architect',
       'TEL;TYPE=CELL,VOICE:+5515997311046',
-      'EMAIL;TYPE=WORK:kawan.pablo@glctech.com.br',
-      'URL:https://www.glctech.com.br',
+      'EMAIL;TYPE=WORK:kawan.pablo@glctechsec.com',
+      'URL:https://www.glctechsec.com',
       'ADR;TYPE=WORK:;;Brasil;;;;Brasil',
       'X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/kawan-pablo/',
       'NOTE:Cloud Architect | Infraestrutura e Ambientes Cloud | GLCTech Tecnologia',
@@ -546,5 +571,6 @@
 
 <!-- Tidio Chat -->
 <script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>
+<script src="scripts/i18n.js"></script>
 </body>
 </html>

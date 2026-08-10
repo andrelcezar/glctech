@@ -9,7 +9,22 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..');
-const PAGES = fs.readdirSync(ROOT).filter((f) => f.endsWith('.html'));
+
+// Not browsable site pages, so the whole-page checks below do not apply:
+//  - stats-snippet.html is an HTML fragment pasted into index.html before
+//    </body> (it has no <head> of its own).
+//  - mailmkt.html is an e-mail marketing template (table layout, inline
+//    styles, mso hacks). Mail clients strip <style>, external scripts and
+//    skip-links, so SEO/i18n/Font-Awesome/skip-link checks are meaningless.
+const NON_PAGES = ['stats-snippet.html', 'mailmkt.html'];
+
+// Pages that are intentionally kept out of search indexing (shared by link,
+// carry a robots "noindex" meta) and therefore are not expected in sitemap.xml.
+const NOINDEX = ['andre.html', 'kawan.html', 'tchize.html'];
+
+const PAGES = fs
+  .readdirSync(ROOT)
+  .filter((f) => f.endsWith('.html') && !NON_PAGES.includes(f));
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 
 /** Same file with HTML and CSS comments removed, for checks that scan markup. */
@@ -192,6 +207,7 @@ test('sitemap and robots are present and agree', () => {
   assert.match(robots, /Sitemap: https:\/\/glctechsec\.com\/sitemap\.xml/);
   for (const page of PAGES) {
     if (page === 'index.html') continue;
+    if (NOINDEX.includes(page)) continue;   // intentionally unlisted
     assert.ok(sitemap.includes(page), `${page} missing from sitemap.xml`);
   }
 });

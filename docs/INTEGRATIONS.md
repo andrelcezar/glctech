@@ -26,7 +26,7 @@ value is safe to be public, and how to change it.
 
 | Service | Purpose | Identifier lives in | Public? |
 |---------|---------|---------------------|:---:|
-| Google Analytics 4 | Traffic analytics | `G-7VH0J5XFYK` in each page `<head>` | ✅ public by design |
+| Google Analytics 4 | Traffic analytics | `G-YDBB1PYYCM` in each page `<head>` | ✅ public by design |
 | Web3Forms | Contact form → e-mail | `W3F_ACCESS_KEY` in `index.html` | ✅ public submission key |
 | HubSpot | "Trabalhe Conosco" form | `hsforms.com` link in nav/footer | ✅ public link |
 | JotForm | E-book lead capture | iframe `src` in `ebook.html` | ✅ public embed |
@@ -39,7 +39,7 @@ value is safe to be public, and how to change it.
 ## Google Analytics 4
 
 - **What:** page/traffic analytics via `gtag.js`.
-- **Measurement ID:** `G-7VH0J5XFYK`.
+- **Measurement ID:** `G-YDBB1PYYCM`.
 - **Where:** the `<!-- Google tag (gtag.js) -->` block at the top of every main
   page's `<head>` (index, service pages, legal pages, mailmkt…).
 - **To change/replace:** swap the ID in the `src=…?id=` URL **and** the
