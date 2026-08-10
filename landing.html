@@ -12,6 +12,15 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Solicite um diagnóstico gratuito de TI com a GLCTech: avaliação de monitoramento, segurança e infraestrutura para a sua empresa, sem compromisso.">
+<link rel="canonical" href="https://glctechsec.com/landing.html">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://glctechsec.com/landing.html">
+<meta property="og:image" content="https://glctechsec.com/assets/og/og-default.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Diagnóstico Gratuito de TI - GLCTech</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
@@ -94,12 +103,13 @@
             color: var(--dark);
         }
         .benefits li::before {
-            content: '✔'; /* Ícone de check GLCTech */
+            content: '\f00c'; /* Font Awesome check */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             position: absolute;
             left: 0;
             color: var(--red); /* Cor de destaque GLCTech */
             font-size: 1.2em;
-            font-weight: bold;
         }
         
         /* Formulário */
@@ -181,13 +191,17 @@
                  padding: 12px;
             }
         }
-    </style>
+      .skip-link{position:absolute;left:-999px;top:0;z-index:1000;background:#e6262c;color:#fff;padding:10px 16px;text-decoration:none;border-radius:0 0 6px 0;}
+  .skip-link:focus{left:0;}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
-    <div class="container">
+    <div id="main-content" class="container">
         <header>
-            <img src="https://glctech.com.br/assets/logo/logo.png" alt="Logo GLCTech" style="max-width: 280px; margin-bottom: 15px;">
+            <img src="https://glctechsec.com/assets/logo/logo.png" alt="Logo GLCTech" style="max-width: 280px; margin-bottom: 15px;">
             <h1>Cansado de ser surpreendido? Pare de <span class="highlight-text">**apagar incêndio**</span>!</h1>
             <p>Solicite o Diagnóstico de TI <span class="highlight-text">Gratuito</span> que te mostra ONDE sua infraestrutura vai falhar nos próximos 90 dias.</p>
         </header>
@@ -211,17 +225,16 @@
                 <h2>Solicite seu Diagnóstico Gratuito Agora!</h2>
                 <!-- SUCESSO -->
                 <div id="diag-success" style="display:none; text-align:center; padding:20px 10px;">
-                    <div style="font-size:2.4rem; color:var(--red); margin-bottom:10px;">✓</div>
+                    <i class="fa-solid fa-circle-check" aria-hidden="true" style="font-size:2.4rem; color:var(--red); margin-bottom:10px;"></i>
                     <h3 style="color:var(--dark); margin-bottom:8px;">Solicitação enviada!</h3>
                     <p style="color:#555; font-size:0.95em;">Recebemos seu pedido de diagnóstico e nossa equipe entrará em contato em breve.</p>
                 </div>
-                <form id="diag-form" action="https://api.web3forms.com/submit" method="POST">
-                    <!-- Web3Forms (mesma chave/inbox do formulário de contato) -->
-                    <input type="hidden" name="access_key" value="524f9ef9-fb3d-467b-8eee-7b4930e40520">
-                    <input type="hidden" name="subject" value="Novo pedido de Diagnóstico Gratuito — Landing">
-                    <input type="hidden" name="from_name" value="GLCTech Landing">
+                <form id="diag-form" action="https://formsubmit.co/contact@glctechsec.com" method="POST">
+                    <!-- FormSubmit — same inbox as the main contact form (contact@glctechsec.com) -->
+                    <input type="hidden" name="_subject" value="Novo pedido de Diagnóstico Gratuito — Landing">
+                    <input type="hidden" name="_captcha" value="false">
                     <!-- Honeypot anti-spam -->
-                    <input type="checkbox" name="botcheck" tabindex="-1" style="display:none;" aria-hidden="true">
+                    <input type="text" name="_honey" tabindex="-1" style="display:none;" aria-hidden="true">
                     <div class="form-group">
                         <label for="nome">Nome Completo*</label>
                         <input type="text" id="nome" name="nome" required>
@@ -251,7 +264,7 @@
         </div>
         
         <footer>
-            &copy; 2025 GLCTech Tecnologia. Todos os direitos reservados. | <a href="./politica.html">Política de Privacidade</a>
+            &copy; 2026 GLCTech Tecnologia. Todos os direitos reservados. | <a href="./politica.html">Política de Privacidade</a>
         </footer>
     </div>
 
@@ -271,7 +284,7 @@
     btn.disabled = true;
     btn.textContent = 'Enviando...';
 
-    fetch('https://api.web3forms.com/submit', {
+    fetch('https://formsubmit.co/ajax/contact@glctechsec.com', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: new FormData(form)
@@ -297,5 +310,6 @@
 
 <!-- Tidio Chat -->
 <script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>
+<script src="scripts/i18n.js"></script>
 </body>
 </html>
