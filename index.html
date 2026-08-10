@@ -1213,15 +1213,34 @@
             <input type="email" id="email" name="email" required autocomplete="email" aria-describedby="err-email" placeholder="you@email.com" data-i18n="form.email.ph" data-i18n-attr="placeholder">
             <span class="field-error" id="err-email" role="alert"></span>
           </div>
-          <div class="form-group">
-            <label for="telefone" data-i18n="form.tel">Phone</label>
-            <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="+44 7778 173575" data-i18n="form.tel.ph" data-i18n-attr="placeholder">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefone" data-i18n="form.tel">Phone</label>
+              <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="+44 7778 173575" data-i18n="form.tel.ph" data-i18n-attr="placeholder">
+            </div>
+            <div class="form-group">
+              <label for="assunto" data-i18n="form.subject">Subject</label>
+              <select id="assunto" name="assunto">
+                <option value="General Inquiry" data-i18n="form.subject.general">General Inquiry</option>
+                <option value="Zabbix Monitoring" data-i18n="form.subject.zabbix">Zabbix Monitoring</option>
+                <option value="Kaspersky Security" data-i18n="form.subject.kaspersky">Kaspersky Security</option>
+                <option value="Veeam Backup" data-i18n="form.subject.veeam">Veeam Backup</option>
+                <option value="Other" data-i18n="form.subject.other">Other</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <label for="mensagem" data-i18n="form.msg">Message *</label>
             <textarea id="mensagem" name="mensagem" required aria-describedby="err-mensagem" placeholder="Describe your need or infrastructure..." data-i18n="form.msg.ph" data-i18n-attr="placeholder"></textarea>
             <span class="field-error" id="err-mensagem" role="alert"></span>
           <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          </div>
+          <div class="form-group cf-turnstile-wrap">
+            <!-- Cloudflare Turnstile. Replace data-sitekey with the real site key
+                 (public, safe in HTML) before deploying — see AUDIT-REPORT.md.
+                 While unset/invalid, the widget just doesn't render; the server
+                 skips verification until TURNSTILE_SECRET_KEY is configured. -->
+            <div class="cf-turnstile" data-sitekey="0x0000000000000000000AA" data-theme="dark"></div>
           </div>
           <button type="submit" class="form-submit" id="btn-submit">
             <span id="btn-text"><i class="fa-solid fa-paper-plane" style="margin-right:8px;" aria-hidden="true"></i><span data-i18n="form.submit">Send Message</span></span>
@@ -1285,25 +1304,12 @@
   #btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
 </style>
 <script>
-  /* ── Contact form — FormSubmit.co ──────────────────────────────────────────
-     Previously Web3Forms. Its access key decides the destination server-side,
-     so the recipient was invisible in the code — and the key in use delivered
-     to contato@glctech.com.br, not to this site's own address.
-
-     FormSubmit puts the destination in the request itself, which means it is
-     visible here, greppable, and covered by a test. It is also what
-     trabalhe-conosco.html already uses, so the site now has one form pattern.
-
-     ACTIVATION (once): the first real submission sends a confirmation e-mail to
-     the address below with an "Activate Form" link. Until that link is clicked,
-     submissions are accepted by the API but not delivered.
-  ─────────────────────────────────────────────────────────────────────────── */
-  var CONTACT_EMAIL = 'contact@glctechsec.com';
-
-  /* Set this to the deployed relay URL to send through Zoho Mail SMTP from our
-     own domain (see serverless/README.md). While it is empty the form keeps
-     using FormSubmit, so the site never has a window with a dead form.
-     The SMTP password is NOT here and must never be — this file is public. */
+  /* ── Contact form — Cloudflare Worker → Zoho Mail ─────────────────────────
+     Same-origin POST to /api/contact, served by the same Worker as the site
+     (worker/index.js). The Worker authenticates to Zoho over SMTP with
+     credentials held in Cloudflare secrets — nothing sensitive lives here.
+     The destination mailbox is configurable server-side via CONTACT_TO_EMAIL;
+     it is deliberately NOT in this file. See AUDIT-REPORT.md. */
   var CONTACT_ENDPOINT = '/api/contact';
 
   function clearErrors() {
@@ -1342,55 +1348,40 @@
     btnLoading.style.display = 'inline';
 
     var nome     = document.getElementById('nome').value.trim();
-    var empresa  = document.getElementById('empresa').value.trim() || 'Not provided';
+    var empresa  = document.getElementById('empresa').value.trim();
     var email    = document.getElementById('email').value.trim();
-    var telefone = document.getElementById('telefone').value.trim() || 'Not provided';
+    var telefone = document.getElementById('telefone').value.trim();
+    var assunto  = document.getElementById('assunto').value.trim();
     var mensagem = document.getElementById('mensagem').value.trim();
+    var turnstileInput = document.querySelector('#contact-form [name="cf-turnstile-response"]');
 
-    var form = document.getElementById('contact-form');
-    var formData = new FormData(form);
-    formData.set('_subject', 'New website enquiry — ' + nome);
-    formData.set('_replyto', email);
-    formData.set('_template', 'table');
-    formData.set('_captcha', 'false');
-    formData.set('Name', nome);
-    formData.set('Company', empresa);
-    formData.set('Email', email);
-    formData.set('Phone', telefone);
-    formData.set('Message', mensagem);
-    ['nome', 'empresa', 'email', 'telefone', 'mensagem'].forEach(function (k) { formData.delete(k); });
-
-    var request = CONTACT_ENDPOINT
-      ? fetch(CONTACT_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            name: nome, company: empresa, email: email, phone: telefone,
-            message: mensagem, website: document.getElementById('website').value
-          })
-        })
-      : fetch('https://formsubmit.co/ajax/' + CONTACT_EMAIL, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: formData
-        });
-
-    request
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      // The relay answers {ok:true}; FormSubmit answers success as a string.
-      if (data.ok === true || String(data.success) === 'true') {
+    fetch(CONTACT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: nome, company: empresa, email: email, phone: telefone,
+        subject: assunto, message: mensagem,
+        website: document.getElementById('website').value,
+        'cf-turnstile-response': turnstileInput ? turnstileInput.value : ''
+      })
+    })
+    .then(function(res) { return res.json().then(function(data) { return { status: res.status, data: data }; }); })
+    .then(function(result) {
+      if (result.data.success === true) {
         document.getElementById('contact-form').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
       } else {
-        throw new Error(data.error || data.message || 'Unknown error');
+        throw new Error('send-failed');
       }
     })
     .catch(function() {
+      // The API's own message is Portuguese by design (internal contract) —
+      // the visitor sees the site's own localized fallback instead.
       var errMsg = document.getElementById('form-error-msg');
       errMsg.textContent = (window._i18n_errors && window._i18n_errors.send)
-        || ('Could not send. Try again, e-mail ' + CONTACT_EMAIL + ', or call +44 7778 173575.');
+        || 'Could not send your message. Please try again.';
       errMsg.style.display = 'block';
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
     })
     .finally(function() {
       btn.disabled = false;
@@ -1401,12 +1392,13 @@
 
   function resetForm() {
     clearErrors();
-    ['nome','empresa','email','telefone'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+    ['nome','empresa','email','telefone','assunto'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
     var ta = document.getElementById('mensagem'); if (ta) ta.value = '';
     document.getElementById('form-success').style.display = 'none';
     document.getElementById('contact-form').style.display = 'block';
   }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script src="scripts/i18n.js"></script>
 

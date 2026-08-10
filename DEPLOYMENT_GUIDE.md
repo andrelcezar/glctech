@@ -1,5 +1,14 @@
 # GLCTech International Site — Deployment Guide
 
+> ⚠ **This guide predates the Cloudflare Worker architecture.** It describes
+> the original translation-project handoff (uploading a static zip to a
+> generic web host). It is kept for historical reference on i18n/content
+> topics below, but for deploying the site and its forms **today**, follow
+> **[`AUDIT-REPORT.md`](AUDIT-REPORT.md)** at the repo root instead — it
+> covers `npm run deploy` (Wrangler), the required Worker secrets, Cloudflare
+> Turnstile setup, and DNS. The "Activate Application Form" step below (step 3)
+> is obsolete: the careers form no longer uses FormSubmit.co.
+
 ## ⚡ Quick Start
 
 Your site has been **fully translated to English** and is ready for deployment at **glctechsec.com**.

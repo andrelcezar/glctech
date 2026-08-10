@@ -5,6 +5,9 @@ npm-debug.log*
 # Build output
 dist/
 
+# Wrangler local dev state/cache
+.wrangler/
+
 # Local secrets
 .env
 .dev.vars

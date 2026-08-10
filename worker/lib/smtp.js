@@ -8,7 +8,7 @@
  * implement directly, with no STARTTLS upgrade to negotiate.
  *
  * `connect` is a parameter rather than an import so the whole exchange can be
- * driven by a mock socket in tests.
+ * driven by a mock socket in tests (see tests/smtp.test.js).
  */
 
 const CRLF = '\r\n';
@@ -53,10 +53,60 @@ const header = (v) => String(v == null ? '' : v).replace(/[\r\n]+/g, ' ').trim()
 const dotStuff = (body) =>
   body.replace(/\r?\n/g, CRLF).split(CRLF).map((l) => (l.startsWith('.') ? '.' + l : l)).join(CRLF);
 
+/** Base64, wrapped at 76 chars per RFC 2045 — required for MIME body parts. */
+function base64Wrapped(bytes) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  const full = btoa(binary);
+  const lines = [];
+  for (let i = 0; i < full.length; i += 76) lines.push(full.slice(i, i + 76));
+  return lines.join(CRLF);
+}
+
+/**
+ * Builds the RFC 2045 message body: plain text alone, or a multipart/mixed
+ * message with one file attachment when `attachment` is supplied.
+ */
+function buildBody({ text, attachment }) {
+  if (!attachment) {
+    return [
+      'MIME-Version: 1.0',
+      'Content-Type: text/plain; charset=utf-8',
+      'Content-Transfer-Encoding: 8bit',
+      '',
+      dotStuff(text),
+    ].join(CRLF);
+  }
+
+  const boundary = `glc_${crypto.randomUUID().replace(/-/g, '')}`;
+  const filename = header(attachment.filename).replace(/[";\\]/g, '_');
+  const bytes = attachment.data instanceof Uint8Array ? attachment.data : new Uint8Array(attachment.data);
+
+  return [
+    'MIME-Version: 1.0',
+    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+    '',
+    `--${boundary}`,
+    'Content-Type: text/plain; charset=utf-8',
+    'Content-Transfer-Encoding: 8bit',
+    '',
+    dotStuff(text),
+    '',
+    `--${boundary}`,
+    `Content-Type: ${header(attachment.contentType) || 'application/octet-stream'}; name="${filename}"`,
+    'Content-Transfer-Encoding: base64',
+    `Content-Disposition: attachment; filename="${filename}"`,
+    '',
+    base64Wrapped(bytes),
+    '',
+    `--${boundary}--`,
+  ].join(CRLF);
+}
+
 export async function sendMail(options) {
   const {
     connect, hostname = 'smtppro.zoho.com', port = 465,
-    user, pass, from, to, replyTo, subject, text,
+    user, pass, from, to, replyTo, subject, text, attachment,
   } = options;
 
   const socket = connect({ hostname, port }, { secureTransport: 'on', allowHalfOpen: false });
@@ -101,12 +151,11 @@ export async function sendMail(options) {
       replyTo ? `Reply-To: ${header(replyTo)}` : null,
       `Subject: ${header(subject)}`,
       `Date: ${new Date().toUTCString()}`,
-      'MIME-Version: 1.0',
-      'Content-Type: text/plain; charset=utf-8',
-      'Content-Transfer-Encoding: 8bit',
     ].filter(Boolean).join(CRLF);
 
-    await send(headers + CRLF + CRLF + dotStuff(text) + CRLF + '.');
+    const body = buildBody({ text, attachment });
+
+    await send(headers + CRLF + body + CRLF + '.');
     await expect([250], 'message body');
 
     await send('QUIT');

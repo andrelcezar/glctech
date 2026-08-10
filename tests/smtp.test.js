@@ -58,7 +58,7 @@ function mockSocket(script) {
 
 function loadSmtp() {
   // The module is ESM; load it through a dynamic import.
-  return import('../serverless/cloudflare/src/smtp.js');
+  return import('../worker/lib/smtp.js');
 }
 
 const OK_SCRIPT = [
@@ -188,4 +188,50 @@ test('rejects a bad greeting instead of pushing on', async () => {
   script.greeting = '421 Service not available' + CRLF;
   const { socket } = mockSocket(script);
   await assert.rejects(() => sendMail({ ...BASE, connect: () => socket }), /greeting failed/);
+});
+
+/* ── attachments (careers form resume) ────────────────────────────────────── */
+
+test('builds a multipart/mixed message when an attachment is supplied', async () => {
+  const { sendMail } = await loadSmtp();
+  const { socket, written } = mockSocket(OK_SCRIPT);
+  const pdfBytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x34]); // "%PDF-1.4"
+  const res = await sendMail({
+    ...BASE,
+    connect: () => socket,
+    attachment: { filename: 'resume.pdf', contentType: 'application/pdf', data: pdfBytes },
+  });
+  assert.deepStrictEqual(res, { ok: true });
+  const body = written[7];
+  assert.match(body, /^Content-Type: multipart\/mixed; boundary="/m);
+  assert.match(body, /^Content-Type: application\/pdf; name="resume\.pdf"$/m);
+  assert.match(body, /^Content-Disposition: attachment; filename="resume\.pdf"$/m);
+  assert.match(body, /^Content-Transfer-Encoding: base64$/m);
+  // The base64 payload decodes back to the original bytes.
+  const b64Line = body.split(CRLF).find((l) => /^[A-Za-z0-9+/]+=*$/.test(l) && l.length > 4);
+  assert.strictEqual(Buffer.from(b64Line, 'base64').toString('utf8'), '%PDF-1.4');
+});
+
+test('sanitizes a crafted attachment filename so it cannot break the MIME header', async () => {
+  const { sendMail } = await loadSmtp();
+  const { socket, written } = mockSocket(OK_SCRIPT);
+  await sendMail({
+    ...BASE,
+    connect: () => socket,
+    attachment: {
+      filename: 'evil".pdf\r\nContent-Type: text/html',
+      contentType: 'application/pdf',
+      data: new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d]),
+    },
+  });
+  const body = written[7];
+  assert.ok(!/^Content-Type: text\/html$/m.test(body), 'header injection via filename succeeded');
+});
+
+test('a plain-text message (no attachment) is unaffected', async () => {
+  const { sendMail } = await loadSmtp();
+  const { socket, written } = mockSocket(OK_SCRIPT);
+  await sendMail({ ...BASE, connect: () => socket });
+  const body = written[7];
+  assert.ok(!/multipart\/mixed/.test(body), 'plain message unexpectedly became multipart');
 });

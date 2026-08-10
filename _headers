@@ -1,0 +1,14 @@
+# Security headers for static assets served by the Workers "Static Assets"
+# binding. Requests matching a file here are served directly by Cloudflare
+# without invoking worker/index.js, so these headers are the ones that
+# actually reach the browser for every page, image, script and stylesheet.
+#
+# /api/contact and /api/careers are NOT static assets — they always run
+# worker/index.js, which sets the equivalent headers itself in
+# worker/lib/http.js (securityHeaders()). Keep the two lists in sync.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdnjs.cloudflare.com https://code.tidio.co https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://challenges.cloudflare.com https://*.tidio.co wss://*.tidio.co; frame-src https://challenges.cloudflare.com https://*.tidio.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'

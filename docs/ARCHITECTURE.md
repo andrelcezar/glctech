@@ -12,7 +12,7 @@ first for the high-level mental model.
   - [1. Internationalization (i18n)](#1-internationalization-i18n)
   - [2. Language switcher](#2-language-switcher)
   - [3. Mobile navigation](#3-mobile-navigation)
-  - [4. Contact form → Web3Forms](#4-contact-form--web3forms)
+  - [4. Contact and careers forms → Cloudflare Worker → Zoho Mail](#4-contact-and-careers-forms--cloudflare-worker--zoho-mail)
   - [5. Blog RSS feed (hidden)](#5-blog-rss-feed-hidden)
   - [6. Tidio AI chatbot](#6-tidio-ai-chatbot)
 - [Stats pipeline (Zabbix → JSON)](#stats-pipeline-zabbix--json)
@@ -40,10 +40,11 @@ first for the high-level mental model.
 
 | Page | Purpose | Loads `i18n.js`? | Notable integrations |
 |------|---------|:---:|----------------------|
-| `index.html` | Main one-page site (all sections) | ✅ | GA4, Web3Forms (contact), RSS blog feed, Tidio chat |
+| `index.html` | Main one-page site (all sections) | ✅ | GA4, contact form → `/api/contact` (Worker), RSS blog feed, Tidio chat |
 | `zabbix.html` | Monitoring service detail | ✅ | GA4 |
 | `kaspersky.html` | Security service detail | ✅ | GA4 |
 | `veeam.html` | Backup service detail | ✅ | GA4 |
+| `trabalhe-conosco.html` | Careers | ✅ | GA4, application form → `/api/careers` (Worker, PDF attachment) |
 | `politica.html` | Privacy policy | ✅ | GA4 |
 | `termos.html` | Terms of use | ✅ | GA4 |
 | `andre.html` / `tchize.html` / `kawan.html` | Individual team-member profiles | — | — |
@@ -52,10 +53,11 @@ first for the high-level mental model.
 | `mailmkt.html` | HTML **e-mail** template (table layout) | — | Rendered inside e-mail clients, not the browser |
 | `stats-snippet.html` | Reusable snippet to display live Zabbix stats | — | Reads `assets/data/stats.json` |
 
-> **`landing.html` note:** its "Free Diagnostic" `<form>` submits to
-> **FormSubmit.co** (destination in the request URL → `hr@glctechsec.com`)
-> via a small JS handler, with a native HTML POST fallback if JS is disabled.
-> See [`INTEGRATIONS.md`](INTEGRATIONS.md#web3forms-contact-form).
+> **`landing.html` is orphaned** (no other page links to it) and was out of
+> scope for the forms audit in `AUDIT-REPORT.md`. It still posts straight to
+> **FormSubmit.co** and was not migrated to the Worker — treat it as legacy;
+> either wire it to `/api/contact` with a `subject` of "Free Diagnostic" or
+> remove it, as a follow-up decision.
 
 > **`mailmkt.html` is an e-mail, not a web page.** It uses table-based layout
 > and inline styles because e-mail clients don't support modern CSS. Don't
@@ -138,11 +140,11 @@ flowchart TD
     BLOG --> CTA[cta-banner]
     CTA --> CONTACT[#contact — form + details]
     CONTACT --> FOOT[footer]
-    FOOT --> SCRIPTS[bottom scripts:<br/>blog IIFE, Web3Forms, i18n.js,<br/>mobile nav, Tidio]
+    FOOT --> SCRIPTS[bottom scripts:<br/>blog IIFE, contact form, i18n.js,<br/>mobile nav, Tidio]
 ```
 
 **Order matters for the scripts at the bottom:** the blog feed IIFE, the
-Web3Forms contact handler, then `scripts/i18n.js`, then the mobile-nav handlers,
+contact-form handler, then `scripts/i18n.js`, then the mobile-nav handlers,
 then the Tidio loader. `i18n.js` runs after the DOM exists and translates
 in place.
 
@@ -186,33 +188,47 @@ add/remove an `.open` class on the hamburger and `#mobile-menu`, and lock body
 scroll while open. A document-level click listener closes the drawer when you
 click outside it.
 
-### 4. Contact form → Web3Forms
+### 4. Contact and careers forms → Cloudflare Worker → Zoho Mail
 
-The `#contact` form is submitted with JS (no page reload) to the **Web3Forms**
-API, which forwards the message to GLCTech's inbox.
+Both forms are submitted with JS (no page reload) to the **same Worker that
+serves the site** (`worker/index.js`), which authenticates to Zoho Mail over
+raw SMTP (`worker/lib/smtp.js`, using `connect()` from `cloudflare:sockets` —
+Workers have no Node TCP stack, so `nodemailer` cannot run there) and relays
+the message. No third-party form service, no second origin, no CORS
+preflight. Full detail, secrets list and deployment steps: **`AUDIT-REPORT.md`**
+at the repo root.
 
 ```mermaid
 sequenceDiagram
     participant U as Visitor
-    participant P as index.html (sendEmail)
-    participant W as api.web3forms.com
+    participant P as index.html / trabalhe-conosco.html
+    participant WK as worker/index.js (/api/contact, /api/careers)
+    participant Z as Zoho Mail (SMTP)
     participant M as GLCTech inbox
-    U->>P: Click "Enviar Mensagem"
-    P->>P: clearErrors() + validateForm()
+    U->>P: Submit form
+    P->>P: client-side validation (mirrors server checks)
     alt invalid
         P-->>U: Inline field errors (localized)
     else valid
-        P->>W: POST JSON { access_key, name, email, message, … }
-        W->>M: Deliver e-mail
-        W-->>P: { success: true }
+        P->>WK: fetch POST (JSON for contact, multipart for careers)
+        WK->>WK: origin check, rate limit, honeypot, Turnstile, field/file validation
+        WK->>Z: SMTP over cloudflare:sockets (port 465, implicit TLS)
+        Z->>M: Deliver e-mail (Reply-To = visitor's address)
+        WK-->>P: { success: true, message }
         P-->>U: Show success state
     end
 ```
 
-- Access key: `W3F_ACCESS_KEY` in the page's script. It's a **public**
-  submission key (safe in client code). See [`INTEGRATIONS.md`](INTEGRATIONS.md#web3forms-contact-form).
-- Validation errors are localized via `window._i18n_errors`, populated by
-  `applyLang()` — that's the coupling between the form and i18n.
+- Destination mailboxes (`CONTACT_TO_EMAIL`, `CAREERS_TO_EMAIL`) and the
+  authenticating Zoho account (`ZOHO_USER`/`ZOHO_PASS`) are Worker secrets —
+  never in the HTML/JS, never in the repository.
+- Cloudflare Turnstile is verified server-side (`worker/lib/turnstile.js`);
+  it is skipped gracefully until `TURNSTILE_SECRET_KEY` is configured.
+- The careers form's résumé upload is validated for extension, declared MIME
+  type **and** magic bytes (`worker/lib/validate.js`) before being attached to
+  the outgoing e-mail as MIME `multipart/mixed`.
+- Client-side validation errors on the contact form are localized via
+  `window._i18n_errors`, populated by `applyLang()`.
 
 ### 5. Blog RSS feed (hidden)
 
