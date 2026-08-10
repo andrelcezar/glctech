@@ -618,8 +618,11 @@
 
         <div class="form-group">
           <!-- Cloudflare Turnstile. Replace data-sitekey with the real site key
-               (public, safe in HTML) before deploying — see AUDIT-REPORT.md. -->
-          <div class="cf-turnstile" data-sitekey="0x0000000000000000000AA" data-theme="dark"></div>
+               (public, safe in HTML) before deploying — see AUDIT-REPORT.md.
+               Rendered explicitly (see the callback near the end of the page):
+               with the placeholder key still in place, nothing is rendered
+               here at all — no widget, no error UI. -->
+          <div id="turnstile-careers" class="cf-turnstile" data-sitekey="0x0000000000000000000AA" data-theme="dark"></div>
         </div>
 
         <button type="submit" class="form-submit" id="c-btn-submit">
@@ -807,8 +810,23 @@
       });
   });
 </script>
-<script src="scripts/i18n.js"></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="scripts/i18n.js?v=r4"></script>
+<script>
+  /* Turnstile is rendered explicitly rather than via its default DOM-scan
+     auto-render, so a still-placeholder data-sitekey renders nothing at all
+     (no widget, no "Troubleshooting" error link) instead of showing a
+     Turnstile error state to real visitors before the real key is set. */
+  var TURNSTILE_SITEKEY_PLACEHOLDER = '0x0000000000000000000AA';
+  function onloadTurnstileCallback() {
+    document.querySelectorAll('.cf-turnstile[data-sitekey]').forEach(function (el) {
+      var key = el.getAttribute('data-sitekey');
+      if (key && key !== TURNSTILE_SITEKEY_PLACEHOLDER && window.turnstile) {
+        window.turnstile.render(el, { sitekey: key, theme: el.getAttribute('data-theme') || 'auto' });
+      }
+    });
+  }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&amp;render=explicit" async defer></script>
 
 <!-- Tidio Chat -->
 <script src="//code.tidio.co/z471nxc3tjaciumkzzasuoe928m5odks.js" async></script>
