@@ -1,306 +1,249 @@
-# GLCTech Site — Complete English Translation
+# GLCTech Sec — glctechsec.com
 
-## 📦 Deliverables
+Marketing website for **GLCTech Sec**, the UK security/operations arm of the
+GLCTech Group — an IT monitoring, cybersecurity, and backup services company.
+The site is static and multilingual, served by a single **Cloudflare Worker**
+that also handles the contact and careers form submissions server-side.
 
-### Main Package
-- **`glctech-international.zip`** (24 MB)
-  - 7 fully translated HTML pages
-  - Complete i18n translation engine (353 keys, 6 languages)
-  - All CSS, JavaScript, and assets
-  - Ready to deploy to glctechsec.com
-
-### Documentation
-- **`TRANSLATION_CHANGELOG.md`** — Detailed log of all changes
-- **`DEPLOYMENT_GUIDE.md`** — Step-by-step deployment instructions
-- **`README.md`** — This file
+- **Live domain:** https://glctechsec.com
+- **Detailed architecture:** [`docs/SITE_ARCHITECTURE.md`](docs/SITE_ARCHITECTURE.md)
+- **Forms / security / deployment audit:** [`AUDIT-REPORT.md`](AUDIT-REPORT.md)
 
 ---
 
-## ✅ What Was Done
+## Purpose & core functionality
 
-### 1. **Complete Translation to English**
-All content translated from Portuguese (Brazil) to English:
-- ✅ Homepage (index.html) — Hero, About, Services, Team, Contact
-- ✅ Service Pages — Kaspersky, Veeam Backup, Zabbix Monitoring
-- ✅ Legal Pages — Privacy Policy (7 sections), Terms of Use (7 sections)
-- ✅ Careers Page — Job descriptions, benefits, application form
+A lead-generation marketing site presenting GLCTech's services (Zabbix
+monitoring, Kaspersky/vendor-agnostic security, Veeam backup), company and
+compliance information, and two working forms:
 
-**Translation Coverage:**
-- 353 translation keys in i18n.js (all 6 languages)
-- All hardcoded HTML text converted to English
-- Form labels, placeholders, error messages translated
-- Service features, testimonials, job descriptions in English
+- **Contact form** (`/api/contact`) — JSON, relayed by email to the GLCTech inbox.
+- **Careers form** (`/api/careers`) — multipart with a validated PDF résumé
+  attached to the notification email.
 
-### 2. **Removed Unnecessary Pages** (Reduced Clutter)
-Deleted 6 orphaned pages with no internal links:
-- ❌ andre.html, kawan.html, tchize.html (personal profiles)
-- ❌ ebook.html, landing.html, mailmkt.html (old marketing campaigns)
-- ❌ stats-snippet.html (dev snippet)
+Both forms post to the **same origin** (the Worker that serves the site), so
+there is no CORS preflight and no third-party form service. Other features:
+client-side internationalisation (6 languages), per-locale pricing simulators,
+a live "devices monitored" counter fed from Zabbix, GA4 analytics, and a Tidio
+chat widget.
 
-Plus legacy dead code:
-- ❌ js/i18n.js (old system)
-- ❌ lang.js, lang/en.json, pt.json (legacy files)
+## Technology stack
 
-### 3. **Language Switcher Cleanup**
-**Before:** 6 languages (PT, EN, DE, ES, FR, IT) with Portuguese as default  
-**After:** 5 languages (EN, DE, ES, FR, IT) with English as default
+| Area | Technology |
+|---|---|
+| Frontend | Hand-authored HTML5 + CSS + vanilla JavaScript (no framework, no bundler) |
+| i18n | `scripts/i18n.js` — self-contained dictionary, 6 languages |
+| Backend | Cloudflare Worker (`worker/index.js`) + `worker/lib/*` |
+| Mail | Direct SMTP to Zoho Mail over `cloudflare:sockets` |
+| Build | `scripts/build.mjs` — allowlist that assembles `dist/` |
+| Tests | Node.js built-in test runner (`node --test`) |
+| CI/CD | GitHub Actions (`ci.yml`) + Wrangler deploy |
+| Hosting | Cloudflare Workers + Cloudflare DNS/CDN/TLS |
 
-- ✅ Portuguese removed from UI dropdown
-- ✅ Portuguese browsers now default to English (not PT)
-- ✅ English is the master fallback language
-- ✅ Portuguese block kept in i18n.js for reference (easy to restore)
+## Repository structure
 
-### 4. **Contact Information Updated**
+```text
+.
+├── *.html                     14 published pages (index, services, legal, careers, …)
+├── css/ · assets/             Styles and images (logos, team, service, OG)
+├── scripts/
+│   ├── build.mjs              Allowlist build → dist/
+│   ├── i18n.js                Shared i18n runtime (loaded by every page)
+│   └── fetch_zabbix_stats.py  CI script for the live stats counter
+├── worker/
+│   ├── index.js               Router: /api/contact, /api/careers, else static assets
+│   └── lib/                    http, smtp, mail, validate, turnstile
+├── tests/                     Node test suite (html, links, i18n, json, smtp, worker, quality)
+├── docs/                      ARCHITECTURE, SITE_ARCHITECTURE, INTEGRATIONS, I18N, CI-CD, CONTENT-EDITING
+├── tools/                     Python generators for brand SVG figures
+├── wrangler.toml              Cloudflare Worker config
+├── _headers                   Security headers for static assets
+├── AUDIT-REPORT.md            Forms/security audit + all out-of-repo actions
+└── package.json               Scripts: build, test, deploy, preview
+```
 
-| Info | Old | New |
-|------|-----|-----|
-| Email | contato@glctech.com.br | contact@glctechsec.com |
-| Phone | +55 11 95762-4146 | +44 7778 173575 |
-| Domain | glctech.com.br | glctechsec.com |
+## Prerequisites
 
-**Updated in:** All 7 pages + scripts/i18n.js (6 language blocks)
+- **Node.js ≥ 22** (see `package.json` `engines`).
+- **npm** (bundled with Node).
+- A **Cloudflare account** with Wrangler access (for deploying / previewing the Worker).
+- Python 3 is only needed for the Zabbix stats script and the `tools/` generators.
 
-### 5. **Pricing Converted to International Currencies**
+## Local development setup
 
-| Language | Currency | Example |
-|----------|----------|---------|
-| EN (English) | USD $ | $90/mo, $230/mo |
-| DE (German) | EUR € | €82/mo, €211/mo |
-| ES (Spanish) | EUR € | €16/mo, €39/mo |
-| FR (French) | EUR € | €82/mo, €211/mo |
-| IT (Italian) | EUR € | €82/mo, €211/mo |
+```bash
+npm install                    # installs wrangler (only dev dependency)
+cp .dev.vars.example .dev.vars # fill in local secrets — never commit this file
+```
 
-**Auto-converts when language changes** (dynamic, no page refresh needed)
+`.dev.vars` holds the Worker secrets used by `wrangler dev`. See
+[`.dev.vars.example`](.dev.vars.example) for the full list and
+[`AUDIT-REPORT.md`](AUDIT-REPORT.md) for how to obtain each value.
 
-### 6. **Metadata & SEO Updated**
+## Environment configuration
 
-All pages now have:
-- ✅ `<html lang="en">` (was pt-BR)
-- ✅ English meta descriptions
-- ✅ English Open Graph titles/descriptions
-- ✅ og:locale set to en_US
-- ✅ Canonical URLs point to glctechsec.com
+Runtime secrets are set in Cloudflare, never in the repo
+(`npx wrangler secret put <NAME>`). Names and purposes:
 
----
+| Variable | Purpose |
+|---|---|
+| `ZOHO_USER` / `ZOHO_PASS` | Zoho mailbox + app-specific password for outgoing SMTP |
+| `CONTACT_TO_EMAIL` | Contact-form recipient (falls back to `ZOHO_USER`) |
+| `CAREERS_TO_EMAIL` | Careers-form recipient (falls back to `ZOHO_USER`) |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret (optional; verification skipped if unset) |
+| `RATE_LIMIT` (KV binding) | Per-IP rate limiting (optional; commented in `wrangler.toml`) |
+| `ZABBIX_URL` / `ZABBIX_USER` / `ZABBIX_PASS` | GitHub Actions secrets for the live stats pipeline |
 
-## 🎯 Key Features Retained
+Full detail: [`docs/SITE_ARCHITECTURE.md`](docs/SITE_ARCHITECTURE.md) §9.
 
-Nothing was removed except unused pages:
-- ✅ All 6 languages in i18n.js (EN, DE, ES, FR, IT + PT for reference)
-- ✅ Dynamic language switcher with real-time translation
-- ✅ Pricing simulators (Kaspersky, Veeam, Zabbix)
-- ✅ WhatsApp integration (updated phone number)
-- ✅ Contact forms with file uploads (CV for careers)
-- ✅ Team section, service descriptions, testimonials
-- ✅ Blog RSS feed, social integration
-- ✅ All CSS, animations, responsive design
+## Running the project
 
----
+```bash
+npm run preview     # build + wrangler dev — full site + working /api/* locally
+```
 
-## 🚀 Deployment
+For a quick static-only preview without the Worker, any static server works
+(e.g. `python3 -m http.server 8080`), but the form endpoints will not respond.
 
-### Quick Steps
-1. **Extract** glctech-international.zip
-2. **Upload** to web server (glctechsec.com)
-3. **Activate form** at https://formsubmit.co (one-time)
-4. **Test** language switcher and contact forms
-5. **Monitor** for errors
+## Build process
 
-See **DEPLOYMENT_GUIDE.md** for detailed instructions.
+```bash
+npm run build       # scripts/build.mjs → dist/
+```
 
----
+`build.mjs` is an **allowlist**: only explicitly named files/directories are
+copied into `dist/`, and it fails if any listed file is missing or any asset
+exceeds Cloudflare's 25 MiB limit. This is deliberate — nothing (secrets,
+tests, docs, `node_modules`) can be published by accident.
 
-## 📊 Statistics
+## Testing
 
-| Metric | Value |
-|--------|-------|
-| Pages Translated | 7 |
-| Pages Removed | 6 |
-| Translation Keys | 353 |
-| Languages Supported | 5 (EN primary, DE/ES/FR/IT) |
-| Contact Info Updates | 9+ locations |
-| Test Pass Rate | 100% ✅ |
+```bash
+npm test            # node --test over tests/*.test.js and tests/*.test.mjs
+```
 
----
+The suite covers HTML integrity, internal links, i18n key completeness, JSON
+data files, the SMTP client, the Worker form contract, and site-quality
+invariants. CI runs it on every PR and push to `main` (`.github/workflows/ci.yml`).
 
-## ✨ Quality Assurance
+## Deployment overview
 
-✅ **All 7 pages scanned** for leftover Portuguese text  
-✅ **Email & phone replacements verified** across entire site  
-✅ **HTML lang="en" confirmed** on all pages  
-✅ **Translation keys complete** (no missing keys)  
-✅ **Currency conversion logic validated**  
-✅ **Form submissions tested** (endpoints verified)  
-✅ **No broken links** to removed orphan pages  
-✅ **All meta tags updated** to English  
+```bash
+npm run deploy      # npm run build && wrangler deploy
+```
 
-**Result:** Site is ready for international deployment ✅
+Deploying requires the Worker secrets above and Cloudflare account access.
+After the first deploy, the custom domain (`glctechsec.com`) is attached in the
+Cloudflare dashboard (Workers & Pages → glctechsec → Domains & Routes). The
+**authoritative deployment runbook — secrets, Turnstile, DNS/SPF/DKIM/DMARC,
+testing, rollback — is [`AUDIT-REPORT.md`](AUDIT-REPORT.md).**
 
----
+> Note: `DEPLOYMENT_GUIDE.md` predates the Worker architecture and is retained
+> only for historical i18n/content notes. Use `AUDIT-REPORT.md` for deployment.
 
-## 💡 Notes
+## Architecture overview
 
-### What's Still in Portuguese
-- Legacy block in i18n.js (not displayed, just for reference)
-- Old assets may have PT in filename (non-critical)
-- Historical comments in code (not visible to users)
+Single Cloudflare Worker → serves static `dist/` assets for all non-API routes
+and processes `/api/contact` + `/api/careers` in-process, relaying to Zoho Mail
+over SMTP. No database; the site is stateless apart from a committed
+`stats.json`, an optional rate-limit KV, and browser `localStorage`. See
+[`docs/SITE_ARCHITECTURE.md`](docs/SITE_ARCHITECTURE.md) for diagrams and the
+full breakdown, and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for
+page/JS-subsystem internals.
 
-### Easy to Restore Portuguese
-If you need Portuguese again, just:
-1. Add back `'pt': 'pt'` to locale map in i18n.js (1 line)
-2. Add back flag to switcher (1 line)
-3. Redeploy
+## Security considerations
 
-Takes 5 minutes. Everything stays translated, just becomes available in UI.
+- HTTPS at the Cloudflare edge; security headers on static assets (`_headers`)
+  and API responses (`worker/lib/http.js`).
+- Form endpoints: same-origin check, honeypot, optional Turnstile
+  (server-verified), per-IP rate limiting, and résumé validation by extension +
+  MIME + magic bytes.
+- All credentials live in Worker/CI secrets — never in the repository.
+- **Open items** (require account/DNS access): deploy the Worker, add a DMARC
+  record for `glctechsec.com`, and configure Turnstile + rate-limit KV for
+  production. See [`AUDIT-REPORT.md`](AUDIT-REPORT.md).
 
----
+## Contribution / development workflow
 
-## 📞 Support
+1. Branch from `main`.
+2. Make changes; preview locally (`npm run preview`).
+3. `npm test` — keep the suite green.
+4. Open a PR to `main`; CI runs the test suite.
+5. After merge, publish with `npm run deploy` (there is no staging environment).
 
-All changes are **fully documented**:
-- See `TRANSLATION_CHANGELOG.md` for every modification
-- See `DEPLOYMENT_GUIDE.md` for troubleshooting
-- All code is commented and easy to follow
+Content-editing recipes (copy, translations, stats): see
+[`docs/CONTENT-EDITING.md`](docs/CONTENT-EDITING.md) and
+[`docs/I18N.md`](docs/I18N.md).
 
-Questions? Check the documentation first — it's comprehensive.
+## Troubleshooting
 
----
+| Symptom | Likely cause / fix |
+|---|---|
+| `POST /api/contact` returns 405 on the live site | The Worker isn't deployed / domain not attached — see `AUDIT-REPORT.md`. |
+| Forms return 500 | `ZOHO_USER`/`ZOHO_PASS` not set (fails closed by design). |
+| Turnstile "verification failed" | Site key in HTML and `TURNSTILE_SECRET_KEY` mismatch, or widget not created. |
+| Rate-limit not enforced | `RATE_LIMIT` KV namespace not bound (optional; site still works). |
+| Stats counter shows the fallback number | `ZABBIX_*` CI secrets not set, or the last fetch failed. |
+| Translations not applying | All pages load `scripts/i18n.js`; check the `data-i18n*` attributes and `docs/I18N.md`. |
 
-## ✅ Checklist Before Going Live
+## Documentation index
 
-- [ ] Extract glctech-international.zip
-- [ ] Upload to web server
-- [ ] Verify CNAME → glctechsec.com
-- [ ] Activate form at FormSubmit.co
-- [ ] Test language switcher (PT should NOT appear)
-- [ ] Test contact forms (all pages)
-- [ ] Check pricing displays in different languages
-- [ ] Verify email links point to contact@glctechsec.com
-- [ ] Verify phone links have +44 7778 173575
-- [ ] Check browser console (no errors)
-- [ ] Hard refresh and clear cache
-- [ ] Test on mobile & desktop
-
----
-
-**Your international site is complete and tested.** 🎉  
-Ready to deploy whenever you are!
-
----
-
-## 🔄 Revision 2 — Strategic Audit Fixes (Aug 2026)
-
-Following a strategic review of glctechsec.com vs. glctech.com.br (see internal audit doc), this revision fixes the core credibility issues the audit identified:
-
-- **Dual-office transparency.** Every page now discloses both São Paulo (GLCTech Group HQ, est. 2016) and Salford, Greater Manchester (GLCTech Sec UK operations) instead of presenting Salford as the only address. Applied to all 6 language blocks in `scripts/i18n.js`, all page footers, the contact section, and a new origin strip under the main nav.
-- **Two new pages:** `about-the-group.html` (explains the GLCTech / GLCTech Sec relationship transparently) and `trust-compliance.html` (DPA, 72-hour ICO breach process, Cyber Essentials status, insurance, vendor-agnostic security policy).
-- **Kaspersky repositioned as vendor-agnostic.** Service card copy, the homepage "why us" tag, and a new callout on `kaspersky.html` now frame Kaspersky as one option among Microsoft Defender for Business, Bitdefender GravityZone and Sophos, selected per client risk profile — not the default.
-- **Pricing converted to GBP** for the `en` locale on `zabbix.html`, `kaspersky.html` and `veeam.html` (was USD, serving neither the UK nor Brazil market).
-- **Testimonials disclosed as Brazil-based**, with an honest note that the UK client base is new.
-- **Removed further clutter:** the hidden/dead Portuguese blog + RSS-feed block on `index.html` (HTML, CSS and JS), and 7 orphaned pages (`andre.html`, `kawan.html`, `tchize.html`, `landing.html`, `mailmkt.html`, `ebook.html` + its PT PDF, `stats-snippet.html`) plus the legacy unused i18n systems (`css/styles.css`, `js/i18n.js`, `lang.js`, `lang/*.json`) that had already been documented as removed but were still present in this snapshot.
-- **Fixed a live cross-domain bug:** every page was loading its own logo/images from `https://glctech.com.br/...`, which itself just redirects back to this site. All asset references are now local (`./assets/...`).
-- **Privacy Policy** (`politica.html`) now includes a UK-specific note on DPA availability and 72-hour ICO breach notification within the existing "Information Security" section.
-
-**Still open / needs a human decision before publishing:**
-- Cyber Essentials certification is marked "in progress" — needs a real target date once you've started the process.
-- The DPA, insurance certificate of currency, and 72-hour breach process on `trust-compliance.html` describe a *commitment*, not a signed/audited status — confirm these are accurate before this page goes live to real UK prospects.
-- DE/ES/FR/IT language blocks were not updated for the new Kaspersky-agnostic wording or the two new pages (English-only for now) — flagged as a follow-up if those locales matter for the UK launch.
+| Doc | Contents |
+|---|---|
+| [`docs/SITE_ARCHITECTURE.md`](docs/SITE_ARCHITECTURE.md) | Full system architecture, diagrams, data flow, security, risks |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Page + JavaScript-subsystem internals |
+| [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md) | Third-party integration setup (Zoho, Turnstile, GA4, Tidio, Zabbix) |
+| [`docs/I18N.md`](docs/I18N.md) | Internationalisation engine and translation keys |
+| [`docs/CONTENT-EDITING.md`](docs/CONTENT-EDITING.md) | Task-oriented content-editing recipes |
+| [`docs/CI-CD.md`](docs/CI-CD.md) | CI pipeline details |
+| [`AUDIT-REPORT.md`](AUDIT-REPORT.md) | Forms/security audit + deployment runbook + out-of-repo actions |
 
 ---
 
-## 🔄 Revision 3 — Full audit, image replacement and rebuild
+## Change history
 
-See **`REVISION-3-CHANGELOG.md`** for the complete list. Headlines:
+The project has gone through several documented revisions. Summaries below;
+the linked changelogs hold the full detail.
 
-- **All AI-generated imagery replaced.** The hero "dashboard" contained invented
-  Portuguese labels and an invalid timestamp (18:60); the Veeam graphic was
-  misspelt "VEEEAM"; both founder portraits carried a visible AI-generator
-  watermark. Four brand-native SVG figures now stand in, generated from
-  `tools/`.
-- **Bundle cut from 24 MB to 1.4 MB** — three pages were serving 1.3–1.8 MB PNGs
-  next to identical 32–56 KB WebPs, and 22 MB of assets were never referenced.
-- **SEO metadata actually added.** Six pages had no description, canonical, OG
-  tags or favicon, contrary to what earlier revisions of this README claimed.
-- **Accessibility baseline**: skip links, focus rings, reduced-motion, a real
-  `<form>`, a mobile-reachable language switcher, and a text colour that clears
-  the WCAG contrast floor.
-- **Iconography unified on Font Awesome** across all nine pages — 21 emoji and
-  every CSS text glyph replaced, so icons follow the brand palette and render
-  identically on every OS.
-- **Contact form repointed to `contact@glctechsec.com`** — it was delivering to
-  `contato@glctech.com.br` via a Web3Forms key that hid the recipient from the
-  code. Needs one activation click, see the changelog.
-- **Zoho Mail SMTP via `serverless/`** — the credential cannot live in a static
-  site, so it sits in a small relay function's environment instead. The form
-  falls back to FormSubmit until you deploy it. See `serverless/README.md`.
-- **Cloudflare Worker relay** (`serverless/cloudflare/`) with its own SMTP
-  client for Zoho, since `nodemailer` cannot run on Workers. A Vercel/Netlify
-  variant is also included; both share one contract.
-- **Cloudflare deploy fixed.** It was publishing the repo root (2126 files, and
-  a 122 MiB `workerd` binary that broke the build); `scripts/build.mjs` now
-  assembles `dist/` from an allowlist — 27 files, 1.2 MB. The contact endpoint
-  moved into the same Worker, so the form is same-origin at `/api/contact`.
-- **168 tests passing** (was 63). The new `tests/quality.test.js` locks in every
-  fix above.
+### Revision 1 — Internationalisation
+Full translation of the original Portuguese site to English with a 6-language
+i18n engine (EN default), international pricing, and updated contact details.
+Detail: [`TRANSLATION_CHANGELOG.md`](TRANSLATION_CHANGELOG.md).
 
-⚠ Six items still need a human decision — they are listed at the end of
-`REVISION-3-CHANGELOG.md`. The first is real founder photography.
+### Revision 2 — Strategic audit fixes (Aug 2026)
+- **Dual-office transparency.** Every page discloses both São Paulo (GLCTech
+  Group HQ, est. 2016) and Salford, Greater Manchester (GLCTech Sec UK).
+- **Two new pages:** `about-the-group.html` and `trust-compliance.html`.
+- **Kaspersky repositioned as vendor-agnostic** (one option among Defender,
+  Bitdefender, Sophos).
+- **Pricing converted to GBP** for the `en` locale on the service pages.
+- **Testimonials disclosed as Brazil-based**; UK client base noted as new.
+- **Removed clutter:** the hidden Portuguese blog/RSS block and orphaned pages,
+  and the legacy unused i18n systems.
+- **Fixed a cross-domain bug:** assets now load locally (`./assets/…`) instead
+  of from `glctech.com.br`.
 
----
+*Still needs a human decision:* Cyber Essentials target date; confirming the
+DPA/insurance/breach commitments on `trust-compliance.html`; DE/ES/FR/IT copy
+for the new pages.
 
-## 🔄 Revision 4 — Full site audit and functional, secure forms (Aug 2026)
+### Revision 3 — Full audit, image replacement and rebuild
+See [`REVISION-3-CHANGELOG.md`](REVISION-3-CHANGELOG.md). Headlines: all
+AI-generated imagery replaced with brand-native SVGs; bundle cut from 24 MB to
+1.4 MB; SEO metadata added to six pages; accessibility baseline (skip links,
+focus rings, reduced-motion, real `<form>`); iconography unified on Font
+Awesome; contact form repointed to `contact@glctechsec.com`; Cloudflare deploy
+fixed with the allowlist build; test count raised to 168.
 
-Requested: a complete audit of `glctechsec.com` plus a real, production-ready
-implementation of the contact and careers forms — visitor → Cloudflare Worker
-→ Zoho Mail → GLCTech inbox — instead of the third-party form services the
-site had accumulated. Full findings, every configuration required outside
-this repo (Cloudflare secrets, Turnstile, DNS/SPF/DKIM/DMARC), and how to
-deploy/test/roll back live in **[`AUDIT-REPORT.md`](AUDIT-REPORT.md)** at the
-repo root. Headlines:
+### Revision 4 — Full site audit and functional, secure forms (Aug 2026)
+See [`AUDIT-REPORT.md`](AUDIT-REPORT.md). Headlines: contact form was broken in
+production (Worker never deployed); careers form moved off FormSubmit.co onto
+`/api/careers`; three duplicate mail implementations consolidated into
+`worker/lib/`; résumé uploads validated by magic bytes; Cloudflare Turnstile
+added (server-verified); security headers added everywhere; recipient addresses
+moved to Worker secrets; 242 tests passing.
 
-- **The contact form was completely broken in production.** The live site is
-  still served by GitHub Pages behind Cloudflare's proxy — the Worker in this
-  repo (`worker/index.js`) had never actually been deployed. Every `POST
-  /api/contact` on the real domain returned GitHub Pages' `405 Not Allowed`,
-  so every visitor submission failed silently. Deploying the Worker (see
-  `AUDIT-REPORT.md`) is what fixes this, not a code change alone.
-- **Careers form moved off FormSubmit.co and onto the Worker**, at a new
-  `/api/careers` endpoint, alongside the existing contact form at
-  `/api/contact`. Both are same-origin, so there is no CORS preflight and
-  nothing to keep in sync across two URLs.
-- **Duplicate implementations consolidated.** The repo carried three separate
-  copies of "send the contact e-mail" (`worker/index.js`,
-  `serverless/cloudflare/`, `serverless/api/` for Vercel/Netlify) with
-  diverging CORS logic, only one of which was actually deployed. `serverless/`
-  is removed; `worker/lib/` is now the single implementation, covered by 51
-  tests (was split across two files, one of them testing code that was never
-  live).
-- **Résumé uploads are validated properly.** Extension, declared MIME type
-  *and* the file's own magic bytes (`%PDF-`) are all checked — a renamed
-  `.exe` with a spoofed `.pdf` name and `Content-Type` no longer passes. Valid
-  PDFs are attached to the notification e-mail as MIME `multipart/mixed`,
-  capped at 5MB.
-- **Cloudflare Turnstile added to both forms**, verified server-side
-  (`worker/lib/turnstile.js`) against Cloudflare's `siteverify` endpoint — the
-  browser-side widget alone is never trusted. It degrades gracefully (skipped,
-  not failed) until `TURNSTILE_SECRET_KEY` is configured, so the forms don't
-  break the moment this ships.
-- **Security headers added everywhere** — CSP, `X-Content-Type-Options`,
-  `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options` — via a `_headers`
-  file for static pages (the ones Cloudflare's asset server answers directly,
-  bypassing the Worker) and via `worker/lib/http.js` for the two API routes.
-  Neither existed before.
-- **Recipient addresses are now Worker secrets, not hard-coded.**
-  `CONTACT_TO_EMAIL` and `CAREERS_TO_EMAIL` default to
-  `contac@glctech.com.br` and `rh@glctech.com.br` respectively — see
-  `AUDIT-REPORT.md` for why those addresses, not the `glctechsec.com` ones the
-  site displays publicly, and for the DNS/SPF/DKIM/DMARC findings for both
-  domains.
-- **242 tests passing** (was 232, several of them exercising code that could
-  never have run in production). See `AUDIT-REPORT.md` for the full list of
-  what was tested and how to test the forms manually end-to-end.
-
-⚠ Several items need a human decision or an action outside this repository
-(deploying the Worker, rotating/creating the Zoho app password, creating the
-Turnstile widget, a DMARC record for `glctechsec.com`) — all listed at the end
-of `AUDIT-REPORT.md`.
+⚠ Several items need a human decision or an action outside this repository —
+deploying the Worker, rotating/creating the Zoho app password, creating the
+Turnstile widget, and adding a DMARC record for `glctechsec.com`. All are
+listed at the end of [`AUDIT-REPORT.md`](AUDIT-REPORT.md).

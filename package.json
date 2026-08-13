@@ -2,7 +2,7 @@
   "name": "glctech-site",
   "version": "1.0.0",
   "private": true,
-  "description": "GLCTech marketing website (static, multilingual, deployed to GitHub Pages).",
+  "description": "GLCTech Sec marketing website (static, multilingual) served by a Cloudflare Worker that also handles the contact and careers form endpoints.",
   "scripts": {
     "build": "node scripts/build.mjs",
     "pretest": "node scripts/check-tests-exist.mjs",
