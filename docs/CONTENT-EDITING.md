@@ -4,8 +4,9 @@ Task-oriented guide for changing **what the site says and shows** without
 needing to understand the plumbing. If a recipe touches translations, it links
 to [`I18N.md`](I18N.md).
 
-> **Before you start:** preview locally (`python3 -m http.server 8080`), because
-> merging to `glctech2.0` publishes straight to production. And remember most
+> **Before you start:** preview locally (`npm run preview`, or
+> `python3 -m http.server 8080` for a static-only preview), because merging to
+> `main` and running `npm run deploy` publishes straight to production. And remember most
 > visible strings are **translated** — changing the Portuguese HTML alone can be
 > visually overridden by `scripts/i18n.js` on load. When in doubt, change both
 > the HTML text *and* the dictionary value (see each recipe).

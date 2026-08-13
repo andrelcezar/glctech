@@ -317,7 +317,7 @@ which the homepage reads and animates on load.
 
 ```mermaid
 flowchart LR
-    CRON[GitHub Action<br/>.github/workflows/zabbix-stats.yml<br/>daily + manual] --> PY[scripts/fetch_zabbix_stats.py]
+    CRON[GitHub Action<br/>.github/workflows/'Atualizar Stats Zabbix.yml'<br/>daily + manual] --> PY[scripts/fetch_zabbix_stats.py]
     PY -->|Zabbix 7.x JSON-RPC| ZBX[(Zabbix server)]
     PY -->|writes + commits| JSON[assets/data/stats.json]
     JSON -->|fetched by inline script in| IDX[index.html]
@@ -326,7 +326,7 @@ flowchart LR
 
 **How it's wired:**
 
-- **Workflow** — `.github/workflows/zabbix-stats.yml` runs daily (and on manual
+- **Workflow** — `.github/workflows/Atualizar Stats Zabbix.yml` runs daily (and on manual
   `workflow_dispatch`), executes `scripts/fetch_zabbix_stats.py`, and commits
   `assets/data/stats.json` if it changed. It **skips gracefully** (job succeeds,
   does nothing) until the Zabbix secrets are configured, so it never fails
@@ -365,7 +365,7 @@ Treat the Zabbix credentials as **secrets** — never commit them. See
   attempts (`js/i18n.js`, `lang.js`, `lang/*.json`) were removed. See
   [`I18N.md`](I18N.md).
 - **Duplicated nav/footer.** No includes — update shared chrome on every page.
-- **Publish = merge to `glctech2.0`.** No staging. Preview locally.
+- **Publish = merge to `main`, then `npm run deploy`.** No staging. Preview locally.
 - **`CNAME` must stay** or the custom domain breaks.
 - **Client-side keys are public.** Anything in the HTML/JS is visible to
   visitors. Only the Zabbix credentials are meant to be secret (and they belong
