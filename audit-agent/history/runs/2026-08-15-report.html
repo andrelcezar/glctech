@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal — Auditoria GLCTechSec Europe — 2026-08-15</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f4f4f6; color:#1f1f24; margin:0; padding:0; }
+  .wrap { max-width: 760px; margin: 0 auto; background:#ffffff; }
+  .header { background:#2d2d2d; color:#fff; padding:32px 40px; }
+  .header .label { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#e6262c; font-weight:700; margin:0 0 8px; }
+  .header h1 { margin:0; font-size:22px; line-height:1.3; }
+  .header .meta { margin-top:10px; font-size:13px; color:#c9c9c9; }
+  .content { padding: 32px 40px 48px; }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.06em; color:#e6262c; border-bottom:2px solid #eee; padding-bottom:8px; margin:32px 0 14px; }
+  h2:first-of-type { margin-top:0; }
+  h3 { font-size:14px; color:#2d2d2d; margin:20px 0 8px; }
+  p { line-height:1.6; font-size:14px; }
+  table { width:100%; border-collapse: collapse; font-size:13px; margin: 8px 0 16px; }
+  th, td { border:1px solid #e2e2e6; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f7f7f9; font-weight:700; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:3px; font-size:11px; font-weight:700; text-transform:uppercase; }
+  .sev-alto { background:#fde8e8; color:#b3261e; }
+  .sev-medio { background:#fff3cd; color:#8a6100; }
+  .sev-baixo { background:#e7f4e8; color:#1f7a2e; }
+  .finding { background:#fafafa; border:1px solid #eee; border-left:4px solid #e6262c; border-radius:4px; padding:14px 16px; margin:10px 0 20px; font-size:13px; }
+  .finding pre { white-space:pre-wrap; font-family: inherit; margin:0; line-height:1.7; }
+  .note { font-size:12px; color:#777; background:#f7f7f9; border-radius:4px; padding:10px 14px; margin-top:8px; }
+  .footer { padding:20px 40px; font-size:11px; color:#999; border-top:1px solid #eee; }
+  ul, ol { font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <p class="label">GLCTechSec Europe · Agente de Auditoria Contínua</p>
+    <h1>Relatório Semanal — Auditoria do Site</h1>
+    <p class="meta">Período: 2026-08-15 · glctechsec.com · Execução de validação (dry-run + envio real corrigido)</p>
+  </div>
+
+  <div class="content">
+    <h2>Resumo executivo</h2>
+    <p>O site está tecnicamente estável (headers de segurança e formulários funcionando), mas há uma
+    inconsistência de SEO técnico entre sitemap, redirects e canonical que vale corrigir, e uma lacuna
+    de conformidade de cookies/GDPR que precisa de decisão jurídica. Dois itens já sinalizados em
+    auditorias anteriores (Turnstile com chave placeholder, depoimentos só do Brasil) seguem pendentes.</p>
+
+    <h2>Status geral</h2>
+    <table>
+      <tr><th>Eixo</th><th>Status</th></tr>
+      <tr><td>Conversão / CTA</td><td>Avaliado parcialmente</td></tr>
+      <tr><td>SEO</td><td>Avaliado</td></tr>
+      <tr><td>SEO Internacional</td><td>Avaliado parcialmente</td></tr>
+      <tr><td>Performance</td><td>Não avaliado (limitação do ambiente nesta execução)</td></tr>
+      <tr><td>UX / UI</td><td>Avaliado parcialmente</td></tr>
+      <tr><td>Segurança</td><td>Avaliado</td></tr>
+      <tr><td>Privacidade / GDPR</td><td>Avaliado</td></tr>
+      <tr><td>Acessibilidade</td><td>Não avaliado nesta execução</td></tr>
+      <tr><td>Conteúdo</td><td>Avaliado parcialmente</td></tr>
+      <tr><td>Técnico</td><td>Avaliado</td></tr>
+      <tr><td>Mobile</td><td>Não avaliado nesta execução</td></tr>
+    </table>
+
+    <h2>Principais descobertas</h2>
+    <ul>
+      <li>Sitemap, redirects e canonical tag de todas as páginas internas se contradizem entre si.</li>
+      <li>GA4 carrega sem qualquer mecanismo de consentimento.</li>
+      <li>Cloudflare Turnstile segue com chave de teste em produção nos dois formulários.</li>
+    </ul>
+
+    <h2>Top 5 oportunidades comerciais</h2>
+    <ol>
+      <li>Corrigir o loop sitemap → redirect → canonical (AUDIT-0001).</li>
+      <li>Decidir sobre Consent Mode / banner de cookies (AUDIT-0002).</li>
+      <li>Ativar o Turnstile real nos formulários (AUDIT-0003).</li>
+      <li>Obter a primeira referência de cliente do Reino Unido (AUDIT-0004).</li>
+      <li>Uma próxima execução completa deve avaliar Performance, Acessibilidade e Mobile.</li>
+    </ol>
+
+    <h2>Problemas críticos</h2>
+    <p>Nenhum encontrado nesta execução.</p>
+
+    <h2>Recomendações</h2>
+    <table>
+      <tr><th>ID</th><th>Categoria</th><th>Problema</th><th>Impacto</th><th>Prioridade</th><th>Esforço</th></tr>
+      <tr>
+        <td>AUDIT-0001</td><td>SEO</td>
+        <td>Sitemap lista URLs .html que redirecionam (307) para a forma sem extensão, mas o canonical de cada página aponta de volta para a versão .html</td>
+        <td><span class="badge sev-medio">Médio</span></td><td>Médio</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0002</td><td>Privacidade / GDPR</td>
+        <td>GA4 carrega sem <code>gtag('consent', ...)</code> e sem banner técnico de consentimento</td>
+        <td><span class="badge sev-alto">Alto</span></td><td>Alto</td><td>Médio</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0003</td><td>Segurança / Conversão</td>
+        <td>Turnstile com <code>data-sitekey</code> placeholder em produção nos dois formulários</td>
+        <td><span class="badge sev-medio">Médio</span></td><td>Médio</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0004</td><td>Comercial / Confiança</td>
+        <td>Depoimentos exclusivamente do Brasil, sem case do Reino Unido</td>
+        <td><span class="badge sev-baixo">Baixo</span></td><td>Médio</td><td>Alto</td>
+      </tr>
+    </table>
+
+    <h3>AUDIT-0001 — detalhe</h3>
+    <div class="finding"><pre>Status: CONFIRMADO
+Categoria: SEO
+Problema: URLs do sitemap.xml redirecionam para uma forma diferente da que o canonical da própria página declara.
+Evidência: curl -I https://glctechsec.com/trust-compliance.html → HTTP 307, Location: /trust-compliance.
+           canonical da página aponta para .../trust-compliance.html. Mesmo padrão nas outras 9 URLs do sitemap.
+Página: todas as páginas internas exceto a home
+URL: https://glctechsec.com/sitemap.xml
+Arquivo: sitemap.xml (redirect vem do roteamento de assets do Worker)
+Recomendação: alinhar sitemap.xml e &lt;link rel="canonical"&gt; para a mesma forma de URL.
+Necessita aprovação: SIM</pre></div>
+
+    <h3>AUDIT-0002 — detalhe</h3>
+    <div class="finding"><pre>Status: REQUER ANÁLISE JURÍDICA
+Categoria: Privacidade / GDPR
+Problema: GA4 carregado incondicionalmente, sem Consent Mode nem banner de cookies detectado.
+Evidência: script gtag.js presente no &lt;head&gt; de todas as páginas; nenhuma ocorrência de gtag('consent', ...); nenhum banner encontrado.
+Recomendação: avaliar juridicamente a necessidade de Consent Mode/banner sob UK GDPR/PECR.
+Necessita aprovação: SIM</pre></div>
+
+    <p class="note">AUDIT-0003 e AUDIT-0004 já estavam documentados em <strong>AUDIT-REPORT.md</strong> e
+    <strong>REVISION-3-CHANGELOG.md</strong>, respectivamente — incluídos aqui para entrarem no histórico
+    do agente e serem rastreados como reincidentes nas próximas execuções.</p>
+
+    <h2>Oportunidades estratégicas</h2>
+    <p>Nenhuma nova além das já listadas — uma execução mais completa (com performance e acessibilidade
+    avaliados) tende a revelar mais.</p>
+
+    <h2>Pendências</h2>
+    <p>AUDIT-0001, AUDIT-0002, AUDIT-0003, AUDIT-0004 — todos ficam <strong>PENDENTE</strong> no histórico
+    após esta execução.</p>
+
+    <h2>Reincidências</h2>
+    <p>N/A — primeira execução, <code>known-issues.json</code> estava vazio.</p>
+
+    <h2>Evolução</h2>
+    <p>N/A — sem execução anterior para comparar.</p>
+
+    <p class="note">
+      <strong>Nota técnica:</strong> <code>audit-agent/probe.mjs</code> (Playwright/Chromium) não conseguiu
+      completar a navegação até glctechsec.com neste ambiente (<code>net::ERR_CONNECTION_RESET</code>; via
+      curl a mesma URL funciona normalmente) — Performance, erros de console e Acessibilidade não foram
+      avaliados nesta execução, em vez de inventados.
+    </p>
+  </div>
+
+  <div class="footer">
+    Gerado automaticamente pelo Agente de Auditoria Contínua GLCTechSec (skill <code>glctechsec-audit</code>).
+    Enviado de <strong>contact@glctechsec.com</strong>. Ferramenta em revisão em
+    <a href="https://github.com/andrelcezar/glctech/pull/10">PR #10</a>.
+  </div>
+</div>
+</body>
+</html>

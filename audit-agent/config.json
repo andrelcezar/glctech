@@ -1,0 +1,26 @@
+{
+  "site": {
+    "baseUrl": "https://glctechsec.com",
+    "repository": "andrelcezar/glctech"
+  },
+  "report": {
+    "zohoMcpServer": "zoho_MCP",
+    "zohoMcpServerNote": "This repository (glctechsec.com) must use the 'zoho_MCP' connector (tools named mcp__zoho_MCP__ZohoMail_*), authenticated as contact@glctechsec.com — the European site's own mailbox. A separate 'zoho' connector may also be present in the environment (authenticated as andre.cezar@glctech.com.br, the Brazilian entity's account) — do NOT use it for this repo's audit reports.",
+    "recipient": "diretoria@glctech.com.br",
+    "recipientFallback": "contact@glctechsec.com",
+    "senderAlias": "contact@glctechsec.com",
+    "weeklySubjectTemplate": "[GLCTECHSEC] Relatório Semanal — Auditoria do Site — {{DATA}}",
+    "monthlySubjectTemplate": "[GLCTECHSEC] Relatório Mensal — Auditoria e Evolução do Site — {{MÊS}}/{{ANO}}"
+  },
+  "dryRun": false,
+  "schedule": {
+    "weeklyCron": "17 8 * * 1",
+    "monthlyCron": "23 8 1 * *",
+    "timezoneNote": "Local time of the Claude Code Remote environment; adjust if the account's timezone differs."
+  },
+  "history": {
+    "knownIssuesFile": "audit-agent/history/known-issues.json",
+    "runsDir": "audit-agent/history/runs",
+    "logsFile": "audit-agent/history/logs.ndjson"
+  }
+}
