@@ -69,11 +69,24 @@
     }
   ],
   "emailStatus": "sent",
-  "emailMessageId": "1786814670103155100",
+  "emailMessageId": "1786815090373138400",
   "emailSenderUsed": "contact@glctechsec.com",
   "emailRecipientUsed": "diretoria@glctech.com.br",
-  "emailCorrection": {
-    "note": "First send (messageId 1786799199819155000) used the wrong Zoho connector — the 'zoho' connector (andre.cezar@glctech.com.br, Brazilian entity account) instead of the 'zoho_MCP' connector (contact@glctechsec.com, this site's own mailbox). Config and Skill corrected; this run re-sent from the right sender. See audit-agent/config.json report.zohoMcpServer.",
-    "supersededMessageId": "1786799199819155000"
-  }
+  "emailFormat": "full standalone HTML document (styled), also delivered to the user as audit-agent/history/runs/2026-08-15-report.html for reference",
+  "emailHistory": [
+    {
+      "messageId": "1786799199819155000",
+      "note": "WRONG sender — used the generic 'zoho' connector (andre.cezar@glctech.com.br, Brazilian entity account) instead of this repo's zoho_MCP connector.",
+      "supersededBy": "1786814670103155100"
+    },
+    {
+      "messageId": "1786814670103155100",
+      "note": "Corrected sender (contact@glctechsec.com via zoho_MCP), simple inline-styled fragment body.",
+      "supersededBy": "1786815090373138400"
+    },
+    {
+      "messageId": "1786815090373138400",
+      "note": "Final version: full standalone styled HTML document, sent from contact@glctechsec.com via zoho_MCP."
+    }
+  ]
 }
