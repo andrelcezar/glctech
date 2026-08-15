@@ -36,9 +36,11 @@ Execução manual  ──┘         │
 | Arquivo | Papel |
 |---|---|
 | `config.json` | Única fonte de configuração: URL do site, destinatário do e-mail, alias de envio, `dryRun`, cron de referência |
+| `report-template.html` | **Formato HTML padrão de todo relatório** (adotado 2026-08-15) — cabeçalho, tipografia e componentes (tabelas, badges de severidade, blocos de achado) reutilizados em toda execução; não redesenhar por run |
 | `probe.mjs` | Script Playwright único: navega numa página real, captura erros de console e timing básico. Ver limitação conhecida no cabeçalho do arquivo (proxy do ambiente pode bloquear Chromium — degrada para "não avaliado", nunca inventa dado) |
 | `history/known-issues.json` | Índice de achados por fingerprint → primeira vez visto, última vez visto, status (NOVO/PENDENTE-REINCIDENTE/RESOLVIDO) |
-| `history/runs/<data>.json` | Snapshot bruto de cada execução real (não-dry-run) |
+| `history/runs/<data>.json` | Snapshot estruturado de cada execução real (não-dry-run) |
+| `history/runs/<data>-report.html` | O relatório final, no formato de `report-template.html`, exatamente como foi enviado por e-mail |
 | `history/logs.ndjson` | Uma linha por execução (formato da seção 29 da spec) |
 
 ## DRY_RUN

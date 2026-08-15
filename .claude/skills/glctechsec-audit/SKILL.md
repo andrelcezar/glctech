@@ -181,11 +181,31 @@ sem hash necessário). Para cada achado desta execução, buscar o fingerprint e
 **Mensal** (modo `monthly`), template exato da seção 25 — agrega os runs semanais salvos em
 `audit-agent/history/runs/` daquele mês (1–20 da seção 25).
 
-Formato de envio: **HTML** (a `ZohoMail_sendEmail` não tem ferramenta de upload de anexo
-disponível nesta MCP — nunca tentar referenciar um `attachmentPath` sem tê-lo carregado por
-uma ferramenta real). Gerar o relatório em Markdown primeiro (fica legível no
-`audit-agent/history/runs/<data>.json` e no log da conversa), depois convertê-lo para HTML
-simples e semântico (títulos, tabela, listas) para o corpo do e-mail.
+**Formato de envio — padrão obrigatório, adotado em 2026-08-15 (aprovado pelo usuário):**
+todo relatório (semanal e mensal) sai como o **documento HTML completo e estilizado** de
+`audit-agent/report-template.html` — não uma versão simplificada, não Markdown puro, não um
+fragmento com estilos inline soltos. Passos:
+
+1. Copiar `audit-agent/report-template.html` inteiro.
+2. Preencher `{{TITLE}}`, `{{PERIOD}}`, `{{MODE_LABEL}}` (ex.: "Execução semanal" ou
+   "Consolidado mensal") e `{{FOOTER_NOTE}}` (ex.: link do PR/commit relevante, se houver).
+3. Montar `{{BODY}}` usando os componentes já definidos no CSS do template — não inventar
+   classes novas nem redesenhar o visual: `<h2>` para cada seção do §24/§25, `<table>` para
+   "Status geral" e "Recomendações", `<span class="badge sev-alto|sev-medio|sev-baixo">`
+   para severidade, `<div class="finding"><pre>...</pre></div>` para o bloco completo de
+   cada achado (§21), `<p class="note">` para ressalvas/notas técnicas (ex. cobertura não
+   avaliada), `<ul>`/`<ol>` para listas.
+   Referência completa de um relatório real já usando esse padrão:
+   `audit-agent/history/runs/2026-08-15-report.html`.
+4. O documento inteiro (com `<!doctype>`/`<html>`/`<head>`/`<style>`/`<body>`) vai direto
+   como `body.content` do `ZohoMail_sendEmail`, `mailFormat: "html"` — não extrair só o
+   `<body>`. Isso já foi testado e entregue corretamente (Zoho preserva o `<style>` no
+   `<head>`).
+5. A `ZohoMail_sendEmail` não tem ferramenta de upload de anexo disponível nesta MCP —
+   nunca tentar referenciar um `attachmentPath` sem tê-lo carregado por uma ferramenta real.
+6. Também salvar essa mesma versão HTML final como
+   `audit-agent/history/runs/<data>-report.html` (só quando `dryRun: false`, junto com o
+   passo 9) — mantém um arquivo de referência visual por execução, não só o JSON estruturado.
 
 ### 7. Se `dryRun: true` — parar aqui
 
@@ -223,7 +243,8 @@ dois foi efetivamente usado.** Nunca falhar silenciosamente (§30).
 ### 9. Persistir o histórico (só se `dryRun: false`, e só depois do passo 8 ter sido tentado)
 
 - Gravar `audit-agent/history/runs/<YYYY-MM-DD>.json` com todos os achados estruturados
-  desta execução + o relatório em Markdown.
+  desta execução, e `audit-agent/history/runs/<YYYY-MM-DD>-report.html` com o documento HTML
+  final enviado (passo 6.6) — mesmo padrão de nome usado em 2026-08-15.
 - Atualizar `audit-agent/history/known-issues.json` com as transições de status do passo 5.
 - Adicionar uma linha a `audit-agent/history/logs.ndjson`, formato exato da seção 29:
 
