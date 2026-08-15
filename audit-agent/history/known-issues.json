@@ -1,0 +1,34 @@
+{
+  "issues": {
+    "SEO|todas as páginas internas exceto a home|Sitemap lista URLs .html que redirecionam (307) para a forma sem extensão, mas o canonical de cada página aponta de volta para a versão .html": {
+      "id": "AUDIT-0001",
+      "status": "PENDENTE",
+      "firstSeen": "2026-08-15",
+      "lastSeen": "2026-08-15",
+      "occurrences": 1
+    },
+    "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
+      "id": "AUDIT-0002",
+      "status": "PENDENTE",
+      "firstSeen": "2026-08-15",
+      "lastSeen": "2026-08-15",
+      "occurrences": 1
+    },
+    "Segurança/Conversão|index.html e trabalhe-conosco.html|Turnstile com data-sitekey placeholder em produção nos dois formulários": {
+      "id": "AUDIT-0003",
+      "status": "PENDENTE",
+      "firstSeen": "2026-08-15",
+      "lastSeen": "2026-08-15",
+      "occurrences": 1,
+      "crossReference": "AUDIT-REPORT.md §6.3"
+    },
+    "Comercial/Confiança|index.html #testimonials|Depoimentos exclusivamente do Brasil, sem case do Reino Unido": {
+      "id": "AUDIT-0004",
+      "status": "PENDENTE",
+      "firstSeen": "2026-08-15",
+      "lastSeen": "2026-08-15",
+      "occurrences": 1,
+      "crossReference": "REVISION-3-CHANGELOG.md"
+    }
+  }
+}

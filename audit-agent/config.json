@@ -1,0 +1,24 @@
+{
+  "site": {
+    "baseUrl": "https://glctechsec.com",
+    "repository": "andrelcezar/glctech"
+  },
+  "report": {
+    "recipient": "diretoria@glctech.com.br",
+    "recipientFallback": "andre.cezar@glctech.com.br",
+    "senderAlias": "andre.cezar@glctech.com.br",
+    "weeklySubjectTemplate": "[GLCTECHSEC] Relatório Semanal — Auditoria do Site — {{DATA}}",
+    "monthlySubjectTemplate": "[GLCTECHSEC] Relatório Mensal — Auditoria e Evolução do Site — {{MÊS}}/{{ANO}}"
+  },
+  "dryRun": false,
+  "schedule": {
+    "weeklyCron": "17 8 * * 1",
+    "monthlyCron": "23 8 1 * *",
+    "timezoneNote": "Local time of the Claude Code Remote environment; adjust if the account's timezone differs."
+  },
+  "history": {
+    "knownIssuesFile": "audit-agent/history/known-issues.json",
+    "runsDir": "audit-agent/history/runs",
+    "logsFile": "audit-agent/history/logs.ndjson"
+  }
+}
