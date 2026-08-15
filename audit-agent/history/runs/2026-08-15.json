@@ -69,6 +69,11 @@
     }
   ],
   "emailStatus": "sent",
-  "emailMessageId": "1786799199819155000",
-  "emailRecipientUsed": "diretoria@glctech.com.br"
+  "emailMessageId": "1786814670103155100",
+  "emailSenderUsed": "contact@glctechsec.com",
+  "emailRecipientUsed": "diretoria@glctech.com.br",
+  "emailCorrection": {
+    "note": "First send (messageId 1786799199819155000) used the wrong Zoho connector — the 'zoho' connector (andre.cezar@glctech.com.br, Brazilian entity account) instead of the 'zoho_MCP' connector (contact@glctechsec.com, this site's own mailbox). Config and Skill corrected; this run re-sent from the right sender. See audit-agent/config.json report.zohoMcpServer.",
+    "supersededMessageId": "1786799199819155000"
+  }
 }

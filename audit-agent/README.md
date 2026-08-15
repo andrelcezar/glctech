@@ -58,14 +58,23 @@ Para testar só o probe de navegador real:
 node audit-agent/probe.mjs https://glctechsec.com/ https://glctechsec.com/trabalhe-conosco.html
 ```
 
+## Qual conector Zoho usar
+
+Este repositório (`glctechsec.com`) usa especificamente o conector **`zoho_MCP`**
+(ferramentas `mcp__zoho_MCP__ZohoMail_*`), autenticado como `contact@glctechsec.com` — a
+caixa própria do site europeu (`config.json` → `report.zohoMcpServer`). O ambiente pode ter
+também um conector `zoho` genérico, autenticado como `andre.cezar@glctech.com.br` (conta da
+entidade brasileira) — **não é o usado por este agente**. Confirmado via
+`ZohoMail_getMailAccounts` (`accountId 6691063000000008002`).
+
 ## Trocar o destinatário ou o remetente
 
-Editar `config.json` → `report.recipient` / `report.senderAlias`. Os aliases de envio
-disponíveis na conta Zoho conectada (vistos via `ZohoMail_getMailAccounts` durante a
-implementação): `vendas@`, `marketing@`, `suporte@`, `noc@`, `rh@`, `contato@` e
-`diretoria@glctech.com.br`. Nenhum estava marcado como `"validated"` no momento da
-implementação — se o envio falhar por causa disso, a skill tenta automaticamente
-`report.recipientFallback` e registra qual dos dois foi usado.
+Editar `config.json` → `report.recipient` / `report.senderAlias`. Aliases de envio já
+vistos disponíveis na conta `contact@glctechsec.com`: o próprio `contact@glctechsec.com`,
+mais `suporte@glctech.com.br` e `diretoria@glctech.com.br` (grupos compartilhados entre as
+duas contas Zoho). Nenhum estava marcado como `"validated"` no momento da implementação —
+mesmo assim o envio real de teste funcionou; se algum dia falhar por causa disso, a skill
+tenta automaticamente `report.recipientFallback` e registra qual dos dois foi usado.
 
 ## Agendamento
 
