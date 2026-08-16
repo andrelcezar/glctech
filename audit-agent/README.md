@@ -62,8 +62,8 @@ node audit-agent/probe.mjs https://glctechsec.com/ https://glctechsec.com/trabal
 
 ## Qual conector Zoho usar
 
-Este repositório (`glctechsec.com`) usa especificamente o conector **`zoho_MCP`**
-(ferramentas `mcp__zoho_MCP__ZohoMail_*`), autenticado como `contact@glctechsec.com` — a
+Este repositório (`glctechsec.com`) usa especificamente o conector **`GLCtechSec`**
+(ferramentas `mcp__GLCtechSec__ZohoMail_*`), autenticado como `contact@glctechsec.com` — a
 caixa própria do site europeu (`config.json` → `report.zohoMcpServer`). O ambiente pode ter
 também um conector `zoho` genérico, autenticado como `andre.cezar@glctech.com.br` (conta da
 entidade brasileira) — **não é o usado por este agente**. Confirmado via
