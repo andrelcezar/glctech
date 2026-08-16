@@ -214,16 +214,16 @@ passos 8/9.
 
 ### 8. Enviar o e-mail (só se `dryRun: false`)
 
-**Este repositório usa especificamente o conector `zoho_MCP`** (`config.report.zohoMcpServer`)
-— ferramentas com prefixo `mcp__zoho_MCP__ZohoMail_*`, autenticado como
+**Este repositório usa especificamente o conector `GLCtechSec`** (`config.report.zohoMcpServer`)
+— ferramentas com prefixo `mcp__GLCtechSec__ZohoMail_*`, autenticado como
 `contact@glctechsec.com`, a caixa própria do site europeu. Pode existir também um conector
 `zoho` genérico no ambiente (autenticado como `andre.cezar@glctech.com.br`, conta da
-entidade brasileira) — **não usar esse para os relatórios deste repositório**. Se `zoho_MCP`
+entidade brasileira) — **não usar esse para os relatórios deste repositório**. Se `GLCtechSec`
 não estiver disponível na sessão, parar e avisar — não cair silenciosamente para o outro
 conector.
 
-Usar `mcp__zoho_MCP__ZohoMail_sendEmail`. Antes de chamar, ler
-`mcp__zoho_MCP__ZohoMail_getMailAccounts` (só leitura) para confirmar o `accountId` atual —
+Usar `mcp__GLCtechSec__ZohoMail_sendEmail`. Antes de chamar, ler
+`mcp__GLCtechSec__ZohoMail_getMailAccounts` (só leitura) para confirmar o `accountId` atual —
 não fixar um valor antigo se a conta mudar.
 
 ```

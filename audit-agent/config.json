@@ -4,8 +4,8 @@
     "repository": "andrelcezar/glctech"
   },
   "report": {
-    "zohoMcpServer": "zoho_MCP",
-    "zohoMcpServerNote": "This repository (glctechsec.com) must use the 'zoho_MCP' connector (tools named mcp__zoho_MCP__ZohoMail_*), authenticated as contact@glctechsec.com — the European site's own mailbox. A separate 'zoho' connector may also be present in the environment (authenticated as andre.cezar@glctech.com.br, the Brazilian entity's account) — do NOT use it for this repo's audit reports.",
+    "zohoMcpServer": "GLCtechSec",
+    "zohoMcpServerNote": "This repository (glctechsec.com) must use the 'GLCtechSec' connector (tools named mcp__GLCtechSec__ZohoMail_*), authenticated as contact@glctechsec.com — the European site's own mailbox. A separate 'zoho' connector may also be present in the environment (authenticated as andre.cezar@glctech.com.br, the Brazilian entity's account) — do NOT use it for this repo's audit reports.",
     "recipient": "diretoria@glctech.com.br",
     "recipientFallback": "contact@glctechsec.com",
     "senderAlias": "contact@glctechsec.com",
