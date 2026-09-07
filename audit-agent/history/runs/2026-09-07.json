@@ -1,0 +1,81 @@
+{
+  "date": "2026-09-07",
+  "mode": "weekly",
+  "dryRun": false,
+  "site": "https://glctechsec.com",
+  "coverage": {
+    "evaluated": ["SEO", "Segurança (headers)", "Privacidade/GDPR", "Formulários (endpoint reachability)", "Técnico (sitemap/links)", "Segredos expostos", "Conversão/Conteúdo (parcial)"],
+    "notEvaluated": ["Performance", "Acessibilidade", "Mobile", "Erros de console/Core Web Vitals"],
+    "notEvaluatedReason": "audit-agent/probe.mjs falhou com net::ERR_CONNECTION_RESET ao navegar via Chromium neste ambiente (mesma limitação conhecida)."
+  },
+  "findings": [
+    {
+      "id": "AUDIT-0001",
+      "status": "CONFIRMADO",
+      "categoria": "SEO",
+      "problema": "URLs do sitemap.xml redirecionam (307) para uma forma diferente da que o <link rel=\"canonical\"> da própria página declara.",
+      "evidencia": "curl -I https://glctechsec.com/trust-compliance.html -> HTTP 307, Location: /trust-compliance. canonical aponta para .../trust-compliance.html. Reconfirmado em 2026-09-07.",
+      "pagina": "todas as páginas internas exceto a home",
+      "url": "https://glctechsec.com/sitemap.xml",
+      "arquivo": "sitemap.xml",
+      "severidade": "MÉDIO",
+      "prioridade": "MÉDIO",
+      "esforco": "BAIXO",
+      "recomendacao": "Alinhar sitemap.xml e <link rel=\"canonical\"> de cada página para a mesma forma de URL.",
+      "necessitaAprovacao": true,
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 2026-09-04 e 2026-09-07)"
+    },
+    {
+      "id": "AUDIT-0002",
+      "status": "REQUER ANÁLISE JURÍDICA",
+      "categoria": "Privacidade/GDPR",
+      "problema": "GA4 carregado incondicionalmente, sem Consent Mode nem banner de cookies detectado.",
+      "evidencia": "gtag.js presente no <head>; 0 ocorrências de gtag('consent', ...); nenhum banner encontrado. Reconfirmado em 2026-09-07.",
+      "pagina": "todas",
+      "url": "https://glctechsec.com/",
+      "arquivo": "index.html (e demais páginas)",
+      "severidade": "ALTO",
+      "prioridade": "ALTO",
+      "esforco": "MÉDIO",
+      "recomendacao": "Avaliar juridicamente a necessidade de Consent Mode/banner sob UK GDPR/PECR antes de decidir a implementação.",
+      "necessitaAprovacao": true,
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 2026-09-04 e 2026-09-07)"
+    },
+    {
+      "id": "AUDIT-0003",
+      "status": "CONFIRMADO",
+      "categoria": "Segurança/Conversão",
+      "problema": "Cloudflare Turnstile com data-sitekey placeholder em produção nos dois formulários.",
+      "evidencia": "curl https://glctechsec.com/ -> data-sitekey=\"0x0000000000000000000AA\". Reconfirmado em 2026-09-07.",
+      "pagina": "index.html, trabalhe-conosco.html",
+      "severidade": "MÉDIO",
+      "prioridade": "MÉDIO",
+      "esforco": "BAIXO",
+      "recomendacao": "Criar o widget Turnstile real no painel Cloudflare e substituir a chave (ver AUDIT-REPORT.md §6.3).",
+      "necessitaAprovacao": true,
+      "crossReference": "AUDIT-REPORT.md §6.3",
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 2026-09-04 e 2026-09-07)"
+    },
+    {
+      "id": "AUDIT-0004",
+      "status": "OPORTUNIDADE",
+      "categoria": "Comercial/Confiança",
+      "problema": "Depoimentos exclusivamente do Brasil, sem case do Reino Unido.",
+      "evidencia": "Seção #testimonials de index.html, reconfirmado em 2026-09-07 (4 ocorrências de 'Brazil', 0 de 'United Kingdom').",
+      "pagina": "index.html",
+      "severidade": "BAIXO",
+      "prioridade": "MÉDIO",
+      "esforco": "ALTO",
+      "recomendacao": "Obter e publicar a primeira referência de cliente do Reino Unido quando disponível.",
+      "necessitaAprovacao": true,
+      "crossReference": "REVISION-3-CHANGELOG.md",
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 2026-09-04 e 2026-09-07)"
+    }
+  ],
+  "emailStatus": "sent",
+  "emailMessageId": "1788769209415138300",
+  "emailSenderUsed": "contact@glctechsec.com",
+  "emailRecipientUsed": "diretoria@glctech.com.br",
+  "emailFormat": "full standalone HTML document (styled), also delivered to the user as audit-agent/history/runs/2026-09-07-report.html for reference",
+  "gitPersistenceStatus": "committed locally only — GitHub push blocked: both `git push` and the GitHub API (create_branch) returned 403 with message \"Claude doesn't have GitHub access to andrelcezar/glctech for your organization\". Awaiting reauthorization (claude.ai/customize/connectors or GitHub App reinstall)."
+}
