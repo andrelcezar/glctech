@@ -4,30 +4,30 @@
       "id": "AUDIT-0001",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-08-15",
-      "occurrences": 1
+      "lastSeen": "2026-09-07",
+      "occurrences": 3
     },
     "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
       "id": "AUDIT-0002",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-08-15",
-      "occurrences": 1
+      "lastSeen": "2026-09-07",
+      "occurrences": 3
     },
     "Segurança/Conversão|index.html e trabalhe-conosco.html|Turnstile com data-sitekey placeholder em produção nos dois formulários": {
       "id": "AUDIT-0003",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-08-15",
-      "occurrences": 1,
+      "lastSeen": "2026-09-07",
+      "occurrences": 3,
       "crossReference": "AUDIT-REPORT.md §6.3"
     },
     "Comercial/Confiança|index.html #testimonials|Depoimentos exclusivamente do Brasil, sem case do Reino Unido": {
       "id": "AUDIT-0004",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-08-15",
-      "occurrences": 1,
+      "lastSeen": "2026-09-07",
+      "occurrences": 3,
       "crossReference": "REVISION-3-CHANGELOG.md"
     }
   }
