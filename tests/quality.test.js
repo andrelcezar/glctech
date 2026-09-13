@@ -178,6 +178,18 @@ test('the English site does not email itself in Portuguese', () => {
   }
 });
 
+test('the Worker never emails or replies in Portuguese', () => {
+  // Unlike index.html (which legitimately carries other-language strings for
+  // testimonials/i18n), worker/index.js and worker/lib/mail.js are pure
+  // logic — any accented Portuguese character here means a user-facing API
+  // message or e-mail template regressed back to Portuguese.
+  const accented = /[áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ]/;
+  for (const file of ['worker/index.js', 'worker/lib/mail.js']) {
+    const s = read(file);
+    assert.ok(!accented.test(s), `Portuguese accented characters found in ${file}`);
+  }
+});
+
 /* ── accessibility ──────────────────────────────────────────────────────── */
 
 test('every page offers a skip link and respects reduced motion', () => {
@@ -311,10 +323,10 @@ test('the contact form posts same-origin to /api/contact (no third-party form se
 });
 
 test('the careers form posts same-origin to /api/careers (no third-party form service)', () => {
-  const s = read('trabalhe-conosco.html');
+  const s = read('career.html');
   assert.match(s, /var CAREERS_ENDPOINT = '\/api\/careers';/,
     'careers form no longer posts to the Worker at /api/careers');
-  assert.ok(!/formsubmit\.co/.test(s), 'trabalhe-conosco.html still references FormSubmit');
+  assert.ok(!/formsubmit\.co/.test(s), 'career.html still references FormSubmit');
 });
 
 test('the real recipient addresses are not hard-coded in client code', () => {
@@ -381,13 +393,13 @@ test('the form carries a honeypot the Worker can check', () => {
   assert.match(contact, /id="website"[^>]*tabindex="-1"/, 'contact form: no honeypot field');
   assert.match(contact, /id="website"[^>]*aria-hidden="true"/, 'contact honeypot is exposed to screen readers');
 
-  const careers = read('trabalhe-conosco.html');
+  const careers = read('career.html');
   assert.match(careers, /name="website"[^>]*tabindex="-1"/, 'careers form: no honeypot field');
   assert.match(careers, /name="website"[^>]*aria-hidden="true"/, 'careers honeypot is exposed to screen readers');
 });
 
 test('both forms embed a Cloudflare Turnstile widget', () => {
-  for (const page of ['index.html', 'trabalhe-conosco.html']) {
+  for (const page of ['index.html', 'career.html']) {
     const s = read(page);
     assert.match(s, /class="cf-turnstile"/, `${page}: no Turnstile widget`);
     assert.match(s, /challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/, `${page}: Turnstile script not loaded`);
@@ -427,7 +439,7 @@ test('build outputs and local secrets are gitignored', () => {
 test('both forms post to endpoints the Worker actually routes', () => {
   const worker = fs.readFileSync(path.join(ROOT, 'worker', 'index.js'), 'utf8');
   const contactEndpoint = read('index.html').match(/var CONTACT_ENDPOINT = '([^']*)'/)[1];
-  const careersEndpoint = read('trabalhe-conosco.html').match(/var CAREERS_ENDPOINT = '([^']*)'/)[1];
+  const careersEndpoint = read('career.html').match(/var CAREERS_ENDPOINT = '([^']*)'/)[1];
   assert.ok(worker.includes(`'${contactEndpoint}'`), `the Worker does not route ${contactEndpoint}`);
   assert.ok(worker.includes(`'${careersEndpoint}'`), `the Worker does not route ${careersEndpoint}`);
 });

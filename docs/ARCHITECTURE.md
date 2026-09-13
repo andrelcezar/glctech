@@ -44,7 +44,7 @@ first for the high-level mental model.
 | `zabbix.html` | Monitoring service detail | ✅ | GA4 |
 | `kaspersky.html` | Security service detail | ✅ | GA4 |
 | `veeam.html` | Backup service detail | ✅ | GA4 |
-| `trabalhe-conosco.html` | Careers | ✅ | GA4, application form → `/api/careers` (Worker, PDF attachment) |
+| `career.html` | Careers | ✅ | GA4, application form → `/api/careers` (Worker, PDF attachment) |
 | `politica.html` | Privacy policy | ✅ | GA4 |
 | `termos.html` | Terms of use | ✅ | GA4 |
 | `andre.html` / `tchize.html` / `kawan.html` | Individual team-member profiles | — | — |
@@ -201,7 +201,7 @@ at the repo root.
 ```mermaid
 sequenceDiagram
     participant U as Visitor
-    participant P as index.html / trabalhe-conosco.html
+    participant P as index.html / career.html
     participant WK as worker/index.js (/api/contact, /api/careers)
     participant Z as Zoho Mail (SMTP)
     participant M as GLCTech inbox

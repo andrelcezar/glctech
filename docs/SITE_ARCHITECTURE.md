@@ -86,7 +86,7 @@ flowchart TD
 | **State management** | None beyond `localStorage` (`glctech_lang` for language, `glc_rss_v6` for the blog cache). |
 | **Routing** | No client router — each page is a distinct HTML file. Cloudflare serves them at clean, extensionless URLs (`/about-the-group` → `about-the-group.html`). |
 | **Styling** | CSS custom properties (design tokens) defined in each page's `:root`; brand accent `--red: #e6262c`. Shared `css/styles.css` exists but pages are largely self-styled. See `ARCHITECTURE.md#the-shared-design-system`. |
-| **Forms & validation** | Contact form (`index.html`) and careers form (`trabalhe-conosco.html`) validate client-side (localized errors via `window._i18n_errors`) and re-validate server-side in the Worker. |
+| **Forms & validation** | Contact form (`index.html`) and careers form (`career.html`) validate client-side (localized errors via `window._i18n_errors`) and re-validate server-side in the Worker. |
 | **Assets** | `assets/` (logos, team photos as WebP, service/hero/OG images, flags). Optimised to WebP in a prior revision. |
 | **SEO** | Per-page meta description, canonical, Open Graph tags, favicon; `robots.txt` + `sitemap.xml` at root. |
 | **i18n** | Client-side dictionary embedded in `scripts/i18n.js` (six languages: `pt`, `en`, `de`, `es`, `fr`, `it`). Full detail in [`I18N.md`](I18N.md). |
@@ -107,7 +107,7 @@ truth for what ships):
 │   ├── zabbix.html            Zabbix monitoring service + pricing simulator
 │   ├── kaspersky.html         Security (vendor-agnostic) service + pricing simulator
 │   └── veeam.html             Veeam backup service + pricing simulator
-├── trabalhe-conosco.html      Careers — job listings + application form (PDF upload)
+├── career.html      Careers — job listings + application form (PDF upload)
 ├── politica.html              Privacy Policy
 ├── termos.html                Terms of Use
 └── (orphaned — published but unlinked from navigation)
@@ -124,7 +124,7 @@ Key pages:
 | Page | Route | Primary components | Data / APIs | Key CTA |
 |---|---|---|---|---|
 | Home | `/` | Hero, stats strip, services cards, team, testimonials, contact form | `assets/data/stats.json` (live counter), `POST /api/contact`, GA4, Tidio | "Fale Conosco" / contact form |
-| Careers | `/trabalhe-conosco` | Job listings, application form w/ résumé upload | `POST /api/careers` (multipart + PDF), GA4 | Submit application |
+| Careers | `/career` | Job listings, application form w/ résumé upload | `POST /api/careers` (multipart + PDF), GA4 | Submit application |
 | Zabbix / Kaspersky / Veeam | `/zabbix`, `/kaspersky`, `/veeam` | Service detail, pricing simulator (currency by locale) | GA4 | Contact / quote |
 | Trust & Compliance | `/trust-compliance` | DPA, ICO breach process, Cyber Essentials status | GA4 | Contact |
 | Privacy / Terms | `/politica`, `/termos` | Legal copy | GA4 | — |

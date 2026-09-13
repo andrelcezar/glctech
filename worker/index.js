@@ -50,7 +50,7 @@ async function handleContact(request, env, ctx) {
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   if (await isRateLimited(env, ctx, 'contact', ip, 5, 600)) {
     console.log(`[contact] ${rid} 429 rate-limited`);
-    return json({ success: false, message: 'Muitas tentativas. Tente novamente em alguns minutos.' }, 429);
+    return json({ success: false, message: 'Too many attempts. Please try again in a few minutes.' }, 429);
   }
 
   let body;
@@ -61,14 +61,14 @@ async function handleContact(request, env, ctx) {
   }
 
   // Honeypot: a hidden field no human fills in.
-  if (clean(body.website, 200)) return json({ success: true, message: 'Mensagem enviada com sucesso.' }, 200);
+  if (clean(body.website, 200)) return json({ success: true, message: 'Message sent successfully.' }, 200);
 
   const turnstile = await verifyTurnstile({
     token: body['cf-turnstile-response'], secret: env.TURNSTILE_SECRET_KEY, ip, fetchImpl: fetch,
   });
   if (turnstile.configured && !turnstile.ok) {
     console.log(`[contact] ${rid} 400 turnstile-failed`);
-    return json({ success: false, message: 'Verificação de segurança falhou. Recarregue a página e tente novamente.' }, 400);
+    return json({ success: false, message: 'Security check failed. Please reload the page and try again.' }, 400);
   }
 
   const name = clean(body.name, 120);
@@ -79,15 +79,15 @@ async function handleContact(request, env, ctx) {
   const subject = clean(body.subject, 160);
 
   if (!name || !message) {
-    return json({ success: false, message: 'Nome e mensagem são obrigatórios.' }, 400);
+    return json({ success: false, message: 'Name and message are required.' }, 400);
   }
   if (!isValidEmail(email)) {
-    return json({ success: false, message: 'Informe um e-mail válido.' }, 400);
+    return json({ success: false, message: 'Please provide a valid email address.' }, 400);
   }
 
   if (!env.ZOHO_USER || !env.ZOHO_PASS) {
     console.error(`[contact] ${rid} 500 mail-not-configured`);
-    return json({ success: false, message: 'Não foi possível enviar a mensagem. Tente novamente mais tarde.' }, 500);
+    return json({ success: false, message: 'Unable to send the message. Please try again later.' }, 500);
   }
 
   const { subject: mailSubject, text } = buildContactEmail({ name, email, phone, company, subject, message });
@@ -107,11 +107,11 @@ async function handleContact(request, env, ctx) {
       text,
     });
     console.log(`[contact] ${rid} 200 sent`);
-    return json({ success: true, message: 'Mensagem enviada com sucesso. Entraremos em contato em breve.' }, 200);
+    return json({ success: true, message: 'Message sent successfully. We will be in touch shortly.' }, 200);
   } catch (err) {
     // The SMTP error names the host and the account — log it, never return it.
     console.error(`[contact] ${rid} 502 send-failed:`, err && err.message);
-    return json({ success: false, message: 'Não foi possível enviar sua mensagem. Tente novamente.' }, 502);
+    return json({ success: false, message: 'Unable to send your message. Please try again.' }, 502);
   }
 }
 
@@ -120,7 +120,7 @@ async function handleCareers(request, env, ctx) {
   if (request.method === 'OPTIONS') return preflight();
   if (request.method !== 'POST') return json({ success: false, message: 'Method not allowed.' }, 405);
   if (!originAllowed(request)) return json({ success: false, message: 'Origin not allowed.' }, 403);
-  if (tooLarge(request, MAX_CAREERS_BODY_BYTES)) return json({ success: false, message: 'Arquivo muito grande.' }, 413);
+  if (tooLarge(request, MAX_CAREERS_BODY_BYTES)) return json({ success: false, message: 'File too large.' }, 413);
 
   const contentType = request.headers.get('Content-Type') || '';
   if (!contentType.includes('multipart/form-data')) {
@@ -130,7 +130,7 @@ async function handleCareers(request, env, ctx) {
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   if (await isRateLimited(env, ctx, 'careers', ip, 5, 600)) {
     console.log(`[careers] ${rid} 429 rate-limited`);
-    return json({ success: false, message: 'Muitas tentativas. Tente novamente em alguns minutos.' }, 429);
+    return json({ success: false, message: 'Too many attempts. Please try again in a few minutes.' }, 429);
   }
 
   let form;
@@ -143,14 +143,14 @@ async function handleCareers(request, env, ctx) {
   const get = (k, max) => clean(form.get(k), max);
 
   // Honeypot: a hidden field no human fills in.
-  if (get('website', 200)) return json({ success: true, message: 'Candidatura enviada com sucesso.' }, 200);
+  if (get('website', 200)) return json({ success: true, message: 'Application submitted successfully.' }, 200);
 
   const turnstile = await verifyTurnstile({
     token: form.get('cf-turnstile-response'), secret: env.TURNSTILE_SECRET_KEY, ip, fetchImpl: fetch,
   });
   if (turnstile.configured && !turnstile.ok) {
     console.log(`[careers] ${rid} 400 turnstile-failed`);
-    return json({ success: false, message: 'Verificação de segurança falhou. Recarregue a página e tente novamente.' }, 400);
+    return json({ success: false, message: 'Security check failed. Please reload the page and try again.' }, 400);
   }
 
   const name = get('nome', 120);
@@ -167,10 +167,10 @@ async function handleCareers(request, env, ctx) {
   const portfolio = get('portfolio', 300);
 
   if (!name || !phone || !location || !position || !message) {
-    return json({ success: false, message: 'Preencha todos os campos obrigatórios.' }, 400);
+    return json({ success: false, message: 'Please fill in all required fields.' }, 400);
   }
   if (!isValidEmail(email)) {
-    return json({ success: false, message: 'Informe um e-mail válido.' }, 400);
+    return json({ success: false, message: 'Please provide a valid email address.' }, 400);
   }
 
   const resume = await validateResumeFile(form.get('curriculo'));
@@ -180,7 +180,7 @@ async function handleCareers(request, env, ctx) {
 
   if (!env.ZOHO_USER || !env.ZOHO_PASS) {
     console.error(`[careers] ${rid} 500 mail-not-configured`);
-    return json({ success: false, message: 'Não foi possível enviar sua candidatura. Tente novamente mais tarde.' }, 500);
+    return json({ success: false, message: 'Unable to submit your application. Please try again later.' }, 500);
   }
 
   const { subject: mailSubject, text } = buildCareersEmail({
@@ -202,10 +202,10 @@ async function handleCareers(request, env, ctx) {
       attachment: { filename: resume.filename, contentType: 'application/pdf', data: resume.bytes },
     });
     console.log(`[careers] ${rid} 200 sent`);
-    return json({ success: true, message: 'Candidatura enviada com sucesso. Nossa equipe de RH entrará em contato.' }, 200);
+    return json({ success: true, message: 'Application submitted successfully. Our HR team will be in touch.' }, 200);
   } catch (err) {
     console.error(`[careers] ${rid} 502 send-failed:`, err && err.message);
-    return json({ success: false, message: 'Não foi possível enviar sua candidatura. Tente novamente.' }, 502);
+    return json({ success: false, message: 'Unable to submit your application. Please try again.' }, 502);
   }
 }
 
