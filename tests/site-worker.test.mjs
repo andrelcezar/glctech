@@ -60,7 +60,7 @@ test('contact: validation and honeypot behave', async () => {
   assert.strictEqual((await w.fetch(post('/api/contact', { ...GOOD_CONTACT, name: '' }, { origin: 'https://glctechsec.com' }), ENV, CTX)).status, 400);
   const hp = await w.fetch(post('/api/contact', { ...GOOD_CONTACT, website: 'bot' }, { origin: 'https://glctechsec.com' }), ENV, CTX);
   assert.strictEqual(hp.status, 200);
-  assert.deepStrictEqual(await hp.json(), { success: true, message: 'Mensagem enviada com sucesso.' });
+  assert.deepStrictEqual(await hp.json(), { success: true, message: 'Message sent successfully.' });
 });
 test('contact: fails closed without secrets', async () => {
   const r = await w.fetch(post('/api/contact', GOOD_CONTACT, { origin: 'https://glctechsec.com' }), { ASSETS }, CTX);
@@ -133,7 +133,7 @@ test('careers: invalid email is rejected', async () => {
 test('careers: honeypot is silently accepted', async () => {
   const r = await w.fetch(careersPost(careersForm({ overrides: { website: 'bot' } })), ENV, CTX);
   assert.strictEqual(r.status, 200);
-  assert.deepStrictEqual(await r.json(), { success: true, message: 'Candidatura enviada com sucesso.' });
+  assert.deepStrictEqual(await r.json(), { success: true, message: 'Application submitted successfully.' });
 });
 test('careers: missing resume is rejected', async () => {
   const r = await w.fetch(careersPost(careersForm({ file: null })), ENV, CTX);

@@ -57,7 +57,7 @@ semanal do glctechsec em dry-run"* ou *"rode o relatório mensal do glctechsec"*
 
 Para testar só o probe de navegador real:
 ```bash
-node audit-agent/probe.mjs https://glctechsec.com/ https://glctechsec.com/trabalhe-conosco.html
+node audit-agent/probe.mjs https://glctechsec.com/ https://glctechsec.com/career.html
 ```
 
 ## Qual conector Zoho usar

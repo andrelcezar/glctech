@@ -117,7 +117,7 @@ seção "Pendências" no final.
   aplica headers de segurança aos assets estáticos também.
 - `index.html` — formulário de contato: campo "Assunto", honeypot mantido,
   widget Turnstile, JS de envio simplificado (sem fallback FormSubmit).
-- `trabalhe-conosco.html` — formulário de vagas: honeypot novo, widget
+- `career.html` — formulário de vagas: honeypot novo, widget
   Turnstile, JS de envio trocado de FormSubmit.co para `/api/careers`
   (multipart, same-origin).
 - `scripts/i18n.js` — chaves `form.subject*` adicionadas em pt/en/de/es/fr/it.
@@ -141,7 +141,8 @@ seção "Pendências" no final.
 - `worker/lib/smtp.js` — cliente SMTP (movido de `serverless/cloudflare/`,
   **estendido** para suportar anexo MIME `multipart/mixed`).
 - `worker/lib/mail.js` — templates de assunto/corpo dos dois e-mails
-  internos (em português, conforme especificado).
+  internos (em inglês, alinhado ao idioma do site glctechsec.com — alterado
+  em 2026-09; originalmente em português).
 - `worker/lib/validate.js` — validação de currículo PDF (extensão + MIME +
   magic bytes + tamanho) e sanitização de nome de arquivo.
 - `worker/lib/turnstile.js` — verificação server-side do Cloudflare
@@ -204,7 +205,7 @@ envios/10min por IP.
 3. Copiar o **Site Key** (público) e colar em `data-sitekey="..."` em dois
    lugares:
    - `index.html` — `<div class="cf-turnstile" data-sitekey="0x0000000000000000000AA" ...>`
-   - `trabalhe-conosco.html` — mesmo padrão.
+   - `career.html` — mesmo padrão.
 4. Copiar o **Secret Key** e definir como secret do Worker (`6.1`).
 5. Sem isso configurado, os formulários continuam funcionando — a verificação
    Turnstile é pulada automaticamente até `TURNSTILE_SECRET_KEY` existir

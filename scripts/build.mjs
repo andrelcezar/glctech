@@ -31,7 +31,7 @@ const FILES = [
   'zabbix.html',
   'kaspersky.html',
   'veeam.html',
-  'trabalhe-conosco.html',
+  'career.html',
   'politica.html',
   'termos.html',
   'ebook.html',

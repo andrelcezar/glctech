@@ -37,7 +37,7 @@ unzip glctech-international.zip
 - Test: `nslookup glctechsec.com`
 
 ### 3. Activate Application Form
-The careers form (trabalhe-conosco.html) uses FormSubmit.co for file uploads:
+The careers form (career.html) uses FormSubmit.co for file uploads:
 
 1. Go to https://formsubmit.co
 2. Enter **hr@glctechsec.com**
@@ -90,7 +90,7 @@ All occurrences:
 - index.html (3 places)
 - politica.html (2 places)
 - termos.html (1 place)
-- trabalhe-conosco.html (3 places)
+- career.html (3 places)
 - scripts/i18n.js (multiple language blocks)
 
 ### Change Phone Number
@@ -98,7 +98,7 @@ All occurrences:
 - index.html (form, error message, contact)
 - politica.html (contact box)
 - termos.html (contact box)
-- trabalhe-conosco.html (form)
+- career.html (form)
 - scripts/i18n.js (placeholders in all languages)
 
 ### Adjust Pricing
@@ -122,7 +122,7 @@ glctech-main/
 ├── zabbix.html                  ← Zabbix monitoring page
 ├── politica.html                ← Privacy Policy (EN)
 ├── termos.html                  ← Terms of Use (EN)
-├── trabalhe-conosco.html        ← Careers (EN)
+├── career.html        ← Careers (EN)
 ├── CNAME                        ← glctechsec.com
 ├── scripts/
 │   ├── i18n.js                  ← Translation engine (353 keys, 6 languages)
@@ -144,7 +144,7 @@ glctech-main/
 
 ### Form Not Sending?
 - ✅ Check if you clicked "Activate" link in FormSubmit email
-- ✅ Verify hr@glctechsec.com is the destination in trabalhe-conosco.html
+- ✅ Verify hr@glctechsec.com is the destination in career.html
 - ✅ Check browser console for CORS errors
 
 ### Language Not Changing?
