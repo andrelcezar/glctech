@@ -4,30 +4,31 @@
       "id": "AUDIT-0001",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-07",
-      "occurrences": 3
+      "lastSeen": "2026-09-14",
+      "occurrences": 4
     },
     "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
       "id": "AUDIT-0002",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-07",
-      "occurrences": 3
+      "lastSeen": "2026-09-14",
+      "occurrences": 4
     },
-    "Segurança/Conversão|index.html e trabalhe-conosco.html|Turnstile com data-sitekey placeholder em produção nos dois formulários": {
+    "Segurança/Conversão|index.html e career.html|Turnstile com data-sitekey placeholder em produção nos dois formulários": {
       "id": "AUDIT-0003",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-07",
-      "occurrences": 3,
-      "crossReference": "AUDIT-REPORT.md §6.3"
+      "lastSeen": "2026-09-14",
+      "occurrences": 4,
+      "crossReference": "AUDIT-REPORT.md §6.3",
+      "note": "Página renomeada de trabalhe-conosco.html para career.html em 2026-09-13 (mesma issue, fingerprint atualizado para refletir o nome atual do arquivo)."
     },
     "Comercial/Confiança|index.html #testimonials|Depoimentos exclusivamente do Brasil, sem case do Reino Unido": {
       "id": "AUDIT-0004",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-07",
-      "occurrences": 3,
+      "lastSeen": "2026-09-14",
+      "occurrences": 4,
       "crossReference": "REVISION-3-CHANGELOG.md"
     }
   }
