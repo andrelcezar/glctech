@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-14",
+  "mode": "weekly",
+  "dryRun": false,
+  "site": "https://glctechsec.com",
+  "coverage": {
+    "evaluated": ["SEO", "Segurança (headers)", "Privacidade/GDPR", "Formulários (endpoint reachability + regressão de idioma)", "Técnico (sitemap/links)", "Segredos expostos", "Conversão/Conteúdo (parcial)"],
+    "notEvaluated": ["Performance", "Acessibilidade", "Mobile", "Erros de console/Core Web Vitals"],
+    "notEvaluatedReason": "audit-agent/probe.mjs falhou com net::ERR_CONNECTION_RESET ao navegar via Chromium neste ambiente (mesma limitação conhecida). Nesta execução, o pacote playwright precisou ser reinstalado via npm install antes de reproduzir essa limitação."
+  },
+  "findings": [
+    {
+      "id": "AUDIT-0001",
+      "status": "CONFIRMADO",
+      "categoria": "SEO",
+      "problema": "URLs do sitemap.xml redirecionam (307) para uma forma diferente da que o <link rel=\"canonical\"> da própria página declara.",
+      "evidencia": "curl -I https://glctechsec.com/trust-compliance.html -> HTTP 307, Location: /trust-compliance. canonical aponta para .../trust-compliance.html. Reconfirmado em 2026-09-14.",
+      "pagina": "todas as páginas internas exceto a home",
+      "url": "https://glctechsec.com/sitemap.xml",
+      "arquivo": "sitemap.xml",
+      "severidade": "MÉDIO",
+      "prioridade": "MÉDIO",
+      "esforco": "BAIXO",
+      "recomendacao": "Alinhar sitemap.xml e <link rel=\"canonical\"> de cada página para a mesma forma de URL.",
+      "necessitaAprovacao": true,
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 09-04, 09-07 e 09-14)"
+    },
+    {
+      "id": "AUDIT-0002",
+      "status": "REQUER ANÁLISE JURÍDICA",
+      "categoria": "Privacidade/GDPR",
+      "problema": "GA4 carregado incondicionalmente, sem Consent Mode nem banner de cookies detectado.",
+      "evidencia": "gtag.js presente no <head>; 0 ocorrências de gtag('consent', ...); nenhum banner encontrado. Reconfirmado em 2026-09-14.",
+      "pagina": "todas",
+      "url": "https://glctechsec.com/",
+      "arquivo": "index.html (e demais páginas)",
+      "severidade": "ALTO",
+      "prioridade": "ALTO",
+      "esforco": "MÉDIO",
+      "recomendacao": "Avaliar juridicamente a necessidade de Consent Mode/banner sob UK GDPR/PECR antes de decidir a implementação.",
+      "necessitaAprovacao": true,
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 09-04, 09-07 e 09-14)"
+    },
+    {
+      "id": "AUDIT-0003",
+      "status": "CONFIRMADO",
+      "categoria": "Segurança/Conversão",
+      "problema": "Cloudflare Turnstile com data-sitekey placeholder em produção nos dois formulários.",
+      "evidencia": "curl https://glctechsec.com/ e /career.html -> data-sitekey=\"0x0000000000000000000AA\" em ambos. Reconfirmado em 2026-09-14.",
+      "pagina": "index.html, career.html",
+      "severidade": "MÉDIO",
+      "prioridade": "MÉDIO",
+      "esforco": "BAIXO",
+      "recomendacao": "Criar o widget Turnstile real no painel Cloudflare e substituir a chave (ver AUDIT-REPORT.md §6.3).",
+      "necessitaAprovacao": true,
+      "crossReference": "AUDIT-REPORT.md §6.3",
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 09-04, 09-07 e 09-14)"
+    },
+    {
+      "id": "AUDIT-0004",
+      "status": "OPORTUNIDADE",
+      "categoria": "Comercial/Confiança",
+      "problema": "Depoimentos exclusivamente do Brasil, sem case do Reino Unido.",
+      "evidencia": "Seção #testimonials de index.html, reconfirmado em 2026-09-14 (4 ocorrências de 'Brazil', 0 de 'United Kingdom').",
+      "pagina": "index.html",
+      "severidade": "BAIXO",
+      "prioridade": "MÉDIO",
+      "esforco": "ALTO",
+      "recomendacao": "Obter e publicar a primeira referência de cliente do Reino Unido quando disponível.",
+      "necessitaAprovacao": true,
+      "crossReference": "REVISION-3-CHANGELOG.md",
+      "recorrencia": "REINCIDENTE (visto em 2026-08-15, 17, 24, 31, 09-04, 09-07 e 09-14)"
+    }
+  ],
+  "resolvedSinceLastRun": [],
+  "evolutionThisPeriod": [
+    "Tidio chat widget corrigido para o workspace correto de glctechsec.com (era o script do site brasileiro) — commit 11c8fb2",
+    "E-mails dos formulários de contato e vagas traduzidos para inglês (worker/index.js, worker/lib/mail.js) — commits ad3bf3f",
+    "Página trabalhe-conosco.html renomeada para career.html, com links/sitemap/canonical atualizados — commit ad3bf3f",
+    "Script Tidio reordenado para ser sempre o último elemento antes de </body> — commit f8529d1",
+    "Formulário de vagas em career.html simplificado (removidos Curso/Instituição/Semestre/GitHub) para igualar o padrão do site brasileiro — commit b89fecd",
+    "Todas as mudanças acima confirmadas ao vivo em produção via deploy manual (wrangler deploy) em 2026-09-13"
+  ],
+  "emailStatus": "sent",
+  "emailMessageId": "1789374066317155300",
+  "emailSenderUsed": "contact@glctechsec.com",
+  "emailRecipientUsed": "diretoria@glctech.com.br",
+  "emailFormat": "full standalone HTML document (styled), also delivered to the user as audit-agent/history/runs/2026-09-14-report.html for reference"
+}
