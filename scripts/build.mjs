@@ -32,6 +32,7 @@ const FILES = [
   'kaspersky.html',
   'veeam.html',
   'career.html',
+  'zabbix-diagnostic.html',
   'politica.html',
   'termos.html',
   'ebook.html',
