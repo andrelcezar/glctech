@@ -596,6 +596,84 @@
   }
   .mobile-menu .mob-cta:hover { background: var(--red-light); }
 
+  /* ── EXIT-INTENT POPUP ── */
+  .nl-popup-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(20,20,20,0.72); backdrop-filter: blur(3px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  /* [hidden] must win over the "display: flex" above, or removing the
+     hidden attribute in JS is the only thing that ever shows/hides it —
+     that's exactly the class of bug fixed elsewhere on this page. */
+  .nl-popup-overlay[hidden] { display: none; }
+  .nl-popup-overlay.nl-popup-show { opacity: 1; }
+  .nl-popup {
+    position: relative; width: 100%; max-width: 420px;
+    background: var(--dark-light); border: 1px solid var(--dark-border);
+    border-radius: var(--radius-lg); padding: 2.2rem 2rem;
+    transform: translateY(12px) scale(0.98); transition: transform 0.25s ease;
+  }
+  .nl-popup-overlay.nl-popup-show .nl-popup { transform: translateY(0) scale(1); }
+  .nl-popup-close {
+    position: absolute; top: 0.9rem; right: 0.9rem;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--dark); border: 1px solid var(--dark-border); color: var(--gray-dim);
+    font-size: 18px; line-height: 1; cursor: pointer; transition: border-color var(--transition), color var(--transition);
+  }
+  .nl-popup-close:hover { border-color: var(--red); color: var(--white); }
+  .nl-popup-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--dark-border); background: var(--dark);
+    padding: 5px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 500; color: var(--gray-dim); margin-bottom: 1rem;
+  }
+  .nl-popup-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 2s infinite; }
+  #nl-popup-title { font-size: 1.4rem; color: var(--white); line-height: 1.25; margin-bottom: 0.6rem; }
+  .nl-popup-lead { font-size: 14px; color: var(--gray-dim); line-height: 1.6; margin-bottom: 1.5rem; }
+  .nl-popup input[type="email"] {
+    width: 100%; background: var(--dark); border: 1px solid var(--dark-border);
+    border-radius: var(--radius); padding: 12px 14px; color: var(--white);
+    font-family: var(--font-body); font-size: 15px; outline: none;
+    transition: border-color var(--transition); margin-bottom: 1rem;
+  }
+  .nl-popup input[type="email"]:focus { border-color: var(--red); }
+  .nl-popup input[type="email"].error { border-color: var(--red); }
+  .nl-popup-consent {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 12.5px; text-transform: none; font-weight: 400; letter-spacing: normal;
+    color: var(--gray-dim); line-height: 1.5;
+    margin-bottom: 1.3rem; cursor: pointer;
+  }
+  /* The site's global `input { width:100%; appearance:none; ... }` rule (built for
+     text inputs) otherwise stretches this checkbox to the full row width — reset
+     it back to a normal small checkbox. */
+  .nl-popup-consent input[type="checkbox"] {
+    width: 16px; height: 16px; flex: 0 0 16px;
+    margin-top: 3px; padding: 0; border-radius: 3px;
+    background: var(--dark); appearance: auto; -webkit-appearance: checkbox;
+    accent-color: var(--red);
+  }
+  .nl-popup-consent span { flex: 1; }
+  .nl-popup-consent a { color: var(--gray-dim); text-decoration: underline; }
+  .nl-popup-consent a:hover { color: var(--white); }
+  .nl-popup-submit {
+    width: 100%; background: var(--red); color: #fff; border: none;
+    border-radius: var(--radius); padding: 14px; font-family: var(--font-display);
+    font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 0.04em;
+    transition: background var(--transition);
+  }
+  .nl-popup-submit:hover { background: var(--red-light); }
+  .nl-popup-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .nl-popup-status { font-size: 12.5px; margin-top: 0.8rem; text-align: center; min-height: 16px; }
+  .nl-popup-status.error { color: var(--red); }
+  .nl-popup-status.success { color: #4ade80; }
+  @media (max-width: 480px) {
+    .nl-popup { padding: 1.8rem 1.4rem; }
+    #nl-popup-title { font-size: 1.2rem; }
+  }
+
   @media (max-width: 900px) {
     /* Nav */
     .nav-links { display: none; }
@@ -756,6 +834,28 @@
   <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Salford, Greater Manchester, UK — GLCTech Sec operations</span>
   <span class="origin-sep"></span>
   <span><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <a href="about-the-group.html">Why two countries? →</a></span>
+</div>
+
+<!-- EXIT-INTENT POPUP — surfaces the free diagnosis offer before most visitors
+     ever reach the footer form. See scripts/i18n.js-adjacent JS block near the
+     end of the page for trigger/frequency-cap logic. -->
+<div class="nl-popup-overlay" id="nl-popup-overlay" hidden>
+  <div class="nl-popup" role="dialog" aria-modal="true" aria-labelledby="nl-popup-title">
+    <button type="button" class="nl-popup-close" id="nl-popup-close" aria-label="Close">&times;</button>
+    <div class="nl-popup-badge"><div class="nl-popup-badge-dot"></div><span>Free · 15 Days · No Commitment</span></div>
+    <h3 id="nl-popup-title">Wait — don't miss your free diagnosis</h3>
+    <p class="nl-popup-lead">15 days of expert Zabbix monitoring on your infrastructure, completely free. Leave your email and our team will reach out to get you started.</p>
+    <form id="nl-popup-form" novalidate>
+      <input type="email" name="email" id="nl-popup-email" placeholder="you@yourcompany.com" required autocomplete="email">
+      <input type="text" name="website" id="nl-popup-website" tabindex="-1" autocomplete="off" hidden>
+      <label class="nl-popup-consent">
+        <input type="checkbox" name="consent" id="nl-popup-consent" required>
+        <span>I'd like to receive my free diagnosis details and agree to the <a href="politica.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+      </label>
+      <button type="submit" class="nl-popup-submit" id="nl-popup-submit">Get My Free Diagnosis</button>
+      <p class="nl-popup-status" id="nl-popup-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -1468,6 +1568,123 @@
       closeMenu();
     }
   });
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────
+     EXIT-INTENT POPUP
+     Desktop: fires when the cursor leaves through the top of the window
+     (about to close the tab / switch away). Mobile has no exit-intent, so
+     a 20s fallback timer covers it (and any desktop visitor who doesn't
+     trigger exit-intent). Shows once per visit; dismissing snoozes it for
+     30 days; a successful submit hides it permanently. Reuses /api/contact
+     (same Worker as the main contact form) — the endpoint only requires
+     {name, message}, so a fixed name and a note are supplied alongside the
+     visitor's email; there is no dedicated newsletter backend on this site.
+────────────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  var STORAGE_KEY = 'glc_nl_popup_state';
+  var SNOOZE_DAYS = 30;
+  var POPUP_ENDPOINT = '/api/contact';
+  var overlay = document.getElementById('nl-popup-overlay');
+  var form = document.getElementById('nl-popup-form');
+  var closeBtn = document.getElementById('nl-popup-close');
+  var shown = false;
+
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function setState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+  }
+  function shouldShow() {
+    var state = getState();
+    if (state.subscribed) return false;
+    if (state.dismissedAt && (Date.now() - state.dismissedAt) < SNOOZE_DAYS * 24 * 60 * 60 * 1000) return false;
+    return true;
+  }
+  function openPopup() {
+    if (shown || !shouldShow()) return;
+    shown = true;
+    overlay.hidden = false;
+    requestAnimationFrame(function () { overlay.classList.add('nl-popup-show'); });
+    setTimeout(function () { document.getElementById('nl-popup-email').focus(); }, 300);
+  }
+  function closePopup(persistDismiss) {
+    overlay.classList.remove('nl-popup-show');
+    setTimeout(function () { overlay.hidden = true; }, 250);
+    if (persistDismiss) { var s = getState(); s.dismissedAt = Date.now(); setState(s); }
+  }
+
+  closeBtn.addEventListener('click', function () { closePopup(true); });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closePopup(true); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !overlay.hidden) closePopup(true); });
+
+  // Exit-intent (desktop)
+  document.addEventListener('mouseout', function (e) {
+    if (!e.relatedTarget && e.clientY <= 0) openPopup();
+  });
+  // Fallback timer (covers mobile, and desktop visitors who never trigger exit-intent)
+  setTimeout(openPopup, 20000);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('nl-popup-status');
+    var btn = document.getElementById('nl-popup-submit');
+    var emailInput = document.getElementById('nl-popup-email');
+    var email = emailInput.value.trim();
+    var consent = form.consent.checked;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    status.className = 'nl-popup-status';
+    status.textContent = '';
+    emailInput.classList.remove('error');
+
+    if (!email || !emailRegex.test(email)) {
+      emailInput.classList.add('error');
+      status.className = 'nl-popup-status error';
+      status.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    if (!consent) {
+      status.className = 'nl-popup-status error';
+      status.textContent = 'Please agree to the Privacy Policy to continue.';
+      return;
+    }
+
+    btn.disabled = true;
+    status.textContent = 'Sending...';
+
+    fetch(POPUP_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: 'Website visitor (exit-intent popup)',
+        email: email,
+        subject: 'Free 15-Day Zabbix Diagnostic — Popup Lead',
+        message: 'Requested the free 15-day Zabbix diagnosis via the homepage exit-intent popup. Email: ' + email + '. No further details provided yet — please follow up to gather infrastructure information.',
+        website: document.getElementById('nl-popup-website').value
+      })
+    })
+      .then(function (res) { return res.json().then(function (data) { return { status: res.status, data: data }; }); })
+      .then(function (result) {
+        if (result.data.success === true) {
+          status.className = 'nl-popup-status success';
+          status.textContent = "Thanks! We'll be in touch shortly to schedule your free diagnosis.";
+          setState({ subscribed: true });
+          form.reset();
+          setTimeout(function () { closePopup(false); }, 2500);
+        } else {
+          throw new Error('send-failed');
+        }
+      })
+      .catch(function () {
+        status.className = 'nl-popup-status error';
+        status.textContent = 'Could not send your request. Please try again in a moment.';
+        btn.disabled = false;
+      });
+  });
+})();
 </script>
 
 <!-- ─────────────────────────────────────────────────────────────
