@@ -4,32 +4,53 @@
       "id": "AUDIT-0001",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-14",
-      "occurrences": 4
+      "lastSeen": "2026-09-25",
+      "occurrences": 5
     },
     "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
       "id": "AUDIT-0002",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-14",
-      "occurrences": 4
+      "lastSeen": "2026-09-25",
+      "occurrences": 5
     },
-    "Segurança/Conversão|index.html e career.html|Turnstile com data-sitekey placeholder em produção nos dois formulários": {
+    "Segurança/Conversão|index.html, career.html e zabbix-diagnostic.html|Turnstile com data-sitekey placeholder em produção nos três formulários": {
       "id": "AUDIT-0003",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-14",
-      "occurrences": 4,
+      "lastSeen": "2026-09-25",
+      "occurrences": 5,
       "crossReference": "AUDIT-REPORT.md §6.3",
-      "note": "Página renomeada de trabalhe-conosco.html para career.html em 2026-09-13 (mesma issue, fingerprint atualizado para refletir o nome atual do arquivo)."
+      "note": "Página renomeada de trabalhe-conosco.html para career.html em 2026-09-13 (mesma issue, fingerprint atualizado). Em 2026-09-25, escopo ampliado: a nova zabbix-diagnostic.html (publicada em 2026-09-15) herda o mesmo placeholder — fingerprint atualizado para refletir as três páginas afetadas hoje, mesma causa raiz e mesmo ID."
     },
     "Comercial/Confiança|index.html #testimonials|Depoimentos exclusivamente do Brasil, sem case do Reino Unido": {
       "id": "AUDIT-0004",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-14",
-      "occurrences": 4,
+      "lastSeen": "2026-09-25",
+      "occurrences": 5,
       "crossReference": "REVISION-3-CHANGELOG.md"
+    },
+    "Segurança|todas|Header Strict-Transport-Security ausente em todas as respostas do site": {
+      "id": "AUDIT-0005",
+      "status": "PENDENTE",
+      "firstSeen": "2026-09-25",
+      "lastSeen": "2026-09-25",
+      "occurrences": 1
+    },
+    "Conversão/UX|index.html|Popup de exit-intent repete verbatim a mesma oferta do CTA principal do hero": {
+      "id": "AUDIT-0006",
+      "status": "PENDENTE",
+      "firstSeen": "2026-09-25",
+      "lastSeen": "2026-09-25",
+      "occurrences": 1
+    },
+    "Privacidade/GDPR|zabbix-diagnostic.html e index.html (popup)|Aviso de consentimento mínimo nos dois novos pontos de captação de lead, sem opt-in separado para marketing": {
+      "id": "AUDIT-0007",
+      "status": "PENDENTE",
+      "firstSeen": "2026-09-25",
+      "lastSeen": "2026-09-25",
+      "occurrences": 1
     }
   }
 }
