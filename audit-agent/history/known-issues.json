@@ -4,15 +4,15 @@
       "id": "AUDIT-0001",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-10-19",
-      "occurrences": 7
+      "lastSeen": "2026-10-26",
+      "occurrences": 8
     },
     "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
       "id": "AUDIT-0002",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-10-19",
-      "occurrences": 7
+      "lastSeen": "2026-10-26",
+      "occurrences": 8
     },
     "Segurança/Conversão|index.html, career.html e zabbix-diagnostic.html|Turnstile com data-sitekey placeholder em produção nos três formulários": {
       "id": "AUDIT-0003",
@@ -27,16 +27,16 @@
       "id": "AUDIT-0004",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-10-19",
-      "occurrences": 7,
+      "lastSeen": "2026-10-26",
+      "occurrences": 8,
       "crossReference": "REVISION-3-CHANGELOG.md"
     },
     "Segurança|todas|Header Strict-Transport-Security ausente em todas as respostas do site": {
       "id": "AUDIT-0005",
       "status": "PENDENTE",
       "firstSeen": "2026-09-25",
-      "lastSeen": "2026-10-19",
-      "occurrences": 4,
+      "lastSeen": "2026-10-26",
+      "occurrences": 5,
       "note": "Escopo ampliado em 2026-10-15: confirmado que não é só o HSTS que falta — nenhum header de segurança (CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-Frame-Options, HSTS) está presente em nenhuma resposta, por a produção estar rodando uma versão desatualizada do Worker (ver AUDIT-0008). Mesmo ID mantido, mesma causa raiz."
     },
     "Conversão/UX|index.html|Popup de exit-intent repete verbatim a mesma oferta do CTA principal do hero": {
@@ -59,9 +59,9 @@
       "id": "AUDIT-0008",
       "status": "PENDENTE",
       "firstSeen": "2026-10-15",
-      "lastSeen": "2026-10-19",
-      "occurrences": 2,
-      "note": "CRÍTICO. Causa raiz provável dos achados AUDIT-0003, 0006 e 0007 terem se tornado não reproduzíveis desde 2026-10-15, e do escopo de AUDIT-0005 ter se ampliado. Reconfirmado sem nenhuma mudança em 2026-10-19 — segunda semana consecutiva sem ação. Recomendação: verificar no painel Cloudflare qual deployment está ativo na rota do domínio."
+      "lastSeen": "2026-10-26",
+      "occurrences": 3,
+      "note": "CRÍTICO. Causa raiz provável dos achados AUDIT-0003, 0006 e 0007 terem se tornado não reproduzíveis desde 2026-10-15, e do escopo de AUDIT-0005 ter se ampliado. Reconfirmado sem nenhuma mudança em 2026-10-19 e 2026-10-26 (checado em 2026-11-01) — terceira execução consecutiva sem ação. Recomendação: verificar no painel Cloudflare qual deployment está ativo na rota do domínio."
     }
   }
 }

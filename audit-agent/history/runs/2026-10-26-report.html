@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal — Auditoria GLCTechSec Europe — 2026-10-26</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f4f4f6; color:#1f1f24; margin:0; padding:0; }
+  .wrap { max-width: 760px; margin: 0 auto; background:#ffffff; }
+  .header { background:#2d2d2d; color:#fff; padding:32px 40px; }
+  .header .label { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#e6262c; font-weight:700; margin:0 0 8px; }
+  .header h1 { margin:0; font-size:22px; line-height:1.3; }
+  .header .meta { margin-top:10px; font-size:13px; color:#c9c9c9; }
+  .content { padding: 32px 40px 48px; }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.06em; color:#e6262c; border-bottom:2px solid #eee; padding-bottom:8px; margin:32px 0 14px; }
+  h2:first-of-type { margin-top:0; }
+  h3 { font-size:14px; color:#2d2d2d; margin:20px 0 8px; }
+  p { line-height:1.6; font-size:14px; }
+  table { width:100%; border-collapse: collapse; font-size:13px; margin: 8px 0 16px; }
+  th, td { border:1px solid #e2e2e6; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f7f7f9; font-weight:700; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:3px; font-size:11px; font-weight:700; text-transform:uppercase; }
+  .sev-alto { background:#fde8e8; color:#b3261e; }
+  .sev-medio { background:#fff3cd; color:#8a6100; }
+  .sev-baixo { background:#e7f4e8; color:#1f7a2e; }
+  .finding { background:#fafafa; border:1px solid #eee; border-left:4px solid #e6262c; border-radius:4px; padding:14px 16px; margin:10px 0 20px; font-size:13px; }
+  .finding pre { white-space:pre-wrap; font-family: inherit; margin:0; line-height:1.7; }
+  .note { font-size:12px; color:#777; background:#f7f7f9; border-radius:4px; padding:10px 14px; margin-top:8px; }
+  .footer { padding:20px 40px; font-size:11px; color:#999; border-top:1px solid #eee; }
+  ul, ol { font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <p class="label">GLCTechSec Europe · Agente de Auditoria Contínua</p>
+    <h1>Relatório Semanal — Auditoria do Site</h1>
+    <p class="meta">Período: 2026-10-26 (referente ao intervalo desde 2026-10-19; execução realizada em 2026-11-01 após sessão ociosa) · glctechsec.com · Execução semanal</p>
+  </div>
+
+  <div class="content">
+    <h2>Resumo executivo</h2>
+    <p>Terceira semana consecutiva sem mudanças — nem no repositório, nem em produção. Todos os 8 achados
+    conhecidos foram reconfirmados exatamente como nas execuções de 2026-10-15 e 10-19, incluindo o achado
+    crítico <strong>AUDIT-0008 (produção servindo uma versão desatualizada do site/Worker)</strong>, que
+    segue sem nenhuma ação há três execuções. Nota: o trigger semanal disparou em 2026-10-26, mas a sessão só
+    retomou em 2026-11-01 — os checks ao vivo foram feitos nessa data.</p>
+
+    <h2>Status geral</h2>
+    <table>
+      <tr><th>Eixo</th><th>Status</th></tr>
+      <tr><td>Produção vs. repositório</td><td>Avaliado — AUDIT-0008 segue PENDENTE, 3ª semana sem ação</td></tr>
+      <tr><td>SEO</td><td>Avaliado</td></tr>
+      <tr><td>Performance</td><td>Avaliado (probe.mjs funcionou)</td></tr>
+      <tr><td>Console / erros de runtime</td><td>Avaliado (nenhum erro de console)</td></tr>
+      <tr><td>Segurança</td><td>Avaliado</td></tr>
+      <tr><td>Privacidade / GDPR</td><td>Avaliado</td></tr>
+      <tr><td>Acessibilidade</td><td>Não avaliado (sem ferramenta dedicada)</td></tr>
+      <tr><td>Conteúdo</td><td>Avaliado</td></tr>
+      <tr><td>Técnico</td><td>Avaliado</td></tr>
+    </table>
+
+    <h2>Problemas críticos</h2>
+    <p>AUDIT-0008 segue em aberto, agora há três semanas — ver detalhe abaixo.</p>
+
+    <h2>Principais descobertas</h2>
+    <ul>
+      <li>Nenhuma mudança de código no repositório desde 2026-10-19.</li>
+      <li>Produção segue na mesma versão desatualizada — AUDIT-0008 sem ação há 3 execuções consecutivas.</li>
+      <li>Todos os demais achados (0001 a 0007) reconfirmados sem alteração.</li>
+    </ul>
+
+    <h2>Top 5 oportunidades comerciais</h2>
+    <ol>
+      <li>Confirmar e corrigir qual versão do site está ativa em produção no Cloudflare (AUDIT-0008) — 3ª
+        semana consecutiva sem ação, prioridade máxima.</li>
+      <li>Depois de AUDIT-0008 resolvido, reativar os headers de segurança completos (AUDIT-0005).</li>
+      <li>Corrigir o loop sitemap → redirect → canonical (AUDIT-0001).</li>
+      <li>Decidir sobre Consent Mode / banner de cookies (AUDIT-0002).</li>
+      <li>Obter a primeira referência de cliente do Reino Unido (AUDIT-0004).</li>
+    </ol>
+
+    <h2>Recomendações</h2>
+    <table>
+      <tr><th>ID</th><th>Categoria</th><th>Problema</th><th>Impacto</th><th>Prioridade</th><th>Esforço</th></tr>
+      <tr>
+        <td>AUDIT-0008</td><td>Técnico/Deploy</td>
+        <td>Produção serve uma versão do site/Worker muito mais antiga que o repositório (3ª semana sem ação)</td>
+        <td><span class="badge sev-alto">Crítico</span></td><td>Crítico</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0005</td><td>Segurança</td>
+        <td>Nenhum header de segurança presente em nenhuma resposta</td>
+        <td><span class="badge sev-alto">Alto</span></td><td>Alto</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0001</td><td>SEO</td>
+        <td>Sitemap/canonical mismatch (307)</td>
+        <td><span class="badge sev-medio">Médio</span></td><td>Médio</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0002</td><td>Privacidade / GDPR</td>
+        <td>GA4 sem Consent Mode nem banner</td>
+        <td><span class="badge sev-alto">Alto</span></td><td>Alto</td><td>Médio</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0004</td><td>Comercial / Confiança</td>
+        <td>Depoimentos só do Brasil</td>
+        <td><span class="badge sev-baixo">Baixo</span></td><td>Médio</td><td>Alto</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0003</td><td>Segurança / Conversão</td>
+        <td>Turnstile placeholder — não reproduzível (consequência de AUDIT-0008)</td>
+        <td><span class="badge sev-medio">Médio</span></td><td>Média</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0006</td><td>Conversão / UX</td>
+        <td>Popup duplicado — não reproduzível (consequência de AUDIT-0008)</td>
+        <td><span class="badge sev-baixo">Baixo</span></td><td>Baixa</td><td>Baixo</td>
+      </tr>
+      <tr>
+        <td>AUDIT-0007</td><td>Privacidade / GDPR</td>
+        <td>Consentimento mínimo — não reproduzível (consequência de AUDIT-0008)</td>
+        <td><span class="badge sev-medio">Médio</span></td><td>Média</td><td>Baixo–Médio</td>
+      </tr>
+    </table>
+
+    <h3>AUDIT-0008 — detalhe</h3>
+    <div class="finding"><pre>Status: CONFIRMADO
+Categoria: Técnico/Deploy
+Problema: A produção (glctechsec.com) continua servindo uma versão do site e do Worker
+          significativamente mais antiga do que o repositório.
+Evidência: reconfirmado em 2026-11-01, idêntico às execuções de 2026-10-15 e 10-19 —
+           career.html e zabbix-diagnostic.html retornam 404; trabalhe-conosco.html segue
+           ativo (307); /api/careers (OPTIONS) -> 404 enquanto /api/contact (OPTIONS) -> 204;
+           popup de exit-intent ausente; nenhum header de segurança presente. Três execuções
+           consecutivas sem nenhuma mudança.
+Recomendação: verificar no painel Cloudflare (Workers & Pages) qual deployment/versão está
+              atualmente ativado na rota do domínio glctechsec.com — terceira semana
+              consecutiva sem ação sobre este achado.
+Necessita aprovação: SIM</pre></div>
+
+    <p class="note">AUDIT-0001 a AUDIT-0007 seguem documentados com detalhe completo em
+    <strong>audit-agent/history/runs/2026-10-15-report.html</strong> — reconfirmados nesta execução sem
+    nenhuma alteração.</p>
+
+    <h2>Oportunidades estratégicas</h2>
+    <p>Nenhuma nova nesta execução.</p>
+
+    <h2>Pendências</h2>
+    <p>AUDIT-0001 a AUDIT-0008 — todos seguem <strong>PENDENTE</strong> no histórico após esta execução.</p>
+
+    <h2>Reincidências</h2>
+    <p>AUDIT-0001, 0002 e 0004: 9ª ocorrência. AUDIT-0005: 5ª ocorrência. AUDIT-0008: 3ª ocorrência, sem
+    mudança. AUDIT-0003, 0006 e 0007: seguem não reproduzíveis na produção atual.</p>
+
+    <h2>Evolução</h2>
+    <p>Nenhuma mudança de código no repositório nem em produção desde 2026-10-19.</p>
+  </div>
+
+  <div class="footer">
+    Gerado automaticamente pelo Agente de Auditoria Contínua GLCTechSec (skill <code>glctechsec-audit</code>).
+    Enviado de <strong>contact@glctechsec.com</strong>.
+  </div>
+</div>
+</body>
+</html>
