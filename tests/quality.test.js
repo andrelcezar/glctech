@@ -312,6 +312,25 @@ test('no inline style overrides the responsive nav logo height', () => {
   }
 });
 
+test('careers header logo matches the live landing-page dimensions', () => {
+  // The deployed landing page uses a 120px-tall, 350px-wide header logo.
+  // Keep the careers page aligned with that visual baseline.
+  const career = read('career.html');
+  const rule = career.match(/\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/);
+  assert.ok(rule, 'career.html: nav logo rule is missing');
+  assert.match(rule[1], /height:\s*120px\s*;/,
+    'career.html: header logo height differs from the landing page');
+  assert.match(rule[1], /max-width:\s*350px\s*;/,
+    'career.html: header logo max-width differs from the landing page');
+
+  const mobileRule = career.match(/@media\s*\(max-width:\s*480px\)[\s\S]*?\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/);
+  assert.ok(mobileRule, 'career.html: responsive nav logo rule is missing');
+  assert.match(mobileRule[1], /height:\s*32px\s*;/,
+    'career.html: mobile header logo height differs from the landing page');
+  assert.match(mobileRule[1], /max-width:\s*168px\s*;/,
+    'career.html: mobile header logo max-width differs from the landing page');
+});
+
 /* ── form destinations ──────────────────────────────────────────────────── */
 
 test('the contact form posts same-origin to /api/contact (no third-party form service)', () => {
