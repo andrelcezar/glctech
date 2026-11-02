@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Mensal — Auditoria e Evolução do Site — Outubro/2026</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f4f4f6; color:#1f1f24; margin:0; padding:0; }
+  .wrap { max-width: 760px; margin: 0 auto; background:#ffffff; }
+  .header { background:#2d2d2d; color:#fff; padding:32px 40px; }
+  .header .label { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#e6262c; font-weight:700; margin:0 0 8px; }
+  .header h1 { margin:0; font-size:22px; line-height:1.3; }
+  .header .meta { margin-top:10px; font-size:13px; color:#c9c9c9; }
+  .content { padding: 32px 40px 48px; }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.06em; color:#e6262c; border-bottom:2px solid #eee; padding-bottom:8px; margin:32px 0 14px; }
+  h2:first-of-type { margin-top:0; }
+  h3 { font-size:14px; color:#2d2d2d; margin:20px 0 8px; }
+  p { line-height:1.6; font-size:14px; }
+  table { width:100%; border-collapse: collapse; font-size:13px; margin: 8px 0 16px; }
+  th, td { border:1px solid #e2e2e6; padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f7f7f9; font-weight:700; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:3px; font-size:11px; font-weight:700; text-transform:uppercase; }
+  .sev-alto { background:#fde8e8; color:#b3261e; }
+  .sev-medio { background:#fff3cd; color:#8a6100; }
+  .sev-baixo { background:#e7f4e8; color:#1f7a2e; }
+  .finding { background:#fafafa; border:1px solid #eee; border-left:4px solid #e6262c; border-radius:4px; padding:14px 16px; margin:10px 0 20px; font-size:13px; }
+  .finding pre { white-space:pre-wrap; font-family: inherit; margin:0; line-height:1.7; }
+  .note { font-size:12px; color:#777; background:#f7f7f9; border-radius:4px; padding:10px 14px; margin-top:8px; }
+  .footer { padding:20px 40px; font-size:11px; color:#999; border-top:1px solid #eee; }
+  ul, ol { font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <p class="label">GLCTechSec Europe · Agente de Auditoria Contínua</p>
+    <h1>Relatório Mensal — Auditoria e Evolução do Site</h1>
+    <p class="meta">Período: Outubro/2026 (1 a 31 de outubro) · glctechsec.com · Consolidado mensal</p>
+  </div>
+
+  <div class="content">
+    <h2>Resumo executivo</h2>
+    <p>Outubro foi um mês sem nenhuma mudança de código no site — nem no repositório, nem (pelo que se pôde
+    observar de fora) em produção — mas foi o mês em que esta auditoria encontrou seu achado mais sério até
+    agora: <strong>AUDIT-0008</strong>, descoberto em 15/10, mostra que a produção (glctechsec.com) está
+    servindo uma versão do site e do Worker significativamente mais antiga do que o repositório — anterior
+    até à migração dos formulários de contato/carreiras para os endpoints próprios do Worker. Como
+    consequência direta, três achados que vinham sendo rastreados desde agosto/setembro (Turnstile
+    placeholder, popup de exit-intent duplicando oferta, consentimento mínimo nos formulários) deixaram de
+    ser observáveis simplesmente porque as páginas e funcionalidades a que se referem não existem na versão
+    atualmente em produção — não foram corrigidos, apenas não estão no ar. Esse achado foi reconfirmado,
+    sem nenhuma ação visível, em todas as três execuções semanais completas do mês (15/10, 19/10 e 26/10).
+    Os quatro achados mais antigos (SEO/canonical, GA4 sem consentimento, Turnstile, depoimentos só do
+    Brasil) também permaneceram pendentes o mês inteiro.</p>
+
+    <h2>Total de execuções no mês</h2>
+    <table>
+      <tr><th>Data</th><th>Modo</th><th>Achados</th><th>Novos</th><th>Resolvidos</th><th>E-mail</th></tr>
+      <tr><td>2026-10-01</td><td>Semanal</td><td>7</td><td>0</td><td>0</td><td>Enviado*</td></tr>
+      <tr><td>2026-10-15</td><td>Semanal</td><td>8</td><td>1</td><td>0</td><td>Enviado</td></tr>
+      <tr><td>2026-10-19</td><td>Semanal</td><td>8</td><td>0</td><td>0</td><td>Enviado</td></tr>
+      <tr><td>2026-10-26</td><td>Semanal</td><td>8</td><td>0</td><td>0</td><td>Enviado</td></tr>
+    </table>
+    <p class="note">* A execução de 2026-10-01 foi gerada e enviada por e-mail normalmente (messageId
+    1790831333209138400), mas o commit que persistiria seu histórico em <code>audit-agent/history/runs/</code>
+    nunca chegou a ser enviado ao GitHub — o push ficou bloqueado por um erro 403 de acesso recorrente, e o
+    ambiente daquela sessão foi reciclado antes de o bloqueio se resolver. O arquivo
+    <code>audit-agent/history/runs/2026-10-01.json</code> não existe neste repositório; o conteúdo dos
+    achados dessa execução está preservado apenas no e-mail já entregue. As outras três execuções do mês
+    foram totalmente persistidas (com atraso no push devido ao mesmo problema recorrente de acesso ao
+    GitHub, mas sem perda de dados). A execução nominalmente de 26/10 só pôde ser processada em 01/11,
+    quando a sessão foi retomada — datada 26/10 para manter a cadência semanal e permitir esta agregação.</p>
+
+    <h2>Achados por categoria (ao final do mês)</h2>
+    <table>
+      <tr><th>Categoria</th><th>Quantidade</th><th>IDs</th></tr>
+      <tr><td>SEO</td><td>1</td><td>AUDIT-0001</td></tr>
+      <tr><td>Privacidade / GDPR</td><td>2</td><td>AUDIT-0002, AUDIT-0007</td></tr>
+      <tr><td>Segurança / Conversão</td><td>1</td><td>AUDIT-0003</td></tr>
+      <tr><td>Comercial / Confiança</td><td>1</td><td>AUDIT-0004</td></tr>
+      <tr><td>Segurança</td><td>1</td><td>AUDIT-0005</td></tr>
+      <tr><td>Conversão / UX</td><td>1</td><td>AUDIT-0006</td></tr>
+      <tr><td>Técnico / Deploy</td><td>1</td><td>AUDIT-0008</td></tr>
+    </table>
+
+    <h2>Recomendações geradas / resolvidas / pendentes no mês</h2>
+    <table>
+      <tr><th>Geradas no mês</th><th>Resolvidas no mês</th><th>Pendentes ao final do mês</th></tr>
+      <tr><td>1 (AUDIT-0008, em 15/10)</td><td>0</td><td>8 (todas)</td></tr>
+    </table>
+    <p class="note">Nenhum dos 8 achados pendentes foi corrigido durante o mês. Todos seguem
+    <strong>PENDENTE</strong> no histórico. AUDIT-0003, 0006 e 0007 não puderam ser reproduzidos nas três
+    últimas execuções do mês — isso é consequência de AUDIT-0008 (a versão em produção não contém as
+    páginas/funcionalidades a que esses achados se referem), não uma correção, e seguem contados como
+    pendentes.</p>
+
+    <h2>Reincidências</h2>
+    <table>
+      <tr><th>ID</th><th>Primeira vez visto</th><th>Ocorrências ao final de outubro</th><th>Observação</th></tr>
+      <tr><td>AUDIT-0001</td><td>2026-08-15</td><td>8</td><td>Reconfirmado em todas as execuções do mês</td></tr>
+      <tr><td>AUDIT-0002</td><td>2026-08-15</td><td>8</td><td>Reconfirmado em todas as execuções do mês</td></tr>
+      <tr><td>AUDIT-0003</td><td>2026-08-15</td><td>6</td><td>Última vez observável: 10-01. Não reproduzível em 10-15, 10-19 e 10-26 (ver AUDIT-0008)</td></tr>
+      <tr><td>AUDIT-0004</td><td>2026-08-15</td><td>8</td><td>Reconfirmado em todas as execuções do mês</td></tr>
+      <tr><td>AUDIT-0005</td><td>2026-09-25</td><td>5</td><td>Escopo ampliado em 10-15: de "só falta HSTS" para "nenhum header de segurança presente"</td></tr>
+      <tr><td>AUDIT-0006</td><td>2026-09-25</td><td>2</td><td>Última vez observável: 10-01. Não reproduzível em 10-15, 10-19 e 10-26 (ver AUDIT-0008)</td></tr>
+      <tr><td>AUDIT-0007</td><td>2026-09-25</td><td>2</td><td>Última vez observável: 10-01. Não reproduzível em 10-15, 10-19 e 10-26 (ver AUDIT-0008)</td></tr>
+      <tr><td>AUDIT-0008</td><td>2026-10-15</td><td>3</td><td>Novo em outubro. Reconfirmado sem nenhuma ação em 10-19 e 10-26 — achado crítico do mês</td></tr>
+    </table>
+
+    <h2>Evolução por eixo</h2>
+    <h3>Técnico / Deploy</h3>
+    <ul>
+      <li><strong>Achado do mês:</strong> descoberta de que a produção está servindo uma versão do
+        site/Worker significativamente mais antiga do que o repositório (AUDIT-0008) — a primeira vez que
+        esta auditoria comparou o HTML de produção linha a linha com o repositório, em vez de assumir que
+        trabalho já mesclado em PRs anteriores havia de fato chegado ao ar.</li>
+      <li>Sem nenhuma ação de correção visível até o fim do mês, apesar de reconfirmado em três execuções
+        consecutivas.</li>
+    </ul>
+    <h3>Conversão / CTA</h3>
+    <ul>
+      <li>Nenhuma evolução — a landing page <code>zabbix-diagnostic.html</code>, os redirecionamentos de CTA
+        e o popup de exit-intent (lançados em setembro) não puderam ser avaliados em produção durante
+        outubro, pois a versão atualmente no ar não os contém (ver AUDIT-0008).</li>
+    </ul>
+    <h3>Mobile / UX</h3>
+    <ul>
+      <li>Nenhuma mudança de código no repositório relativa a mobile/UX neste mês.</li>
+    </ul>
+    <h3>Conteúdo / Idioma</h3>
+    <ul>
+      <li>Nenhuma mudança de conteúdo no repositório neste mês.</li>
+    </ul>
+    <h3>Segurança / Privacidade</h3>
+    <ul>
+      <li>Escopo do achado de headers de segurança ampliado (AUDIT-0005): confirmado que não é apenas o
+        HSTS que falta na produção atual — nenhum dos headers definidos em <code>worker/lib/http.js</code>
+        está em vigor.</li>
+      <li>Nenhuma correção de GA4/consentimento (AUDIT-0002) ocorreu no mês.</li>
+    </ul>
+
+    <h2>Nota técnica — cobertura do mês</h2>
+    <p class="note">
+      <code>audit-agent/probe.mjs</code> (Playwright/Chromium) funcionou normalmente nas execuções de
+      15/10, 19/10 e 26/10 (diferente das falhas de rede registadas em meses anteriores) — Performance e
+      erros de console foram avaliados com dados reais (nenhum erro de console detectado; tempos de
+      carregamento na faixa de 1.3–2.5s). Acessibilidade não foi avaliada em nenhuma execução do mês — o
+      script não cobre esse eixo e nenhuma ferramenta dedicada esteve disponível. Todos os outros eixos
+      (SEO, segurança de headers, formulários, GDPR, conteúdo, e a nova comparação produção-vs-repositório)
+      foram checados diretamente contra a produção em cada execução.
+    </p>
+  </div>
+
+  <div class="footer">
+    Gerado automaticamente pelo Agente de Auditoria Contínua GLCTechSec (skill <code>glctechsec-audit</code>),
+    consolidando as execuções semanais de 2026-10-01 (parcial, ver nota), 2026-10-15, 2026-10-19 e 2026-10-26.
+    Enviado de <strong>contact@glctechsec.com</strong>.
+  </div>
+</div>
+</body>
+</html>

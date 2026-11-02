@@ -4,53 +4,64 @@
       "id": "AUDIT-0001",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-25",
-      "occurrences": 5
+      "lastSeen": "2026-10-26",
+      "occurrences": 8
     },
     "Privacidade/GDPR|todas|GA4 carrega sem gtag('consent', ...) e sem banner técnico de consentimento": {
       "id": "AUDIT-0002",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-25",
-      "occurrences": 5
+      "lastSeen": "2026-10-26",
+      "occurrences": 8
     },
     "Segurança/Conversão|index.html, career.html e zabbix-diagnostic.html|Turnstile com data-sitekey placeholder em produção nos três formulários": {
       "id": "AUDIT-0003",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-25",
-      "occurrences": 5,
+      "lastSeen": "2026-10-01",
+      "occurrences": 6,
       "crossReference": "AUDIT-REPORT.md §6.3",
-      "note": "Página renomeada de trabalhe-conosco.html para career.html em 2026-09-13 (mesma issue, fingerprint atualizado). Em 2026-09-25, escopo ampliado: a nova zabbix-diagnostic.html (publicada em 2026-09-15) herda o mesmo placeholder — fingerprint atualizado para refletir as três páginas afetadas hoje, mesma causa raiz e mesmo ID."
+      "note": "Página renomeada de trabalhe-conosco.html para career.html em 2026-09-13 (mesma issue, fingerprint atualizado). Em 2026-09-25, escopo ampliado: a nova zabbix-diagnostic.html (publicada em 2026-09-15) herda o mesmo placeholder. Em 2026-10-15: não reproduzível, pois a versão atualmente em produção não tem nenhum widget Turnstile (ver AUDIT-0008) — não contar como resolvido, lastSeen mantido em 2026-10-01 (última vez efetivamente observado)."
     },
     "Comercial/Confiança|index.html #testimonials|Depoimentos exclusivamente do Brasil, sem case do Reino Unido": {
       "id": "AUDIT-0004",
       "status": "PENDENTE",
       "firstSeen": "2026-08-15",
-      "lastSeen": "2026-09-25",
-      "occurrences": 5,
+      "lastSeen": "2026-10-26",
+      "occurrences": 8,
       "crossReference": "REVISION-3-CHANGELOG.md"
     },
     "Segurança|todas|Header Strict-Transport-Security ausente em todas as respostas do site": {
       "id": "AUDIT-0005",
       "status": "PENDENTE",
       "firstSeen": "2026-09-25",
-      "lastSeen": "2026-09-25",
-      "occurrences": 1
+      "lastSeen": "2026-10-26",
+      "occurrences": 5,
+      "note": "Escopo ampliado em 2026-10-15: confirmado que não é só o HSTS que falta — nenhum header de segurança (CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-Frame-Options, HSTS) está presente em nenhuma resposta, por a produção estar rodando uma versão desatualizada do Worker (ver AUDIT-0008). Mesmo ID mantido, mesma causa raiz."
     },
     "Conversão/UX|index.html|Popup de exit-intent repete verbatim a mesma oferta do CTA principal do hero": {
       "id": "AUDIT-0006",
       "status": "PENDENTE",
       "firstSeen": "2026-09-25",
-      "lastSeen": "2026-09-25",
-      "occurrences": 1
+      "lastSeen": "2026-10-01",
+      "occurrences": 2,
+      "note": "Em 2026-10-15: não reproduzível, pois o popup não existe na versão atualmente em produção (ver AUDIT-0008) — não contar como resolvido, lastSeen mantido em 2026-10-01."
     },
     "Privacidade/GDPR|zabbix-diagnostic.html e index.html (popup)|Aviso de consentimento mínimo nos dois novos pontos de captação de lead, sem opt-in separado para marketing": {
       "id": "AUDIT-0007",
       "status": "PENDENTE",
       "firstSeen": "2026-09-25",
-      "lastSeen": "2026-09-25",
-      "occurrences": 1
+      "lastSeen": "2026-10-01",
+      "occurrences": 2,
+      "note": "Em 2026-10-15: não reproduzível, pois nem zabbix-diagnostic.html nem o popup existem na versão atualmente em produção (ver AUDIT-0008) — não contar como resolvido, lastSeen mantido em 2026-10-01."
+    },
+    "Técnico/Deploy|todas|A produção (glctechsec.com) está servindo uma versão do site e do Worker significativamente mais antiga do que o repositório, anterior à migração dos formulários para os endpoints próprios do Worker": {
+      "id": "AUDIT-0008",
+      "status": "PENDENTE",
+      "firstSeen": "2026-10-15",
+      "lastSeen": "2026-10-26",
+      "occurrences": 3,
+      "note": "CRÍTICO. Causa raiz provável dos achados AUDIT-0003, 0006 e 0007 terem se tornado não reproduzíveis desde 2026-10-15, e do escopo de AUDIT-0005 ter se ampliado. Reconfirmado sem nenhuma mudança em 2026-10-19 e 2026-10-26 (checado em 2026-11-01) — terceira execução consecutiva sem ação. Recomendação: verificar no painel Cloudflare qual deployment está ativo na rota do domínio."
     }
   }
 }
