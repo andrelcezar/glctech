@@ -67,3 +67,12 @@ for (const file of htmlFiles) {
     );
   });
 }
+
+test('index.html fallback hero matches the UK compliance-led English copy', () => {
+  const html = fs.readFileSync(path.join(REPO_ROOT, 'index.html'), 'utf8');
+
+  assert.match(html, /Cybersecurity assurance for UK professional firms/);
+  assert.match(html, /Prove you protect<br><span>client data<\/span>/);
+  assert.match(html, /Review Your Evidence/);
+  assert.match(html, /href="#sectors"[^>]*>See Who We Help/);
+});

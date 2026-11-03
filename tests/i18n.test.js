@@ -62,3 +62,16 @@ test('no translation value is empty or non-string', () => {
     }
   }
 });
+
+test('English homepage hero leads with UK compliance confidence', () => {
+  const en = translations.en;
+
+  assert.equal(en['hero.badge'], 'Cybersecurity assurance for UK professional firms');
+  assert.equal(en['hero.h1'], 'Prove you protect<br><span>client data</span>');
+  assert.equal(
+    en['hero.p'],
+    'We help accountancy, legal, financial and regulated firms answer security questions from clients, insurers and regulators with clear evidence — then close the gaps.'
+  );
+  assert.equal(en['hero.cta1'], 'Review Your Evidence');
+  assert.equal(en['hero.cta2'], 'See Who We Help');
+});

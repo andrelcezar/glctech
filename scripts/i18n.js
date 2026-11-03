@@ -425,7 +425,7 @@
     },
 
     'en': {
-'page.title': 'GLCTech — IT Monitoring & Security',
+      'page.title': 'GLCTech Sec — Cybersecurity Assurance for UK Firms',
       'page.lang':  'en',
 
       'nav.about':    'About',
@@ -435,16 +435,16 @@
       'nav.careers':  'Careers',
       'nav.contact':  'Contact Us',
 
-      'hero.badge':   'Real-time monitoring · Zabbix & Grafana',
+      'hero.badge':   'Cybersecurity assurance for UK professional firms',
       'hero.live':    'Live',
-      'hero.h1':      'Total visibility of your<br><span>IT infrastructure</span>',
+      'hero.h1':      'Prove you protect<br><span>client data</span>',
       'hero.h1.line1':'Total Visibility',
       'hero.h1.line2':'of Your',
       'hero.h1.line3':'IT',
       'hero.h1.span': 'Infrastructure',
-      'hero.p':       'We detect failures before they impact your business. Intelligent monitoring, advanced security and specialized support — all in a single partner.',
-      'hero.cta1':    'Request Diagnosis',
-      'hero.cta2':    'See Solutions',
+      'hero.p':       'We help accountancy, legal, financial and regulated firms answer security questions from clients, insurers and regulators with clear evidence — then close the gaps.',
+      'hero.cta1':    'Review Your Evidence',
+      'hero.cta2':    'See Who We Help',
 
       'stat.snmp':     'Devices monitored via SNMP',
       'stat.capacity': 'Total monitoring capacity',
