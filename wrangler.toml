@@ -5,7 +5,7 @@
 # workerd binary) and would also publish tests/, docs/ and serverless/ source.
 # dist/ is built by scripts/build.mjs from an explicit allowlist.
 
-name = "glctechsec"
+name = "glctechglobal"
 main = "worker/index.js"
 compatibility_date = "2026-08-10"
 
