@@ -72,6 +72,61 @@ test('English homepage hero leads with UK compliance confidence', () => {
     en['hero.p'],
     'We help accountancy, legal, financial and regulated firms answer security questions from clients, insurers and regulators with clear evidence — then close the gaps.'
   );
-  assert.equal(en['hero.cta1'], 'Review Your Evidence');
+  assert.equal(en['hero.cta1'], 'See the Evidence Review');
   assert.equal(en['hero.cta2'], 'See Who We Help');
+});
+
+test('monitoring copy avoids unsupported support promises in every language', () => {
+  const en = translations.en;
+  const retiredClaims = [
+    'Suporte 24/7', 'NOC dedicado', 'NOC dedicado 24/7', 'Suporte 24/7 com NOC dedicado',
+    '24/7 Support', 'Dedicated NOC', 'Dedicated NOC 24/7', '24/7 Support with dedicated NOC',
+    '24/7-Support', 'Dediziertes NOC', 'Dediziertes NOC 24/7', '24/7-Support mit dediziertem NOC',
+    'Soporte 24/7', 'NOC dedicado', 'NOC dedicado 24/7', 'Soporte 24/7 con NOC dedicado',
+    'Support 24/7', 'NOC dédié', 'NOC dédié 24/7', 'Support 24/7 avec NOC dédié',
+    'Supporto 24/7', 'NOC dedicato', 'NOC dedicato 24/7', 'Supporto 24/7 con NOC dedicato',
+  ];
+
+  assert.equal(en['zabbix.p1.f4'], 'Business-hours support');
+  assert.equal(en['zabbix.p1.f5'], 'Shared operations team');
+  assert.equal(en['zabbix.p2.f5'], 'Response targets agreed in the SLA');
+  assert.equal(en['zabbix.p3.f4'], '24/7 cover available only under a separately costed SLA');
+
+  for (const lang of EXPECTED_LANGS) {
+    const values = Object.values(translations[lang]);
+    for (const claim of retiredClaims) {
+      assert.ok(!values.includes(claim), `[${lang}] still exposes retired claim: ${claim}`);
+    }
+    assert.ok(
+      !/Estimated|Estimada|Estimée|Geschätzte|Stimata|Recorrência/.test(translations[lang]['zabbix.result.label']),
+      `[${lang}] still presents the simulator as a converted estimate`
+    );
+  }
+});
+
+test('no locale guarantees SLAs, implies continuous cover, or gives away the review', () => {
+  // The English copy was rewritten first; stale sibling locales would silently
+  // restore guaranteed SLAs and free-diagnosis CTAs on every language switch.
+  const banned = [
+    /SLA\s+garant/i,                       // pt/es/fr/it guaranteed SLA
+    /garantierter\s+SLA/i,                 // de guaranteed SLA
+    /suporte\s+t[eé]cnico\s+cont[ií]nuo/i, // pt implied continuous cover
+    /soporte\s+t[eé]cnico\s+continuo/i,    // es
+    /support\s+technique\s+continu/i,      // fr
+    /supporto\s+tecnico\s+continuo/i,      // it
+    /kontinuierlicher\s+technischer/i,     // de
+    /continuous\s+technical\s+support/i,   // en
+    /diagn[oó]stic[oa]\s+grat/i,           // pt/es/it free diagnosis
+    /diagnostic\s+gratuit/i,               // fr
+    /kostenlose\s+diagnose/i,              // de
+  ];
+
+  for (const lang of EXPECTED_LANGS) {
+    for (const [key, value] of Object.entries(translations[lang])) {
+      if (typeof value !== 'string') continue;
+      for (const rule of banned) {
+        assert.ok(!rule.test(value), `[${lang}] ${key} still says: ${value}`);
+      }
+    }
+  }
 });

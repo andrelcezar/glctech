@@ -836,23 +836,23 @@
   <span><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <a href="about-the-group.html">Why two countries? →</a></span>
 </div>
 
-<!-- EXIT-INTENT POPUP — surfaces the free diagnosis offer before most visitors
+<!-- EXIT-INTENT POPUP — surfaces the paid evidence review before most visitors
      ever reach the footer form. See scripts/i18n.js-adjacent JS block near the
      end of the page for trigger/frequency-cap logic. -->
 <div class="nl-popup-overlay" id="nl-popup-overlay" hidden>
   <div class="nl-popup" role="dialog" aria-modal="true" aria-labelledby="nl-popup-title">
     <button type="button" class="nl-popup-close" id="nl-popup-close" aria-label="Close">&times;</button>
-    <div class="nl-popup-badge"><div class="nl-popup-badge-dot"></div><span>Free · 15 Days · No Commitment</span></div>
-    <h3 id="nl-popup-title">Wait — don't miss your free diagnosis</h3>
-    <p class="nl-popup-lead">15 days of expert Zabbix monitoring on your infrastructure, completely free. Leave your email and our team will reach out to get you started.</p>
+    <div class="nl-popup-badge"><div class="nl-popup-badge-dot"></div><span>Paid · Fixed scope · Quote agreed upfront</span></div>
+    <h3 id="nl-popup-title">Turn security questions into deal-ready evidence</h3>
+    <p class="nl-popup-lead">Our Security Evidence Review maps your gaps, checks Cyber Essentials readiness and prepares reusable questionnaire evidence.</p>
     <form id="nl-popup-form" novalidate>
       <input type="email" name="email" id="nl-popup-email" placeholder="you@yourcompany.com" required autocomplete="email">
       <input type="text" name="website" id="nl-popup-website" tabindex="-1" autocomplete="off" hidden>
       <label class="nl-popup-consent">
         <input type="checkbox" name="consent" id="nl-popup-consent" required>
-        <span>I'd like to receive my free diagnosis details and agree to the <a href="politica.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+        <span>I'd like to discuss a Security Evidence Review and agree to the <a href="politica.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
       </label>
-      <button type="submit" class="nl-popup-submit" id="nl-popup-submit">Get My Free Diagnosis</button>
+      <button type="submit" class="nl-popup-submit" id="nl-popup-submit">Book an Evidence Review</button>
       <p class="nl-popup-status" id="nl-popup-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -872,7 +872,7 @@
       <h1 data-i18n-html="hero.h1">Prove you protect<br><span>client data</span></h1>
       <p data-i18n="hero.p">We help accountancy, legal, financial and regulated firms answer security questions from clients, insurers and regulators with clear evidence — then close the gaps.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary"><span data-i18n="hero.cta1">Review Your Evidence</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="#prove-offer" class="btn-primary"><span data-i18n="hero.cta1">See the Evidence Review</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         <a href="#sectors" class="btn-outline" data-i18n="hero.cta2">See Who We Help</a>
       </div>
     </div>
@@ -905,16 +905,50 @@
     </div>
     <div class="stat-item">
       <i class="fa-solid fa-circle-check" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;" aria-hidden="true"></i>
-      <div class="stat-number">99<span>.9%</span></div>
-      <div class="stat-desc" data-i18n="stat.sla">SLA guaranteed to clients</div>
+      <div class="stat-number">Clear</div>
+      <div class="stat-desc" data-i18n="stat.sla">Service levels defined in contract</div>
     </div>
     <div class="stat-item">
       <i class="fa-solid fa-headset" style="color:var(--red);font-size:1.3rem;margin-bottom:0.5rem;display:block;" aria-hidden="true"></i>
-      <div class="stat-number">24<span>/7</span></div>
-      <div class="stat-desc" data-i18n="stat.support">Continuous technical support</div>
+      <div class="stat-number">Scoped</div>
+      <div class="stat-desc" data-i18n="stat.support">Support and SLA agreed before contract</div>
     </div>
   </div>
 </div>
+
+<!-- PRIMARY UK OFFER -->
+<section id="prove-offer" style="background:var(--dark-mid); border-top:1px solid var(--dark-border); border-bottom:1px solid var(--dark-border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="label">Paid procurement support</span>
+      <h2>Security Evidence Review</h2>
+      <p style="color:var(--gray-dim); max-width:720px; margin-top:1rem; font-size:17px;">A fixed-scope engagement for UK firms that need to answer a client, insurer or procurement questionnaire and show a credible route to Cyber Essentials.</p>
+    </div>
+    <div class="sector-grid">
+      <div class="sector-card">
+        <i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i>
+        <h3>Gap assessment</h3>
+        <p>Prioritised findings mapped to the deal, renewal or assurance request in front of you.</p>
+      </div>
+      <div class="sector-card">
+        <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+        <h3>Cyber Essentials readiness</h3>
+        <p>Baseline readiness check, remediation priorities and evidence requirements.</p>
+      </div>
+      <div class="sector-card">
+        <i class="fa-solid fa-file-circle-check" aria-hidden="true"></i>
+        <h3>Questionnaire evidence</h3>
+        <p>A reusable evidence pack and support answering the security questions blocking revenue.</p>
+      </div>
+      <div class="sector-card">
+        <i class="fa-solid fa-sterling-sign" aria-hidden="true"></i>
+        <h3>Paid fixed-scope engagement</h3>
+        <p>Your quote is agreed before work starts. Monitoring is optional and quoted separately after the review.</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:2.5rem;"><a href="#contact" class="btn-primary">Book an Evidence Review <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+  </div>
+</section>
 
 <!-- ABOUT -->
 <section id="about">
@@ -1056,7 +1090,7 @@
             <div class="why-pillar-num">03</div>
             <div>
               <h4 data-i18n="why.p3.h">Long-Term Partnership</h4>
-              <p data-i18n="why.p3.p">Continuous technical support, proactive updates and close follow-up — your operation stays stable and constantly evolving.</p>
+              <p data-i18n="why.p3.p">Support under your agreed SLA, proactive updates and close follow-up — your operation stays stable and constantly evolving.</p>
             </div>
           </div>
           <div class="why-pillar">
@@ -1252,9 +1286,9 @@
 <!-- CTA BANNER -->
 <div class="cta-banner">
   <div class="container cta-banner-inner">
-    <h2 data-i18n="cta.h2">Ready to protect your infrastructure?</h2>
-    <p data-i18n="cta.p">Talk to our specialists and discover how GLCTech can transform your company's monitoring.</p>
-    <a href="zabbix-diagnostic.html" class="btn-white"><span data-i18n="cta.btn">Start Free Diagnosis</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    <h2 data-i18n="cta.h2">Need evidence to unblock a deal?</h2>
+    <p data-i18n="cta.p">Start with a paid Security Evidence Review. Add monitoring only where the findings justify it.</p>
+    <a href="#prove-offer" class="btn-white"><span data-i18n="cta.btn">See the Evidence Review</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
   </div>
 </div>
 
@@ -1661,8 +1695,8 @@
       body: JSON.stringify({
         name: 'Website visitor (exit-intent popup)',
         email: email,
-        subject: 'Free 15-Day Zabbix Diagnostic — Popup Lead',
-        message: 'Requested the free 15-day Zabbix diagnosis via the homepage exit-intent popup. Email: ' + email + '. No further details provided yet — please follow up to gather infrastructure information.',
+        subject: 'Security Evidence Review — Homepage Enquiry',
+        message: 'Requested a discussion about the paid Security Evidence Review via the homepage exit-intent popup. Email: ' + email + '. Please follow up to confirm the procurement or assurance requirement and scope.',
         website: document.getElementById('nl-popup-website').value
       })
     })
@@ -1670,7 +1704,7 @@
       .then(function (result) {
         if (result.data.success === true) {
           status.className = 'nl-popup-status success';
-          status.textContent = "Thanks! We'll be in touch shortly to schedule your free diagnosis.";
+          status.textContent = "Thanks! We'll be in touch shortly to scope your Evidence Review.";
           setState({ subscribed: true });
           form.reset();
           setTimeout(function () { closePopup(false); }, 2500);
