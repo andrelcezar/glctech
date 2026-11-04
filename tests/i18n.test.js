@@ -72,6 +72,34 @@ test('English homepage hero leads with UK compliance confidence', () => {
     en['hero.p'],
     'We help accountancy, legal, financial and regulated firms answer security questions from clients, insurers and regulators with clear evidence — then close the gaps.'
   );
-  assert.equal(en['hero.cta1'], 'Review Your Evidence');
+  assert.equal(en['hero.cta1'], 'See the Evidence Review');
   assert.equal(en['hero.cta2'], 'See Who We Help');
+});
+
+test('monitoring copy avoids unsupported support promises in every language', () => {
+  const en = translations.en;
+  const retiredClaims = [
+    'Suporte 24/7', 'NOC dedicado', 'NOC dedicado 24/7', 'Suporte 24/7 com NOC dedicado',
+    '24/7 Support', 'Dedicated NOC', 'Dedicated NOC 24/7', '24/7 Support with dedicated NOC',
+    '24/7-Support', 'Dediziertes NOC', 'Dediziertes NOC 24/7', '24/7-Support mit dediziertem NOC',
+    'Soporte 24/7', 'NOC dedicado', 'NOC dedicado 24/7', 'Soporte 24/7 con NOC dedicado',
+    'Support 24/7', 'NOC dédié', 'NOC dédié 24/7', 'Support 24/7 avec NOC dédié',
+    'Supporto 24/7', 'NOC dedicato', 'NOC dedicato 24/7', 'Supporto 24/7 con NOC dedicato',
+  ];
+
+  assert.equal(en['zabbix.p1.f4'], 'Business-hours support');
+  assert.equal(en['zabbix.p1.f5'], 'Shared operations team');
+  assert.equal(en['zabbix.p2.f5'], 'Response targets agreed in the SLA');
+  assert.equal(en['zabbix.p3.f4'], '24/7 cover available only under a separately costed SLA');
+
+  for (const lang of EXPECTED_LANGS) {
+    const values = Object.values(translations[lang]);
+    for (const claim of retiredClaims) {
+      assert.ok(!values.includes(claim), `[${lang}] still exposes retired claim: ${claim}`);
+    }
+    assert.ok(
+      !/Estimated|Estimada|Estimée|Geschätzte|Stimata|Recorrência/.test(translations[lang]['zabbix.result.label']),
+      `[${lang}] still presents the simulator as a converted estimate`
+    );
+  }
 });
