@@ -112,15 +112,36 @@ test('UK trust pages do not give away the Security Gap Assessment', () => {
   assert.match(pages, /paid Security Evidence Review/);
 });
 
-test('UK service pages avoid unqualified NOC and 24/7 promises', () => {
+// Unqualified cover promises crept back in twice: once through SEO/OG metadata
+// and once through the static fallback text a page shows before i18n hydrates.
+// Both are buyer-facing, so the sweep covers every UK page in full, not a
+// hand-picked list. landing.html is the pt-BR Brazil funnel on a different cost
+// base and is out of UK scope.
+const BANNED_UK_CLAIMS = [
+  /dedicated\s+NOC/i,
+  /NOC\s*24\s*[x\u00d7/]\s*7/i,
+  /round-the-clock/i,
+  /24\s*[x\u00d7]\s*7/i,
+  /99[.,]9\s*%?\s*SLA/i,
+  /(?:guaranteed\s+SLA|SLA\s+guaranteed)/i,
+  /24\/7(?!\s+cover available only under a separately costed SLA)/i,
+];
+
+for (const file of htmlFiles.filter((f) => f !== 'landing.html')) {
+  test(`${file}: makes no unqualified 24/7 or dedicated-NOC promise`, () => {
+    const html = fs.readFileSync(path.join(REPO_ROOT, file), 'utf8');
+    for (const rule of BANNED_UK_CLAIMS) {
+      const hit = html.match(rule);
+      assert.ok(!hit, `${file} still promises: ${hit && hit[0]}`);
+    }
+  });
+}
+
+test('UK service pages qualify cover and service levels explicitly', () => {
   const pages = ['zabbix.html', 'about-the-group.html', 'veeam.html']
     .map((file) => fs.readFileSync(path.join(REPO_ROOT, file), 'utf8'))
     .join('\n');
 
-  assert.doesNotMatch(pages, /Round-the-clock infrastructure monitoring/);
-  assert.doesNotMatch(pages, /Mission Critical \(NOC 24x7\)/);
-  assert.doesNotMatch(pages, /24\/7 monitoring operation/);
-  assert.doesNotMatch(pages, /Premium SLA with dedicated NOC/);
   assert.match(pages, /separately costed SLA/);
   assert.match(pages, /contract-defined service levels/);
 });
