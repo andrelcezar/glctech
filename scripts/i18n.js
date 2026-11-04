@@ -34,14 +34,14 @@
       'hero.h1.line3':'de TI',
       'hero.h1.span': 'Infraestrutura',
       'hero.p':       'Detectamos falhas antes que impactem seu negócio. Monitoramento inteligente, segurança avançada e suporte especializado — tudo em um único parceiro.',
-      'hero.cta1':    'Solicitar Diagnóstico',
+      'hero.cta1':    'Ver a Revisão de Evidências',
       'hero.cta2':    'Ver Soluções',
 
       /* Stats */
       'stat.snmp':     'Devices monitorados via SNMP',
       'stat.capacity': 'Capacidade total de monitoramento',
-      'stat.sla':      'SLA garantido aos clientes',
-      'stat.support':  'Suporte técnico contínuo',
+      'stat.sla':      'Níveis de serviço definidos em contrato',
+      'stat.support':  'Suporte e SLA acordados antes do contrato',
 
       /* About */
       'about.label':     'Sobre a GLCTech',
@@ -81,7 +81,7 @@
       'why.p2.h':  'Abordagem Estratégica',
       'why.p2.p':  'Não entregamos apenas ferramentas: criamos estratégias sob medida, transformando dados em insights acionáveis para decisões mais rápidas.',
       'why.p3.h':  'Parceria de Longo Prazo',
-      'why.p3.p':  'Suporte técnico contínuo, atualizações proativas e acompanhamento próximo — sua operação permanece estável e em constante evolução.',
+      'why.p3.p':  'Suporte no SLA acordado, atualizações proativas e acompanhamento próximo — sua operação permanece estável e em constante evolução.',
       'why.p4.h':  'Compromisso com a Excelência',
       'why.p4.p':  'Qualidade, transparência e inovação em cada solução. Resultados mensuráveis e um ambiente de TI robusto e confiável.',
       'why.quote': '"A qualidade dos serviços prestados pela GLCTech é excepcional. Sempre atenciosos e ágeis, demonstram profundo conhecimento em sua área, oferecendo soluções eficazes para qualquer desafio."',
@@ -109,7 +109,7 @@
       /* CTA Banner */
       'cta.h2':  'Pronto para proteger sua infraestrutura?',
       'cta.p':   'Fale com nossos especialistas e descubra como a GLCTech pode transformar o monitoramento da sua empresa.',
-      'cta.btn': 'Iniciar Diagnóstico Gratuito',
+      'cta.btn': 'Ver a Revisão de Evidências',
 
       /* Contact */
       'contact.label':    'Fale Conosco',
@@ -486,7 +486,7 @@
       'why.p2.h':  'Strategic Approach',
       'why.p2.p':  'We don\'t just deliver tools: we create tailored strategies, turning data into actionable insights for faster decisions.',
       'why.p3.h':  'Long-Term Partnership',
-      'why.p3.p':  'Continuous technical support, proactive updates and close follow-up — your operation stays stable and constantly evolving.',
+      'why.p3.p':  'Support under your agreed SLA, proactive updates and close follow-up — your operation stays stable and constantly evolving.',
       'why.p4.h':  'Commitment to Excellence',
       'why.p4.p':  'Quality, transparency and innovation in every solution. Measurable results and a robust, reliable IT environment.',
       'why.quote': '"The quality of services provided by GLCTech is exceptional. Always attentive and agile, they demonstrate deep knowledge in their field, offering effective solutions to any challenge."',
@@ -824,13 +824,13 @@
       'hero.h1.line3':'IT',
       'hero.h1.span': 'Infrastruktur',
       'hero.p':       'Wir erkennen Ausfälle, bevor sie Ihr Geschäft beeinträchtigen. Intelligentes Monitoring, fortschrittliche Sicherheit und spezialisierter Support — alles bei einem einzigen Partner.',
-      'hero.cta1':    'Diagnose anfragen',
+      'hero.cta1':    'Evidence Review ansehen',
       'hero.cta2':    'Lösungen ansehen',
 
       'stat.snmp':     'Geräte per SNMP überwacht',
       'stat.capacity': 'Gesamte Monitoring-Kapazität',
-      'stat.sla':      'Garantierter SLA für Kunden',
-      'stat.support':  'Kontinuierlicher technischer Support',
+      'stat.sla':      'Service-Level vertraglich festgelegt',
+      'stat.support':  'Support und SLA vor Vertragsschluss vereinbart',
 
       'about.label':     'Über GLCTech',
       'about.h2':        'Experten, die die Kontinuität Ihres Unternehmens sichern',
@@ -867,7 +867,7 @@
       'why.p2.h':  'Strategischer Ansatz',
       'why.p2.p':  'Wir liefern nicht nur Werkzeuge: Wir entwickeln maßgeschneiderte Strategien, die Daten in umsetzbare Erkenntnisse verwandeln.',
       'why.p3.h':  'Langfristige Partnerschaft',
-      'why.p3.p':  'Kontinuierlicher technischer Support, proaktive Updates und enge Begleitung — Ihr Betrieb bleibt stabil und entwickelt sich stetig.',
+      'why.p3.p':  'Support im vereinbarten SLA, proaktive Updates und enge Begleitung — Ihr Betrieb bleibt stabil und entwickelt sich stetig.',
       'why.p4.h':  'Engagement für Exzellenz',
       'why.p4.p':  'Qualität, Transparenz und Innovation in jeder Lösung. Messbare Ergebnisse und eine robuste, zuverlässige IT-Umgebung.',
       'why.quote': '„Die Qualität der von GLCTech erbrachten Dienstleistungen ist außergewöhnlich. Stets aufmerksam und agil, zeigen sie tiefes Fachwissen und bieten effektive Lösungen für jede Herausforderung."',
@@ -891,7 +891,7 @@
 
       'cta.h2':  'Bereit, Ihre Infrastruktur zu schützen?',
       'cta.p':   'Sprechen Sie mit unseren Spezialisten und entdecken Sie, wie GLCTech das Monitoring Ihres Unternehmens transformieren kann.',
-      'cta.btn': 'Kostenlose Diagnose starten',
+      'cta.btn': 'Evidence Review ansehen',
 
       'contact.label':    'Kontakt',
       'contact.h2':       'Kontaktieren Sie unser technisches Team',
@@ -1143,13 +1143,13 @@
       'hero.h1.line3':'TI',
       'hero.h1.span': 'Infraestructura',
       'hero.p':       'Detectamos fallas antes de que afecten tu negocio. Monitoreo inteligente, seguridad avanzada y soporte especializado — todo en un único socio.',
-      'hero.cta1':    'Solicitar Diagnóstico',
+      'hero.cta1':    'Ver la Revisión de Evidencias',
       'hero.cta2':    'Ver Soluciones',
 
       'stat.snmp':     'Dispositivos monitoreados vía SNMP',
       'stat.capacity': 'Capacidad total de monitoreo',
-      'stat.sla':      'SLA garantizado a los clientes',
-      'stat.support':  'Soporte técnico continuo',
+      'stat.sla':      'Niveles de servicio definidos en contrato',
+      'stat.support':  'Soporte y SLA acordados antes del contrato',
 
       'about.label':     'Acerca de GLCTech',
       'about.h2':        'Expertos que garantizan la continuidad de tu negocio',
@@ -1186,7 +1186,7 @@
       'why.p2.h':  'Enfoque Estratégico',
       'why.p2.p':  'No solo entregamos herramientas: creamos estrategias a medida, transformando datos en insights accionables para decisiones más rápidas.',
       'why.p3.h':  'Alianza a Largo Plazo',
-      'why.p3.p':  'Soporte técnico continuo, actualizaciones proactivas y acompañamiento cercano — tu operación permanece estable y en constante evolución.',
+      'why.p3.p':  'Soporte bajo el SLA acordado, actualizaciones proactivas y acompañamiento cercano — tu operación permanece estable y en constante evolución.',
       'why.p4.h':  'Compromiso con la Excelencia',
       'why.p4.p':  'Calidad, transparencia e innovación en cada solución. Resultados medibles y un entorno de TI robusto y confiable.',
       'why.quote': '"La calidad de los servicios prestados por GLCTech es excepcional. Siempre atentos y ágiles, demuestran profundo conocimiento y ofrecen soluciones eficaces para cualquier desafío."',
@@ -1210,7 +1210,7 @@
 
       'cta.h2':  '¿Listo para proteger tu infraestructura?',
       'cta.p':   'Habla con nuestros especialistas y descubre cómo GLCTech puede transformar el monitoreo de tu empresa.',
-      'cta.btn': 'Iniciar Diagnóstico Gratuito',
+      'cta.btn': 'Ver la Revisión de Evidencias',
 
       'contact.label':    'Contáctanos',
       'contact.h2':       'Ponte en contacto con nuestro equipo técnico',
@@ -1446,13 +1446,13 @@
       'hero.h1.line3':'IT',
       'hero.h1.span': 'Infrastructure',
       'hero.p':       'Nous détectons les pannes avant qu\'elles n\'impactent votre activité. Supervision intelligente, sécurité avancée et support spécialisé — en un seul partenaire.',
-      'hero.cta1':    'Demander un diagnostic',
+      'hero.cta1':    'Voir la Revue de preuves',
       'hero.cta2':    'Voir les solutions',
 
       'stat.snmp':     'Équipements supervisés via SNMP',
       'stat.capacity': 'Capacité totale de supervision',
-      'stat.sla':      'SLA garanti aux clients',
-      'stat.support':  'Support technique continu',
+      'stat.sla':      'Niveaux de service définis au contrat',
+      'stat.support':  'Support et SLA convenus avant le contrat',
 
       'about.label':     'À propos de GLCTech',
       'about.h2':        'Des experts qui garantissent la continuité de votre activité',
@@ -1489,7 +1489,7 @@
       'why.p2.h':  'Approche Stratégique',
       'why.p2.p':  'Nous ne livrons pas seulement des outils : nous créons des stratégies sur mesure, transformant les données en insights actionnables.',
       'why.p3.h':  'Partenariat Durable',
-      'why.p3.p':  'Support technique continu, mises à jour proactives et suivi rapproché — votre exploitation reste stable et en constante évolution.',
+      'why.p3.p':  'Support selon le SLA convenu, mises à jour proactives et suivi rapproché — votre exploitation reste stable et en constante évolution.',
       'why.p4.h':  'Engagement envers l\'Excellence',
       'why.p4.p':  'Qualité, transparence et innovation dans chaque solution. Résultats mesurables et environnement IT robuste et fiable.',
       'why.quote': '« La qualité des services fournis par GLCTech est exceptionnelle. Toujours attentifs et agiles, ils font preuve d\'une connaissance approfondie de leur domaine et proposent des solutions efficaces à chaque défi. »',
@@ -1513,7 +1513,7 @@
 
       'cta.h2':  'Prêt à protéger votre infrastructure ?',
       'cta.p':   'Parlez à nos spécialistes et découvrez comment GLCTech peut transformer la supervision de votre entreprise.',
-      'cta.btn': 'Démarrer le diagnostic gratuit',
+      'cta.btn': 'Voir la Revue de preuves',
 
       'contact.label':    'Nous contacter',
       'contact.h2':       'Contactez notre équipe technique',
@@ -1749,13 +1749,13 @@
       'hero.h1.line3':'IT',
       'hero.h1.span': 'Infrastruttura',
       'hero.p':       'Rilevamo i guasti prima che impattino il tuo business. Monitoraggio intelligente, sicurezza avanzata e supporto specializzato — tutto da un unico partner.',
-      'hero.cta1':    'Richiedere Diagnosi',
+      'hero.cta1':    'Vedi la Revisione delle Evidenze',
       'hero.cta2':    'Vedi Soluzioni',
 
       'stat.snmp':     'Dispositivi monitorati via SNMP',
       'stat.capacity': 'Capacità totale di monitoraggio',
-      'stat.sla':      'SLA garantito ai clienti',
-      'stat.support':  'Supporto tecnico continuo',
+      'stat.sla':      'Livelli di servizio definiti nel contratto',
+      'stat.support':  'Supporto e SLA concordati prima del contratto',
 
       'about.label':     'Chi è GLCTech',
       'about.h2':        'Esperti che garantiscono la continuità del tuo business',
@@ -1792,7 +1792,7 @@
       'why.p2.h':  'Approccio Strategico',
       'why.p2.p':  'Non consegniamo solo strumenti: creiamo strategie su misura, trasformando i dati in insight azionabili per decisioni più rapide.',
       'why.p3.h':  'Partnership a Lungo Termine',
-      'why.p3.p':  'Supporto tecnico continuo, aggiornamenti proattivi e monitoraggio ravvicinato — la tua operazione rimane stabile e in costante evoluzione.',
+      'why.p3.p':  'Supporto nello SLA concordato, aggiornamenti proattivi e monitoraggio ravvicinato — la tua operazione rimane stabile e in costante evoluzione.',
       'why.p4.h':  'Impegno per l\'Eccellenza',
       'why.p4.p':  'Qualità, trasparenza e innovazione in ogni soluzione. Risultati misurabili e un ambiente IT robusto e affidabile.',
       'why.quote': '«La qualità dei servizi forniti da GLCTech è eccezionale. Sempre attenti e agili, dimostrano una profonda conoscenza del loro campo, offrendo soluzioni efficaci a qualsiasi sfida.»',
@@ -1816,7 +1816,7 @@
 
       'cta.h2':  'Pronto a proteggere la tua infrastruttura?',
       'cta.p':   'Parla con i nostri specialisti e scopri come GLCTech può trasformare il monitoraggio della tua azienda.',
-      'cta.btn': 'Inizia la Diagnosi Gratuita',
+      'cta.btn': 'Vedi la Revisione delle Evidenze',
 
       'contact.label':    'Contattaci',
       'contact.h2':       'Mettiti in contatto con il nostro team tecnico',
