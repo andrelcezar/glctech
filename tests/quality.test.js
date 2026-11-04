@@ -306,29 +306,31 @@ test('no inline style overrides the responsive nav logo height', () => {
   // An inline height:70px on two pages beat the responsive rule and pushed the
   // hamburger off narrow viewports.
   for (const page of PAGES) {
-    for (const tag of readMarkup(page).match(/<img[^>]*glctech-logo[^>]*>/g) || []) {
+    for (const tag of readMarkup(page).match(/<img[^>]*glctechsec-logo[^>]*>/g) || []) {
       assert.ok(!/style="[^"]*height/.test(tag), `${page}: inline height on the logo`);
     }
   }
 });
 
-test('careers header logo matches the live landing-page dimensions', () => {
-  // The deployed landing page uses a 120px-tall, 350px-wide header logo.
-  // Keep the careers page aligned with that visual baseline.
-  const career = read('career.html');
-  const rule = career.match(/\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/);
-  assert.ok(rule, 'career.html: nav logo rule is missing');
-  assert.match(rule[1], /height:\s*120px\s*;/,
-    'career.html: header logo height differs from the landing page');
-  assert.match(rule[1], /max-width:\s*350px\s*;/,
-    'career.html: header logo max-width differs from the landing page');
+test('careers header logo matches the homepage dimensions', () => {
+  // Compare against the checked-in homepage so an old deployment's dimensions
+  // cannot make CI demand a different design from the rest of the site.
+  const logoRule = /\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/;
+  const mobileRule = /@media\s*\(max-width:\s*480px\)[\s\S]*?\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/;
+  const dimensions = (page, pattern) => {
+    const rule = readMarkup(page).match(pattern);
+    assert.ok(rule, `${page}: nav logo rule is missing`);
+    return ['height', 'max-width'].map((property) => {
+      const value = rule[1].match(new RegExp(`(?:^|;)\\s*${property}:\\s*([^;]+);`));
+      assert.ok(value, `${page}: nav logo ${property} is missing`);
+      return value[1].trim();
+    });
+  };
 
-  const mobileRule = career.match(/@media\s*\(max-width:\s*480px\)[\s\S]*?\.nav-logo img, \.nav-logo4 img\s*\{([^}]*)\}/);
-  assert.ok(mobileRule, 'career.html: responsive nav logo rule is missing');
-  assert.match(mobileRule[1], /height:\s*32px\s*;/,
-    'career.html: mobile header logo height differs from the landing page');
-  assert.match(mobileRule[1], /max-width:\s*168px\s*;/,
-    'career.html: mobile header logo max-width differs from the landing page');
+  for (const pattern of [logoRule, mobileRule]) {
+    assert.deepStrictEqual(dimensions('career.html', pattern), dimensions('index.html', pattern),
+      'career.html: header logo dimensions differ from the homepage');
+  }
 });
 
 /* ── form destinations ──────────────────────────────────────────────────── */
