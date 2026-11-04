@@ -19,7 +19,7 @@ const post = (path, body, { origin, headers = {}, contentType = 'application/jso
 /* ── static fall-through + security headers ───────────────────────────────── */
 
 test('static paths fall through to assets and carry security headers', async () => {
-  for (const p of ['/', '/index.html', '/assets/logo/glctech-logo.png', '/zabbix.html']) {
+  for (const p of ['/', '/index.html', '/assets/logo/glctechsec-logo-horizontal-branco.svg', '/zabbix.html']) {
     const r = await w.fetch(new Request('https://glctechsec.com' + p), ENV, CTX);
     assert.strictEqual(await r.text(), 'asset:' + p);
     assert.strictEqual(r.headers.get('X-Content-Type-Options'), 'nosniff');

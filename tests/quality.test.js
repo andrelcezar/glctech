@@ -306,7 +306,7 @@ test('no inline style overrides the responsive nav logo height', () => {
   // An inline height:70px on two pages beat the responsive rule and pushed the
   // hamburger off narrow viewports.
   for (const page of PAGES) {
-    for (const tag of readMarkup(page).match(/<img[^>]*glctech-logo[^>]*>/g) || []) {
+    for (const tag of readMarkup(page).match(/<img[^>]*glctechsec-logo[^>]*>/g) || []) {
       assert.ok(!/style="[^"]*height/.test(tag), `${page}: inline height on the logo`);
     }
   }
