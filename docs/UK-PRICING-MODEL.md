@@ -62,8 +62,8 @@ Ad hoc day rate: not approved for publication. Quote separately.
 ## 5. Offer page and trial logic
 
 - The free 15-day trial from the Brazil page does not transfer. A paid, fixed-scope Evidence Review is the UK front door. Scoping-call requests use a working email fallback until a real booking URL is verified.
-- Qualifying fields instead of free-text: sector, staff count, trigger (customer questionnaire / insurer / regulator / incident / other), deadline, current certification. These map to Zoho Lead Description via worker/lib/crm.js.
+- Qualifying fields instead of free-text: sector, staff count, trigger (customer questionnaire / insurer / regulator / incident / other), deadline, current certification. These feed the Systeme.io contact's account-specific enquiry custom field via worker/lib/crm.js; the slug still needs verification.
 
 ## 6. Remaining integration
 
-- Zoho Bookings has no verified public URL. Keep the email scoping fallback; replace it only after the actual booking destination is verified.
+- Systeme.io booking has no verified public URL. Keep the email scoping fallback; replace it only after the actual booking destination is verified.
