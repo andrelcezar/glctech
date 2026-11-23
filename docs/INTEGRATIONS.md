@@ -3,15 +3,15 @@
 Every external service the site talks to, where its key/ID lives, whether that
 value is safe to be public, and how to change it.
 
-> **Golden rule:** this is a static site — **everything in the HTML/JS ships to
-> the browser and is publicly visible.** So the only keys that belong here are
-> ones designed to be public (submission keys, widget IDs, measurement IDs).
-> The **only** genuinely secret credentials (Zabbix login) must live in CI
-> secrets, never in the repo.
+> The browser-visible HTML/JS is public; secrets belong only in server-side
+> Worker bindings or CI environment variables. Never commit them or place them
+> in a page. GitHub Actions secrets do **not** automatically provision the
+> separately deployed Cloudflare Worker runtime.
 
 - [At a glance](#at-a-glance)
 - [Google Analytics 4](#google-analytics-4)
 - [Cloudflare Worker + Zoho Mail (contact and careers forms)](#cloudflare-worker--zoho-mail-contact-and-careers-forms)
+- [Systeme.io (contact enquiries and booking)](#systemeio-contact-enquiries-and-booking)
 - [JotForm (e-book capture)](#jotform-e-book-capture)
 - [RSS2JSON + CORS proxies (blog feed)](#rss2json--cors-proxies-blog-feed)
 - [Tidio AI chatbot](#tidio-ai-chatbot)
@@ -27,6 +27,7 @@ value is safe to be public, and how to change it.
 |---------|---------|---------------------|:---:|
 | Google Analytics 4 | Traffic analytics | `G-YDBB1PYYCM` in each page `<head>` | ✅ public by design |
 | Cloudflare Worker + Zoho Mail | Contact form → e-mail (`/api/contact`) | `worker/index.js` + `worker/lib/`; credentials in Worker secrets | 🔒 credentials secret, endpoint path is public |
+| Systeme.io | Best-effort attributed contact capture after successful e-mail | `worker/lib/crm.js`; API key in Worker secret, custom field slug in Worker variable | 🔒 API key, never client-side |
 | Cloudflare Worker + Zoho Mail | Careers form → e-mail (`/api/careers`) | same Worker, `CAREERS_TO_EMAIL` secret | 🔒 credentials secret, endpoint path is public |
 | Cloudflare Turnstile | Bot protection on both forms | site key in HTML (public), secret key in `TURNSTILE_SECRET_KEY` | ✅ site key public / 🔒 secret key secret |
 | JotForm | E-book lead capture | iframe `src` in `ebook.html` | ✅ public embed |
@@ -66,6 +67,39 @@ value is safe to be public, and how to change it.
   `scripts/i18n.js` (`form.err.*`). The Worker's own JSON error `message` is
   intentionally not shown verbatim to the visitor (it is Portuguese, an
   internal API contract) — the frontend shows its own localized fallback text.
+
+---
+
+## Systeme.io (contact enquiries and booking)
+
+- **Flow:** successful `/api/contact` SMTP delivery schedules a best-effort
+  Systeme.io Public API call via `ctx.waitUntil`. Exact-email search precedes
+  contact creation; a match updates only the custom latest-enquiry field. An
+  ambiguous or failed lookup never creates a duplicate. This is **contact
+  capture**, not a Zoho-style Leads pipeline or historical note stream. The
+  email notification retains every enquiry, including repeats. CRM failures
+  do not change the visitor's successful response. Careers and legacy
+  `landing.html` are not captured.
+- **Attribution:** the configured enquiry field stores subject, message, UK
+  qualifiers, source page, referrer and supplied UTM fields. Source-page and
+  UTM values are client-supplied, not verified.
+- **Configuration:** create or verify an appropriate Systeme.io *contact custom
+  field* for latest website enquiry. Set its exact slug as the Worker variable
+  `SYSTEME_ENQUIRY_FIELD_SLUG`. The deployed Worker also needs `SYSTEME_API_KEY`
+  as a secret. Without both, SMTP continues but CRM capture is skipped. The
+  existing Zoho Mail `ZOHO_USER` / `ZOHO_PASS` are separate and still needed
+  for SMTP; changing CRM does not migrate mail. A planned repository secret
+  named `SYSTEME_API_KEY` alone does not reach the Worker: either provision
+  the Worker secret directly through an authorized Cloudflare operator or add
+  and review a *trusted, gated* deployment workflow that explicitly transmits
+  it. Do not expose it to PR jobs, logs or browser pages. No such workflow is
+  included in this review-only PR.
+- **Booking:** Systeme.io supports calendar events, but no account-specific
+  public event URL has been verified. The offer page continues to use an
+  honest email scoping-call link. Supply/verify the real public booking URL
+  before linking it in this PR. An event API ID is not itself a booking link.
+- **Validation:** mocked tests cover create, repeat enquiry, lookup failure and
+  email fallback. Live Worker-to-Systeme capture and booking are still untested.
 
 ---
 

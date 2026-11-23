@@ -24,6 +24,10 @@ not_found_handling = "404-page"
 #   npx wrangler secret put CONTACT_TO_EMAIL     # contac@glctech.com.br — where the contact form is delivered
 #   npx wrangler secret put CAREERS_TO_EMAIL     # rh@glctech.com.br — where the careers form is delivered
 #   npx wrangler secret put TURNSTILE_SECRET_KEY # Cloudflare Turnstile secret key (optional — see AUDIT-REPORT.md)
+#   npx wrangler secret put SYSTEME_API_KEY      # Systeme.io Public API key for CRM capture
+# Also set SYSTEME_ENQUIRY_FIELD_SLUG to the verified custom contact field slug
+# in the Worker runtime (not browser code). GitHub Actions secrets are not
+# automatically injected into Cloudflare Workers Builds.
 #
 # If CONTACT_TO_EMAIL / CAREERS_TO_EMAIL are not set, mail falls back to ZOHO_USER.
 

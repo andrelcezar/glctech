@@ -8,7 +8,7 @@
  * Everything that is not one of those two paths falls through to the static
  * assets in dist/, assembled by scripts/build.mjs.
  *
- * The Zoho credential and the Turnstile secret live in Worker secrets. They
+ * The Zoho Mail credential, Systeme.io key and Turnstile secret live in Worker secrets. They
  * are never in this file, and never in the repository. See AUDIT-REPORT.md
  * for the full list of required secrets and how to set them.
  */
@@ -16,6 +16,7 @@ import { sendMail } from './lib/smtp.js';
 import { buildContactEmail, buildCareersEmail } from './lib/mail.js';
 import { validateResumeFile } from './lib/validate.js';
 import { verifyTurnstile } from './lib/turnstile.js';
+import { crmConfigured, buildLeadRecord, pushLead } from './lib/crm.js';
 import {
   json, clean, isValidEmail, originAllowed, isRateLimited, requestId, withSecurityHeaders,
 } from './lib/http.js';
@@ -78,6 +79,17 @@ async function handleContact(request, env, ctx) {
   const phone = clean(body.phone, 60);
   const subject = clean(body.subject, 160);
 
+  // Optional structured qualifiers (UK offer page) and campaign attribution.
+  const Q = (k, n = 120) => clean(body[k], n);
+  const qualifiers = {
+    Sector: Q('sector'), 'Team size': Q('team_size'), 'Trigger': Q('trigger'),
+    Deadline: Q('deadline'), 'Current certification': Q('certification'),
+  };
+  const attribution = {
+    'Source page': Q('source_page', 200), 'UTM source': Q('utm_source'), 'UTM medium': Q('utm_medium'),
+    'UTM campaign': Q('utm_campaign'), Referrer: Q('referrer', 200),
+  };
+
   if (!name || !message) {
     return json({ success: false, message: 'Name and message are required.' }, 400);
   }
@@ -91,6 +103,9 @@ async function handleContact(request, env, ctx) {
   }
 
   const { subject: mailSubject, text } = buildContactEmail({ name, email, phone, company, subject, message });
+  const contextLines = [...Object.entries(qualifiers), ...Object.entries(attribution)]
+    .filter(([, value]) => value).map(([key, value]) => `${key}: ${value}`);
+  const mailText = contextLines.length ? `${text}\n\nWebsite context:\n${contextLines.join('\n')}` : text;
 
   try {
     const { connect } = await import('cloudflare:sockets');
@@ -104,9 +119,20 @@ async function handleContact(request, env, ctx) {
       to: env.CONTACT_TO_EMAIL || env.ZOHO_USER,
       replyTo: `"${name}" <${email}>`,
       subject: mailSubject,
-      text,
+      text: mailText,
     });
     console.log(`[contact] ${rid} 200 sent`);
+    if (crmConfigured(env)) {
+      try {
+        const lead = buildLeadRecord({ name, email, phone, company, subject, message, qualifiers, attribution });
+        const work = pushLead(env, lead)
+          .then((r) => console.log(`[contact] ${rid} crm ${r.action}`))
+          .catch((e) => console.error(`[contact] ${rid} crm-failed:`, e && e.message));
+        ctx.waitUntil(work);
+      } catch (e) {
+        console.error(`[contact] ${rid} crm-schedule-failed:`, e && e.message);
+      }
+    }
     return json({ success: true, message: 'Message sent successfully. We will be in touch shortly.' }, 200);
   } catch (err) {
     // The SMTP error names the host and the account — log it, never return it.
