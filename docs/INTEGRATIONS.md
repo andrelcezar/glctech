@@ -3,15 +3,15 @@
 Every external service the site talks to, where its key/ID lives, whether that
 value is safe to be public, and how to change it.
 
-> **Golden rule:** this is a static site — **everything in the HTML/JS ships to
-> the browser and is publicly visible.** So the only keys that belong here are
-> ones designed to be public (submission keys, widget IDs, measurement IDs).
-> The **only** genuinely secret credentials (Zabbix login) must live in CI
-> secrets, never in the repo.
+> The browser-visible HTML/JS is public; secrets belong only in server-side
+> Worker bindings or CI environment variables. Never commit them or place them
+> in a page. A connected assistant-side Composio account does **not** provision
+> the separately deployed Worker's authentication.
 
 - [At a glance](#at-a-glance)
 - [Google Analytics 4](#google-analytics-4)
 - [Cloudflare Worker + Zoho Mail (contact and careers forms)](#cloudflare-worker--zoho-mail-contact-and-careers-forms)
+- [Zoho CRM via Composio (contact leads)](#zoho-crm-via-composio-contact-leads)
 - [JotForm (e-book capture)](#jotform-e-book-capture)
 - [RSS2JSON + CORS proxies (blog feed)](#rss2json--cors-proxies-blog-feed)
 - [Tidio AI chatbot](#tidio-ai-chatbot)
@@ -27,6 +27,7 @@ value is safe to be public, and how to change it.
 |---------|---------|---------------------|:---:|
 | Google Analytics 4 | Traffic analytics | `G-YDBB1PYYCM` in each page `<head>` | ✅ public by design |
 | Cloudflare Worker + Zoho Mail | Contact form → e-mail (`/api/contact`) | `worker/index.js` + `worker/lib/`; credentials in Worker secrets | 🔒 credentials secret, endpoint path is public |
+| Zoho CRM via Composio | Best-effort contact lead/duplicate note after successful e-mail | `worker/lib/crm.js`; Composio key and connected-account ID in Worker secrets | 🔒 runtime bindings, never client-side |
 | Cloudflare Worker + Zoho Mail | Careers form → e-mail (`/api/careers`) | same Worker, `CAREERS_TO_EMAIL` secret | 🔒 credentials secret, endpoint path is public |
 | Cloudflare Turnstile | Bot protection on both forms | site key in HTML (public), secret key in `TURNSTILE_SECRET_KEY` | ✅ site key public / 🔒 secret key secret |
 | JotForm | E-book lead capture | iframe `src` in `ebook.html` | ✅ public embed |
@@ -66,6 +67,37 @@ value is safe to be public, and how to change it.
   `scripts/i18n.js` (`form.err.*`). The Worker's own JSON error `message` is
   intentionally not shown verbatim to the visitor (it is Portuguese, an
   internal API contract) — the frontend shows its own localized fallback text.
+
+---
+
+## Zoho CRM via Composio (contact leads)
+
+- **Flow:** successful `/api/contact` SMTP delivery schedules a best-effort CRM
+  task via `ctx.waitUntil`. It searches Zoho `Leads` by email; a match receives
+  a `Notes` record, otherwise a new `Leads` record is created. If the search
+  fails or has an unrecognised response, no create is attempted (avoids
+  duplicate leads). CRM errors are logged without changing the successful
+  visitor response. Careers and the legacy `landing.html` form are not captured.
+- **Attribution:** the lead description includes `Source: Website`, subject,
+  message, UK offer qualifiers, source page, referrer and supplied UTM fields.
+  The email notification also includes qualifiers and attribution so a CRM
+  outage does not discard them. `Last_Name` is always populated; the CRM's
+  verified `Web Download` source value is used because `Website` is unavailable
+  in that picklist. Source-page and UTM values are client-supplied, not verified.
+- **Runtime configuration:** the deployed Worker needs two *separately
+  provisioned* bindings: `COMPOSIO_API_KEY` and `COMPOSIO_ZOHO_ACCOUNT_ID`.
+  Neither has been provisioned by this integration. Without both, SMTP still
+  works but CRM capture is skipped. Assistant-side Composio authorization is
+  distinct from Worker runtime credentials; do not copy assistant session
+  tokens or account details into the repository or public HTML. Provisioning
+  requires explicit operator approval and deployment configuration. Existing
+  SMTP bindings `ZOHO_USER` / `ZOHO_PASS` are separate.
+- **Request shapes:** checked against the Composio Zoho
+  `ZOHO_SEARCH_ZOHO_RECORDS` (`module_api_name`, `email`, `fields`) and
+  `ZOHO_CREATE_ZOHO_RECORD` (`module_api_name`, `data` array) tool schemas.
+  `Notes.Parent_Id` refers to the matching Lead. Local mocked tests exercise
+  both paths and CRM failure handling; a live deployed Worker-to-CRM test is
+  still needed after its bindings are provisioned.
 
 ---
 

@@ -1,6 +1,6 @@
-# GLCTech Sec UK pricing model (draft for approval)
+# GLCTech Sec UK pricing model (approved)
 
-Status: DRAFT. Not yet published on the site. All figures GBP, ex VAT.
+Status: Approved price book. Offer and monitoring prices are displayed on the site. All figures GBP, ex VAT.
 Replaces the old Brazil-converted numbers (R$500 / 6.2 = £80, R$1,300 / 6.2 = £210).
 
 ## 1. Market evidence (UK, 2026)
@@ -28,18 +28,18 @@ Source C: Atlant Security, "Cybersecurity consulting services 2026 guide"
 
 Boutique, fixed-scope, evidence-led. Priced above "cheap offshore" signals (sub-£5/user, £80 for 30 hosts) and below Big Four/partner-led firms. Target the floor-to-lower-middle of mid-level consultant day rates, because delivery is remote and fixed-scope.
 
-## 3. Proposed price book
+## 3. Approved price book
 
 Security Evidence Review (primary offer, fixed scope, paid)
-- Up to 25 staff: £1,250 (about 1 mid-level day-rate equivalent plus report and one retest check)
+- Up to 25 staff: £1,250
 - 26-75 staff: £2,250
 - 76-150 staff: £3,950
 - Includes written report, ranked fix list, questionnaire-ready evidence pack, 30-min readout. Retest of fixed items within 30 days included (Atlant: excluding retests is how quotes mislead).
-- Note: tests/html.test.js currently forbids the string "From £1,250" on the homepage. If we publish, update that test deliberately.
+- The homepage links to the detailed offer page; it does not display the starting price.
 
-Cyber Essentials readiness (fixed)
+Cyber Essentials (separately commissioned)
 - CE: £750 + IASME fee at cost (UK market £500-1,500)
-- CE Plus readiness: £1,750 + IASME audit/assessor at cost (market £2,500-5,000 all-in)
+- CE Plus: £1,750 + audit/assessor costs (market £2,500-5,000 all-in)
 
 Managed monitoring (Zabbix, business hours, optional, quoted separately)
 - Platform and onboarding: £950 one-off
@@ -51,21 +51,19 @@ Advisory retainer (vCISO-lite)
 - 4 hours/month £900; 8 hours/month £1,650; 16 hours/month £3,000
 - Equivalent hourly £225 / £206 / £188, under CB Solve project rate £350 and consistent with the 15-30% retainer discount
 
-Day rate (ad hoc, publish only on request): £850/day remote.
+Ad hoc day rate: not approved for publication. Quote separately.
 
 ## 4. Margin sanity check (ASSUMPTIONS, confirm with Tchize and Andre)
 
-- Cost of delivery assumed at £350-450/day blended (founder time plus tooling). Evidence Review up to 25 staff assumed 1.5-2 days: cost about £700-900, margin about 28-44%. Needs real hour tracking on the first 3 jobs.
+- Cost of delivery assumed at £350-450/day blended (founder time plus tooling). Evidence Review for up to 25 staff assumed 1.5-2 days: cost about £700-900, margin about 28-44%. Needs real hour tracking on the first 3 jobs.
 - Monitoring at 30 hosts: assumed 3-4 hours/month ongoing, cost about £150-200, margin about 55-65%.
 - If actual hours exceed assumptions by 30%, the Review tier 1 margin drops near 10%. Revisit after 3 engagements.
 
 ## 5. Offer page and trial logic
 
-- The free 15-day trial from the Brazil page does not transfer. A paid, fixed-scope Evidence Review with a free 30-minute scoping call is the UK front door.
+- The free 15-day trial from the Brazil page does not transfer. A paid, fixed-scope Evidence Review is the UK front door. Scoping-call requests use a working email fallback until a real booking URL is verified.
 - Qualifying fields instead of free-text: sector, staff count, trigger (customer questionnaire / insurer / regulator / incident / other), deadline, current certification. These map to Zoho Lead Description via worker/lib/crm.js.
 
-## 6. Open decisions for Tchize
+## 6. Remaining integration
 
-1. Approve or adjust the price book above.
-2. Publish numbers on the site, or keep "scoped quote" with a published range?
-3. Booking calendar: Zoho Bookings (same suite as CRM) is recommended.
+- Zoho Bookings has no verified public URL. Keep the email scoping fallback; replace it only after the actual booking destination is verified.

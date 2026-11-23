@@ -33,6 +33,7 @@ const FILES = [
   'veeam.html',
   'career.html',
   'zabbix-diagnostic.html',
+  'uk-evidence-review.html',
   'politica.html',
   'termos.html',
   'ebook.html',

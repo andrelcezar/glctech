@@ -103,6 +103,9 @@ async function handleContact(request, env, ctx) {
   }
 
   const { subject: mailSubject, text } = buildContactEmail({ name, email, phone, company, subject, message });
+  const contextLines = [...Object.entries(qualifiers), ...Object.entries(attribution)]
+    .filter(([, value]) => value).map(([key, value]) => `${key}: ${value}`);
+  const mailText = contextLines.length ? `${text}\n\nWebsite context:\n${contextLines.join('\n')}` : text;
 
   try {
     const { connect } = await import('cloudflare:sockets');
@@ -116,15 +119,19 @@ async function handleContact(request, env, ctx) {
       to: env.CONTACT_TO_EMAIL || env.ZOHO_USER,
       replyTo: `"${name}" <${email}>`,
       subject: mailSubject,
-      text,
+      text: mailText,
     });
     console.log(`[contact] ${rid} 200 sent`);
     if (crmConfigured(env)) {
-      const lead = buildLeadRecord({ name, email, phone, company, subject, message, qualifiers, attribution });
-      const work = pushLead(env, lead)
-        .then((r) => console.log(`[contact] ${rid} crm ${r.action}`))
-        .catch((e) => console.error(`[contact] ${rid} crm-failed:`, e && e.message));
-      ctx.waitUntil(work);
+      try {
+        const lead = buildLeadRecord({ name, email, phone, company, subject, message, qualifiers, attribution });
+        const work = pushLead(env, lead)
+          .then((r) => console.log(`[contact] ${rid} crm ${r.action}`))
+          .catch((e) => console.error(`[contact] ${rid} crm-failed:`, e && e.message));
+        ctx.waitUntil(work);
+      } catch (e) {
+        console.error(`[contact] ${rid} crm-schedule-failed:`, e && e.message);
+      }
     }
     return json({ success: true, message: 'Message sent successfully. We will be in touch shortly.' }, 200);
   } catch (err) {

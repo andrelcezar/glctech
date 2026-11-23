@@ -26,7 +26,12 @@ async function execute(env, slug, args, fetchImpl) {
   if (!res.ok) throw new Error(`composio ${slug} http ${res.status}`);
   const body = await res.json();
   if (body.successful === false || body.error) throw new Error(`composio ${slug} failed`);
-  return body.data || body;
+  const data = body.data || body;
+  if (data.success === false || data.error ||
+      (Array.isArray(data.data) && data.data.some((row) => row.status === 'error'))) {
+    throw new Error(`zoho ${slug} failed`);
+  }
+  return data;
 }
 
 /** Splits "Jane Q Smith" into Zoho's First_Name / Last_Name (Last_Name is mandatory). */
@@ -37,7 +42,7 @@ export function splitName(full) {
 }
 
 export function buildLeadRecord({ name, email, phone, company, subject, message, qualifiers, attribution }) {
-  const lines = [`Enquiry: ${subject || 'General enquiry'}`];
+  const lines = [`Enquiry: ${subject || 'General enquiry'}`, 'Source: Website'];
   for (const [k, v] of Object.entries(qualifiers || {})) if (v) lines.push(`${k}: ${v}`);
   for (const [k, v] of Object.entries(attribution || {})) if (v) lines.push(`${k}: ${v}`);
   if (message) lines.push('', message);
@@ -46,7 +51,7 @@ export function buildLeadRecord({ name, email, phone, company, subject, message,
     Email: email,
     Phone: phone || undefined,
     Company: company || 'Not provided',
-    Lead_Source: 'Web Research',
+    Lead_Source: 'Web Download',
     Lead_Status: 'Not Contacted',
     Description: lines.join('\n').slice(0, 30000),
   };
@@ -59,8 +64,9 @@ export function buildLeadRecord({ name, email, phone, company, subject, message,
  */
 export async function pushLead(env, lead, fetchImpl = fetch) {
   const found = await execute(env, 'ZOHO_SEARCH_ZOHO_RECORDS',
-    { module_api_name: 'Leads', email: lead.Email, fields: 'id,Email' }, fetchImpl).catch(() => null);
-  const existing = found && Array.isArray(found.data) && found.data[0];
+    { module_api_name: 'Leads', email: lead.Email, fields: 'id,Email' }, fetchImpl);
+  if (!Array.isArray(found?.data)) throw new Error('zoho search returned unexpected result');
+  const existing = found.data[0];
   if (existing && existing.id) {
     await execute(env, 'ZOHO_CREATE_ZOHO_RECORD', {
       module_api_name: 'Notes',
