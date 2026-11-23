@@ -33,4 +33,5 @@ not_found_handling = "404-page"
 # then paste the id below and uncomment.
 # [[kv_namespaces]]
 # binding = "RATE_LIMIT"
-# id = "<paste the id wrangler prints>"
+
+[previews]
