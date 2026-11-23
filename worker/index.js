@@ -8,7 +8,7 @@
  * Everything that is not one of those two paths falls through to the static
  * assets in dist/, assembled by scripts/build.mjs.
  *
- * The Zoho credential and the Turnstile secret live in Worker secrets. They
+ * The Zoho Mail credential, Systeme.io key and Turnstile secret live in Worker secrets. They
  * are never in this file, and never in the repository. See AUDIT-REPORT.md
  * for the full list of required secrets and how to set them.
  */

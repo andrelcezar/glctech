@@ -5,13 +5,13 @@ value is safe to be public, and how to change it.
 
 > The browser-visible HTML/JS is public; secrets belong only in server-side
 > Worker bindings or CI environment variables. Never commit them or place them
-> in a page. A connected assistant-side Composio account does **not** provision
-> the separately deployed Worker's authentication.
+> in a page. GitHub Actions secrets do **not** automatically provision the
+> separately deployed Cloudflare Worker runtime.
 
 - [At a glance](#at-a-glance)
 - [Google Analytics 4](#google-analytics-4)
 - [Cloudflare Worker + Zoho Mail (contact and careers forms)](#cloudflare-worker--zoho-mail-contact-and-careers-forms)
-- [Zoho CRM via Composio (contact leads)](#zoho-crm-via-composio-contact-leads)
+- [Systeme.io (contact enquiries and booking)](#systemeio-contact-enquiries-and-booking)
 - [JotForm (e-book capture)](#jotform-e-book-capture)
 - [RSS2JSON + CORS proxies (blog feed)](#rss2json--cors-proxies-blog-feed)
 - [Tidio AI chatbot](#tidio-ai-chatbot)
@@ -27,7 +27,7 @@ value is safe to be public, and how to change it.
 |---------|---------|---------------------|:---:|
 | Google Analytics 4 | Traffic analytics | `G-YDBB1PYYCM` in each page `<head>` | ✅ public by design |
 | Cloudflare Worker + Zoho Mail | Contact form → e-mail (`/api/contact`) | `worker/index.js` + `worker/lib/`; credentials in Worker secrets | 🔒 credentials secret, endpoint path is public |
-| Zoho CRM via Composio | Best-effort contact lead/duplicate note after successful e-mail | `worker/lib/crm.js`; Composio key and connected-account ID in Worker secrets | 🔒 runtime bindings, never client-side |
+| Systeme.io | Best-effort attributed contact capture after successful e-mail | `worker/lib/crm.js`; API key in Worker secret, custom field slug in Worker variable | 🔒 API key, never client-side |
 | Cloudflare Worker + Zoho Mail | Careers form → e-mail (`/api/careers`) | same Worker, `CAREERS_TO_EMAIL` secret | 🔒 credentials secret, endpoint path is public |
 | Cloudflare Turnstile | Bot protection on both forms | site key in HTML (public), secret key in `TURNSTILE_SECRET_KEY` | ✅ site key public / 🔒 secret key secret |
 | JotForm | E-book lead capture | iframe `src` in `ebook.html` | ✅ public embed |
@@ -70,34 +70,36 @@ value is safe to be public, and how to change it.
 
 ---
 
-## Zoho CRM via Composio (contact leads)
+## Systeme.io (contact enquiries and booking)
 
-- **Flow:** successful `/api/contact` SMTP delivery schedules a best-effort CRM
-  task via `ctx.waitUntil`. It searches Zoho `Leads` by email; a match receives
-  a `Notes` record, otherwise a new `Leads` record is created. If the search
-  fails or has an unrecognised response, no create is attempted (avoids
-  duplicate leads). CRM errors are logged without changing the successful
-  visitor response. Careers and the legacy `landing.html` form are not captured.
-- **Attribution:** the lead description includes `Source: Website`, subject,
-  message, UK offer qualifiers, source page, referrer and supplied UTM fields.
-  The email notification also includes qualifiers and attribution so a CRM
-  outage does not discard them. `Last_Name` is always populated; the CRM's
-  verified `Web Download` source value is used because `Website` is unavailable
-  in that picklist. Source-page and UTM values are client-supplied, not verified.
-- **Runtime configuration:** the deployed Worker needs two *separately
-  provisioned* bindings: `COMPOSIO_API_KEY` and `COMPOSIO_ZOHO_ACCOUNT_ID`.
-  Neither has been provisioned by this integration. Without both, SMTP still
-  works but CRM capture is skipped. Assistant-side Composio authorization is
-  distinct from Worker runtime credentials; do not copy assistant session
-  tokens or account details into the repository or public HTML. Provisioning
-  requires explicit operator approval and deployment configuration. Existing
-  SMTP bindings `ZOHO_USER` / `ZOHO_PASS` are separate.
-- **Request shapes:** checked against the Composio Zoho
-  `ZOHO_SEARCH_ZOHO_RECORDS` (`module_api_name`, `email`, `fields`) and
-  `ZOHO_CREATE_ZOHO_RECORD` (`module_api_name`, `data` array) tool schemas.
-  `Notes.Parent_Id` refers to the matching Lead. Local mocked tests exercise
-  both paths and CRM failure handling; a live deployed Worker-to-CRM test is
-  still needed after its bindings are provisioned.
+- **Flow:** successful `/api/contact` SMTP delivery schedules a best-effort
+  Systeme.io Public API call via `ctx.waitUntil`. Exact-email search precedes
+  contact creation; a match updates only the custom latest-enquiry field. An
+  ambiguous or failed lookup never creates a duplicate. This is **contact
+  capture**, not a Zoho-style Leads pipeline or historical note stream. The
+  email notification retains every enquiry, including repeats. CRM failures
+  do not change the visitor's successful response. Careers and legacy
+  `landing.html` are not captured.
+- **Attribution:** the configured enquiry field stores subject, message, UK
+  qualifiers, source page, referrer and supplied UTM fields. Source-page and
+  UTM values are client-supplied, not verified.
+- **Configuration:** create or verify an appropriate Systeme.io *contact custom
+  field* for latest website enquiry. Set its exact slug as the Worker variable
+  `SYSTEME_ENQUIRY_FIELD_SLUG`. The deployed Worker also needs `SYSTEME_API_KEY`
+  as a secret. Without both, SMTP continues but CRM capture is skipped. The
+  existing Zoho Mail `ZOHO_USER` / `ZOHO_PASS` are separate and still needed
+  for SMTP; changing CRM does not migrate mail. A planned repository secret
+  named `SYSTEME_API_KEY` alone does not reach the Worker: either provision
+  the Worker secret directly through an authorized Cloudflare operator or add
+  and review a *trusted, gated* deployment workflow that explicitly transmits
+  it. Do not expose it to PR jobs, logs or browser pages. No such workflow is
+  included in this review-only PR.
+- **Booking:** Systeme.io supports calendar events, but no account-specific
+  public event URL has been verified. The offer page continues to use an
+  honest email scoping-call link. Supply/verify the real public booking URL
+  before linking it in this PR. An event API ID is not itself a booking link.
+- **Validation:** mocked tests cover create, repeat enquiry, lookup failure and
+  email fallback. Live Worker-to-Systeme capture and booking are still untested.
 
 ---
 
